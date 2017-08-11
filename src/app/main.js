@@ -9,7 +9,7 @@ import VueScroller from 'vue-scroller'
 import '../css/base/utilities.less'
 
 Vue.use(VueResource);
-Vue.use(VueScroller)
+Vue.use(VueScroller);
 Vue.config.debug = true;//开启错误提示
 
 var app = new Vue({

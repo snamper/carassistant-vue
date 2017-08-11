@@ -40,7 +40,7 @@ module.exports = {
                 query: {presets: ['es2015', 'stage-0']}
             },
             {
-                test: /\.(png|jpg|gif)$/,
+                test: /\.(png|jpg|gif|ico)$/,
                 loader: 'file-loader',
                 query: {
                     name: 'images/[name]-[hash:5].[ext]'
