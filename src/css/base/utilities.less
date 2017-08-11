@@ -1,0 +1,109 @@
+@import "./base.less";
+@import "../glyphicons.less";
+@import "../config/mixins/border.less";
+@import "../config/mixins/border-radius.less";
+@import "../config/mixins/clearfix.less";
+@import "../config/mixins/default.less";
+@import "../config/mixins/dialog.less";
+@import "../config/mixins/flex.less";
+@import "../config/mixins/form-template.less";
+@import "../config/mixins/opacity.less";
+@import "../config/mixins/text-overflow.less";
+
+
+//此less文件专门写一些全局的公用的样式，提供一些好用的'工具',又名工具less文件，比如浮动啊，省略号啊等等等，以后有的话还可以继续添加。
+
+.pull-right {
+  float: right;
+}
+.pull-left {
+  float: left;
+}
+
+//清除浮动类
+.clearfix {
+  .clearfix();
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+
+//加上省略号...
+.ellipsis {
+  .text-overflow();
+}
+
+//Force Line Break
+.word-break {
+  word-break:break-all;
+  word-wrap:break-word;
+  white-space: normal;
+}
+
+//防止文字换行
+.nowrap {
+  word-break:normal;
+  word-wrap:normal;
+  white-space: nowrap;
+}
+
+// Alignment
+.text-left           { text-align: left; }
+.text-right          { text-align: right; }
+.text-center         { text-align: center; }
+.text-justify        { text-align: justify; }
+.text-nowrap         { white-space: nowrap; }
+.vertical-top        { vertical-align: top; }
+.vertical-middle     { vertical-align: middle; }
+.vertical-bottom     { vertical-align: bottom; }
+
+.line-height-1 {
+  line-height:1;
+}
+.font-size-0 {
+  font-size :0;
+}
+.cursor-pointer {
+  cursor :pointer;
+}
+
+.opacity-0 {
+  .opacity(0);
+  .pointer-events(none);
+  cursor: default;
+  .user-select(none);
+}
+.opacity-0:hover {
+  cursor: default;
+}
+/*flex布局公共*/
+.flex{
+  .display-flex();
+}
+
+.flex-number-loop(6); //  生成 .flex-1 ~ .flex-6
+
+//定位
+.position-relative{
+  position:relative;
+}
+.position-absolute{
+  position:absolute;
+}
+.position-fixed{
+  position:fixed;
+}
