@@ -8,7 +8,7 @@ module.exports = {
     //输入
     entry: {
         app: "./src/app/main.js",  //入口
-        vendors: ['vue', 'vue-router','vue-resource'] //公共js
+        vendors: ['vue', 'vue-router','axios'] //公共js
     },
     //输出
     output: {

@@ -11,7 +11,6 @@
 </template>
 
 <script>
-    import NewsApi from '../../api/news-api.js'
     export default {
         name: '',
         data(){
@@ -28,8 +27,7 @@
         methods:{
             //页面方法
             clickData:function(){
-                NewsApi
-                    .login(this,'F76F3B467F0000012B1D0FB5B5FD3B6F','common')
+
             },
             goPage:function () {//方法，定义路由跳转，注意这里必须使用this，不然报错
                 this.$router.push('/news/list')
