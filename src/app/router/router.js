@@ -1,11 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Default404 from '../components/default/404.vue'
-import News from '../components/news/news.vue'
-import NewsDetail from '../components/news/detail/detail.vue'
-import NewsList from '../components/news/list/list.vue'
-import DomeList from '../components/dome/dome-list/dome-list.vue'
-import DomeHttp from '../components/dome/dome-http/dome-http.vue'
+import ComponentsRouter from '../components/components'
 
 Vue.use(VueRouter);
 
@@ -13,12 +9,8 @@ Vue.use(VueRouter);
 // 然后定义路由(routes)，components还可以是Vue.extend()创建的
 var routes = [
     { path: '/', component: Default404 },
-    { path: '/News',component: News,},
-    { path: '/news/detail', component: NewsDetail },
-    { path: '/news/list', component: NewsList },
-    { path: '/dome/list', component: DomeList },
-    { path: '/dome/http', component: DomeHttp }
 ];
+routes=routes.concat(ComponentsRouter);
 
 export default new VueRouter({
     routes: routes,

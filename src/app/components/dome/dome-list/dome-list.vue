@@ -21,7 +21,7 @@
             for (let i = 0; i <= 20; i++) {
                 var item;
                 if(i%7==0){
-                   item={
+                    item={
                         type:"letter",
                         value:"A"
                     };

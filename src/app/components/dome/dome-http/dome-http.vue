@@ -44,9 +44,9 @@
                     <div class="form-cell-content form-control">
                         <input type="tpl" placeholder="请输入手机号" maxlength="11"/>
                         <span v-if="true" class="form-phone-btn form-phone-btn-start"
-                              >获取验证</span>
+                        >获取验证</span>
                         <span v-if="false" class="form-phone-btn form-phone-btn-done"
-                              >重新({{times}})</span>
+                        >重新({{times}})</span>
                     </div>
                 </div>
                 <div class="form-cell">
@@ -132,7 +132,7 @@
                             </ul>
                             <div v-show="(detail.inspector.length)>12">
                                 <div class="head-more" v-show="!detail.inspectorHeight"
-                                     >
+                                >
                                     <div class="more-line"></div>
                                     <span class="iconfont icon-icon9 more-icon"></span>
                                     <div class="more-text">
@@ -140,7 +140,7 @@
                                     </div>
                                 </div>
                                 <div class="head-more" v-show="detail.inspectorHeight"
-                                    >
+                                >
                                     <div class="more-line"></div>
                                     <span class="iconfont icon-icon10 more-icon"></span>
                                     <div class="more-text">
@@ -221,7 +221,7 @@
 
 <script>
 
-    import api from "../../../api/dome-api"
+    import api from "../../../api/dome-api";
     export default {
         name: 'dome-http',
         data() {

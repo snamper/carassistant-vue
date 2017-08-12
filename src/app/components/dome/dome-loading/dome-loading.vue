@@ -1,12 +1,14 @@
 
 <template>
-    <div class="letter" v-if="item.type=='letter'">({{item.index}}) {{item.value}}</div>
+    <div class="dome-loading">
+        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
+    </div>
 </template>
 
 <script>
 
     export default {
-        name: 'letter',
+        name: 'dome-loading',
         data() {
             return {
             }
@@ -19,10 +21,17 @@
         },
         methods: {
             //页面方法
+            loadingClick(){
+                let loading=this.$loading
+                loading.show();
+
+                setTimeout(function () {
+                    loading.hide();
+                },3000)
+            }
         },
         components:{
-        },
-        props: ['item']
+        }
     }
 </script>
 

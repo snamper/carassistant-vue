@@ -1,6 +1,7 @@
 
 <template>
     <div class="dome">
+        dome
     </div>
 </template>
 

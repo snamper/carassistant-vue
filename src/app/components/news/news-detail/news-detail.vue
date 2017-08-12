@@ -1,14 +1,14 @@
 
 <template>
-    <div class="news-list">
-        news-list
+    <div class="news-detail">
+        news-detail
     </div>
 </template>
 
 <script>
 
     export default {
-        name: 'news-list',
+        name: 'news-detail',
         data() {
             return {
             }
