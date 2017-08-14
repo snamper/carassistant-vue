@@ -28,5 +28,8 @@
 </script>
 
 <style lang="less" scoped>
+    .<%= fileName %>{
+        //页面样式
 
+    }
 </style>
