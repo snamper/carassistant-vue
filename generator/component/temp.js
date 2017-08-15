@@ -2,7 +2,7 @@ import <%= name %> from './<%= fileName %>.vue';
 
 
 let <%= name %>Module = [
-    { path: '<%= modulePath %>/<%= fileName %>', component: <%= name %> },
+    { path: '<%= modulePath %>/<%= fileName %>', component: <%= name %>,meta:{title:'<%= fileName %>'} },
 ]
 <%= name %>Module=<%= name %>Module.concat(
 

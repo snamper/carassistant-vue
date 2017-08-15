@@ -23,6 +23,7 @@
         },
         created() {
             //页面创建完成后
+            this.page.setTitle("新闻二");
         },
         watch:{
             //监听动态路由
@@ -30,7 +31,7 @@
         methods:{
             //页面方法
             clickData:function(){
-                let loading=this.$loading
+                let loading=this.$loading;
                 loading.show();
 
                 setTimeout(function () {

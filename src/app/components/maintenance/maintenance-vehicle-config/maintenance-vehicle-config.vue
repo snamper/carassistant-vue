@@ -6,7 +6,7 @@
         </div>
         <div class="brand">
               <div class="brand-bg">
-                  <img src="../../../../images/maintenance/icon_oil@3x.png"/>
+                  <img src="../../../../images/maintenance/pic_carlogo@3x.png"/>
               </div>
               <div class="brand-title font-14 color-gray5">
                   上海宝马-3系
@@ -72,12 +72,12 @@
             .brand-bg{
                 margin-top: 30/100rem;
                 margin-bottom:20/100rem;
-                width: 70/100rem;
-                height: 70/100rem;
+                width: 100/100rem;
+                height: 100/100rem;
                 border-radius: 100%;
                 display: inline-block;
                 background: @body-bg;
-                padding: 5/100rem;
+                box-shadow: -0 0 0 @gery-d, /*左边阴影*/ 0px 0 2px @gery-d, /*右边阴影*/ 0 0 0 @gery-d, /*顶部阴影*/ 0 1px 2px @gery-d; /*底边阴影*/
                 img{
                     width: 100%;
                     height: 100%;
@@ -92,7 +92,7 @@
                 padding: 30/100rem;
                 background: @body-bg;
                 border-radius: 8/100rem;
-                box-shadow: -0 0 0 @gery-d, /*左边阴影*/ 1px 0 1px @gery-d, /*右边阴影*/ 0 0 0 @gery-d, /*顶部阴影*/ 0 1px 5px @gery-d; /*底边阴影*/
+                box-shadow: -0 0 0 @gery-d, /*左边阴影*/ 0px 0 2px @gery-d, /*右边阴影*/ 0 0 0 @gery-d, /*顶部阴影*/ 0 1px 2px @gery-d; /*底边阴影*/
                 .item-title{
                     line-height: 32/100rem;
                     .item-img{

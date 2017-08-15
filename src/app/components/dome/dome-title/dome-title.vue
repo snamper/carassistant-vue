@@ -1,14 +1,14 @@
 
 <template>
-    <div class="<%= fileName %>">
-        <%= fileName %>
+    <div class="dome-title">
+        dome-title
     </div>
 </template>
 
 <script>
 
     export default {
-        name: '<%= fileName %>',
+        name: 'dome-title',
         data() {
             return {
             }
@@ -16,7 +16,7 @@
         created() {
             //页面创建完成后
             //自定义标题
-            this.page.setTitle("<%= fileName %>");
+            this.page.setTitle("标题");
         },
         watch: {
             //监听动态路由
@@ -30,7 +30,7 @@
 </script>
 
 <style lang="less" scoped>
-    .<%= fileName %>{
+    .dome-title{
         //页面样式
 
     }

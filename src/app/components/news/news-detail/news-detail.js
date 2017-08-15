@@ -2,7 +2,7 @@ import newsDetail from './news-detail.vue';
 
 
 let newsDetailModule = [
-    { path: '/news/news-detail', component: newsDetail },
+    { path: '/news/news-detail', component: newsDetail,meta:{title:'news-detail'}  },
 ]
 newsDetailModule=newsDetailModule.concat(
 
