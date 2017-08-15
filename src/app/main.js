@@ -8,10 +8,13 @@ import Page from './plugins/page';
 import AppConfig from './app.config';
 import VueLoading from './plugins/loading/loading';
 import Router from './router/router';
+import page from './plugins/page/page2'
 
 import '../css/base/utilities.less';
 Vue.use(VueScroller);
 Vue.use(VueLoading,{});
+Vue.use(page);
+//console.log(page)
 Vue.use(Page);
 Vue.config.debug = true;//开启错误提示
 
@@ -120,4 +123,7 @@ Vue.prototype.wxsdk=wxsdk;
 var app = new Vue({
     router:Router,
     render: h => h(App)
+    // (function (h) {
+    //     return h(App)
+    // })
 }).$mount("#app");
