@@ -1,11 +1,14 @@
 
 <template>
+
     <div class="news-list">
         news-list
         <!--<div is=my-component></div>-->
         <div v-for="item in list"  class="item">
             <div v-text="item"></div>
         </div>
+        <p class="example-list-item" v-for="item in list" v-text="item"></p>
+        <infinite-loading :on-infinite="onInfinite" :distance="distance" ref="infiniteLoading"></infinite-loading>
         <div poler-loadmore="arrList.more()" data-ng-show="pageOver && arrList.dataList.length != 0" cover='0'>
             <div v-myDr data-ng-if="!loadingData && arrList.hasMore"><span class="list-tipmsg">查看更多</span></div>
             <div data-ng-if="!loadingData && !arrList.hasMore"><span class="list-tipmsg">没有更多内容</span>
@@ -14,6 +17,7 @@
                 <!--加载中...-->
             <!--</loading>-->
         </div>
+        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
     </div>
 
 </template>
@@ -110,13 +114,14 @@
             return listObj;
         }()
     }
-    var arrList=new obi();
-    console.log(arrList.init())
+   // var arrList=new obi();
+   // console.log(arrList.init())
+
     export default {
-        name: 'news-list',
+        //name: 'news-list',
         data() {
-            return {
-                list:[1111,22222,333,44444,555,666,777,888,999,10]
+            return {distance: 100,
+                list:[1111,22222,333,44444,555,666,777,888,999,10,1111,22222,333,44444,555,666,777,888,999,10,1111,22222,333,44444,555,666,777,888,999,10,1111,22222,333,44444,555,666,777,888,999,10]
             }
         },
         created() {
@@ -127,6 +132,30 @@
         },
         methods: {
             //页面方法
+            //页面方法
+            loadingClick(){
+                let toast=this.$toast
+                toast.show({
+                    showTime: 2,
+                    message: '分享成功',
+                    style:'success'
+                });
+            },
+            onInfinite: function () {
+                if (this.list.length > 200) {
+                    this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+                } else {
+                    setTimeout(function () {
+                        var temp = [];
+                        for (var i = this.list.length; i <= this.list.length + 10; i++) {
+                            temp.push(i);
+                        }
+
+                        this.list = this.list.concat(temp);
+                        this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+                    }.bind(this), 1000);
+                }
+            }
         },
         components:{
         }

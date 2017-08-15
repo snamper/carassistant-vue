@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import page from './page.vue'
-import Swiper from '../idangerous.swiper.min' //注意路径
 export default {
 
     install(Vue, pluginOptions = {}) {
