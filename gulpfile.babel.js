@@ -110,4 +110,4 @@ gulp.task('component:lazy', () => {
 
 
 
-gulp.task('default', ['serve']);
+gulp.task('default');

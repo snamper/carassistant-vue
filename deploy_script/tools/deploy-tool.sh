@@ -44,7 +44,7 @@ function tool_build_gulp() {
     cd "$1"
     gulp clean
     rm -f $2
-    gulp build
+    npm run build $3
 
     tar -czvf $2 dist
 }
