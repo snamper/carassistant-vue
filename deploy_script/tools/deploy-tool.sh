@@ -23,8 +23,7 @@ function tool_config() {
     echo "配置发布环境：$2"
 
     cd "$1"
-    cp -rf deploy_script/env/$2/* src/
-
+    cp -rf deploy_script/env/$2/* client/
     npm install --registry=http://registry.npm.taobao.org --phantomjs_cdnurl=http://cnpmjs.org/downloads
     # npm install -g bower
     #rm -rf bower_components
@@ -42,8 +41,8 @@ function tool_build_gulp() {
     echo "到：     $2"
 
     cd "$1"
-    gulp clean
     rm -f $2
+    echo `pwd`
     npm run build $3
 
     tar -czvf $2 dist
@@ -60,9 +59,9 @@ function tool_build_gulp() {
 #############
 function tool_deploy() {
     echo "发布到服务器：$3"
-    
+
     cd "$1"
-    
+
     ssh root@$3 "mkdir -p $5 && cd $5 && pwd"
     ssh root@$3 "mkdir -p $4 && cd $4 && pwd"
 
