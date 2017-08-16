@@ -8,7 +8,7 @@ module.exports = {
     //输入
     entry: {
         app: "./src/app/main.js",  //入口
-        vendors: ['vue', 'vue-router','axios'] //公共js
+        vendors: ['vue', 'vue-router','axios','jquery'] //公共js
     },
     //输出
     output: {
@@ -70,6 +70,10 @@ module.exports = {
             filename: './index.html',
             template: path.resolve(__dirname, '../src/index.html'),
             inject: true
+        }),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
         }),
         new ExtractTextPlugin("[name].css"),
         new webpack.optimize.CommonsChunkPlugin({name: 'vendors', filename: 'vendors.js'})

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-on:click="clickData">
+        <div v-on:click="clickData" class="cd12">
             点击请求接口
         </div>
         <div v-on:click="goPage">
@@ -33,7 +33,8 @@
             clickData:function(){
                 let loading=this.$loading;
                 loading.show();
-
+             var  s =$(".cd12");
+               alert(s.text());
                 setTimeout(function () {
                     loading.hide();
                 },3000)
