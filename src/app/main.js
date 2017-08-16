@@ -1,8 +1,9 @@
 
 import Vue from 'vue';
 import App from './app.vue';
-import Router from './router/router';
 import VueScroller from 'vue-scroller';
+import wx from 'weixin-js-sdk'
+import Router from './router/router';
 import VueLoading from './plugins/loading/loading';
 import Page from './plugins/page';
 

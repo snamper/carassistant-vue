@@ -9,23 +9,15 @@ TEMP_DIR=${DEPLOY_DIR}"_temp"     # 发布临时目录
 BACKUP_DIR=${DEPLOY_DIR}"_backup" # 备份目录
 ###############
 
-cd "$PROJ_DIR"
-cp -rf deploy_script/env/$DEPLOY_ENV/* src/
-npm install --registry=http://registry.npm.taobao.org --phantomjs_cdnurl=http://cnpmjs.org/downloads
+# 加载发布工具方法
+. ${PROJ_DIR}/deploy_script/tools/deploy-tool.sh
+
+# 配置打包/部署环境
+tool_config ${PROJ_DIR} ${DEPLOY_ENV}
 
 # clean build env
-gulp clean
-rm -f dist.tar.gz
-gulp build
+tool_build_gulp ${PROJ_DIR} ${PROJ_DIR}/dist.tar.gz ${DEPLOY_ENV}
 
-tar -czvf dist.tar.gz dist
+tool_backup "sourcecode_h5_pc_${DEPLOY_ENV}" ${HOST} ${DEPLOY_DIR} ${BACKUP_DIR}
 
-ssh root@$HOST "mkdir -p $TEMP_DIR && cd $TEMP_DIR && pwd"
-ssh root@$HOST "mkdir -p $DEPLOY_DIR && cd $DEPLOY_DIR && pwd"
-
-ssh root@$HOST "rm -rf $TEMP_DIR/*"
-scp $PROJ_DIR/dist.tar.gz root@$HOST:$TEMP_DIR/app.tar.gz
-ssh root@$HOST "cd $TEMP_DIR && tar -zxvf app.tar.gz"
-
-ssh root@$HOST "rm -rf $DEPLOY_DIR/* && cp -rf $TEMP_DIR/dist/* $DEPLOY_DIR/"
-ssh root@$HOST "cd $DEPLOY_DIR && pwd && ls -al"
+tool_deploy ${PROJ_DIR} ${PROJ_DIR}/dist.tar.gz ${HOST} ${DEPLOY_DIR} ${TEMP_DIR}
