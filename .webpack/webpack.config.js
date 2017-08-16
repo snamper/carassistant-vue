@@ -15,7 +15,7 @@ module.exports = {
         path: path.resolve(__dirname, "../dist"),  //打包后路径
         filename: "[name].js",   //打包名称 app， vendor hash 版本
         chunkFilename: "[name].chunk.js",
-        publicPath: "/dist/"
+        publicPath: ""
     },
     //
     resolve: { //模块的处理方案
