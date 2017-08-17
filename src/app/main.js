@@ -8,17 +8,19 @@ import Page from './plugins/page';
 import AppConfig from './app.config';
 import VueLoading from './plugins/loading/loading';
 import Router from './router/router';
-import page from './plugins/page/page2'
 import toast from './plugins/toast/toast'
 import InfiniteLoading from './plugins/InfiniteLoading'
-
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
 import '../css/base/utilities.less';
 Vue.use(VueScroller);
 Vue.use(VueLoading,{});
 Vue.use(toast,{});
-Vue.use(page);
-Vue.component('infinite-loading', InfiniteLoading);
-debugger
+Vue.use(VueAwesomeSwiper)
+Vue.use(MintUI)
+
+Vue.use(InfiniteLoading);
 //console.log(page)
 Vue.use(Page);
 Vue.config.debug = true;//开启错误提示

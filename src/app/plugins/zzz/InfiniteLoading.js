@@ -8,4 +8,3 @@ const InfiniteLoadingmodel = {
 }
 // 导出组件
 export default InfiniteLoadingmodel
-console.log(InfiniteLoadingmodel)

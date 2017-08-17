@@ -3,5 +3,11 @@
   "ignore":[
           "node_modules/**/*.js",
           "lib/js/**/*.js"
-      ]
+      ],
+  "plugins": [["component", [
+    {
+      "libraryName": "mint-ui",
+      "style": true
+    }
+  ]]]
 }
