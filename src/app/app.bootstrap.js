@@ -1,7 +1,7 @@
 /**
  * 应用启动和基本信息定义
  */
-
+import wxsdk from 'weixin-js-sdk';
 
 /**
  * 解析url
@@ -50,13 +50,10 @@ var jsApiList = ['chooseWXPay','hideMenuItems',
  * 配置启动流程
  */
 function app_bootstrap(code) {
-    resolvesFactory: [function ($q, $http, wxsdk) {
-        // 获取用户信息
-        return $q(function (resolve, reject) {
 
-            // 对于微信pc端,不支持js-sdk,所以不能调用js-sdk
-            if (!client_browser.browser.wxpc && client_browser.browser.wx && OPEN_WXSDK) {
-                wxsdk.config({
+    var auth = code.result.jscfg;
+        // 获取用户信息
+        wxsdk.config({
                     debug: false,
                     appId: auth.appid,
                     timestamp: auth.timestamp,
@@ -72,13 +69,15 @@ function app_bootstrap(code) {
                 wxsdk.error(function (err) {
                     reject(JSON.stringify(err));
                 });
-            } else {
-                resolve(data.result);
-            }
+                wxsdk.checkJsApi({
+                    jsApiList: ['chooseImage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+                    success: function(res) {
+                        alert(JSON.stringify(res));
+                    }
 
-            return true;
-        })
-
-
-    }]
+                        // 以键值对的形式返回，可用的api值true，不可用为false
+                        // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+                    }
+                );
 }
+export default app_bootstrap;
