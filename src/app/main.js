@@ -1,12 +1,13 @@
 
 import Vue from 'vue';
-import App from './app.vue';
-import VueScroller from 'vue-scroller';
 import $ from 'jquery'
-import Router from './router/router';
-import VueLoading from './plugins/loading/loading';
-import Page from './plugins/page';
 import wxsdk from 'weixin-js-sdk';
+import VueScroller from 'vue-scroller';
+import App from './app.vue';
+import Page from './plugins/page';
+import AppConfig from './app.config';
+import VueLoading from './plugins/loading/loading';
+import Router from './router/router';
 
 import '../css/base/utilities.less';
 Vue.use(VueScroller);
@@ -68,7 +69,7 @@ function parseURL(url) {
 }
 
 var _identifier = "safetyreport";
-var url = 'https://dhr-shell.vchangyi.com/' + 'xacy' +"/Common/Frontend/Member/JsLogin";
+var url = AppConfig.API.BASE_URL + 'xacy' +"/Common/Frontend/Member/JsLogin";
 var params = parseURL(window.location.href).params;
 
 // 如果不包含code,是用户打开,需要获得用户信息
