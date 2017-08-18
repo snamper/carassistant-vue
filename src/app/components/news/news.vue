@@ -41,7 +41,7 @@
             },
             goPage:function () {//方法，定义路由跳转，注意这里必须使用this，不然报错
 
-                this.$router.push('/news/news-list')
+                this.$router.push({path:'/news/news-list',query: {id:"111"}});
 
             },
             goPageDetail:function () {//方法，定义路由跳转，注意这里必须使用this，不然报错

@@ -39,32 +39,8 @@
         watch: {
             //监听动态路由
         },
-        mounted() {
-        },
         methods: {
             //页面方法
-            onPageChange(page) {
-                console.log(page);
-            },
-            //页面方法
-            loadingClick(){
-                let toast=this.$toast
-                toast.show({
-                    showTime: 2,
-                    message: '分享成功',
-                    style:'success'
-                });
-            },
-            http(params){
-                var params=params?params:'11'
-                console.log(params)
-                this.data.list=[1,2,3,4,5,6,7,8,9,0];
-                this.data.total=50;
-            },
-            loadData (data,params) {
-                this.http(params)
-                this.list=data; //data 返回处理过得数组
-            }
         },
         components:{
         }

@@ -11,15 +11,11 @@ import Router from './router/router';
 import toast from './plugins/toast/toast'
 import InfiniteLoading from './plugins/InfiniteLoading'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-import MintUI from 'mint-ui'
-import 'mint-ui/lib/style.css'
 import '../css/base/utilities.less';
 Vue.use(VueScroller);
 Vue.use(VueLoading,{});
 Vue.use(toast,{});
 Vue.use(VueAwesomeSwiper)
-Vue.use(MintUI)
-
 Vue.use(InfiniteLoading);
 //console.log(page)
 Vue.use(Page);

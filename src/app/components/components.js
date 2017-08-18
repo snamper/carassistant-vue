@@ -1,11 +1,11 @@
-import domeRouter from './dome/dome';
+import demoRouter from './demo/demo';
 import newRouter from './news/news';
 import maintenanceRouter from './maintenance/maintenance';
 import homeRouter from './home/home';
 
 let componentsModule=[];
 componentsModule=componentsModule.concat(
-    domeRouter,
+    demoRouter,
     newRouter,
     maintenanceRouter,
     homeRouter
