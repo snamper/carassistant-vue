@@ -31,8 +31,7 @@
                         <!-- Optional controls -->
                         <div class="swiper-scrollbar" slot="scrollbar"></div>
 
-                        <!-- Add Pagination -->
-                        <div class="swiper-pagination"></div>
+
                     </swiper>
                 </div>
                 <div class='brand-list'>
@@ -229,7 +228,9 @@
                     scrollbarHide: true,
                     slidesPerView: 'auto',
                     freeMode: true,
-                    setWrapperSize :true,
+                   setWrapperSize :true,
+
+                    //setWrapperSize :true,
                 }
             }
         },
@@ -416,6 +417,9 @@
                         text-align: center;
                         margin-top: 16/100rem;
                     }
+                }
+                .hot-brand:nth-last-child(1){
+                    margin-right: 0;
                 }
             }
             .brand-list{
