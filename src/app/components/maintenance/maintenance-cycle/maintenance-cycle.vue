@@ -7,8 +7,8 @@
             </div>
         </header>
         <nav class='flex font-12'>
-            <div class='nav-item active'>保养计划周期</div>
-            <div class='nav-item'>原厂配件参数</div>
+            <div class='nav-item active' @click='changeType("baoyang")'>保养计划周期</div>
+            <div class='nav-item' @click='changeType("yuanchang")'>原厂配件参数</div>
         </nav>
         <section class='baoyang' v-show='currentType=="baoyang"'>
             <div class='term flex'>
@@ -77,7 +77,7 @@
 
                             </div>
                         </div>
-                        <div class='term-right-item' style='margin-top: 1.2rem'>
+                        <div class='term-right-item' style='margin-top: 0.98rem'>
                             <div class='status flex'>
                                 <div class='radio'></div>
                             </div>
@@ -201,19 +201,6 @@
             <footer class='font-12'>此数据仅供参考，请以原厂保养手册为准</footer>
         </section>
         <section class='ycpj' v-show='currentType=="yuanchang"'>
-            <header class='flex'>
-                <div class='left flex font-13'>
-                        配件名称
-                </div>
-                <div class='right font-12' :options="swiperOption" ref="mySwiper">
-                    <div class='itme'>
-                       <p>规格型号</p>
-                    </div>
-                    <div class='itme'>
-                        <p>参考用量</p>
-                    </div>
-                </div>
-            </header>
             <div class='term flex'>
                 <div class='term-left flex'>
                     <!--<div class='term-left-item'>-->
@@ -221,19 +208,62 @@
                     <!--</div>-->
                     <div class='term-left-item font-13' :options="swiperOption3" >
                         <div class='status flex'>
-                            <div >小保养服务</div>
+                            <div >配件名称</div>
                         </div>
                         <div class='status flex'>
                             <div >大保养服务</div>
                         </div>
                         <div class='status flex'>
-                            <div >内置燃油过滤</div>
+                            <div >小保养服务</div>
+                        </div>
+                        <div class='status flex'>
+                            <div >内置燃油滤</div>
                         </div>
 
                     </div>
                 </div>
                 <div class='term-right'>
-                    <div class='term-right-item' ref="mySwiper1">
+                    <div class='fixbox'>
+                        <div class='term-right-top font-12'>
+                            <div class='status'>
+                                <p class='month'>6个月</p>
+                            </div>
+                            <div class='status'>
+                                <p class='month'>6个月</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='term-right-item' style='margin-top: 0.98rem'>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+
+                    </div>
+                    <div class='term-right-item'>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+
+                    </div>
+                    <div class='term-right-item'>
                         <div class='status flex'>
                             <div class='radio'></div>
                         </div>
@@ -247,7 +277,7 @@
                             <div class='radio'></div>
                         </div>
                     </div>
-                    <div class='term-right-item' ref="mySwiper1">
+                    <div class='term-right-item'>
                         <div class='status flex'>
                             <div class='radio'></div>
                         </div>
@@ -261,7 +291,49 @@
                             <div class='radio'></div>
                         </div>
                     </div>
-                    <div class='term-right-item' ref="mySwiper1">
+                    <div class='term-right-item'>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+                    </div>
+                    <div class='term-right-item'>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+                    </div>
+                    <div class='term-right-item'>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+                        <div class='status flex'>
+                            <div class='radio'></div>
+                        </div>
+                    </div>
+                    <div class='term-right-item'>
                         <div class='status flex'>
                             <div class='radio'></div>
                         </div>
@@ -278,6 +350,7 @@
                 </div>
 
             </div>
+
             <div class='tip flex font-11'>
                 <p>红色按钮可点击查看对应的保养推荐</p>
                 <i class='iconfont icon-quxiaoline_ font-12' ></i>
@@ -318,6 +391,9 @@
         },
         methods: {
             //页面方法
+            changeType (type) {
+                this.currentType=type
+            },
 
         },
         components: {},
@@ -413,7 +489,7 @@
 
                     }
                     .status:nth-child(1){
-                        height: 1.2rem;
+                        height: 0.98rem;
                         position: sticky;
                         top:1.7rem;
                         width: 1.9rem;
@@ -426,6 +502,7 @@
                     float: right;
                     overflow: scroll;
                     width: calc(~"100% - @{diff}");
+                    line-height:1;
                     ::-webkit-scrollbar{
                         width: 16px;
                         height: 16px;
@@ -439,9 +516,8 @@
                     .term-right-top{
                         width:max-content;
                         overflow: auto;
-                        padding: 20/100rem 0;
                         background: #fff;
-                        height: 1.2rem;
+                        height: 0.98rem;
                         position: sticky;
                         top: 1.7rem;
                         &:after {
@@ -454,6 +530,7 @@
 
                             .month{
                                 margin-bottom: 10/100rem;
+                                margin-top: 20/100rem;
                             }
                         }
 
@@ -505,51 +582,13 @@
             }
         }
         .ycpj{
-            padding-top: 2.34rem;
-            header {
-                overflow: hidden;
-                position: fixed;
-                top:1.7rem;
-                z-index: 9;
-                width: 100%;
-                background: #fff;
-                .left {
-                    width: @diff;
-                    text-align: center;
-                    background: #fff;
-                    float: left;
-                    justify-content: center;
-                    align-items: center;
-                }
-                .right {
-                    float: right;
-                    width: calc(~"100% - @{diff}");
-                    overflow: hidden;
-                    position: relative;
-                    padding: 20/100rem 0;
-                    &:after {
-                        .Pseudo-border-after();
-                    }
-                    .itme {
-                        float: left;
-                        padding: 0 20/100rem;
-                        width: 1.5rem;
-                        text-align: center;
-                    }
-                    .month {
-                        margin-bottom: 10/100rem;
-                    }
-
-                }
-            }
             .term {
-
                 .term-left {
                     float: left;
                     width: @diff;
                     justify-content: center;
-
                     min-height: 736/100rem;
+                    line-height: 1;
                     .status{
                         height: 98/100rem;
                         float: left;
@@ -559,29 +598,63 @@
                         background: #fff;
 
                     }
+                    .status:nth-child(1){
+                        height: 0.98rem;
+                        position: sticky;
+                        top:1.7rem;
+                        width: 1.9rem;
+                    }
                     .term-left-item{
                         box-shadow:0px 0px 20px #EFF2F7;
                     }
                 }
                 .term-right {
                     float: right;
-                    width: calc(~"100% - @{diff}");
                     overflow: scroll;
+                    width: calc(~"100% - @{diff}");
                     ::-webkit-scrollbar{
                         width: 16px;
                         height: 16px;
                         background-color: #F5F5F5;
                     }
+                    .fixbox{
+                        position: fixed;
+                        width: calc(~"100% - @{diff}");
+                        overflow: auto;
+                        background: #fff;
+                        &:after {
+                            .Pseudo-border-after();
+                        }
+                    }
+                    .term-right-top{
+                        width:max-content;
+                        overflow: auto;
+                        background: #fff;
+                        height: 0.98rem;
+                        line-height: 0.98rem;
+                        position: sticky;
+                        top: 1.7rem;
+
+                        .status {
+                            width: 1.5rem;
+                            float: left;
+                            text-align: center;
+
+                        }
+
+                    }
+
                     .term-right-item {
                         width:max-content;
-
+                        overflow: hidden;
+                        border-bottom: 1px dashed #ccc;
                         .flex {
                             width: 1.5rem;
                             height: 98/100rem;
                             float: left;
                             align-items: center;
                             justify-content: center;
-                            border-bottom: 1px dashed #ccc;
+
                         }
                     }
                     .radio{
@@ -616,6 +689,7 @@
                 }
             }
         }
+
         footer{
             padding: 60/100rem 20/100rem 30/100rem 20/100rem;
             div{
