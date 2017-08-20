@@ -16,7 +16,7 @@
                     <!--<div class='term-left-item'>-->
                         <!--小保养服务-->
                     <!--</div>-->
-                    <div class='term-left-item font-13' :options="swiperOption3" >
+                    <div class='term-left-item font-13'>
                         <div class='status flex'>
                             <div >保养计划</div>
                         </div>
@@ -206,7 +206,7 @@
                     <!--<div class='term-left-item'>-->
                     <!--小保养服务-->
                     <!--</div>-->
-                    <div class='term-left-item font-13' :options="swiperOption3" >
+                    <div class='term-left-item font-13' >
                         <div class='status flex'>
                             <div >配件名称</div>
                         </div>

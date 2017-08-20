@@ -5,13 +5,13 @@
         <div class="swiper-scrollbar"   slot="scrollbar"></div>
         <p class="example-list-item" v-for="item in list" v-text="item"></p>
         <infinite-loading
-                          ref="infiniteLoading"
-                          @changedata="loadData"
-                          :data='data'
-                          :params='params'></infinite-loading>
+                ref="infiniteLoading"
+                @changedata="loadData"
+                :data='data'
+                :params='params'></infinite-loading>
 
         <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        </div>
+    </div>
 
 </template>
 
@@ -39,8 +39,40 @@
         watch: {
             //监听动态路由
         },
+        mounted() {
+        },
         methods: {
             //页面方法
+            onPageChange(page) {
+                console.log(page);
+            },
+            //页面方法
+            loadingClick(){
+                let toast=this.$toast
+                let list1=this.$list
+                let arr=['zzzz','jjj','yyy']
+                list1.init({
+                    limit:10,
+                    page:1
+                })
+                list1.getData(arr),
+                console.log(list1)
+                toast.show({
+                    showTime: 2,
+                    message: '分享成功',
+                    style:'success'
+                });
+            },
+            http(params){
+                var params=params?params:'11'
+                console.log(params)
+                this.data.list=[1,2,3,4,5,6,7,8,9,0];
+                this.data.total=50;
+            },
+            loadData (data,params) {
+                this.http(params)
+                this.list=data; //data 返回处理过得数组
+            }
         },
         components:{
         }
