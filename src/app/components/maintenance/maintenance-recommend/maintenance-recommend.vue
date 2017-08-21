@@ -139,7 +139,6 @@
             input {
                 width: 180/100rem;
                 line-height: 1;
-                font-size: 16px;
             }
         }
         .main-list {
