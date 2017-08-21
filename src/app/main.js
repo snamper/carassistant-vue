@@ -13,6 +13,8 @@ import InfiniteLoading from './plugins/InfiniteLoading'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import pagelist from './plugins/list'
 import '../css/base/utilities.less';
+import drag from './plugins/loadmore'
+Vue.directive('drag',drag)
 Vue.use(VueScroller);
 Vue.use(VueLoading,{});
 Vue.use(toast,{});

@@ -11,6 +11,7 @@
                 :params='params'></infinite-loading>
 
         <div v-on:click="loadingClick" >点击加载3秒后消失</div>
+        <div v-drag="list2.more">我可以拖拽</div>
     </div>
 
 </template>
@@ -30,11 +31,13 @@
                     total:''
                 },
                 list:[],
+                list2:{}
             }
         },
         created() {
             //页面创建完成后
             this.http()
+            this.list2=this.$list;
         },
         watch: {
             //监听动态路由
@@ -46,22 +49,29 @@
             onPageChange(page) {
                 console.log(page);
             },
-            //页面方法
+            dosomething(msg){
+                console.log(1012);
+            },            //页面方法
             loadingClick(){
-                let toast=this.$toast
-                let list1=this.$list
+                //let toast=this.$toast
+                this.list2=this.$list;
+                this.list2.getData=function () {
+                    return ['zjy']
+                };
+                this.list2.dataList=['111sss']
+                this.list2.hasInit=true
                 let arr=['zzzz','jjj','yyy']
-                list1.init({
+                this.list2.init({
                     limit:10,
                     page:1
                 })
-                list1.getData(arr),
-                console.log(list1)
-                toast.show({
-                    showTime: 2,
-                    message: '分享成功',
-                    style:'success'
-                });
+                this.list2.getData(arr),
+                console.log(this.list2.dataList)
+//                toast.show({
+//                    showTime: 2,
+//                    message: '分享成功',
+//                    style:'success'
+//                });
             },
             http(params){
                 var params=params?params:'11'
@@ -72,7 +82,12 @@
             loadData (data,params) {
                 this.http(params)
                 this.list=data; //data 返回处理过得数组
-            }
+            },
+            http2(){
+                console.log(this.list2.listParams)
+                this.data.list=[1,2,3,4,5,6,7,8,9,0];
+                this.data.total=50;
+            },
         },
         components:{
         }
