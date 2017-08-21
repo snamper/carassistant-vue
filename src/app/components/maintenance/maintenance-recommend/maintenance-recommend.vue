@@ -139,6 +139,7 @@
             input {
                 width: 180/100rem;
                 line-height: normal;
+                margin-top: -1px;
             }
         }
         .main-list {
