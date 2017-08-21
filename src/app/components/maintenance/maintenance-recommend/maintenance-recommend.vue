@@ -14,7 +14,7 @@
         </div>
         <div class="mileage color-gray2 font-14">
             <div class=" pull-left">当前里程数</div>
-            <div class="pull-left m-l-30"><input class="color-gray2 font-14" placeholder="请输入" /></div>
+            <div class="pull-left m-l-30"><input class="color-gray2 font-14 line-height-1" placeholder="请输入" /></div>
             <div class="pull-right">KM</div>
         </div>
         <div class="main-list">
@@ -138,7 +138,7 @@
             box-shadow: -0 0 0 @gery-d, /*左边阴影*/ 1px 0 1px @gery-d, /*右边阴影*/ 0 0 0 @gery-d, /*顶部阴影*/ 0 1px 5px @gery-d; /*底边阴影*/
             input {
                 width: 180/100rem;
-                line-height: 30/100rem;
+                line-height: 1;
                 font-size: 16px;
             }
         }
