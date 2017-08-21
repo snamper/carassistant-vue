@@ -12,9 +12,9 @@
                 一汽品牌大众奥迪-Q3
             </div>
         </div>
-        <div class="mileage color-gray2">
+        <div class="mileage color-gray2 font-14">
             <div class=" pull-left">当前里程数</div>
-            <div class="pull-left m-l-30"><input class="color-gray2" placeholder="请输入" /></div>
+            <div class="pull-left m-l-30"><input class="color-gray2 font-14" placeholder="请输入" /></div>
             <div class="pull-right">KM</div>
         </div>
         <div class="main-list">
