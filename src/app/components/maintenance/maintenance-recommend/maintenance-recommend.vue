@@ -97,6 +97,9 @@
         },
         methods: {
             //页面方法
+            feedback(){
+                this.$router.push({path:'',query: {id:"1"}});
+            }
         },
         components:{
         }

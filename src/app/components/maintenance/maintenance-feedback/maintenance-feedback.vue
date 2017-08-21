@@ -6,12 +6,12 @@
                 <img src="../../../../images/maintenance/vmc_header.png">
             </div>
             <div class="header-title font-18">意见反馈</div>
-            <div class="header-title-en font-12">Submit the Visible Management Commitment</div>
+            <div class="header-title-en font-12">Feedback</div>
         </div>
         <div class="content">
             <div class="form-item">
                 <div class="form-title">
-                    <span class="title font-12">反馈内容</span><span class="title-en font-11">Topic</span>
+                    <span class="title font-12">反馈内容</span><span class="title-en font-11">Content of the feedback</span>
                 </div>
                 <div class="form-content p-b" >
                     <input type="text" class="font-14" maxlength="100" placeholder="请输入反馈内容" />
