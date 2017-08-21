@@ -16,7 +16,11 @@ routes=routes.concat(ComponentsRouter);
 let router=new VueRouter({
     routes: routes,
     scrollBehavior (to, from, savedPosition) {
-        return { x: 0, y: 0 }
+        if (to.hash) {
+            return {
+                selector: to.hash
+            }
+        }
     },
     beforeEach:function(to,from,next){
         // window.scrollTo(0,0);
