@@ -138,7 +138,7 @@
             box-shadow: -0 0 0 @gery-d, /*左边阴影*/ 1px 0 1px @gery-d, /*右边阴影*/ 0 0 0 @gery-d, /*顶部阴影*/ 0 1px 5px @gery-d; /*底边阴影*/
             input {
                 width: 180/100rem;
-                padding: 14/100rem 0 16/100rem 0;
+                padding: 12/100rem 0 16/100rem 0;
                 line-height: normal;
             }
         }
