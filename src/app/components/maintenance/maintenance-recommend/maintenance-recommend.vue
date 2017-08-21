@@ -74,7 +74,7 @@
             </div>
         </div>
         <div class="mc-btn text-center color-white">返回</div>
-        <div class="mc-feedback text-center font-11"><span class="iconfont icon-woshenpideline_ font-11 m-r-10"></span><span>我要反馈</span></div>
+        <div class="mc-feedback text-center font-11" v-on:click="feedback"><span class="iconfont icon-woshenpideline_ font-11 m-r-10"></span><span>我要反馈</span></div>
     </div>
 </template>
 
@@ -98,7 +98,7 @@
         methods: {
             //页面方法
             feedback(){
-                this.$router.push({path:'',query: {id:"1"}});
+                this.$router.push({path:'/maintenance/maintenance-feedback',query: {id:"1"}});
             }
         },
         components:{
