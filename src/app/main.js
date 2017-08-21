@@ -9,19 +9,16 @@ import AppConfig from './app.config';
 import VueLoading from './plugins/loading/loading';
 import Router from './router/router';
 import toast from './plugins/toast/toast'
-import InfiniteLoading from './plugins/InfiniteLoading'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-import pagelist from './plugins/list'
+import listPage from './plugins/listPage'  //分页请求数据
 import '../css/base/utilities.less';
-import drag from './plugins/loadmore'
-Vue.directive('drag',drag)
+import listmore from './plugins/loadmore'  //滚动加载
+Vue.directive('listmore',listmore)
 Vue.use(VueScroller);
 Vue.use(VueLoading,{});
 Vue.use(toast,{});
 Vue.use(VueAwesomeSwiper)
-Vue.use(pagelist,{})
-
-Vue.use(InfiniteLoading);
+Vue.use(listPage,{})
 //console.log(page)
 Vue.use(Page);
 Vue.config.debug = true;//开启错误提示

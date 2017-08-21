@@ -4,6 +4,7 @@ import maintenanceVehicleConfig from './maintenance-vehicle-config/maintenance-v
 import maintenanceCycle from './maintenance-cycle/maintenance-cycle';
 import maintenanceOther from './maintenance-other/maintenance-other';
 import maintenanceFeedback from './maintenance-feedback/maintenance-feedback';
+import maintenanceHome from './maintenance-home/maintenance-home';
 
 let maintenanceModule = [
     { path: '/maintenance', component: maintenance, meta:{title:'maintenance'} },
@@ -13,7 +14,8 @@ maintenanceModule=maintenanceModule.concat(
     maintenanceVehicleConfig,
     maintenanceCycle,
     maintenanceOther,
-    maintenanceFeedback
+    maintenanceFeedback,
+    maintenanceHome,
 );
 
 export default maintenanceModule;

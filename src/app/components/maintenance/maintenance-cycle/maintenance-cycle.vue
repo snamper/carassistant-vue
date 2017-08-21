@@ -1,14 +1,14 @@
 <template>
-    <div class="maintenance-cycle">
+    <div class="maintenance-cycle" >
         <header class='header'>
             <div class='logo'></div>
             <div class='search' @click="searchShow=true">
-                <i class='iconfont icon-csousuo font-12'></i>
+                <i class='iconfont icon-fangziglyph_ font-12'></i>
             </div>
         </header>
         <nav class='flex font-12'>
-            <div class='nav-item active' @click='changeType("baoyang")'>保养计划周期</div>
-            <div class='nav-item' @click='changeType("yuanchang")'>原厂配件参数</div>
+            <div class='nav-item' v-bind:class="{ active: currentType=='baoyang' }" @click='changeType("baoyang")'>保养计划周期</div>
+            <div class='nav-item' v-bind:class="{ active: currentType=='yuanchang' }" @click='changeType("yuanchang")'>原厂配件参数</div>
         </nav>
         <section class='baoyang' v-show='currentType=="baoyang"'>
             <div class='term flex'>
@@ -54,6 +54,9 @@
                             <div >小保养服务</div>
                         </div>
                     </div>
+                </div>
+                <div style='overflow: hidden'>
+
                 </div>
                 <div class='term-right'>
                         <div class='fixbox'>
@@ -226,10 +229,10 @@
                     <div class='fixbox'>
                         <div class='term-right-top font-12'>
                             <div class='status'>
-                                <p class='month'>6个月</p>
+                                <p class='month'>规格型号</p>
                             </div>
                             <div class='status'>
-                                <p class='month'>6个月</p>
+                                <p class='month'>原厂参数</p>
                             </div>
                         </div>
                     </div>
@@ -240,6 +243,9 @@
                         <div class='status flex'>
                             <div class='radio'></div>
                         </div>
+
+                    </div>
+                    <div class='term-right-item'>
                         <div class='status flex'>
                             <div class='radio'></div>
                         </div>
@@ -255,98 +261,9 @@
                         <div class='status flex'>
                             <div class='radio'></div>
                         </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
+                    </div>
 
-                    </div>
-                    <div class='term-right-item'>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                    </div>
-                    <div class='term-right-item'>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                    </div>
-                    <div class='term-right-item'>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                    </div>
-                    <div class='term-right-item'>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                    </div>
-                    <div class='term-right-item'>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                    </div>
-                    <div class='term-right-item'>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                    </div>
+
                 </div>
 
             </div>
@@ -418,300 +335,5 @@
 </script>
 
 <style lang="less" scoped>
-    @import "../../../../css/config/variables";
-    @import "../../../../css/config/mixins/border";
-
-    .maintenance-cycle {
-        //页面样式
-        background: #fff;
-        height: 100vh;
-        position: relative;
-        .active{
-            color: #fed163;
-        }
-        .header{
-            height: 90/100rem;
-            background: url("../../../../images/home/top.png") no-repeat top;
-            background-size: 100%;
-            position: relative;
-            position: sticky;
-            top: 0;
-            width: 100%;
-            z-index: 11;
-            logo{
-                position: absolute;
-                top:50%;
-                margin-left: 20/100rem;
-                transform:translateY(-50%);
-                height: 48/100rem;
-                width: 120/100rem;
-                background: url("../../../../images/home/logo.png") no-repeat center;
-                background-size: 100%;
-            }
-            .search{
-                position: absolute;
-                top:50%;
-                right: 0;
-                transform:translateY(-50%);
-                margin-right: 20/100rem;
-                color: #fff;
-            }
-        }
-        nav {
-            justify-content: space-around;
-            height: 80/100rem;
-            align-items: center;
-            background: #fff;
-            top: 90/100rem;
-            position: sticky;
-            width: 100%;
-            z-index: 10;
-            &:after {
-                .Pseudo-border-after();
-            }
-
-        }
-        @diff: 190/100rem;
-        .baoyang{
-            .term {
-                .term-left {
-                    float: left;
-                    width: @diff;
-                    justify-content: center;
-                    min-height: 736/100rem;
-                    .status{
-                        height: 98/100rem;
-                        float: left;
-                        align-items: center;
-                        justify-content: center;
-                        width: 100%;
-                        background: #fff;
-
-                    }
-                    .status:nth-child(1){
-                        height: 0.98rem;
-                        position: sticky;
-                        top:1.7rem;
-                        width: 1.9rem;
-                    }
-                    .term-left-item{
-                        box-shadow:0px 0px 20px #EFF2F7;
-                    }
-                }
-                .term-right {
-                    float: right;
-                    overflow: scroll;
-                    width: calc(~"100% - @{diff}");
-                    line-height:1;
-                    ::-webkit-scrollbar{
-                        width: 16px;
-                        height: 16px;
-                        background-color: #F5F5F5;
-                    }
-                    .fixbox{
-                        position: fixed;
-                        width: calc(~"100% - @{diff}");
-                        overflow: auto
-                    }
-                    .term-right-top{
-                        width:max-content;
-                        overflow: auto;
-                        background: #fff;
-                        height: 0.98rem;
-                        position: sticky;
-                        top: 1.7rem;
-                        &:after {
-                            .Pseudo-border-after();
-                        }
-                        .status {
-                            width: 1.5rem;
-                            float: left;
-                            text-align: center;
-
-                            .month{
-                                margin-bottom: 10/100rem;
-                                margin-top: 20/100rem;
-                            }
-                        }
-
-                    }
-
-                    .term-right-item {
-                        width:max-content;
-                        overflow: hidden;
-
-                        .flex {
-                            width: 1.5rem;
-                            height: 98/100rem;
-                            float: left;
-                            align-items: center;
-                            justify-content: center;
-                            border-bottom: 1px dashed #ccc;
-                        }
-                    }
-                    .radio{
-                        height: 7px;
-                        width: 7px;
-                        border-radius:50%;
-                        background: red;
-                    }
-                }
-            }
-            .tip{
-                position: fixed;
-                bottom:246/100rem ;
-                width: 468/100rem;
-                height: 70/100rem;
-                align-items: center;
-                border-radius: 100px;
-                background: rgba(0,0,0,0.4);
-                color: #fff;
-                padding:0 30/100rem;
-                left: 50%;
-                transform: translateX(-50%);
-                justify-content: space-between;
-                z-index: 9;
-            }
-            footer{
-                color: #a2aab6;
-                padding-top: 20/100rem;
-                position: relative;
-                &:before {
-                    .Pseudo-border-before();
-                }
-            }
-        }
-        .ycpj{
-            .term {
-                .term-left {
-                    float: left;
-                    width: @diff;
-                    justify-content: center;
-                    min-height: 736/100rem;
-                    line-height: 1;
-                    .status{
-                        height: 98/100rem;
-                        float: left;
-                        align-items: center;
-                        justify-content: center;
-                        width: 100%;
-                        background: #fff;
-
-                    }
-                    .status:nth-child(1){
-                        height: 0.98rem;
-                        position: sticky;
-                        top:1.7rem;
-                        width: 1.9rem;
-                    }
-                    .term-left-item{
-                        box-shadow:0px 0px 20px #EFF2F7;
-                    }
-                }
-                .term-right {
-                    float: right;
-                    overflow: scroll;
-                    width: calc(~"100% - @{diff}");
-                    ::-webkit-scrollbar{
-                        width: 16px;
-                        height: 16px;
-                        background-color: #F5F5F5;
-                    }
-                    .fixbox{
-                        position: fixed;
-                        width: calc(~"100% - @{diff}");
-                        overflow: auto;
-                        background: #fff;
-                        &:after {
-                            .Pseudo-border-after();
-                        }
-                    }
-                    .term-right-top{
-                        width:max-content;
-                        overflow: auto;
-                        background: #fff;
-                        height: 0.98rem;
-                        line-height: 0.98rem;
-                        position: sticky;
-                        top: 1.7rem;
-
-                        .status {
-                            width: 1.5rem;
-                            float: left;
-                            text-align: center;
-
-                        }
-
-                    }
-
-                    .term-right-item {
-                        width:max-content;
-                        overflow: hidden;
-                        border-bottom: 1px dashed #ccc;
-                        .flex {
-                            width: 1.5rem;
-                            height: 98/100rem;
-                            float: left;
-                            align-items: center;
-                            justify-content: center;
-
-                        }
-                    }
-                    .radio{
-                        height: 7px;
-                        width: 7px;
-                        border-radius:50%;
-                        background: red;
-                    }
-                }
-            }
-            .tip{
-                position: fixed;
-                bottom:246/100rem ;
-                width: 468/100rem;
-                height: 70/100rem;
-                align-items: center;
-                border-radius: 100px;
-                background: rgba(0,0,0,0.4);
-                color: #fff;
-                padding:0 30/100rem;
-                left: 50%;
-                transform: translateX(-50%);
-                justify-content: space-between;
-                z-index: 9;
-            }
-            footer{
-                color: #a2aab6;
-                padding-top: 20/100rem;
-                position: relative;
-                &:before {
-                    .Pseudo-border-before();
-                }
-            }
-        }
-
-        footer{
-            padding: 60/100rem 20/100rem 30/100rem 20/100rem;
-            div{
-                width: 100%;
-                height: 90/100rem;
-                border-radius: 50/100rem;
-                background: #ff5757;
-                color: #fff;
-                text-align: center;
-                line-height: 90/100rem;
-            }
-            p{
-                color: #697Fac;
-                text-align: center;
-                line-height: 1;
-                margin-top: 20/100rem;
-                span{
-
-                    margin-left: 10/100rem;
-                }
-            }
-        }
-
-    }
+    @import "./../../../../css/page/maintenance/cycle";
 </style>
