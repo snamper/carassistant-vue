@@ -19,7 +19,7 @@ let router=new VueRouter({
         return { x: 0, y: 0 }
     },
     beforeEach:function(to,from,next){
-        window.scrollTo(0,0);
+        // window.scrollTo(0,0);
     },
     afterEach:function () {
     }
