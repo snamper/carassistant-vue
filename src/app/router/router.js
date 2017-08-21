@@ -9,7 +9,7 @@ Vue.use(VueRouter);
 
 // 然后定义路由(routes)，components还可以是Vue.extend()创建的
 let routes = [
-    { path: '/', component: Default404 },
+    { path: '/', component: Default404,meta:{title:'页面404'} },
 ];
 routes=routes.concat(ComponentsRouter);
 
