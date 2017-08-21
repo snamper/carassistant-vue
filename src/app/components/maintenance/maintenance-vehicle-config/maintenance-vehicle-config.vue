@@ -43,6 +43,8 @@
         },
         created() {
             //页面创建完成后
+            //自定义标题
+            this.page.setTitle("车辆配置");
         },
         watch: {
             //监听动态路由
