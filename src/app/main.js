@@ -14,11 +14,16 @@ import listPage from './plugins/listPage'  //分页请求数据
 import '../css/base/utilities.less';
 import listmore from './plugins/loadmore'  //滚动加载
 Vue.directive('listmore',listmore)
+import drag from './plugins/loadmore'
+import 'babel-polyfill'
+Vue.directive('drag',drag)
 Vue.use(VueScroller);
 Vue.use(VueLoading,{});
 Vue.use(toast,{});
 Vue.use(VueAwesomeSwiper)
-Vue.use(listPage,{})
+Vue.use(pagelist,{})
+
+Vue.use(InfiniteLoading);
 //console.log(page)
 Vue.use(Page);
 Vue.config.debug = true;//开启错误提示
