@@ -13,9 +13,9 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import listPage from './plugins/listPage'  //分页请求数据
 import '../css/base/utilities.less';
 import listmore from './plugins/loadmore'  //滚动加载
-Vue.directive('listmore',listmore)
 import drag from './plugins/loadmore'
 import 'babel-polyfill'
+Vue.directive('listmore',listmore)
 Vue.directive('drag',drag)
 Vue.use(VueScroller);
 Vue.use(VueLoading,{});
