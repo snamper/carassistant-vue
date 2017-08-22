@@ -21,9 +21,7 @@ Vue.use(VueScroller);
 Vue.use(VueLoading,{});
 Vue.use(toast,{});
 Vue.use(VueAwesomeSwiper)
-Vue.use(pagelist,{})
-
-Vue.use(InfiniteLoading);
+Vue.use(listPage,{})
 //console.log(page)
 Vue.use(Page);
 Vue.config.debug = true;//开启错误提示
