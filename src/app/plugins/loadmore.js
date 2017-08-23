@@ -10,17 +10,17 @@ export default {
         window.addEventListener('touchstart', function (event) {
             startPageY = event.targetTouches[0].pageY;
             //  console.log(event.targetTouches[0].pageY)
-            //OList.value.more()
         });
         window.addEventListener('touchend', function (event) {
             //console.log(event.changedTouches[0].pageY)
             endPageY = event.changedTouches[0].pageY;
             var scroll = document.body.scrollTop;
-            var x = document.body.clientHeight;
+            var x = document.body.clientHeight-64;
+            debugger
             var d = document.body.scrollHeight;
             //var scroll=document.body.scrollTop;
             console.log(startPageY, endPageY)
-            if ( startPageY - endPageY > 100) {
+            if (d - x >= scroll && startPageY - endPageY > 100) {
                 OList.value.more()
             }
         })
