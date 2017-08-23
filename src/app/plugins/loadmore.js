@@ -10,6 +10,7 @@ export default {
         window.addEventListener('touchstart', function (event) {
             startPageY = event.targetTouches[0].pageY;
             //  console.log(event.targetTouches[0].pageY)
+            OList.value.more()
         });
         window.addEventListener('touchend', function (event) {
             //console.log(event.changedTouches[0].pageY)
