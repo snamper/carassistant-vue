@@ -5,29 +5,7 @@
         <div class="swiper-scrollbar"   slot="scrollbar"></div>
         <p class="example-list-item" v-for="item in list2.dataList" v-text="item"></p>
         <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-on:click="loadingClick" >点击加载3秒后消失</div>s
+        
         <div v-listmore="list2">
             <p v-if='list2.hasMore'>加载更多</p>
             <p v-if='!list2.hasMore'>没有更多内容</p>

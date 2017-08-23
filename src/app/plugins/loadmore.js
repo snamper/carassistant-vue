@@ -18,6 +18,8 @@ export default {
             var visitHeight = se - top ;
             if(visitHeight>=readyHeight) {
                 go=true;
+            }else{
+                go=false;
             }
         });
         window.addEventListener('touchend', function (event) {
