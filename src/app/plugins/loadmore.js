@@ -7,21 +7,34 @@ export default {
     bind: function (el, binding) {
         let OList = binding;
         var startPageY, endPageY;
-        window.addEventListener('touchstart', function (event) {
+        var go;
+        window.addEventListener('touchmove', function (event) {
             startPageY = event.targetTouches[0].pageY;
             //  console.log(event.targetTouches[0].pageY)
+            var elementClientRect = el.getBoundingClientRect();
+            var top = elementClientRect.top; //元素顶端到可见区域顶端的距离
+            var readyHeight = elementClientRect.height*0.725;
+            var se = document.documentElement.clientHeight; //浏览器可见区域高度。
+            var visitHeight = se - top ;
+            if(visitHeight>=readyHeight) {
+                go=true;
+            }
         });
         window.addEventListener('touchend', function (event) {
             //console.log(event.changedTouches[0].pageY)
-            endPageY = event.changedTouches[0].pageY;
-            var scroll = document.body.scrollTop;
-            var x = document.body.clientHeight-64;
-            debugger
-            var d = document.body.scrollHeight;
-            //var scroll=document.body.scrollTop;
-            console.log(startPageY, endPageY)
-            if (d - x >= scroll && startPageY - endPageY > 100) {
+            // endPageY = event.changedTouches[0].pageY;
+            // var scroll = document.body.scrollTop;
+            // var x = document.body.clientHeight-64;
+            // debugger
+            // var d = document.body.scrollHeight;
+            // //var scroll=document.body.scrollTop;
+            // console.log(startPageY, endPageY)
+            // if (d - x >= scroll && startPageY - endPageY > 100) {
+            //
+            // }
+            if(go){
                 OList.value.more()
+                go=false
             }
         })
     }
