@@ -50,7 +50,7 @@
                     page: 1
                 }
             );
-            this.uploade.uploadImg('1')
+         //   this.uploade.uploadImg('1')
         },
         watch: {
             //监听动态路由
