@@ -3,9 +3,13 @@
 
     <div class="news-list" >
         <div class="swiper-scrollbar"   slot="scrollbar"></div>
-        <p class="example-list-item" v-for="item in list2.dataList" v-text="item"></p>
+        <div class="example-list-item" v-for="item in list2.dataList">
+            <p>这是</p>
+            <p>一段</p>
+            <p>文字</p>
+        </div>
         <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        
+
         <div v-listmore="list2">
             <p v-if='list2.hasMore'>加载更多</p>
             <p v-if='!list2.hasMore'>没有更多内容</p>
@@ -39,7 +43,7 @@
                  return new Promise((resolve) => {
                         resolve({
                             total: '22',
-                            list: ['11111111111111']
+                            list: ['111111','22222']
                         })
                 })
             });
