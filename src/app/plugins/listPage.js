@@ -71,9 +71,9 @@ export default {
                     return _self.refresh();
                 } else {
                     // 已经初始化，跳转到对应锚
-                    return $q(function (resolve, reject) {
-                        $timeout(function () {
-                            Page.goPos(_self.hash).replace();
+                    return new Promise((resolve) => {
+                        setTimeout(function () {
+                         //   Page.goPos(_self.hash).replace();
                             resolve({
                                 hasMore: _self.hasMore
                             });

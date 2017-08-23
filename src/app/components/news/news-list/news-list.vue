@@ -5,11 +5,16 @@
         <div class="swiper-scrollbar"   slot="scrollbar"></div>
         <p class="example-list-item" v-for="item in list2.dataList" v-text="item"></p>
         <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <div v-listmore="list2">加载更多</div>
+        <div v-listmore="list2">
+            <p v-if='list2.hasMore'>加载更多</p>
+            <p v-if='!list2.hasMore'>没有更多内容</p>
+        </div>
+        <uploader :src="'/api/imgs'"></uploader>
     </div>
 </template>
 
 <script>
+    import uploader from './../../../plugins/uploader.vue'
     export default {
 
         //name: 'news-    list',
@@ -44,7 +49,8 @@
                     limit: 10,
                     page: 1
                 }
-            )
+            );
+            this.uploade.uploadImg('1')
         },
         watch: {
             //监听动态路由
@@ -62,6 +68,7 @@
             },
         },
         components:{
+            uploader
         }
     }
 </script>

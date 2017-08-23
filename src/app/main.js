@@ -11,6 +11,7 @@ import Router from './router/router';
 import toast from './plugins/toast/toast'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import listPage from './plugins/listPage'  //分页请求数据
+import uploadImg from './plugins/uploader'  //分页请求数据
 import '../css/base/utilities.less';
 import listmore from './plugins/loadmore'  //滚动加载
 import drag from './plugins/loadmore'
@@ -22,6 +23,7 @@ Vue.use(VueLoading,{});
 Vue.use(toast,{});
 Vue.use(VueAwesomeSwiper)
 Vue.use(listPage,{})
+Vue.use(uploadImg,{})
 //console.log(page)
 Vue.use(Page);
 Vue.config.debug = true;//开启错误提示
