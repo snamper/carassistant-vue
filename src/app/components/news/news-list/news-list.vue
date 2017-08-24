@@ -39,12 +39,20 @@
         },
         created() {
             //页面创建完成后
+            let loading=this.$loading
+
             this.list2=this.$list('x',function () {
                  return new Promise((resolve) => {
-                        resolve({
-                            total: '22',
-                            list: ['111111','22222']
-                        })
+                     loading.show();
+                     setTimeout(function () {
+                         resolve({
+                             total: '22',
+                             list: ['111111','22222']
+                         })
+                         loading.hide();
+                     },2000)
+
+
                 })
             });
             this.list2.init(
@@ -63,6 +71,7 @@
         mounted() {
         },
         methods: {
+
             loadingClick(){
                 let toast=this.$toast
                 toast.show({

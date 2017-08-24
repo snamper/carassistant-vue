@@ -37,7 +37,7 @@ export default {
             // if (d - x >= scroll && startPageY - endPageY > 100) {
             //
             // }
-            if(go && startPageY-endPageY>50){
+            if(go && startPageY-endPageY>100){
                 OList.value.more()
                 go=false
             }
