@@ -8,8 +8,11 @@ export default {
         let OList = binding;
         var startPageY, endPageY;
         var go;
-        window.addEventListener('touchmove', function (event) {
+        window.addEventListener('touchstart', function (event) {
             startPageY = event.targetTouches[0].pageY;
+        });
+        window.addEventListener('touchmove', function (event) {
+            //startPageY = event.targetTouches[0].pageY;
             //  console.log(event.targetTouches[0].pageY)
             var elementClientRect = el.getBoundingClientRect();
             var top = elementClientRect.top; //元素顶端到可见区域顶端的距离
@@ -24,7 +27,7 @@ export default {
         });
         window.addEventListener('touchend', function (event) {
             //console.log(event.changedTouches[0].pageY)
-            // endPageY = event.changedTouches[0].pageY;
+             endPageY = event.changedTouches[0].pageY;
             // var scroll = document.body.scrollTop;
             // var x = document.body.clientHeight-64;
             // debugger
@@ -34,7 +37,7 @@ export default {
             // if (d - x >= scroll && startPageY - endPageY > 100) {
             //
             // }
-            if(go){
+            if(go && startPageY-endPageY>50){
                 OList.value.more()
                 go=false
             }

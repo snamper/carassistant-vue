@@ -14,7 +14,7 @@
             <p v-if='list2.hasMore'>加载更多</p>
             <p v-if='!list2.hasMore'>没有更多内容</p>
         </div>
-        <uploader :src="'/api/imgs'"></uploader>
+        <!--<uploader :src="'/api/imgs'"></uploader>-->
     </div>
 </template>
 
