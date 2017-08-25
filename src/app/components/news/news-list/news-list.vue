@@ -72,6 +72,7 @@
         },
         methods: {
             upload(){
+                debugger
                 this.uploade.uploadImg()
             },
             loadingClick(){

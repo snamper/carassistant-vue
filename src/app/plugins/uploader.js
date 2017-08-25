@@ -1,4 +1,4 @@
-import wx from 'weixin-js-sdk';
+import wxsdk from 'weixin-js-sdk';
 
 export default {
     /**
@@ -16,6 +16,7 @@ export default {
              */
             return {
                 uploadImg: function (config) {
+                    console.log(11)
                     // 参数处理
                     //config = config || {};
 
@@ -81,7 +82,7 @@ export default {
                     //     status: imageList,
                     //     promise: Q.promise
                     // };
-                    wx.chooseImage({
+                    wxsdk.chooseImage({
                         count: 1, // 默认9
                         sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
                         sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
