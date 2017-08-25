@@ -1,4 +1,4 @@
-import wxsdk from 'weixin-js-sdk';
+
 
 export default {
     /**
@@ -8,7 +8,7 @@ export default {
      */
     install(Vue, pluginOptions = {}) {
         let loading = Vue.loading;
-        let toast = Vue.loading;
+        let wx = Vue.wxsdk;
         var uploade = function () {
 
             /**
@@ -82,7 +82,7 @@ export default {
                     //     status: imageList,
                     //     promise: Q.promise
                     // };
-                    wxsdk.chooseImage({
+                    wx.chooseImage({
                         count: 1, // 默认9
                         sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
                         sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有

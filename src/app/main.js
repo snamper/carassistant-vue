@@ -16,6 +16,7 @@ import '../css/base/utilities.less';
 import listmore from './plugins/loadmore'  //滚动加载
 import drag from './plugins/loadmore'
 import 'babel-polyfill'
+Vue.prototype.wxsdk=wxsdk;
 Vue.directive('listmore',listmore)
 Vue.directive('drag',drag)
 Vue.use(VueScroller);
@@ -128,7 +129,7 @@ var jsApiList = ['chooseWXPay','hideMenuItems',
 //     });
 //
 // }
-Vue.prototype.wxsdk=wxsdk;
+
 
 var app = new Vue({
     router:Router,
