@@ -1,5 +1,5 @@
 
-
+import wxsdk from 'weixin-js-sdk';
 export default {
     /**
      * 每个插件都有的install方法，用于安装插件
@@ -8,7 +8,7 @@ export default {
      */
     install(Vue, pluginOptions = {}) {
         let loading = Vue.loading;
-        let wx = Vue.wxsdk;
+        let wx = wxsdk;
         var uploade = function () {
 
             /**
