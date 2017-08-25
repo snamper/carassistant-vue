@@ -1,4 +1,4 @@
-import wxsdk from 'weixin-js-sdk';
+import wx from 'weixin-js-sdk';
 
 export default {
     /**
@@ -7,8 +7,6 @@ export default {
      * @param {Object} [pluginOptions] - 插件安装配置
      */
     install(Vue, pluginOptions = {}) {
-        Vue.wxsdk = wxsdk;
-        debugger
         let loading = Vue.loading;
         let toast = Vue.loading;
         var uploade = function () {
@@ -19,70 +17,79 @@ export default {
             return {
                 uploadImg: function (config) {
                     // 参数处理
-                    config = config || {};
+                    //config = config || {};
 
                     //var Q = $q.defer();
-                    var Q = new Promise(function (resolve, reject) {
-                        resolve('xxx')
-                    });
-                    var imageList = [];
-                    function uploadImage(localIds, imageList, index, atId) {
-                        return new Promise(function (resolve, reject) {
-                            Vue.wxsdk.uploadImage({
-                                localId: localIds[0],
-                                isShowProgress: false
-                            }).then(function (serverId) {
-                                $http({
-                                    method: 'POST',
-                                    url: opts.upload_url,
-                                    params: "",
-                                    data: {
-                                        wxid: serverId,
-                                        atId: atId,
-                                    }
-                                    //timeout: req_config.timeout
-                                }).success(function (data, status, headers, config) {
-                                    if (parseInt(data.result.atMqStatus) == 0) {
-                                        try {
-                                            getPicInde(serverId, localIds, imageList, index, data.result.atId, resolve);
-                                        } catch (ex) {
-
-                                        }
-                                    }
-                                }).error(function (data, status, headers, config) {
-                                    reject(data);
-                                });
-                            });
-                        });
-                    }
-
-                    var chooseImg = new Promise(function (resolve, rejeact) {
-                        Vue.wxsdk.chooseImage(config)
-                        resolve('xxxxx');
-                    })
-                    chooseImg.then(function (data) {
-                        if (data.length > config.count) {
-                            toast.show({
-                                message: opts.max_msg.replace(/\{number\}/ig, config.count),
-                                showTime: opts.toast_time
-                            });
-                            return;
+                    // var Q = new Promise(function (resolve, reject) {
+                    //     resolve('xxx')
+                    // });
+                    // var imageList = [];
+                    // function uploadImage(localIds, imageList, index, atId) {
+                    //     return new Promise(function (resolve, reject) {
+                    //         Vue.wxsdk.uploadImage({
+                    //             localId: localIds[0],
+                    //             isShowProgress: false
+                    //         }).then(function (serverId) {
+                    //             $http({
+                    //                 method: 'POST',
+                    //                 url: opts.upload_url,
+                    //                 params: "",
+                    //                 data: {
+                    //                     wxid: serverId,
+                    //                     atId: atId,
+                    //                 }
+                    //                 //timeout: req_config.timeout
+                    //             }).success(function (data, status, headers, config) {
+                    //                 if (parseInt(data.result.atMqStatus) == 0) {
+                    //                     try {
+                    //                         getPicInde(serverId, localIds, imageList, index, data.result.atId, resolve);
+                    //                     } catch (ex) {
+                    //
+                    //                     }
+                    //                 }
+                    //             }).error(function (data, status, headers, config) {
+                    //                 reject(data);
+                    //             });
+                    //         });
+                    //     });
+                    // }
+                    //
+                    // var chooseImg = new Promise(function (resolve, rejeact) {
+                    //     Vue.wxsdk.chooseImage(config)
+                    //     resolve('xxxxx');
+                    // })
+                    // chooseImg.then(function (data) {
+                    //     if (data.length > config.count) {
+                    //         toast.show({
+                    //             message: opts.max_msg.replace(/\{number\}/ig, config.count),
+                    //             showTime: opts.toast_time
+                    //         });
+                    //         return;
+                    //     }
+                    //     uploadImage(data, imageList, 0, "").then(function (promiseData) {
+                    //                 loading.hide();
+                    //                 Q.resolve(promiseData);
+                    //
+                    //             }, function (error) {
+                    //                 loading.hide();
+                    //                 Q.reject(error);
+                    //             });
+                    // }), function (error) {
+                    //     console.log(1111)
+                    // }
+                    // return {
+                    //     status: imageList,
+                    //     promise: Q.promise
+                    // };
+                    wx.chooseImage({
+                        count: 1, // 默认9
+                        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                        success: function (res) {
+                            var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                            alert('图片选择成功')
                         }
-                        uploadImage(data, imageList, 0, "").then(function (promiseData) {
-                                    loading.hide();
-                                    Q.resolve(promiseData);
-
-                                }, function (error) {
-                                    loading.hide();
-                                    Q.reject(error);
-                                });
-                    }), function (error) {
-                        console.log(1111)
-                    }
-                    return {
-                        status: imageList,
-                        promise: Q.promise
-                    };
+                    });
                 }
             }
         }

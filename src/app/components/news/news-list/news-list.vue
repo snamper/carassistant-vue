@@ -9,7 +9,7 @@
             <p>文字</p>
         </div>
         <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-
+        <button @click='upload'>点击上传图片</button>
         <div v-listmore="list2">
             <p v-if='list2.hasMore'>加载更多</p>
             <p v-if='!list2.hasMore'>没有更多内容</p>
@@ -63,7 +63,7 @@
                     page: 1
                 }
             );
-         //   this.uploade.uploadImg('1')
+
         },
         watch: {
             //监听动态路由
@@ -71,7 +71,9 @@
         mounted() {
         },
         methods: {
-
+            upload(){
+                this.uploade.uploadImg()
+            },
             loadingClick(){
                 let toast=this.$toast
                 toast.show({
