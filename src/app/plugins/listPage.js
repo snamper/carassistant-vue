@@ -40,7 +40,7 @@ export default {
                 return loadData.call(this);
             };
             ListParent.more = function () {
-                console.log('kkkkkkkkkkkkkkkkkkk')
+                console.log('加载更多')
                 if (this.hasMore) {
                     this.listParams.page += 1;
                     return loadData.call(this); // 请求数据
@@ -119,29 +119,6 @@ export default {
 
                 return listObj;
             }
-        }
-        var list = {
-            listParams: {
-                page: 1
-            },
-            hasInit: false,
-            hasMore: false,
-            dataList: [],  // 列表数据
-            init:init,
-            getData: getData,
-            more:more,
-        }
-        function getData(data) {
-            list.dataList=data.list;
-
-        }
-        function init(params) {
-            list.listParams=params;
-        }
-        function more(params) {
-            console.log('more')
-            list.listParams.page+1;
-            getData.call(this)
         }
         Vue.list=Vue.prototype.$list=ListCacheFactory();
     }

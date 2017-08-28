@@ -2,14 +2,14 @@
 <template>
 
     <div class="news-list" >
-        <div class="swiper-scrollbar"   slot="scrollbar"></div>
         <div class="example-list-item" v-for="item in list2.dataList">
             <p>这是</p>
             <p>一段</p>
             <p>文字</p>
         </div>
         <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        <button @click='upload'>点击上传图片</button>
+        <button @click='upload()'>点击上传图片</button>
+
         <div v-listmore="list2">
             <p v-if='list2.hasMore'>加载更多</p>
             <p v-if='!list2.hasMore'>没有更多内容</p>
@@ -34,7 +34,11 @@
                     total:''
                 },
                 list:[],
-                list2:{}
+                list2:{},
+                config:{
+                    url:'post',
+                    size:'10'
+                }
             }
         },
         created() {
