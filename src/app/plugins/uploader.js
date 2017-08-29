@@ -100,7 +100,7 @@ export default {
                         })
                     })
                     .then(function (data) {
-                        alert('zjy'+data)
+                        alert('zjy'+data.toString())
                         wx.uploadImage({
                             localId: data.toString(), // 需要上传的图片的本地ID，由chooseImage接口获得
                             isShowProgressTips: 1, // 默认为1，显示进度提示
