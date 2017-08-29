@@ -95,66 +95,67 @@ export default {
                     }
                     return new Promise((resolve) => {
                         wx.chooseImage({
-                            count: 1, // 默认9
+                            count: 9, // 默认9
                             sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
                             sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                             success: function (res) {
                                 var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                                resolve({
-                                    data:1
-                                })
+                                resolve(
+                                    localIds
+                                )
                             }
                         })
-                    }).then(function (data) {
-                            alert('zjy'+data)
-                            $http({
-                                method: 'POST',
-                                url: opts.upload_url,
-                                params: "",
-                                data: {
-                                    wxid: serverId,
-                                    atId: atId,
-                                    _identifier: parseAppId()
-                                }
-                                //timeout: req_config.timeout
-                            }).success(function (data, status, headers, config) {
+                    })
+                    .then(function (data) {
+                        alert('zjy'+data)
+                        $http({
+                            method: 'POST',
+                            url: 'https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg',
+                            params: "",
+                            data: {
+                                wxid: '"wxd271727eb7d089d6"',
+                                atId: data,
+                                _identifier: 'shellhero'
+                            }
+                            //timeout: req_config.timeout
+                        }).success(function (data, status, headers, config) {
 
-                                if (parseInt(data.result.atMqStatus) == 0) {
-                                    try {
-                                        getPicInde(serverId, localIds, imageList, index, data.result.atId, resolve);
-                                    } catch (ex) {
-                                        toast.show({
-                                            message: ex,
-                                            showTime: 3
-                                        });
-                                    }
+                            if (parseInt(data.result.atMqStatus) == 0) {
+                                try {
+                                    getPicInde(serverId, localIds, imageList, index, data.result.atId, resolve);
+                                } catch (ex) {
+                                    toast.show({
+                                        message: ex,
+                                        showTime: 3
+                                    });
                                 }
-                                // else if(parseInt(data.result.atMqStatus)==2){
-                                //
-                                // }
-                                // else {
-                                //     imageList.push(data.result);
-                                //     if(localIds.length == 1){
-                                //         loading.hide();
-                                //         resolve([data.result]);
-                                //         return false;
-                                //     }
-                                //     $timeout(function () {
-                                //         index++;
-                                //         uploadImage1(localIds.slice(1),imageList,index).then(function(resDate) {
-                                //             loading.hide();
-                                //             resolve([data.result].concat(resDate));
-                                //         },function(err){
-                                //             loading.hide();
-                                //             reject(err);
-                                //         });
-                                //     })
-                                // }
-                            }).error(function (data, status, headers, config) {
-                                reject(data);
-                            });
-                        }),function(value) {
-                        alert('zjy'+value)
+                            }
+                            // else if(parseInt(data.result.atMqStatus)==2){
+                            //
+                            // }
+                            // else {
+                            //     imageList.push(data.result);
+                            //     if(localIds.length == 1){
+                            //         loading.hide();
+                            //         resolve([data.result]);
+                            //         return false;
+                            //     }
+                            //     $timeout(function () {
+                            //         index++;
+                            //         uploadImage1(localIds.slice(1),imageList,index).then(function(resDate) {
+                            //             loading.hide();
+                            //             resolve([data.result].concat(resDate));
+                            //         },function(err){
+                            //             loading.hide();
+                            //             reject(err);
+                            //         });
+                            //     })
+                            // }
+                        }).error(function (data, status, headers, config) {
+                            reject(data);
+                        });
+                    }),function(value) {
+                    alert('zjy'+value)
                     }
                 }
             }
