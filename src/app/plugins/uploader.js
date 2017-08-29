@@ -80,7 +80,7 @@ export default {
                 },
                 function(data){
                     alert('我们服务器'+data)
-                    alert('我们服务器'+data.result.atId)
+                    alert('我们服务器'+data.result)
                 },
                 "json");//这里返回的类型有：json,html,xml,text
         }
