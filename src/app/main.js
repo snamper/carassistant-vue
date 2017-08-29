@@ -113,9 +113,10 @@ window.authComplete = function (auth) {
 function app_bootstrap(code) {
 
     var auth = code.result.jscfg;
+    debugger
     // 获取用户信息
     wxsdk.config({
-        debug: false,
+        debug: true,
         appId: auth.appid,
         timestamp: auth.timestamp,
         nonceStr: auth.noncestr,
@@ -124,11 +125,13 @@ function app_bootstrap(code) {
         /*'disableSharing','hideOptionMenu',*/
     });
     wxsdk.ready(function () {
-        resolve(data.result);
+        console.log(1)
+        //resolve(data.result);
     });
 
     wxsdk.error(function (err) {
-        reject(JSON.stringify(err));
+       // reject(JSON.stringify(err));
+        console.log(0)
     });
 
 }

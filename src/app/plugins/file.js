@@ -8,6 +8,19 @@ export default {
                     upload()
                 }
                 function upload() {
+                    //判断当前页面是否存在创建的input，存在就直接使用，不存在就创建
+                    if(document.getElementById('myUploadInput')){
+                        input = document.getElementById('myUploadInput');
+                    }else{
+                        input = document.createElement('input');
+                        input.setAttribute('id', 'myUploadInput');
+                        input.setAttribute('type', 'file');
+                        input.setAttribute('name', 'file');
+                        document.body.appendChild(input);
+                        input.style.display = 'none';
+                    }
+
+
                     var fileType = ['doc','docx','xls','xlsx','pdf','jpg','png','ppt','pptx']
                     var option = binding;
                     var xhr = new XMLHttpRequest();
@@ -17,6 +30,10 @@ export default {
                     input.setAttribute('id', 'myUploadInput');
                     input.setAttribute('type', 'file');
                     input.setAttribute('name', 'file');
+                    //是否开启多文件上传
+                    if(option.value.multiple==true){
+                        input.setAttribute('multiple', 'multiple');
+                    }
                     document.body.appendChild(input);
                     input.style.display = 'none';
                     input.click();
@@ -35,7 +52,7 @@ export default {
                             return;
                         }
                         //判断文件大小
-                        if(option.maxSize &&  input.files[0].size > option.maxSize * 1024 * 1024){
+                        if(option.value.maxSize &&  input.files[0].size > option.maxSize * 1024 * 1024){
                             Vue.toast.show({
                                 showTime: 2,
                                 message: '文件不能大于10',
@@ -44,15 +61,21 @@ export default {
                             return;
                         }
                         // 提交参数
-                        fd.append('file', input.files[0]);
+                        if(option.value.multiple==true){
+                            for(var i=0;i<input.files.length;i++){
+                                fd.append("file["+i+"]", input.files[i]);
+                            }
+                        }else{
+                            fd.append('file', input.files[0]);
+                        }
                         fd.append('_identifier', 'newsshellhero');
                         fd.append('atMediatype', '99');
                         xhr.open('post', 'https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadAtta');
                         xhr.onreadystatechange = function(){
                             if(xhr.status == 200&& xhr.readyState == 4){
-                                    if(option.value.callback instanceof Function){
-                                        option.value.callback(xhr.responseText);
-                                    }
+                                if(option.value.callback instanceof Function){
+                                    option.value.callback(xhr.responseText);
+                                }
                             }else{
                                 Vue.toast.show({
                                     showTime: 2,
@@ -64,7 +87,6 @@ export default {
                         }
                         xhr.upload.onprogress = function(event){
                             var pre = Math.floor(100 * event.loaded / event.total);
-
                         }
                         xhr.send(fd);
                     }
@@ -76,8 +98,6 @@ export default {
                         }
                     }
                 }
-
-
             },
             update(el,binding,vnode){
             //    console.log(el);

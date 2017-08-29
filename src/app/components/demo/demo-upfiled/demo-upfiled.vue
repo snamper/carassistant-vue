@@ -19,6 +19,7 @@
                 config:{
                     url:'post',
                     size:'10',
+                    multiple:true,
                     callback:this.uploadcall
                 },
             }
