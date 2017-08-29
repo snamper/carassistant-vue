@@ -1,3 +1,4 @@
+import $ from 'jquery'
 
 import wxsdk from 'weixin-js-sdk';
 export default {
@@ -82,8 +83,9 @@ export default {
                     //     status: imageList,
                     //     promise: Q.promise
                     // };
-                    
+
                     return new Promise((resolve) => {
+
                         wx.chooseImage({
                             count: 9, // 默认9
                             sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -93,57 +95,74 @@ export default {
                                 resolve(
                                     localIds
                                 )
+
                             }
                         })
                     })
                     .then(function (data) {
                         alert('zjy'+data)
-                        $http({
-                            method: 'POST',
-                            url: 'https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg',
-                            params: "",
-                            data: {
+                        var atid=[];
+                        for(var i=0;i<data.length;i++){
+                            atid.push(data[i].LocalResource) 
+                        }
+                        $.post(
+                            'https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg',
+                            {
                                 wxid: '"wxd271727eb7d089d6"',
                                 atId: data,
                                 _identifier: 'shellhero'
+                            },
+                            function (data) {
+
                             }
                             //timeout: req_config.timeout
-                        }).success(function (data, status, headers, config) {
-
-                            if (parseInt(data.result.atMqStatus) == 0) {
-                                try {
-                                    getPicInde(serverId, localIds, imageList, index, data.result.atId, resolve);
-                                } catch (ex) {
-                                    toast.show({
-                                        message: ex,
-                                        showTime: 3
-                                    });
-                                }
-                            }
-                            // else if(parseInt(data.result.atMqStatus)==2){
-                            //
-                            // }
-                            // else {
-                            //     imageList.push(data.result);
-                            //     if(localIds.length == 1){
-                            //         loading.hide();
-                            //         resolve([data.result]);
-                            //         return false;
-                            //     }
-                            //     $timeout(function () {
-                            //         index++;
-                            //         uploadImage1(localIds.slice(1),imageList,index).then(function(resDate) {
-                            //             loading.hide();
-                            //             resolve([data.result].concat(resDate));
-                            //         },function(err){
-                            //             loading.hide();
-                            //             reject(err);
-                            //         });
-                            //     })
-                            // }
-                        }).error(function (data, status, headers, config) {
-                            reject(data);
-                        });
+                        )
+                        // $http({
+                        //     method: 'POST',
+                        //     url: 'https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg',
+                        //     params: "",
+                        //     data: {
+                        //         wxid: '"wxd271727eb7d089d6"',
+                        //         atId: data,
+                        //         _identifier: 'shellhero'
+                        //     }
+                        //     //timeout: req_config.timeout
+                        // }).success(function (data, status, headers, config) {
+                        //
+                        //     if (parseInt(data.result.atMqStatus) == 0) {
+                        //         try {
+                        //             getPicInde(serverId, localIds, imageList, index, data.result.atId, resolve);
+                        //         } catch (ex) {
+                        //             toast.show({
+                        //                 message: ex,
+                        //                 showTime: 3
+                        //             });
+                        //         }
+                        //     }
+                        //     // else if(parseInt(data.result.atMqStatus)==2){
+                        //     //
+                        //     // }
+                        //     // else {
+                        //     //     imageList.push(data.result);
+                        //     //     if(localIds.length == 1){
+                        //     //         loading.hide();
+                        //     //         resolve([data.result]);
+                        //     //         return false;
+                        //     //     }
+                        //     //     $timeout(function () {
+                        //     //         index++;
+                        //     //         uploadImage1(localIds.slice(1),imageList,index).then(function(resDate) {
+                        //     //             loading.hide();
+                        //     //             resolve([data.result].concat(resDate));
+                        //     //         },function(err){
+                        //     //             loading.hide();
+                        //     //             reject(err);
+                        //     //         });
+                        //     //     })
+                        //     // }
+                        // }).error(function (data, status, headers, config) {
+                        //     reject(data);
+                        // });
                     }),function(value) {
                     alert('zjy'+value)
                     }
