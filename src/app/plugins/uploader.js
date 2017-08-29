@@ -104,7 +104,7 @@ export default {
                         function (data) {
                         uploadImage(data).then(
                             function (imageList) {
-                                alert(imageList)
+                                alert('imageList'+imageList)
                                 return{
                                     imageList: imageList,
                                 }
