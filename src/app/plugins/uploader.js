@@ -105,7 +105,53 @@ export default {
                                 })
                             }
                         }).then(function (data) {
-                            alert(data)
+                            alert('zjy'+data)
+                            $http({
+                                method: 'POST',
+                                url: opts.upload_url,
+                                params: "",
+                                data: {
+                                    wxid: serverId,
+                                    atId: atId,
+                                    _identifier: parseAppId()
+                                }
+                                //timeout: req_config.timeout
+                            }).success(function (data, status, headers, config) {
+
+                                if (parseInt(data.result.atMqStatus) == 0) {
+                                    try {
+                                        getPicInde(serverId, localIds, imageList, index, data.result.atId, resolve);
+                                    } catch (ex) {
+                                        toast.show({
+                                            message: ex,
+                                            showTime: 3
+                                        });
+                                    }
+                                }
+                                // else if(parseInt(data.result.atMqStatus)==2){
+                                //
+                                // }
+                                // else {
+                                //     imageList.push(data.result);
+                                //     if(localIds.length == 1){
+                                //         loading.hide();
+                                //         resolve([data.result]);
+                                //         return false;
+                                //     }
+                                //     $timeout(function () {
+                                //         index++;
+                                //         uploadImage1(localIds.slice(1),imageList,index).then(function(resDate) {
+                                //             loading.hide();
+                                //             resolve([data.result].concat(resDate));
+                                //         },function(err){
+                                //             loading.hide();
+                                //             reject(err);
+                                //         });
+                                //     })
+                                // }
+                            }).error(function (data, status, headers, config) {
+                                reject(data);
+                            });
                         })
                     })
 
