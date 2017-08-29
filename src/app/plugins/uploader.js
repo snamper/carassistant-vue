@@ -40,14 +40,15 @@ export default {
             return new Promise((resolve) => {
                 alert(data.length)
                 var uploadCount=0;
-                var serverIds=[]
+                var serverIds=[];
+                var imageList=[];
                 var upload = function() {
                     wx.uploadImage({
                         localId:data[uploadCount].toString(),
                         success: function(res) {
                             // images.serverId.push(res.serverId);
                             //如果还有照片，继续上传
-                            uploadImageMine(res.serverId)//这个方法是你需要把所谓的媒体meidaid进行下载到本地的ajax处理
+                            imageList.push(uploadImageMine(res.serverId))//这个方法是你需要把所谓的媒体meidaid进行下载到本地的ajax处理
                             uploadCount++;
                             if (uploadCount < data.length) {
                                 var serverId = res.serverId; // 返回图片的服务器端ID
@@ -57,7 +58,7 @@ export default {
                             }else{
                                 alert('完成'+serverIds)
                                 resolve(
-                                    serverIds
+                                    imageList
                                 )
                             }
                         }
@@ -72,7 +73,6 @@ export default {
         *  resolve 上传到微信后微信返回的 serverIds 数组
         * */
         function uploadImageMine(postData,atId) {
-            return new Promise((resolve)=>{
                 $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
                     {
                         atId:atId,
@@ -87,19 +87,15 @@ export default {
                             uploadImageMine(postData,atId)
                         }
                         if(data.result.atMqStatus==1){
-                            resolve(data.result.atAttachment)
+                            return data.result.atAttachment
                         }
                     },
                     "json");//这里返回的类型有：json,html,xml,text
-            })
 
         }
         var uploadeImg = function () {
             return {
                 uploadImg: function (config) {
-                    var promise=new Promise((resolve)=>{
-
-                    })
                    // uploadImageMine()
                     console.log(11)
                     // 参数处理
@@ -107,16 +103,14 @@ export default {
                     chooseImage(config).then(
                         function (data) {
                         uploadImage(data).then(
-                            function (data) {
-                            alert('111111111111'+data)
-                                promise.resolve('zzzzzzzzzz')
+                            function (imageList) {
+                                return{
+                                    imageList: imageList,
+                                }
                         })
 
                     })
-                    return{
-                        imageList: 'imageList',
-                        promise: promise
-                    }
+
                 }
             }
         }
