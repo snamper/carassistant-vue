@@ -10,6 +10,10 @@ export default {
     install(Vue, pluginOptions = {}) {
         let loading = Vue.loading;
         let wx = wxsdk;
+        /*
+        *  用来掉漆微信选择图片
+        *  resolve 选择的图片localIds数组
+        * */
         function chooseImage(config) {
             return new Promise((resolve) => {
                 wx.chooseImage({
@@ -26,7 +30,13 @@ export default {
                 })
             })
         }
-        function uploadImage(data) {
+        /*
+        *  用来上传图片到微信
+        *  data 接收 chooseImage() resolve的localIds
+        *  resolve 上传到微信后微信返回的 serverIds 数组
+        * */
+        function uploadImage(data)
+        {
             return new Promise((resolve) => {
                 alert(data.length)
                 var uploadCount=0;
@@ -37,7 +47,7 @@ export default {
                         success: function(res) {
                             // images.serverId.push(res.serverId);
                             //如果还有照片，继续上传
-                            // ajaxupload(res.serverId);//这个方法是你需要把所谓的媒体meidaid进行下载到本地的ajax处理如果你需要的话就写一个ajax方法
+                             uploadImageMine(res.serverId);//这个方法是你需要把所谓的媒体meidaid进行下载到本地的ajax处理
                             uploadCount++;
                             if (uploadCount < data.length) {
                                 var serverId = res.serverId; // 返回图片的服务器端ID
@@ -56,7 +66,24 @@ export default {
                 upload();
             })
         }
-        var uploade = function () {
+        /*
+        *  用来上传图片到微信
+        *  data 接收 chooseImage() resolve的localIds
+        *  resolve 上传到微信后微信返回的 serverIds 数组
+        * */
+        function uploadImageMine(postData) {
+            $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
+                {
+                    atId:postData,
+                    wxid:'wxd271727eb7d089d6',
+                    _identifier:'shellhero',
+                },
+                function(data){
+                    alert('我们服务器'+data)
+                },
+                "json");//这里返回的类型有：json,html,xml,text
+        }
+        var uploadeImg = function () {
             return {
                 uploadImg: function (config) {
                     console.log(11)
@@ -70,10 +97,13 @@ export default {
                         })
 
                     })
-
+                    return{
+                        imageList: 'imageList',
+                        promise: 'promise'
+                    }
                 }
             }
         }
-        Vue.uploade = Vue.prototype.uploade = uploade();
+        Vue.uploade = Vue.prototype.uploade = uploadeImg();
     }
 }
