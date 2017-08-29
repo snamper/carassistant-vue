@@ -100,6 +100,7 @@ export default {
                         })
                     })
                     .then(function (data) {
+                        alert(data.length)
                         var uploadCount=0;
                         var upload = function() {
                             wx.uploadImage({
