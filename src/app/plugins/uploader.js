@@ -49,6 +49,7 @@ export default {
                             //如果还有照片，继续上传
                             uploadImageMine(res.serverId).then(function (atAttachment) {
                                 imageList.push(atAttachment)
+                                alert('imageList2'+imageList)
                                 uploadCount++;
                                 if (uploadCount < data.length) {
                                     var serverId = res.serverId; // 返回图片的服务器端ID
