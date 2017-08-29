@@ -35,8 +35,7 @@ export default {
         *  data 接收 chooseImage() resolve的localIds
         *  resolve 上传到微信后微信返回的 serverIds 数组
         * */
-        function uploadImage(data)
-        {
+        function uploadImage(data) {
             return new Promise((resolve) => {
                 alert(data.length)
                 var uploadCount=0;
@@ -56,10 +55,11 @@ export default {
                                 alert('zjy2'+serverId)
                                 upload();
                             }else{
-                                alert('完成'+serverIds)
+
                                 resolve(
                                     imageList
                                 )
+                                alert('完成'+serverIds)
                             }
                         }
                     });
@@ -96,22 +96,19 @@ export default {
         var uploadeImg = function () {
             return {
                 uploadImg: function (config) {
+                        // return new Promise(function (resolve) {
+                        //     resolve(x)
+                        // })
+
                    // uploadImageMine()
                     console.log(11)
                     // 参数处理
                     //config = config || {};
-                    chooseImage(config).then(
-                        function (data) {
-                        uploadImage(data).then(
-                            function (imageList) {
+                    chooseImage(config).then(function (data) {
+                        uploadImage(data).then(function (imageList) {
                                 alert('imageList'+imageList)
-                                return{
-                                    imageList: imageList,
-                                }
                         })
-
                     })
-
                 }
             }
         }

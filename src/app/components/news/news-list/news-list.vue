@@ -82,7 +82,10 @@
                 var self=this
                 var res=self.uploade.uploadImg()
                 // // 处理返回来的res
-                    self.promisesss=res.imageList
+
+//                res.promise.then(function (data) {
+//                    self.promisesss=data
+//                })
             },
             loadingClick(){
                 let toast=this.$toast
