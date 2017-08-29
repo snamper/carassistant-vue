@@ -52,10 +52,10 @@ export default {
                             if (uploadCount < data.length) {
                                 var serverId = res.serverId; // 返回图片的服务器端ID
                                 serverIds.push(serverId)
-                                alert('zjy2'+serverId)
+                                alert('imageList1'+imageList)
                                 upload();
                             }else{
-                                alert('imageList'+imageList)
+                                alert('imageList2'+imageList)
                                 resolve(
                                     imageList
                                 )
