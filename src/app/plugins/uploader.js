@@ -101,22 +101,31 @@ export default {
                     })
                     .then(function (data) {
                         alert('zjy'+data)
-                        var atid=[];
-                        for(var i=0;i<data.length;i++){
-                            atid.push(data[i].LocalResource) 
-                        }
-                        $.post(
-                            'https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg',
-                            {
-                                wxid: '"wxd271727eb7d089d6"',
-                                atId: data,
-                                _identifier: 'shellhero'
-                            },
-                            function (data) {
-
+                        wx.uploadImage({
+                            localId: data, // 需要上传的图片的本地ID，由chooseImage接口获得
+                            isShowProgressTips: 1, // 默认为1，显示进度提示
+                            success: function (res) {
+                                var serverId = res.serverId; // 返回图片的服务器端ID
+                                alert('zjy2'+serverId)
                             }
-                            //timeout: req_config.timeout
-                        )
+                        });
+
+                        // var atid=[];
+                        // for(var i=0;i<data.length;i++){
+                        //     atid.push(data[i].LocalResource)
+                        // }
+                        // $.post(
+                        //     'https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg',
+                        //     {
+                        //         wxid: '"wxd271727eb7d089d6"',
+                        //         atId: data,
+                        //         _identifier: 'shellhero'
+                        //     },
+                        //     function (data) {
+                        //
+                        //     }
+                        //     //timeout: req_config.timeout
+                        // )
                         // $http({
                         //     method: 'POST',
                         //     url: 'https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg',
