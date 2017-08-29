@@ -85,7 +85,6 @@ export default {
                     // };
 
                     return new Promise((resolve) => {
-
                         wx.chooseImage({
                             count: 9, // 默认9
                             sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -102,6 +101,7 @@ export default {
                     .then(function (data) {
                         alert(data.length)
                         var uploadCount=0;
+                        var serverIds=[]
                         var upload = function() {
                             wx.uploadImage({
                                 localId:data[uploadCount].toString(),
@@ -111,6 +111,8 @@ export default {
                                    // ajaxupload(res.serverId);//这个方法是你需要把所谓的媒体meidaid进行下载到本地的ajax处理如果你需要的话就写一个ajax方法
                                     uploadCount++;
                                     if (uploadCount < data.length) {
+                                        var serverId = res.serverId; // 返回图片的服务器端ID
+                                        serverIds.push(serverId)
                                         alert('zjy2'+serverId)
                                         upload();
                                     }
@@ -118,6 +120,9 @@ export default {
                             });
                         };
                         upload();
+                        resolve(
+                            serverIds
+                        )
                        // alert('zjy'+data())
                         // wx.uploadImage({
                         //     localId: data, // 需要上传的图片的本地ID，由chooseImage接口获得
@@ -190,9 +195,10 @@ export default {
                         // }).error(function (data, status, headers, config) {
                         //     reject(data);
                         // });
-                    }),function(value) {
-                    alert('zjy'+value)
-                    }
+                    })
+                    .then(function (data) {
+                        alert('111111111111'+data)
+                    })
                 }
             }
         }
