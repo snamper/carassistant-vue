@@ -116,14 +116,17 @@ export default {
                                             serverIds.push(serverId)
                                             alert('zjy2'+serverId)
                                             upload();
+                                        }else{
+                                            alert('完成'+serverId)
+                                            resolve(
+                                                serverIds
+                                            )
                                         }
                                     }
                                 });
                             };
                             upload();
-                            resolve(
-                                serverIds
-                            )
+
                             // alert('zjy'+data())
                             // wx.uploadImage({
                             //     localId: data, // 需要上传的图片的本地ID，由chooseImage接口获得
