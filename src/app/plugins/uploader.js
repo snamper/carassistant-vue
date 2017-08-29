@@ -47,7 +47,7 @@ export default {
                         success: function(res) {
                             // images.serverId.push(res.serverId);
                             //如果还有照片，继续上传
-                             uploadImageMine(res.serverId);//这个方法是你需要把所谓的媒体meidaid进行下载到本地的ajax处理
+                            uploadImageMine(res.serverId)//这个方法是你需要把所谓的媒体meidaid进行下载到本地的ajax处理
                             uploadCount++;
                             if (uploadCount < data.length) {
                                 var serverId = res.serverId; // 返回图片的服务器端ID
@@ -71,19 +71,28 @@ export default {
         *  data 接收 chooseImage() resolve的localIds
         *  resolve 上传到微信后微信返回的 serverIds 数组
         * */
-        function uploadImageMine(postData) {
-            $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
-                {
-                   // atId:postData,
-                    wxid:postData,
-                    _identifier:'shellhero',
-                },
-                function(data){
+        function uploadImageMine(postData,atId) {
+            return new Promise((resolve)=>{
+                $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
+                    {
+                        atId:atId,
+                        wxid:postData,
+                        _identifier:'shellhero',
+                    },
+                    function(data){
+                        alert('我们服务器'+data.errcode)
+                        alert('我们服务器'+data.result.atId)
+                        var atId=data.result.atId;
+                        if(data.result.atMqStatus==0){
+                            uploadImageMine(postData,atId)
+                        }
+                        if(data.result.atMqStatus==1){
+                            resolve(data.result.atAttachment)
+                        }
+                    },
+                    "json");//这里返回的类型有：json,html,xml,text
+            })
 
-                    alert('我们服务器'+data.errcode)
-                    alert('我们服务器'+data.result.atId)
-                },
-                "json");//这里返回的类型有：json,html,xml,text
         }
         var uploadeImg = function () {
             return {
