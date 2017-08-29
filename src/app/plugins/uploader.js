@@ -101,10 +101,11 @@ export default {
                             success: function (res) {
                                 var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                                 resolve({
-                                    data:res.localIds
+                                    data:1
                                 })
                             }
-                        }).then(function (data) {
+                        })
+                    }).then(function (data) {
                             alert('zjy'+data)
                             $http({
                                 method: 'POST',
@@ -152,9 +153,9 @@ export default {
                             }).error(function (data, status, headers, config) {
                                 reject(data);
                             });
-                        })
-                    })
-
+                        }),function(value) {
+                        alert('zjy'+value)
+                    }
                 }
             }
         }
