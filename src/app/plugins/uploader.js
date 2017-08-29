@@ -100,15 +100,32 @@ export default {
                         })
                     })
                     .then(function (data) {
-                        alert('zjy'+data.toString())
-                        wx.uploadImage({
-                            localId: data.toString(), // 需要上传的图片的本地ID，由chooseImage接口获得
-                            isShowProgressTips: 1, // 默认为1，显示进度提示
-                            success: function (res) {
-                                var serverId = res.serverId; // 返回图片的服务器端ID
-                                alert('zjy2'+serverId)
-                            }
-                        });
+                        var uploadCount=0;
+                        var upload = function() {
+                            wx.uploadImage({
+                                localId:data[uploadCount].toString(),
+                                success: function(res) {
+                                   // images.serverId.push(res.serverId);
+                                    //如果还有照片，继续上传
+                                   // ajaxupload(res.serverId);//这个方法是你需要把所谓的媒体meidaid进行下载到本地的ajax处理如果你需要的话就写一个ajax方法
+                                    uploadCount++;
+                                    if (uploadCount < data.length) {
+                                        alert('zjy2'+serverId)
+                                        upload();
+                                    }
+                                }
+                            });
+                        };
+                        upload();
+                       // alert('zjy'+data())
+                        // wx.uploadImage({
+                        //     localId: data, // 需要上传的图片的本地ID，由chooseImage接口获得
+                        //     isShowProgressTips: 1, // 默认为1，显示进度提示
+                        //     success: function (res) {
+                        //         var serverId = res.serverId; // 返回图片的服务器端ID
+                        //         alert('zjy2'+serverId)
+                        //     }
+                        // });
 
                         // var atid=[];
                         // for(var i=0;i<data.length;i++){
