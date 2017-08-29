@@ -8,6 +8,7 @@
             <p>文字</p>
         </div>
         <div v-on:click="loadingClick" >点击加载3秒后消失</div>
+        {{promisesss}}
         <button @click='upload()'>点击上传图片</button>
 
         <div v-listmore="list2">
@@ -38,7 +39,8 @@
                 config:{
                     url:'post',
                     size:'10'
-                }
+                },
+                promisesss:[]
             }
         },
         created() {
@@ -77,7 +79,12 @@
         methods: {
             upload(){
                 debugger
-                this.uploade.uploadImg()
+                var self=this
+                var res=self.uploade.uploadImg()
+                // // 处理返回来的res
+                res.promise.then(function (data) {
+                    self.promisesss=data
+                })
             },
             loadingClick(){
                 let toast=this.$toast

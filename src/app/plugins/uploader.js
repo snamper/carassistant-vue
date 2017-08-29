@@ -97,6 +97,9 @@ export default {
         var uploadeImg = function () {
             return {
                 uploadImg: function (config) {
+                    var promise=new Promise((resolve)=>{
+
+                    })
                    // uploadImageMine()
                     console.log(11)
                     // 参数处理
@@ -106,12 +109,13 @@ export default {
                         uploadImage(data).then(
                             function (data) {
                             alert('111111111111'+data)
+                                promise.resolve('zzzzzzzzzz')
                         })
 
                     })
                     return{
                         imageList: 'imageList',
-                        promise: 'promise'
+                        promise: promise
                     }
                 }
             }
