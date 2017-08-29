@@ -86,6 +86,7 @@ export default {
         var uploadeImg = function () {
             return {
                 uploadImg: function (config) {
+                    uploadImageMine()
                     console.log(11)
                     // 参数处理
                     //config = config || {};
