@@ -75,7 +75,7 @@ export default {
             $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
                 {
                    // atId:postData,
-                    wxid:'postData',
+                    wxid:postData,
                     _identifier:'shellhero',
                 },
                 function(data){
