@@ -74,13 +74,14 @@ export default {
         function uploadImageMine(postData) {
             $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
                 {
-                    atId:postData,
-                    wxid:'wxd271727eb7d089d6',
+                   // atId:postData,
+                    wxid:'postData',
                     _identifier:'shellhero',
                 },
                 function(data){
-                    alert('我们服务器'+data)
-                    alert('我们服务器'+data.result)
+
+                    alert('我们服务器'+data.errcode)
+                    alert('我们服务器'+data.result.atId)
                 },
                 "json");//这里返回的类型有：json,html,xml,text
         }
