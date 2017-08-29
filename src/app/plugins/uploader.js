@@ -55,11 +55,11 @@ export default {
                                 alert('zjy2'+serverId)
                                 upload();
                             }else{
-
+                                alert('imageList'+imageList)
                                 resolve(
                                     imageList
                                 )
-                                alert('完成'+serverIds)
+
                             }
                         }
                     });
