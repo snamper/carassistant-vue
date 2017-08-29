@@ -47,32 +47,49 @@ export default {
                         success: function(res) {
                             // images.serverId.push(res.serverId);
                             //如果还有照片，继续上传
-                            imageList.push(uploadImageMine(res.serverId))//这个方法是你需要把所谓的媒体meidaid进行下载到本地的ajax处理
-                            uploadCount++;
-                            if (uploadCount < data.length) {
-                                var serverId = res.serverId; // 返回图片的服务器端ID
-                                serverIds.push(serverId)
-                                alert('imageList1'+imageList)
-                                upload();
-                            }else{
-                                alert('imageList2'+imageList)
-                                resolve(
-                                    imageList
-                                )
+                            uploadImageMine(res.serverId).then(function (atAttachment) {
+                                imageList.push(atAttachment)
+                                uploadCount++;
+                                if (uploadCount < data.length) {
+                                    var serverId = res.serverId; // 返回图片的服务器端ID
+                                    serverIds.push(serverId)
+                                    alert('imageList1'+imageList)
+                                    upload();
+                                }else{
+                                    alert('imageList2'+imageList)
+                                    resolve(
+                                        imageList
+                                    )
 
-                            }
+                                }
+                            })//这个方法是你需要把所谓的媒体meidaid进行下载到本地的ajax处理
+
                         }
                     });
                 };
                 upload();
             })
         }
+        // function fn(want) {
+        //     // 返回Promise对象
+        //     return new Promise(function(resolve, reject) {
+        //         if (typeof want == 'function') {
+        //             resolve(want);
+        //         } else {
+        //
+        //         }
+        //     })
+        // }
+        // fn(uploadImageMine).then(function(want) {
+        //     want();
+        // })
         /*
         *  用来上传图片到微信
         *  data 接收 chooseImage() resolve的localIds
         *  resolve 上传到微信后微信返回的 serverIds 数组
         * */
         function uploadImageMine(postData,atId) {
+            return new Promise(function(resolve, reject) {
                 $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
                     {
                         atId:atId,
@@ -87,10 +104,14 @@ export default {
                             uploadImageMine(postData,atId)
                         }
                         if(data.result.atMqStatus==1){
-                            return data.result.atAttachment
+                            resolve(data.result.atAttachment)
+                            return
                         }
                     },
                     "json");//这里返回的类型有：json,html,xml,text
+            })
+
+
 
         }
         var uploadeImg = function () {
