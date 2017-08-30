@@ -122,7 +122,7 @@ export default {
                     return uploadImageMine(serverIds)
                 }).then(function (imageList) {
                     alert('imageList'+imageList)
-                    resolve('xxxxxxxxxxxx')
+                    resolve(imageList)
                 })
                 // x().then(function () {
                 //     resolve('xxxxxxxxxxxx')
