@@ -12,7 +12,7 @@
         <p>
             <button @click='upload()'>点击上传图片</button>
         </p>
-        <div v-for="item in list2.dataList">
+        <div v-for="item in promisesss">
             <img :src="item" alt="">
         </div>
 
