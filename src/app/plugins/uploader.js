@@ -88,10 +88,12 @@ export default {
                                 http(serverIds,atId)
                             }
                             if(data.result.atMqStatus==1){ //当前serverIds服务器处理完成 并且有剩余serverIds未处理
+                                alert('前'+serverIds)
                                 serverIds.splice(0,1)
+                                alert('后'+serverIds)
                                 imageList.push(data.result.atAttachment)
                                 if(serverIds.length!=0){
-                                    http(serverIds,atId)
+                                    http(serverIds)
                                     return
                                 }
                                 resolve(imageList)
