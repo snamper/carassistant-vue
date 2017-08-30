@@ -52,7 +52,7 @@ export default {
                             // images.serverId.push(res.serverId);
                             //如果还有照片，继续上传
                             //imageList.push(uploadImageMine(res.serverId))//这个方法是你需要把所谓的媒体meidaid进行下载到本地的ajax处理
-                            loading.hide()
+                           //loading.hide()
                             uploadCount++;
                             if (uploadCount < data.length) {
                                 var serverId = res.serverId; // 返回图片的服务器端ID
@@ -89,7 +89,7 @@ export default {
             return new Promise(function(resolve, reject) {
                 var http=function (serverIds,atId) {
                     var serverId=serverIds[0];
-                    loading.show()
+                    //loading.show()
                     $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
                         {
                             atId:atId,
@@ -109,7 +109,7 @@ export default {
                                     http(serverIds)
                                     return
                                 }
-                                loading.hide()
+                                //loading.hide()
                                 resolve(res)
                             }
                         },
@@ -127,7 +127,7 @@ export default {
                     return uploadImageMine(serverIds)
                 }).then(function (res) {
                     alert('res'+res)
-                    loading.hide()
+                    //loading.hide()
                     if(res){
                         resolve(res)
                     }else{
