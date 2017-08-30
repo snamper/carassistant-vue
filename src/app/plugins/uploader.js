@@ -71,33 +71,36 @@ export default {
         *  data 接收 chooseImage() resolve的localIds
         *  resolve 上传到微信后微信返回的 serverIds 数组
         * */
-        imageList=[];
         function uploadImageMine(serverIds,atId) {
+            var imageList=[];
             return new Promise(function(resolve, reject) {
-                var serverId=serverIds[0];
-
-                $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
-                    {
-                        atId:atId,
-                        wxid:serverId,
-                        _identifier:'shellhero',
-                    },
-                    function(data){
-                        var atId=data.result.atId;
-                        if(data.result.atMqStatus==0){ //服务器处理中继续发送请求
-                            uploadImageMine(serverIds,atId)
-                        }
-                        if(data.result.atMqStatus==1){ //当前serverIds服务器处理完成 并且有剩余serverIds未处理
-                            serverIds.splice(0,1)
-                            imageList.push(data.result.atAttachment)
-                            if(serverIds.length!=0){
-                                uploadImageMine(serverIds,atId)
-                                return
+                var http=function (serverIds,atId) {
+                    var serverId=serverIds[0];
+                    $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
+                        {
+                            atId:atId,
+                            wxid:serverId,
+                            _identifier:'shellhero',
+                        },
+                        function(data){
+                            var atId=data.result.atId;
+                            if(data.result.atMqStatus==0){ //服务器处理中继续发送请求
+                                http(serverIds,atId)
                             }
-                            resolve(imageList)
-                        }
-                    },
-                    "json");//这里返回的类型有：json,html,xml,text
+                            if(data.result.atMqStatus==1){ //当前serverIds服务器处理完成 并且有剩余serverIds未处理
+                                serverIds.splice(0,1)
+                                imageList.push(data.result.atAttachment)
+                                if(serverIds.length!=0){
+                                    http(serverIds,atId)
+                                    return
+                                }
+                                resolve(imageList)
+                            }
+                        },
+                        "json");//这里返回的类型有：json,html,xml,text
+                }
+                http(serverIds,atId)
+
             })
 
 
