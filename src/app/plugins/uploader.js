@@ -106,29 +106,18 @@ export default {
 
 
         }
-        var uploadeImg = function () {
-            return {
-                uploadImg: function (config) {
-                    console.log(11)
-                    // 参数处理
-                    config = config || {};
-                    // chooseImage(config).then(function (data) {
-                    //     uploadImage(data).then(function (serverIds) {
-                    //         uploadImageMine(serverIds).then(function (imageList) {
-                    //             alert('imageList'+imageList)
-                    //         })
-                    //     })
-                    // })
-                    chooseImage(config).then(function (data) {
-                        return uploadImage(data)
-                    }).then(function (serverIds) {
-                        return uploadImageMine(serverIds)
-                    }).then(function (imageList) {
-                        alert('imageList'+imageList)
-                    })
-                }
-            }
+        var uploadeImg = function (config) {
+            return new Promise(function (resolve, reject) {
+                chooseImage(config).then(function (data) {
+                    return uploadImage(data)
+                }).then(function (serverIds) {
+                    return uploadImageMine(serverIds)
+                }).then(function (imageList) {
+                    alert('imageList'+imageList)
+                    resolve(imageList)
+                })
+            })
         }
-        Vue.uploade = Vue.prototype.uploade = uploadeImg();
+        Vue.uploade = Vue.prototype.uploade = uploadeImg;
     }
 }

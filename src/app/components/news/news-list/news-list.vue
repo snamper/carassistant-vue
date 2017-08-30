@@ -82,12 +82,10 @@
         methods: {
             upload(){
                 debugger
-                var res=this.uploade.uploadImg()
-                // // 处理返回来的res
-
-//                res.promise.then(function (data) {
-//                    self.promisesss=data
-//                })
+                var res=this.uploade('11')
+                res.then(function (data) {
+                    this.promisesss=data
+                })
             },
             loadingClick(){
                 let toast=this.$toast
