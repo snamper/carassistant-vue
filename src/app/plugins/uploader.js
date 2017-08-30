@@ -67,19 +67,7 @@ export default {
                 upload();
             })
         }
-        // function fn(want) {
-        //     // 返回Promise对象
-        //     return new Promise(function(resolve, reject) {
-        //         if (typeof want == 'function') {
-        //             resolve(want);
-        //         } else {
-        //
-        //         }
-        //     })
-        // }
-        // fn(uploadImageMine).then(function(want) {
-        //     want();
-        // })
+
         /*
         *  用来上传图片到微信
         *  data 接收 chooseImage() resolve的localIds
@@ -99,11 +87,12 @@ export default {
                         alert('我们服务器'+data.errcode)
                         alert('我们服务器'+data.result.atId)
                         var atId=data.result.atId;
-                        if(data.result.atMqStatus==0){
+                        if(data.result.atMqStatus==0 || serverIds.length!=1){
                             uploadImageMine(serverIds,atId)
                         }
                         if(data.result.atMqStatus==1 && serverIds.length==1){
                             serverIds.slice(0,1)
+                            alert('serverIds'+serverIds)
                             imageList.push(data.result.atAttachment)
                             resolve(imageList)
                             return
@@ -123,8 +112,7 @@ export default {
                     config = config || {};
                     chooseImage(config).then(function (data) {
                         uploadImage(data).then(function (serverIds) {
-                            alert('serverIds'+serverIds)
-                            uploadImageMine.then(function (imageList) {
+                            uploadImageMine(serverIds).then(function (imageList) {
                                 alert('imageList'+imageList)
                             })
                         })
