@@ -90,22 +90,15 @@ export default {
                         var atId=data.result.atId;
                         if(data.result.atMqStatus==0){ //服务器处理中继续发送请求
                             uploadImageMine(serverIds,atId)
-                            return
                         }
-                        if(data.result.atMqStatus==1 && serverIds.length!=0){ //当前serverIds服务器处理完成 并且有剩余serverIds未处理
+                        if(data.result.atMqStatus==1){ //当前serverIds服务器处理完成 并且有剩余serverIds未处理
                             serverIds.splice(0,1)
                             imageList.push(data.result.atAttachment)
-                            uploadImageMine(serverIds,atId)
-                            return
-                        }
-                        if(data.result.atMqStatus==1 && serverIds.length==0){ //当前serverIds服务器处理完成 并且没有serverIds需要处理
-                            alert('serverIds'+serverIds)
-                            imageList.push(data.result.atAttachment)
+                            if(serverIds.length!=0){
+                                uploadImageMine(serverIds,atId)
+                            }
                             alert('imageList'+imageList)
-                            resolve(imageList)
-                            return
                         }
-
                     },
                     "json");//这里返回的类型有：json,html,xml,text
             })
