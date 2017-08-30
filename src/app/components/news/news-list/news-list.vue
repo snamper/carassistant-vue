@@ -79,8 +79,7 @@
         methods: {
             upload(){
                 debugger
-                var self=this
-                var res=self.uploade.uploadImg()
+                var res=this.uploade.uploadImg()
                 // // 处理返回来的res
 
 //                res.promise.then(function (data) {

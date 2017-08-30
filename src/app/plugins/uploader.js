@@ -15,6 +15,7 @@ export default {
         *  resolve 选择的图片localIds数组
         * */
         function chooseImage(config) {
+            debugger
             return new Promise((resolve) => {
                 wx.chooseImage({
                     count: 9, // 默认9
@@ -117,6 +118,7 @@ export default {
                         // return new Promise(function (resolve) {
                         //     resolve(x)
                         // })
+
 
                    // uploadImageMine()
                     console.log(11)
