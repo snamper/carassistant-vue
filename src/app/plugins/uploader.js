@@ -102,16 +102,6 @@ export default {
                 http(serverIds,atId)
 
             })
-
-
-
-        }
-        function x() {
-            return new Promise(function (resolve) {
-                console.log(111)
-                resolve(11111)
-            })
-
         }
         var uploadeImg = function (config) {
             return new Promise(function (resolve, reject) {
@@ -124,9 +114,6 @@ export default {
                     alert('imageList'+imageList)
                     resolve(imageList)
                 })
-                // x().then(function () {
-                //     resolve('xxxxxxxxxxxx')
-                // })
             })
         }
         Vue.uploade = Vue.prototype.uploade = uploadeImg;

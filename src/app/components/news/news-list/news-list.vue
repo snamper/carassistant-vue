@@ -13,7 +13,7 @@
             <button @click='upload()'>点击上传图片</button>
         </p>
         <div v-for="item in list2.dataList">
-            <img v-attr="src :item" alt="">
+            <img :src="item" alt="">
         </div>
 
 
