@@ -8,7 +8,7 @@
             <p>文字</p>
         </div>
         <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        {{promisesss}}
+        {{promisesss}}111111111
         <p>
             <button @click='upload()'>点击上传图片</button>
         </p>

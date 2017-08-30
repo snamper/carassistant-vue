@@ -116,7 +116,7 @@ function app_bootstrap(code) {
     debugger
     // 获取用户信息
     wxsdk.config({
-        debug: true,
+        debug: false,
         appId: auth.appid,
         timestamp: auth.timestamp,
         nonceStr: auth.noncestr,
@@ -125,13 +125,13 @@ function app_bootstrap(code) {
         /*'disableSharing','hideOptionMenu',*/
     });
     wxsdk.ready(function () {
-        alert(1)
+        //alert(1)
         //resolve(data.result);
     });
 
     wxsdk.error(function (err) {
        // reject(JSON.stringify(err));
-        alert(0)
+       // alert(0)
     });
 
 }
