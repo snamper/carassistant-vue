@@ -56,7 +56,6 @@ export default {
                             }else{
                                 var serverId = res.serverId; // 返回图片的服务器端ID
                                 serverIds.push(serverId)
-                                alert('uploadImageserverId'+serverIds)
                                 resolve(
                                     serverIds
                                 )
@@ -97,7 +96,6 @@ export default {
                             if(serverIds.length!=0){
                                 uploadImageMine(serverIds,atId)
                             }
-                            alert('imageList'+imageList)
                         }
                     },
                     "json");//这里返回的类型有：json,html,xml,text
@@ -112,12 +110,19 @@ export default {
                     console.log(11)
                     // 参数处理
                     config = config || {};
+                    // chooseImage(config).then(function (data) {
+                    //     uploadImage(data).then(function (serverIds) {
+                    //         uploadImageMine(serverIds).then(function (imageList) {
+                    //             alert('imageList'+imageList)
+                    //         })
+                    //     })
+                    // })
                     chooseImage(config).then(function (data) {
-                        uploadImage(data).then(function (serverIds) {
-                            uploadImageMine(serverIds).then(function (imageList) {
-                                alert('imageList'+imageList)
-                            })
-                        })
+                        return uploadImage(data)
+                    }).then(function (serverIds) {
+                        return uploadImageMine(serverIds)
+                    }).then(function (imageList) {
+                        alert('imageList'+imageList)
                     })
                 }
             }
