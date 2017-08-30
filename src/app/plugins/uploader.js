@@ -91,7 +91,7 @@ export default {
                             uploadImageMine(serverIds,atId)
                         }
                         if(data.result.atMqStatus==1 && serverIds.length==1){
-                            serverIds.slice(0,1)
+                            serverIds.splice(0,1)
                             alert('serverIds'+serverIds)
                             imageList.push(data.result.atAttachment)
                             resolve(imageList)
