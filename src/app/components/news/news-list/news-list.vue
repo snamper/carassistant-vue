@@ -81,7 +81,6 @@
         },
         methods: {
             upload(){
-                debugger
                 var res=this.uploade('11')
                 res.then(function (data) {
                     this.promisesss=data
