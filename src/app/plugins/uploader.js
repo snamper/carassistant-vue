@@ -38,7 +38,6 @@ export default {
         * */
         function uploadImage(data) {
             return new Promise((resolve) => {
-                alert(data.length)
                 var uploadCount=0;
                 var serverIds=[];
                 var upload = function() {
@@ -72,7 +71,7 @@ export default {
         *  data 接收 chooseImage() resolve的localIds
         *  resolve 上传到微信后微信返回的 serverIds 数组
         * */
-        var imageList=[];
+        imageList=[];
         function uploadImageMine(serverIds,atId) {
             return new Promise(function(resolve, reject) {
                 var serverId=serverIds[0];
@@ -84,8 +83,6 @@ export default {
                         _identifier:'shellhero',
                     },
                     function(data){
-                        alert('我们服务器'+data.errcode)
-                        alert('我们服务器'+data.result.atId)
                         var atId=data.result.atId;
                         if(data.result.atMqStatus==0){ //服务器处理中继续发送请求
                             uploadImageMine(serverIds,atId)
@@ -95,7 +92,9 @@ export default {
                             imageList.push(data.result.atAttachment)
                             if(serverIds.length!=0){
                                 uploadImageMine(serverIds,atId)
+                                return
                             }
+                            resolve(imageList)
                         }
                     },
                     "json");//这里返回的类型有：json,html,xml,text
