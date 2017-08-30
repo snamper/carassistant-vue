@@ -8,7 +8,7 @@
             <p>文字</p>
         </div>
         <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        222222222222
+        111111111
         <p>
             <button class='dialog-btn-box' @click='upload()'>点击上传图片</button>
         </p>
