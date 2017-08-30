@@ -18,15 +18,12 @@ export default {
             debugger
             return new Promise((resolve) => {
                 wx.chooseImage({
-                    count: 9, // 默认9
-                    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-                    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                    config,
                     success: function (res) {
                         var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                         resolve(
                             localIds
                         )
-
                     }
                 })
             })
@@ -70,9 +67,16 @@ export default {
         *  用来上传图片到微信
         *  data 接收 chooseImage() resolve的localIds
         *  resolve 上传到微信后微信返回的 serverIds 数组
+        *  @serverIds 是微信选择图片上传到微信服务器后得到的 图片id数组
+        *  @atId 是每一张图片上传到我们的服务器后的Id
         * */
         function uploadImageMine(serverIds,atId) {
-            var imageList=[];
+            var res=[];  //保存上传到我们服务器的图片信息
+            // atId	String	图片ID
+            // atFilename	String	图片名称
+            // atFilesize	String	图片大小字符串：300Kb
+            // atAttachment	String	图片地址
+            // atMqStatus	Int	异步处理状态，0-处理中，1-已完成，2-图片下载失败
             return new Promise(function(resolve, reject) {
                 var http=function (serverIds,atId) {
                     var serverId=serverIds[0];
@@ -91,12 +95,13 @@ export default {
                                 alert('前'+serverIds)
                                 serverIds.splice(0,1)
                                 alert('后'+serverIds)
-                                imageList.push(data.result.atAttachment)
+                                res.push(data.result)
+                                //如果还有未上传的图片继续请求
                                 if(serverIds.length!=0){
                                     http(serverIds)
                                     return
                                 }
-                                resolve(imageList)
+                                resolve(res)
                             }
                         },
                         "json");//这里返回的类型有：json,html,xml,text
@@ -112,9 +117,9 @@ export default {
                 })
                     .then(function (serverIds) {
                     return uploadImageMine(serverIds)
-                }).then(function (imageList) {
-                    alert('imageList'+imageList)
-                    resolve(imageList)
+                }).then(function (res) {
+                    alert('res'+res)
+                    resolve(res)
                 })
             })
         }

@@ -8,14 +8,13 @@
             <p>文字</p>
         </div>
         <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        {{promisesss}}22惺惺惜惺惺想寻00000
+        {{imglist}}22惺惺惜惺惺想寻wwwww
         <p>
             <button class='dialog-btn-box' @click='upload()'>点击上传图片</button>
         </p>
-            <div v-for="item in promisesss">
-                    <img :src="item" alt="">
+            <div v-for="item in imglist">
+                    <img :src="item.atAttachment" alt="">
             </div>
-
         <div v-listmore="list2">
             <p v-if='list2.hasMore'>加载更多</p>
             <p v-if='!list2.hasMore'>没有更多内容</p>
@@ -45,7 +44,7 @@
                     url:'post',
                     size:'10'
                 },
-                promisesss:[]
+                imglist:[]
             }
         },
         created() {
@@ -84,9 +83,13 @@
         methods: {
             upload(){
                 var self=this;
-                var res=self.uploade('11')
+                var res=self.uploade({
+                    count: 3, // 默认9
+                    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                })
                 res.then(function (data) {
-                    self.promisesss=data
+                    self.imglist=data
                 })
             },
             loadingClick(){
@@ -105,5 +108,10 @@
 </script>
 
 <style lang="less" scoped>
-
+.news-list{
+    img{
+        width: 100px;
+        height: 100px;
+    }
+}
 </style>
