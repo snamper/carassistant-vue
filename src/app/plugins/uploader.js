@@ -54,6 +54,9 @@ export default {
                                 serverIds.push(serverId)
                                 upload();
                             }else{
+                                var serverId = res.serverId; // 返回图片的服务器端ID
+                                serverIds.push(serverId)
+                                alert('uploadImageserverId'+serverIds)
                                 resolve(
                                     serverIds
                                 )
@@ -122,7 +125,7 @@ export default {
                         uploadImage(data).then(function (serverIds) {
                             alert('serverIds'+serverIds)
                             uploadImageMine.then(function (imageList) {
-                                alert(imageList)
+                                alert('imageList'+imageList)
                             })
                         })
                         alert(data)
