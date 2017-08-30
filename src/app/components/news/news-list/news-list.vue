@@ -8,7 +8,7 @@
             <p>文字</p>
         </div>
         <div v-on:click="loadingClick" >点击加载3秒后消失</div>
-        {{imglist}}22惺惺惜惺惺想寻3333333333333
+        3333333333333
         <p>
             <button class='dialog-btn-box' @click='upload()'>点击上传图片</button>
         </p>
@@ -82,6 +82,7 @@
         },
         methods: {
             upload(){
+                let loading=this.$loading
                 var self=this;
                 var res=self.uploade({
                     count: 3, // 默认9
@@ -89,7 +90,12 @@
                     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 })
                 res.then(function (data) {
-                    self.imglist=data
+                    self.imglist=data;
+                    loading.hide()
+                })
+                res.catch(function (err) {
+                    loading.hide()
+                    console.log(err)
                 })
             },
             loadingClick(){

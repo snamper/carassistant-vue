@@ -16,14 +16,21 @@ export default {
         * */
         function chooseImage(config) {
             debugger
-            return new Promise((resolve) => {
+            return new Promise((resolve,reject) => {
                 wx.chooseImage({
-                    config,
+                    count: config.count, // 默认9
+                    sizeType: config.sizeType, // 可以指定是原图还是压缩图，默认二者都有
+                    sourceType: config.sourceType, // 可以指定来源是相册还是相机，默认二者都有,
                     success: function (res) {
                         var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                        resolve(
-                            localIds
-                        )
+                        if(res){
+                            resolve(
+                                localIds
+                            )
+                        }else{
+                            reject('上传失败')
+                        }
+
                     }
                 })
             })
@@ -92,9 +99,7 @@ export default {
                                 http(serverIds,atId)
                             }
                             if(data.result.atMqStatus==1){ //当前serverIds服务器处理完成 并且有剩余serverIds未处理
-                                alert('前'+serverIds)
                                 serverIds.splice(0,1)
-                                alert('后'+serverIds)
                                 res.push(data.result)
                                 //如果还有未上传的图片继续请求
                                 if(serverIds.length!=0){
@@ -111,15 +116,20 @@ export default {
             })
         }
         var uploadeImg = function (config) {
+            loading.show()
             return new Promise(function (resolve, reject) {
                 chooseImage(config).then(function (data) {
                     return uploadImage(data)
-                })
-                    .then(function (serverIds) {
+                }).then(function (serverIds) {
                     return uploadImageMine(serverIds)
                 }).then(function (res) {
                     alert('res'+res)
-                    resolve(res)
+                    loading.hide()
+                    if(res){
+                        resolve(res)
+                    }else{
+                        reject('上传失败')
+                    }
                 })
             })
         }
