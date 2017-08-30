@@ -115,15 +115,9 @@ export default {
         var uploadeImg = function () {
             return {
                 uploadImg: function (config) {
-                        // return new Promise(function (resolve) {
-                        //     resolve(x)
-                        // })
-
-
-                   // uploadImageMine()
                     console.log(11)
                     // 参数处理
-                    //config = config || {};
+                    config = config || {};
                     chooseImage(config).then(function (data) {
                         uploadImage(data).then(function (serverIds) {
                             alert('serverIds'+serverIds)

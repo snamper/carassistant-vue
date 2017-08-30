@@ -85,7 +85,7 @@ function parseURL(url) {
     };
 }
 
-var _identifier = "safetyreport";
+var _identifier = "shellhero";
 var url = AppConfig.API.BASE_URL + 'xacy' +"/Common/Frontend/Member/JsLogin";
 var params = parseURL(window.location.href).params;
 
