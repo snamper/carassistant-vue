@@ -116,7 +116,7 @@ function app_bootstrap(code) {
     debugger
     // 获取用户信息
     wxsdk.config({
-        debug: false,
+        debug: true,
         appId: auth.appid,
         timestamp: auth.timestamp,
         nonceStr: auth.noncestr,
