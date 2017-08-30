@@ -119,12 +119,12 @@ export default {
                     // 参数处理
                     config = config || {};
                     chooseImage(config).then(function (data) {
-                        // uploadImage(data).then(function (serverIds) {
-                        //     alert('serverIds'+serverIds)
-                        //     uploadImageMine.then(function (imageList) {
-                        //         alert(imageList)
-                        //     })
-                        // })
+                        uploadImage(data).then(function (serverIds) {
+                            alert('serverIds'+serverIds)
+                            uploadImageMine.then(function (imageList) {
+                                alert(imageList)
+                            })
+                        })
                         alert(data)
                     })
                 }
