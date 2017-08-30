@@ -11,7 +11,7 @@ export default {
         let loading = Vue.loading;
         let wx = wxsdk;
         /*
-        *  用来掉漆微信选择图片
+        *  用来吊起微信选择图片
         *  resolve 选择的图片localIds数组
         * */
         function chooseImage(config) {

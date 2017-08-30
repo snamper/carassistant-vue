@@ -113,7 +113,7 @@ window.authComplete = function (auth) {
 function app_bootstrap(code) {
 
     var auth = code.result.jscfg;
-
+    debugger
     // 获取用户信息
     wxsdk.config({
         debug: true,
@@ -125,13 +125,13 @@ function app_bootstrap(code) {
         /*'disableSharing','hideOptionMenu',*/
     });
     wxsdk.ready(function () {
-        //alert(1)
+        alert(1)
         //resolve(data.result);
     });
 
     wxsdk.error(function (err) {
        // reject(JSON.stringify(err));
-        // ／／alert(0)
+        alert(0)
     });
 
 }
