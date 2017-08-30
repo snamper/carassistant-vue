@@ -106,16 +106,27 @@ export default {
 
 
         }
+        function x() {
+            return new Promise(function (resolve) {
+                console.log(111)
+                resolve(11111)
+            })
+
+        }
         var uploadeImg = function (config) {
             return new Promise(function (resolve, reject) {
                 chooseImage(config).then(function (data) {
                     return uploadImage(data)
-                }).then(function (serverIds) {
+                })
+                    .then(function (serverIds) {
                     return uploadImageMine(serverIds)
                 }).then(function (imageList) {
                     alert('imageList'+imageList)
-                    resolve(imageList)
+                    resolve('xxxxxxxxxxxx')
                 })
+                // x().then(function () {
+                //     resolve('xxxxxxxxxxxx')
+                // })
             })
         }
         Vue.uploade = Vue.prototype.uploade = uploadeImg;

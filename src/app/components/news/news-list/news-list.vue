@@ -81,9 +81,10 @@
         },
         methods: {
             upload(){
-                var res=this.uploade('11')
+                var self=this;
+                var res=self.uploade('11')
                 res.then(function (data) {
-                    this.promisesss=data
+                    self.promisesss=data
                 })
             },
             loadingClick(){
