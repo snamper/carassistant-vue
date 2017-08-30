@@ -9,7 +9,10 @@
         </div>
         <div v-on:click="loadingClick" >点击加载3秒后消失</div>
         {{promisesss}}
-        <button @click='upload()'>点击上传图片</button>
+        <p>
+            <button @click='upload()'>点击上传图片</button>
+        </p>
+
 
         <div v-listmore="list2">
             <p v-if='list2.hasMore'>加载更多</p>
