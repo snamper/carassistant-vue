@@ -73,10 +73,11 @@ export default {
         *  data 接收 chooseImage() resolve的localIds
         *  resolve 上传到微信后微信返回的 serverIds 数组
         * */
+        var imageList=[];
         function uploadImageMine(serverIds,atId) {
             return new Promise(function(resolve, reject) {
                 var serverId=serverIds[0];
-                var imageList=[];
+
                 $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
                     {
                         atId:atId,
@@ -87,16 +88,24 @@ export default {
                         alert('我们服务器'+data.errcode)
                         alert('我们服务器'+data.result.atId)
                         var atId=data.result.atId;
-                        if(data.result.atMqStatus==0 || serverIds.length!=1){
+                        if(data.result.atMqStatus==0){ //服务器处理中继续发送请求
                             uploadImageMine(serverIds,atId)
+                            return
                         }
-                        if(data.result.atMqStatus==1 && serverIds.length==1){
+                        if(data.result.atMqStatus==1 && serverIds.length!=0){ //当前serverIds服务器处理完成 并且有剩余serverIds未处理
                             serverIds.splice(0,1)
+                            imageList.push(data.result.atAttachment)
+                            uploadImageMine(serverIds,atId)
+                            return
+                        }
+                        if(data.result.atMqStatus==1 && serverIds.length==0){ //当前serverIds服务器处理完成 并且没有serverIds需要处理
                             alert('serverIds'+serverIds)
                             imageList.push(data.result.atAttachment)
+                            alert('imageList'+imageList)
                             resolve(imageList)
                             return
                         }
+
                     },
                     "json");//这里返回的类型有：json,html,xml,text
             })
@@ -116,7 +125,6 @@ export default {
                                 alert('imageList'+imageList)
                             })
                         })
-                        alert(data)
                     })
                 }
             }
