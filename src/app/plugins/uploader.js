@@ -47,6 +47,7 @@ export default {
                 var upload = function() {
                     loading.show()
                     wx.uploadImage({
+                        isShowProgressTips:0,
                         localId:data[uploadCount].toString(),
                         success: function(res) {
                             // images.serverId.push(res.serverId);
