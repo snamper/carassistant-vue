@@ -39,7 +39,8 @@
                     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 })
                 res.then(function (data) {
-                    self.imglist.concat(data);
+                    self.imglist=self.imglist.concat(data);
+                    alert(self.imglist)
                     loading.hide()
                 })
                 res.catch(function (err) {
