@@ -21,7 +21,7 @@
         </div>
         <!--<uploader :src="'/api/imgs'"></uploader>-->
         <p>
-            <button @click='preview()'>预览图片</button>
+            <button @click='previewimg()'>预览图片</button>
         </p>
     </div>
 
@@ -29,7 +29,7 @@
 
 <script>
     import uploader from './../../../plugins/uploader.vue'
-    import previewImg from './../../../plugins/previewImg'
+
     export default {
 
         //name: 'news-    list',
@@ -66,8 +66,6 @@
                          })
                          loading.hide();
                      },2000)
-
-
                 })
             });
             this.list2.init(
@@ -111,13 +109,12 @@
                     style:'success'
                 });
             },
-            preview(){
-                this.previewImg()
+            previewimg(){
+                this.imgpreview()
             }
         },
         components:{
             uploader,
-            previewImg
         }
     }
 </script>

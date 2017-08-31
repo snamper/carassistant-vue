@@ -1,4 +1,3 @@
-import $ from 'jquery'
 
 import wxsdk from 'weixin-js-sdk';
 export default {
@@ -24,10 +23,8 @@ export default {
             });
         }
         var previewImg = function (config) {
-            return new Promise(function (resolve, reject) {
                 preview(config)
-            })
         }
-        Vue.previewImg = Vue.prototype.previewImg = previewImg;
+        Vue.imgpreview = Vue.prototype.imgpreview = previewImg;
     }
 }

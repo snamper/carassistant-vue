@@ -16,6 +16,7 @@ import uploadImg from './plugins/uploader'  //分页请求数据
 import '../css/base/utilities.less';
 import listmore from './plugins/loadmore'  //滚动加载
 import upfiled from './plugins/file'  //滚动加载
+import previewImg from './plugins/preview'
 import drag from './plugins/loadmore'
 import 'babel-polyfill'
 Vue.prototype.wxsdk=wxsdk;
@@ -28,6 +29,7 @@ Vue.use(toast,{});
 Vue.use(VueAwesomeSwiper)
 Vue.use(listPage,{})
 Vue.use(uploadImg,{})
+Vue.use(previewImg,{})
 //console.log(page)
 Vue.use(Page);
 Vue.config.debug = true;//开启错误提示
