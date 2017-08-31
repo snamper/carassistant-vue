@@ -13,14 +13,11 @@ export default {
         *  用来吊起微信选择图片
         *  resolve 选择的图片localIds数组
         * */
-        function preview(current,list) {
+        var previewImg = function (current,list) {
             wx.previewImage({
                 current: current, // 当前显示图片的http链接
                 urls: list // 需要预览的图片http链接列表
             });
-        }
-        var previewImg = function (config) {
-                preview(config)
         }
         Vue.imgpreview = Vue.prototype.imgpreview = previewImg;
     }
