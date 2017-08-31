@@ -49,6 +49,10 @@
             },
             previewimg(atAttachment){
                 var imglist=this.imglist
+                var urlList=[];
+                for (var i in imglist){
+                    urlList.push(imglist[i].atAttachment)
+                }
                 this.imgpreview(atAttachment,imglist)
             }
         },
