@@ -7,6 +7,7 @@ import demoJssdk from './demo-jssdk/demo-jssdk';
 import demoPagelist from './demo-pagelist/demo-pagelist';
 import demoToast from './demo-toast/demo-toast';
 import demoUpfiled from './demo-upfiled/demo-upfiled';
+import demoimgUpfild from './demo-img-upload/demo-img-upload';
 
 
 let demoModule = [
@@ -20,7 +21,8 @@ demoModule=demoModule.concat(
     demoJssdk,
     demoPagelist,
     demoToast,
-    demoUpfiled
+    demoUpfiled,
+    demoimgUpfild
 );
 
 export default demoModule;
