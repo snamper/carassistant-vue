@@ -20,11 +20,16 @@
             <p v-if='!list2.hasMore'>没有更多内容</p>
         </div>
         <!--<uploader :src="'/api/imgs'"></uploader>-->
+        <p>
+            <button @click='preview()'>预览图片</button>
+        </p>
     </div>
+
 </template>
 
 <script>
     import uploader from './../../../plugins/uploader.vue'
+    import previewImg from './../../../plugins/previewImg'
     export default {
 
         //name: 'news-    list',
@@ -106,9 +111,13 @@
                     style:'success'
                 });
             },
+            preview(){
+                this.previewImg()
+            }
         },
         components:{
-            uploader
+            uploader,
+            previewImg
         }
     }
 </script>
