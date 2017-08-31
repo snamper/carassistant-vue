@@ -3,9 +3,9 @@
     <div class="demo-img-upload">
         demo-img-upload  点击预览
 
-        <div class='imgbox' v-for="item in imglist">
+        <div class='imgbox' v-for="(item,index) in imglist">
             <img :src="item.atAttachment" alt="" @click='previewimg(item.atAttachment)'>
-            <button>删除图片</button>
+            <button @click='delimg(index)'>删除图片</button>
         </div>
         <p @click='upload()'>上传图片</p>
     </div>
@@ -17,7 +17,7 @@
         name: 'demo-img-upload',
         data() {
             return {
-                imglist:[]
+                imglist:[{'atAttachment':'http://img95.699pic.com/photo/50004/2199.jpg_wh300.jpg'}]
             }
         },
         created() {
@@ -49,12 +49,18 @@
                 })
             },
             previewimg(atAttachment){
+                debugger
                 var imglist=this.imglist
                 var urlList=[];
                 for (var i in imglist){
                     urlList.push(imglist[i].atAttachment)
                 }
-                this.imgpreview(atAttachment,imglist)
+                this.imgpreview(atAttachment,urlList)
+            },
+            delimg(index){
+                var self=this;
+                console.log(index)
+                self.imglist.splice(index,1)
             }
         },
         components:{
