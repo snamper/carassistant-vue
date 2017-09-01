@@ -62,10 +62,6 @@ export default {
                         }
                         // 提交参数
                         if(option.value.multiple==true){
-                            for(var i=0;i<input.files.length;i++){
-                                fd.append("file["+i+"]", input.files[i]);
-                            }
-                        }else{
                             fd.append('file', input.files[0]);
                         }
                         fd.append('_identifier', 'newsshellhero');
