@@ -1,7 +1,7 @@
 
 <template>
     <div class="demo-upload">
-        demo-upload11112222333
+        demo-upload11112222333444
         <div>
             <div class='upload' v-upfiled='config'>
                 上传文件
