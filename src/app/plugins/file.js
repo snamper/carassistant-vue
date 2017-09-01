@@ -68,30 +68,25 @@ export default {
                         fd.append('atMediatype', '99');
                         xhr.open('post', 'https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadAtta');
                         xhr.onreadystatechange = function(){
-                            if(xhr.status == 200&& xhr.readyState == 4){
-                                if(option.value.callback instanceof Function){
-                                    option.value.callback(xhr.responseText);
+                            if(xhr.readyState == 4){
+                                if(xhr.status == 200){
+                                    if(option.value.callback instanceof Function){
+                                        option.value.callback(xhr.responseText);
+                                    }
+                                }else{
+                                    Vue.toast.show({
+                                        showTime: 2,
+                                        message: '上传失败，请重试11',
+                                        style:'error'
+                                    });
+                                    return false
                                 }
-                            }else{
-                                Vue.toast.show({
-                                    showTime: 2,
-                                    message: '上传失败，请重试11',
-                                    style:'error'
-                                });
-                                return false
                             }
                         }
                         xhr.upload.onprogress = function(event){
                             var pre = Math.floor(100 * event.loaded / event.total);
                         }
                         xhr.send(fd);
-                    }
-                    xhr.onreadystatechange = function(){
-                        if(xhr.status == 200){
-
-                        }else{
-
-                        }
                     }
                 }
             },

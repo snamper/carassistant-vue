@@ -6,6 +6,10 @@
             <div class='upload' v-upfiled='config'>
                 上传文件
             </div>
+            <div class='file' v-for='item in filelist'>
+                <img :src="item.atAttachment" alt="">
+                <p v-bind="item.atFilename"></p>
+            </div>
         </div>
     </div>
 </template>
@@ -23,6 +27,7 @@
                     multiple:true,
                     callback:this.uploadcall
                 },
+                filelist:[]
             }
         },
         created() {
@@ -36,7 +41,8 @@
         methods: {
             //页面方法
             uploadcall(data){
-                console.log(data)
+                alert('上传成功'+data)
+                this.filelist=this.files.concat(data)
             }
         },
         components:{
@@ -59,6 +65,13 @@
             text-align: center;
             display: flex;
             justify-content: center;
+        }
+        .file{
+            img{
+                width: 1rem;
+                height: 1rem;
+                background: url("../../../../images/default/vcy_pic_categories.png");
+            }
         }
     }
 </style>
