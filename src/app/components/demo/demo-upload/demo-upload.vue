@@ -42,7 +42,7 @@
             //页面方法
             uploadcall(data){
                 alert('上传成功'+data)
-                this.filelist=this.files.concat(data)
+                this.files.push(data)
             }
         },
         components:{
