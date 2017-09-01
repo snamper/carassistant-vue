@@ -1,7 +1,7 @@
 
 <template>
     <div class="demo-upload">
-        demo-upload123
+        demo-upload1234
         <div>
             <div class='upload' v-upfiled='config'>
                 上传文件
@@ -71,7 +71,7 @@
                 display: block;
                 width: 1rem;
                 height: 1rem;
-                background: orange;
+                background: url("./../../../../images/default/vcy_pic_categories.png");
             }
         }
     }
