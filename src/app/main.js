@@ -18,6 +18,7 @@ import listmore from './plugins/loadmore'  //滚动加载
 import upfiled from './plugins/file'  //滚动加载
 import previewImg from './plugins/preview'
 import drag from './plugins/loadmore'
+import fileSize from './plugins/filter'
 import 'babel-polyfill'
 Vue.prototype.wxsdk=wxsdk;
 Vue.use(listmore,{})
@@ -32,6 +33,7 @@ Vue.use(uploadImg,{})
 Vue.use(previewImg,{})
 //console.log(page)
 Vue.use(Page);
+Vue.use(fileSize,{});
 Vue.config.debug = true;//开启错误提示
 
 // 微信js接口配置
@@ -115,7 +117,6 @@ window.authComplete = function (auth) {
 function app_bootstrap(code) {
 
     var auth = code.result.jscfg;
-    debugger
     // 获取用户信息
     wxsdk.config({
         debug: false,
