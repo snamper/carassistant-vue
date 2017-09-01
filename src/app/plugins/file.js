@@ -21,7 +21,7 @@ export default {
                     }
 
 
-                    var fileType = ['doc','docx','xls','xlsx','pdf','jpg','png','ppt','pptx']
+                    var fileType = ['doc','docx','xls','xlsx','pdf','jpg','png','ppt','pptx','txt']
                     var option = binding;
                     var xhr = new XMLHttpRequest();
                     var fd = new FormData()
