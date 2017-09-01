@@ -1,14 +1,14 @@
 
 <template>
     <div class="demo-upload">
-        demo-upload12
+        demo-upload123
         <div>
             <div class='upload' v-upfiled='config'>
                 上传文件
             </div>
             <div class='file' v-for='item in filelist'>
-                <img :src="item.atAttachment" alt="">
-                <p v-bind="item.atFilename"></p>
+                <a :href="item.atAttachment"></a>
+                <p v-text="item.atFilename"></p>
             </div>
         </div>
     </div>
@@ -67,10 +67,11 @@
             justify-content: center;
         }
         .file{
-            img{
+            a{
+                display: block;
                 width: 1rem;
                 height: 1rem;
-                background: url("../../../../images/default/vcy_pic_categories.png");
+                background: orange;
             }
         }
     }

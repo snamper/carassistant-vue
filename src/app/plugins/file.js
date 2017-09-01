@@ -72,7 +72,18 @@ export default {
                                 if(xhr.status == 200){
                                     if(option.value.callback instanceof Function){
                                         alert(xhr.responseText)
-                                        option.value.callback(JSON.parse(xhr.responseText).result);
+                                        option.value.callback({
+                                            "atId": "3C759AE67F0000014E343D04EF2BBCC5",
+                                            "epId": "B538D3637F00000165C3EACC5E29FB65",
+                                            "atFilename": "汽车助手前端项目排期.xls",
+                                            "atFilesize": 11264,
+                                            "atMediatype": 99,
+                                            "atAttachment": "https:\/\/t-rep.vchangyi.com\/common\/20170901\/3C759AE67F0000014E343D04EF2BBCC5.xls?atId=3C759AE67F0000014E343D04EF2BBCC5",
+                                            "atCreated": 1504252893929,
+                                            "atAuthRequired": 0,
+                                            "atAuthUrl": "",
+                                            "atDefaultAuth": 1
+                                        });
 
                                     }
                                 }else{
