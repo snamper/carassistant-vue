@@ -1,7 +1,7 @@
 
 <template>
     <div class="demo-upload">
-        demo-upload1
+        demo-upload12
         <div>
             <div class='upload' v-upfiled='config'>
                 上传文件
@@ -42,7 +42,7 @@
             //页面方法
             uploadcall(data){
                 alert('上传成功'+data)
-                this.files.push(data)
+                this.filelist.push(data)
             }
         },
         components:{
