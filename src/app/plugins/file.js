@@ -71,7 +71,7 @@ export default {
                             if(xhr.readyState == 4){
                                 if(xhr.status == 200){
                                     if(option.value.callback instanceof Function){
-                                        option.value.callback(xhr.responseText);
+                                        option.value.callback(xhr.responseText.result);
                                     }
                                 }else{
                                     Vue.toast.show({
