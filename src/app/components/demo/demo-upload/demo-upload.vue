@@ -88,12 +88,9 @@
         },
         methods: {
             //页面方法
-            jindu(){
-                $('.windu').width('100%')
-            }
-            ,
             uploadcall(data){
                 this.filelist.push(data)
+                alert(this.filelist)
             },
             filesize (value) {
                 var res = parseInt(value) / 1024;
