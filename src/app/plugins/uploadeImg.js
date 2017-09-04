@@ -45,7 +45,7 @@ export default {
                 var uploadCount=0;
                 var serverIds=[];
                 var upload = function() {
-                    loading.show()
+                    loading.show('上传中...')
                     wx.uploadImage({
                         isShowProgressTips:0,
                         localId:data[uploadCount].toString(),

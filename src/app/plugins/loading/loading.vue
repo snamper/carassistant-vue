@@ -16,7 +16,7 @@
                 <div class="bar11"></div>
                 <div class="bar12"></div>
             </div>
-            <div class="loading-message">加载中...</div>
+            <div class="loading-message" v-text='showText'>加载中...</div>
         </div>
     </div>
 </template>
@@ -220,7 +220,8 @@
     export default {
         data() {
             return {
-                isShow: false
+                isShow: false,
+                showText:'加载中...'
             }
         },
         computed: {
@@ -230,8 +231,9 @@
             /**
              * 显示动画loading
              */
-            show() {
+            show(text) {
                 this.isShow = true
+                this.showText = text
             },
             /**
              * 隐藏动画loading

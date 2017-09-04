@@ -18,7 +18,7 @@ install(Vue, pluginOptions = {}) {
          * 初始化并显示loading
          * @returns {Promise} Promise实例
          */
-        $loading.show= function() {
+        $loading.show= function(text) {
             return new Promise((resolve) => {
                 // 第一次调用
                 if (!loading) {
@@ -29,7 +29,8 @@ install(Vue, pluginOptions = {}) {
                     document.querySelector(pluginOptions.container || 'body').appendChild(loading.$el)
                 }
                 // 显示loading
-                loading.show()
+                debugger
+                loading.show(text)
                 resolve()
             })
         }

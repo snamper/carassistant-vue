@@ -1,6 +1,7 @@
 
 export default {
     install(Vue, pluginOptions = {}){
+
         Vue.directive("upfiled",{
             //  bind: 只调用一次，当指令第一次被绑定到元素时调用。
             //  inserte: 被绑定元素插入父节点时调用（父节点存在即可调用，不必存在于 document 中）。
@@ -12,6 +13,7 @@ export default {
                     console.log("bind");
                     upload()
                 }
+                let loading = Vue.loading;
                 function upload() {
                     //判断当前页面是否存在创建的input，存在就直接使用，不存在就创建
                     if(document.getElementById('myUploadInput')){
@@ -72,14 +74,16 @@ export default {
                         }
                         fd.append('_identifier', 'newsshellhero');
                         fd.append('atMediatype', '99');
+                        loading.show('上传中...')
                         xhr.open('post', 'https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadAtta');
                         xhr.onreadystatechange = function(){
+
                             if(xhr.readyState == 4){
                                 if(xhr.status == 200){
                                     if(option.value.callback instanceof Function){
                                         alert(xhr.responseText)
                                         option.value.callback(JSON.parse(xhr.responseText).result);
-
+                                        loading.hide()
                                     }
                                 }else{
                                     Vue.toast.show({
@@ -87,6 +91,7 @@ export default {
                                         message: '上传失败，请重试11',
                                         style:'error'
                                     });
+                                    loading.hide()
                                     return false
                                 }
                             }
