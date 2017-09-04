@@ -74,7 +74,7 @@ export default {
         }
 
         /*
-        *  用来上传图片到微信
+        *  用来上传图片到本地服务器
         *  data 接收 chooseImage() resolve的localIds
         *  resolve 上传到微信后微信返回的 serverIds 数组
         *  @serverIds 是微信选择图片上传到微信服务器后得到的 图片id数组
@@ -111,8 +111,8 @@ export default {
                                     return
                                 }
                                 loading.hide()
-                                resolve(res)
                             }
+                            resolve(res)
                         },
                         "json");//这里返回的类型有：json,html,xml,text
                 }
