@@ -40,7 +40,7 @@
                 })
                 res.then(function (data) {
                     self.imglist=self.imglist.concat(data);
-                    alert(self.imglist)
+                    //alert(self.imglist)
                     loading.hide()
                 })
                 res.catch(function (err) {

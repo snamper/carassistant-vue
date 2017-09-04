@@ -10,7 +10,6 @@ export default {
             //  unbind: 只调用一次，指令与元素解绑时调用。
             bind(el,binding){
                 el.onclick=function () {
-                    console.log("bind");
                     upload()
                 }
                 let loading = Vue.loading;
@@ -28,8 +27,9 @@ export default {
                     }
 
                     //配置可以上传的文件格式
-                    var fileType = ['doc','docx','xls','xlsx','pdf','jpg','png','ppt','pptx','txt']
-                    var option = binding;
+                    var option = binding.value;
+                    var fileType =option.fileType;
+                    var fileMaxSize =option.fileMaxSize;
                     var xhr = new XMLHttpRequest();
                     var fd = new FormData()
                     var input;
@@ -38,7 +38,7 @@ export default {
                     input.setAttribute('type', 'file');
                     input.setAttribute('name', 'file');
                     //是否开启多文件上传
-                    if(option.value.multiple==true){
+                    if(option.multiple==true){
                         input.setAttribute('multiple', 'multiple');
                     }
                     document.body.appendChild(input);
@@ -49,7 +49,6 @@ export default {
                         if(!input.value){
                             return false;
                         }
-                        console.log(binding.value)
                         var type = input.value.split('.').pop(); //获取文件类型
                         if(fileType.indexOf(type.toLocaleLowerCase()) == -1){
                             Vue.toast.show({
@@ -60,7 +59,7 @@ export default {
                             return;
                         }
                         //判断文件大小
-                        if(option.value.maxSize &&  input.files[0].size > option.maxSize * 1024 * 1024){
+                        if(option.fileMaxSize &&  input.files[0].size > option.fileMaxSize * 1024 * 1024){
                             Vue.toast.show({
                                 showTime: 2,
                                 message: '文件不能大于10',
@@ -69,20 +68,19 @@ export default {
                             return;
                         }
                         // 提交参数
-                        if(option.value.multiple==true){
+                        if(option.multiple==true){
                             fd.append('file', input.files[0]);
                         }
                         fd.append('_identifier', 'newsshellhero');
-                        fd.append('atMediatype', '99');
+                        fd.append('atMediatype', option.atMediatype);
                         loading.show('上传中...')
-                        xhr.open('post', 'https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadAtta');
+                        xhr.open('post',option.url );
                         xhr.onreadystatechange = function(){
-
                             if(xhr.readyState == 4){
                                 if(xhr.status == 200){
-                                    if(option.value.callback instanceof Function){
-                                        alert(xhr.responseText)
-                                        option.value.callback(JSON.parse(xhr.responseText).result);
+                                    if(option.callback instanceof Function){
+                                        //alert(xhr.responseText)
+                                        option.callback(JSON.parse(xhr.responseText).result);
                                         loading.hide()
                                     }
                                 }else{

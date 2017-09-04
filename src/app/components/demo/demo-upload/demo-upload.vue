@@ -47,9 +47,11 @@
         data() {
             return {
                 config:{
-                    url:'post',
+                    url:'https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadAtta',
                     size:'10',
+                    fileType:['doc','docx','xls','xlsx','pdf','jpg','png','ppt','pptx','txt'],
                     multiple:true,
+                    atMediatype:'99',
                     callback:this.uploadcall
                 },
                 filelist:[{
@@ -90,7 +92,7 @@
             //页面方法
             uploadcall(data){
                 this.filelist.push(data)
-                alert(this.filelist)
+                //alert(this.filelist)
             },
             filesize (value) {
                 var res = parseInt(value) / 1024;

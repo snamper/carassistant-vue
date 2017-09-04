@@ -29,7 +29,6 @@ install(Vue, pluginOptions = {}) {
                     document.querySelector(pluginOptions.container || 'body').appendChild(loading.$el)
                 }
                 // 显示loading
-                debugger
                 loading.show(text)
                 resolve()
             })
