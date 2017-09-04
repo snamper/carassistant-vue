@@ -12,13 +12,12 @@ import Router from './router/router';
 import toast from './plugins/toast/toast'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import listPage from './plugins/listPage'  //分页请求数据
-import uploadImg from './plugins/uploader'  //分页请求数据
+import uploadImg from './plugins/uploadeImg'  //微信图片上传
 import '../css/base/utilities.less';
 import listmore from './plugins/loadmore'  //滚动加载
 import upfiled from './plugins/file'  //滚动加载
 import previewImg from './plugins/preview'
 import drag from './plugins/loadmore'
-import fileSize from './plugins/filter'
 import 'babel-polyfill'
 Vue.prototype.wxsdk=wxsdk;
 Vue.use(listmore,{})
@@ -33,7 +32,7 @@ Vue.use(uploadImg,{})
 Vue.use(previewImg,{})
 //console.log(page)
 Vue.use(Page);
-Vue.use(fileSize,{});
+
 Vue.config.debug = true;//开启错误提示
 
 // 微信js接口配置

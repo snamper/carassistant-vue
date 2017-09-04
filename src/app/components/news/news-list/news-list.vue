@@ -28,8 +28,6 @@
 </template>
 
 <script>
-    import uploader from './../../../plugins/uploader.vue'
-
     export default {
 
         //name: 'news-    list',
@@ -114,7 +112,6 @@
             }
         },
         components:{
-            uploader,
         }
     }
 </script>

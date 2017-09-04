@@ -37,11 +37,11 @@
                 </li>
             </ul>
         </section>
+
     </div>
 </template>
 
 <script>
-    import uploader from './../../../plugins/uploader.vue'
     export default {
         name: 'demo-upfiled',
         data() {
@@ -88,8 +88,11 @@
         },
         methods: {
             //页面方法
+            jindu(){
+                $('.windu').width('100%')
+            }
+            ,
             uploadcall(data){
-                alert('上传成功'+data)
                 this.filelist.push(data)
             },
             filesize (value) {
@@ -103,7 +106,6 @@
             }
         },
         components:{
-            uploader,
         },
 
     }

@@ -2,9 +2,14 @@
 export default {
     install(Vue, pluginOptions = {}){
         Vue.directive("upfiled",{
+            //  bind: 只调用一次，当指令第一次被绑定到元素时调用。
+            //  inserte: 被绑定元素插入父节点时调用（父节点存在即可调用，不必存在于 document 中）。
+            //  update: 被绑定元素所在的模板更新时调用，而不论绑定值是否变化。通过比较更新前后的绑定值，可以忽略不必要的模板更新。
+            //  componentUpdated: 被绑定元素所在模板完成一次更新周期时调用。
+            //  unbind: 只调用一次，指令与元素解绑时调用。
             bind(el,binding){
                 el.onclick=function () {
-                    console.log("bind"); // 只会调用一次
+                    console.log("bind");
                     upload()
                 }
                 function upload() {
@@ -20,7 +25,7 @@ export default {
                         input.style.display = 'none';
                     }
 
-
+                    //配置可以上传的文件格式
                     var fileType = ['doc','docx','xls','xlsx','pdf','jpg','png','ppt','pptx','txt']
                     var option = binding;
                     var xhr = new XMLHttpRequest();
@@ -37,6 +42,7 @@ export default {
                     document.body.appendChild(input);
                     input.style.display = 'none';
                     input.click();
+                    //监听文件改变
                     input.onchange = function(){
                         if(!input.value){
                             return false;
@@ -72,7 +78,7 @@ export default {
                                 if(xhr.status == 200){
                                     if(option.value.callback instanceof Function){
                                         alert(xhr.responseText)
-                                        option.value.callback(JSON.parse(xhr.responseText).result);
+                                      //  option.value.callback(JSON.parse(xhr.responseText).result);
 
                                     }
                                 }else{
@@ -85,7 +91,8 @@ export default {
                                 }
                             }
                         }
-                        xhr.upload.onprogress = function(event){
+                        //这里配置上传进度，比如进度条等
+                            xhr.upload.onprogress = function(event){
                             var pre = Math.floor(100 * event.loaded / event.total);
                         }
                         xhr.send(fd);
@@ -93,16 +100,10 @@ export default {
                 }
             },
             update(el,binding,vnode){
-            //    console.log(el);
-            //    console.log(binding);
-             //   console.log(vnode);
+
             },
         })
     },
-    //  bind: 只调用一次，当指令第一次被绑定到元素时调用。
-    //  inserte: 被绑定元素插入父节点时调用（父节点存在即可调用，不必存在于 document 中）。
-    //  update: 被绑定元素所在的模板更新时调用，而不论绑定值是否变化。通过比较更新前后的绑定值，可以忽略不必要的模板更新。
-    //  componentUpdated: 被绑定元素所在模板完成一次更新周期时调用。
-    //  unbind: 只调用一次，指令与元素解绑时调用。
+
 
 }
