@@ -105,6 +105,7 @@ export default {
                             if(data.result.atMqStatus==1){ //当前serverIds服务器处理完成 并且有剩余serverIds未处理
                                 serverIds.splice(0,1)
                                 res.push(data.result)
+                                resolve(res)
                                 //如果还有未上传的图片继续请求
                                 if(serverIds.length!=0){
                                     http(serverIds)
@@ -112,7 +113,7 @@ export default {
                                 }
                                 loading.hide()
                             }
-                            resolve(res)
+
                         },
                         "json");//这里返回的类型有：json,html,xml,text
                 }
