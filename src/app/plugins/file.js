@@ -78,7 +78,7 @@ export default {
                                 if(xhr.status == 200){
                                     if(option.value.callback instanceof Function){
                                         alert(xhr.responseText)
-                                      //  option.value.callback(JSON.parse(xhr.responseText).result);
+                                        option.value.callback(JSON.parse(xhr.responseText).result);
 
                                     }
                                 }else{
