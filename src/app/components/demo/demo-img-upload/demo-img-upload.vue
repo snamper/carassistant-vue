@@ -1,7 +1,7 @@
 
 <template>
     <div class="demo-img-upload">
-        demo-img-upload  点击预览12
+        demo-img-upload  点击预览123
         <div class='imgbox' v-for="(item,index) in imglist">
             <img :src="item.atAttachment" alt="" @click='previewimg(item.atAttachment)'>
             <button @click='delimg(index)'>删除图片</button>
@@ -37,16 +37,22 @@
                     sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
                     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 })
-                res.then(function (data) {
+//                res.then(function (data) {
+//                    self.imglist=self.imglist.concat(data);
+//                    console.log(data)
+//                   // alert(self.imglist)
+//                    loading.hide()
+//                })
+//                res.catch(function (err) {
+//                    loading.hide()
+//                    console.log(err)
+//                })
+                res.promise.then(function (data) {
                     self.imglist=self.imglist.concat(data);
-                    console.log(data)
-                   // alert(self.imglist)
-                    loading.hide()
-                })
-                res.catch(function (err) {
-                    loading.hide()
-                    console.log(err)
-                })
+//                    console.log(data)
+                }, function (error) {
+                    //console.log('失败'+JSON.stringify(error));
+                });
             },
             previewimg(atAttachment){
                 debugger

@@ -105,8 +105,6 @@ export default {
                     }
                     if (data.result.atMqStatus == 1) { //当前serverIds服务器处理完成 并且有剩余serverIds未处理
                         imageList.push(data.result);
-
-
                         if (localIds.length == 1) {
                             loading.hide();
                             resolve([data.result])
@@ -127,16 +125,18 @@ export default {
             );
         }
         var uploadeImg = function (config) {
+            var Q=$.Deferred();
             var imageList = [];
-            return new Promise(function (resolve, reject) {
-                chooseImage(config).then(function (localIds) {
-                    uploadImage(localIds, imageList, 0, "")
-                        .then(function (promiseData) {
-                            resolve(promiseData)
-                            alert('promiseData' + promiseData)
-                    })
+            chooseImage(config).then(function (localIds) {
+                uploadImage(localIds, imageList, 0, "")
+                    .then(function (promiseData) {
+                        Q.resolve(promiseData)
+                        alert('promiseData' + promiseData)
                 })
             })
+            return{
+                promise:Q.promise()
+            }
         }
         Vue.uploade = Vue.prototype.uploade = uploadeImg;
     }
