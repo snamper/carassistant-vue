@@ -78,6 +78,7 @@ export default {
                         function (data) {
                             if (data.result.atMqStatus == 0) { //服务器处理中继续发送请求
                                 get(serverId, localIds, imageList, index, data.result.atId, resolve).then(function (data) {
+                                    alert('get'+data)
                                     resolve(data)
                                 })
                             }
@@ -103,6 +104,7 @@ export default {
                         get(serverId, localIds, imageList, index, data.result.atId, resolve)
                     }
                     if (data.result.atMqStatus == 1) { //当前serverIds服务器处理完成 并且有剩余serverIds未处理
+                        imageList.push(data.result);
                         if (localIds.length == 1) {
                             loading.hide();
                             resolve([data.result])
