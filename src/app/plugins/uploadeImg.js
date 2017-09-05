@@ -37,6 +37,7 @@ export default {
         }
         //
         function uploadImageToWx(localIds) {
+            alert(localIds)
             return new Promise((resolve) =>{
                 wx.uploadImage({
                     isShowProgressTips:0,
