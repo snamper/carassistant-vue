@@ -105,10 +105,11 @@ export default {
                     }
                     if (data.result.atMqStatus == 1) { //当前serverIds服务器处理完成 并且有剩余serverIds未处理
                         imageList.push(data.result);
+                        alert(localIds.length)
+                        alert([data.result])
+                        resolve([data.result])
                         if (localIds.length == 1) {
                             loading.hide();
-                            resolve([data.result])
-                            alert('[data.result]'+[data.result])
                             return false;
                         }
                         //如果还有未上传的图片继续请求
