@@ -43,7 +43,9 @@ export default {
                     isShowProgressTips:0,
                     localId:localIds[0],
                     success: function(res) {
-                        resolve(res)
+                        var serverId=res.serverId
+                        alert(serverId)
+                        resolve(serverId)
                     }
                 });
             })
