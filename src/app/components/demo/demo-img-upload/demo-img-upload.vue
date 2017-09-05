@@ -1,7 +1,7 @@
 
 <template>
     <div class="demo-img-upload">
-        demo-img-upload  点击预览12345
+        demo-img-upload  点击预览123456
 
         <div class='imgbox' v-for="(item,index) in imglist">
             <img :src="item.atAttachment" alt="" @click='previewimg(item.atAttachment)'>

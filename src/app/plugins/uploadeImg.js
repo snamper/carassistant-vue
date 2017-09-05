@@ -67,11 +67,9 @@ export default {
                         },
                         function(data){
                             if(data.result.atMqStatus==0){ //服务器处理中继续发送请求
-                                resolve(
-                                    get(serverId,localIds,imageList,index,atId).then(function (data) {
-                                        resolve(data)
-                                    })
-                                )
+                                get(serverId,localIds,imageList,index,atId).then(function (data) {
+                                    resolve(data)
+                                })
                             }
                         },
                     "json");//这里返回的类型有：json,html,xml,text
