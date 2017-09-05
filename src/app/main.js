@@ -118,7 +118,7 @@ function app_bootstrap(code) {
     var auth = code.result.jscfg;
     // 获取用户信息
     wxsdk.config({
-        debug: false,
+        debug: true,
         appId: auth.appid,
         timestamp: auth.timestamp,
         nonceStr: auth.noncestr,
