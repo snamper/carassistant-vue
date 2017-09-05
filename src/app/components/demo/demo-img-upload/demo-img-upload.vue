@@ -1,7 +1,7 @@
 
 <template>
     <div class="demo-img-upload">
-        demo-img-upload  点击预览12345678901234567
+        demo-img-upload  点击预览123456789012345678
 
         <div class='imgbox' v-for="(item,index) in imglist">
             <img :src="item.atAttachment" alt="" @click='previewimg(item.atAttachment)'>
@@ -41,7 +41,7 @@
                 res.then(function (data) {
                     self.imglist=self.imglist.concat(data);
                     console.log(data)
-                    alert(self.imglist)
+                   // alert(self.imglist)
                     loading.hide()
                 })
                 res.catch(function (err) {
