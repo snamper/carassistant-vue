@@ -35,42 +35,70 @@ export default {
                 })
             })
         }
+        //
+        function uploadImageToWx(localIds) {
+            return new Promise((resolve) =>{
+                wx.uploadImage({
+                    isShowProgressTips:0,
+                    localId:localIds.toString()[0],
+                    success: function(res) {
+                        resolve(res)
+                    }
+                });
+            })
+        }
         /*
         *  用来上传图片到微信
-        *  data 接收 chooseImage() resolve的localIds
+        *  data 接收 chooseImage() resolve的localIds数组
         *  resolve 上传到微信后微信返回的 serverIds 数组
         * */
-        function uploadImage(data) {
+        function uploadImage(localIds,imageList,index,atId) {
             return new Promise((resolve) => {
-                var uploadCount=0;
-                var serverIds=[];
-                var upload = function() {
-                    loading.show('上传中...')
-                    wx.uploadImage({
-                        isShowProgressTips:0,
-                        localId:data[uploadCount].toString(),
-                        success: function(res) {
-                            // images.serverId.push(res.serverId);
-                            //如果还有照片，继续上传
-                            //imageList.push(uploadImageMine(res.serverId))//这个方法是你需要把所谓的媒体meidaid进行下载到本地的ajax处理
-                           loading.hide()
-                            uploadCount++;
-                            if (uploadCount < data.length) {
-                                var serverId = res.serverId; // 返回图片的服务器端ID
-                                serverIds.push(serverId)
-                                upload();
-                            }else{
-                                var serverId = res.serverId; // 返回图片的服务器端ID
-                                serverIds.push(serverId)
-                                resolve(
-                                    serverIds
-                                )
+                uploadImageToWx(localIds).then(function (serverId) {
+                    $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
+                        {
+                            atId:atId,
+                            wxid:serverId,
+                            _identifier:'shellhero',
+                        },
+                        function(data){
+                            if(data.result.atMqStatus==0){ //服务器处理中继续发送请求
+                                get(serverId,localIds,imageList,index,atId);
                             }
-                        }
-                    });
-                };
-                upload();
+                        },
+                        "json");//这里返回的类型有：json,html,xml,text
+                })
             })
+        }
+
+        function get(serverId,localIds,imageList,index,atId) {
+                $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
+                    {
+                        atId:atId,
+                        wxid:serverId,
+                        _identifier:'shellhero',
+                    },
+                    function(data){
+                        if(data.result.atMqStatus==0){ //服务器处理中继续发送请求
+                            get(serverId,localIds,imageList,index,data.result.atId)
+                        }
+                        if(data.result.atMqStatus==1){ //当前serverIds服务器处理完成 并且有剩余serverIds未处理
+                            if(localIds.length == 1){
+                                loading.hide();
+                                resolve([data.result]);
+                                return false;
+                            }
+                            //如果还有未上传的图片继续请求
+                            setTimeout(function () {
+                                index++;
+                                uploadImage(localIds.slice(1),imageList,index).then(function(resDate) {
+                                    loading.hide();
+                                    resolve([data.result].concat(resDate));
+                                });
+                            })
+                        }
+                    },
+                "json");//这里返回的类型有：json,html,xml,text
         }
 
         /*
@@ -105,7 +133,6 @@ export default {
                             if(data.result.atMqStatus==1){ //当前serverIds服务器处理完成 并且有剩余serverIds未处理
                                 serverIds.splice(0,1)
                                 res.push(data.result)
-                                resolve(res)
                                 //如果还有未上传的图片继续请求
                                 if(serverIds.length!=0){
                                     http(serverIds)
@@ -113,7 +140,7 @@ export default {
                                 }
                                 loading.hide()
                             }
-
+                            resolve(res)
                         },
                         "json");//这里返回的类型有：json,html,xml,text
                 }
@@ -121,20 +148,31 @@ export default {
 
             })
         }
+        // var uploadeImg = function (config) {
+        //     return new Promise(function (resolve, reject) {
+        //         chooseImage(config).then(function (data) {
+        //             return uploadImage(data)
+        //         }).then(function (serverIds) {
+        //             return uploadImageMine(serverIds)
+        //         }).then(function (res) {
+        //             alert('res'+res)
+        //             loading.hide()
+        //             if(res){
+        //                 resolve(res)
+        //             }else{
+        //                 reject('上传失败')
+        //             }
+        //         })
+        //     })
+        // }
         var uploadeImg = function (config) {
+            var imageList=[];
             return new Promise(function (resolve, reject) {
                 chooseImage(config).then(function (data) {
-                    return uploadImage(data)
-                }).then(function (serverIds) {
-                    return uploadImageMine(serverIds)
-                }).then(function (res) {
-                    alert('res'+res)
-                    loading.hide()
-                    if(res){
-                        resolve(res)
-                    }else{
-                        reject('上传失败')
-                    }
+                    return uploadImage(data,imageList,0,"")
+                }).then(function (promiseData) {
+                    alert(promiseData)
+                    resolve(promiseData)
                 })
             })
         }
