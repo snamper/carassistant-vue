@@ -38,14 +38,12 @@ export default {
         }
         //
         function uploadImageToWx(localIds) {
-            alert(localIds)
             return new Promise((resolve) =>{
                 wx.uploadImage({
                     isShowProgressTips:0,
                     localId:localIds[0],
                     success: function(res) {
                         var serverId=res.serverId
-                        alert(serverId)
                         resolve(serverId)
                     }
                 });
@@ -68,6 +66,7 @@ export default {
                         function(data){
                             if(data.result.atMqStatus==0){ //服务器处理中继续发送请求
                                 get(serverId,localIds,imageList,index,atId).then(function (data) {
+                                    alert('data'+data)
                                     resolve(data)
                                 })
                             }
@@ -100,7 +99,7 @@ export default {
                                 index++;
                                 uploadImage(localIds.slice(1),imageList,index).then(function(resDate) {
                                     loading.hide();
-                                    return([data.result].concat(resDate));
+                                    resolve([data.result].concat(resDate));
                                 });
                             })
                         }
