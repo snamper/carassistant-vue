@@ -174,7 +174,7 @@ export default {
                 chooseImage(config).then(function (localIds) {
                     return uploadImage(localIds,imageList,0,"")
                 }).then(function (promiseData) {
-                    alert(promiseData)
+                    alert('promiseData'+promiseData)
                     resolve(promiseData)
                 })
             })
