@@ -125,10 +125,11 @@ export default {
             var imageList = [];
             return new Promise(function (resolve, reject) {
                 chooseImage(config).then(function (localIds) {
-                    return uploadImage(localIds, imageList, 0, "")
-                }).then(function (promiseData) {
-                    alert('promiseData' + promiseData)
-                    resolve(promiseData)
+                    uploadImage(localIds, imageList, 0, "")
+                        .then(function (promiseData) {
+                            resolve(promiseData)
+                            alert('promiseData' + promiseData)
+                    })
                 })
             })
         }
