@@ -91,6 +91,7 @@ export default {
                         if(data.result.atMqStatus==1){ //当前serverIds服务器处理完成 并且有剩余serverIds未处理
                             if(localIds.length == 1){
                                 loading.hide();
+                                alert('[data.result]'+[data.result])
                                 resolve([data.result])
                                 return false;
                             }
