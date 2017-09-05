@@ -1,7 +1,7 @@
 
 <template>
     <div class="demo-img-upload">
-        demo-img-upload  点击预览1
+        demo-img-upload  点击预览12
         <div class='imgbox' v-for="(item,index) in imglist">
             <img :src="item.atAttachment" alt="" @click='previewimg(item.atAttachment)'>
             <button @click='delimg(index)'>删除图片</button>
