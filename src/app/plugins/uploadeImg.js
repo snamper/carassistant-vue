@@ -33,6 +33,7 @@ export default {
 
                     }
                 })
+
             })
         }
         //
@@ -66,10 +67,12 @@ export default {
                         },
                         function(data){
                             if(data.result.atMqStatus==0){ //服务器处理中继续发送请求
-                                get(serverId,localIds,imageList,index,atId);
+                                resolve(
+                                    get(serverId,localIds,imageList,index,atId)
+                                )
                             }
                         },
-                        "json");//这里返回的类型有：json,html,xml,text
+                    "json");//这里返回的类型有：json,html,xml,text
                 })
             })
         }
@@ -88,20 +91,20 @@ export default {
                         if(data.result.atMqStatus==1){ //当前serverIds服务器处理完成 并且有剩余serverIds未处理
                             if(localIds.length == 1){
                                 loading.hide();
-                                resolve([data.result]);
-                                return false;
+                                return [data.result];
                             }
                             //如果还有未上传的图片继续请求
                             setTimeout(function () {
                                 index++;
                                 uploadImage(localIds.slice(1),imageList,index).then(function(resDate) {
                                     loading.hide();
-                                    resolve([data.result].concat(resDate));
+                                    return([data.result].concat(resDate));
                                 });
                             })
                         }
                     },
                 "json");//这里返回的类型有：json,html,xml,text
+
         }
 
         /*
