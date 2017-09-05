@@ -55,7 +55,9 @@ export default {
                         resolve(serverId)
                     }
                 });
+                //resolve('jjjjjj')
             })
+
         }
 
         /*
@@ -77,13 +79,11 @@ export default {
                         },
                         function (data) {
                             if (data.result.atMqStatus == 0) { //服务器处理中继续发送请求
-                                get(serverId, localIds, imageList, index, data.result.atId, resolve).then(function (data) {
-                                    alert('get000000'+data)
-                                    resolve(data)
-                                })
+                                get(serverId, localIds, imageList, index, data.result.atId, resolve)
                             }
                         },
                         "json");//这里返回的类型有：json,html,xml,text
+
                 })
             })
         }
@@ -92,7 +92,7 @@ export default {
         * 用来获取本地图片地址，并发上传所有图片
         * @resolve      返回本地服务器图片信息
         * */
-        function get(serverId, localIds, imageList, index, atId, resolve) {
+        function get( serverId, localIds, imageList, index, atId, resolve) {
             $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
                 {
                     atId: atId,
@@ -108,6 +108,7 @@ export default {
                         if (localIds.length == 1) {
                             loading.hide();
                             resolve([data.result])
+                            alert('[data.result]'+[data.result])
                             return false;
                         }
                         //如果还有未上传的图片继续请求
