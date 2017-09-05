@@ -67,7 +67,7 @@ export default {
                         },
                         function(data){
                             if(data.result.atMqStatus==0){ //服务器处理中继续发送请求
-                                get(serverId,localIds,imageList,index,atId).then(function (data) {
+                                get(serverId, localIds, imageList, index, data.result.atId, resolve).then(function (data) {
                                     alert('data'+data)
                                     resolve(data)
                                 })
@@ -84,8 +84,8 @@ export default {
             })
         }
 
-        function get(serverId,localIds,imageList,index,atId) {
-            return new Promise((resolve) => {
+        function get(serverId, localIds, imageList, index, atId, resolve) {
+
                 $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
                     {
                         atId:atId,
@@ -94,13 +94,13 @@ export default {
                     },
                     function(data){
                         if(data.result.atMqStatus==0){ //服务器处理中继续发送请求
-                            get(serverId,localIds,imageList,index,data.result.atId)
+                            get(serverId, localIds, imageList, index, data.result.atId, resolve)
                         }
                         if(data.result.atMqStatus==1){ //当前serverIds服务器处理完成 并且有剩余serverIds未处理
                             if(localIds.length == 1){
                                 loading.hide();
-                                alert('[data.result]'+[data.result])
                                 resolve([data.result])
+                                alert('[data.result]'+[data.result])
                                 return false;
                             }
                             //如果还有未上传的图片继续请求
@@ -118,7 +118,6 @@ export default {
                 //     resolve('yyyy')
                 // },3000)
 
-        })
 
 
         }
