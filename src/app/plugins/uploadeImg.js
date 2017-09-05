@@ -33,6 +33,7 @@ export default {
 
                     }
                 })
+                //resolve('zzzz')
 
             })
         }
@@ -47,6 +48,7 @@ export default {
                         resolve(serverId)
                     }
                 });
+                //resolve('jjjjj')
             })
         }
         /*
@@ -72,6 +74,12 @@ export default {
                             }
                         },
                     "json");//这里返回的类型有：json,html,xml,text
+                    // setTimeout(function () {
+                    //     get().then(function (data) {
+                    //         resolve(data)
+                    //     })
+                    // },1000)
+
                 })
             })
         }
@@ -106,7 +114,11 @@ export default {
                         }
                     },
                     "json");//这里返回的类型有：json,html,xml,text
-            })
+                // setTimeout(function () {
+                //     resolve('yyyy')
+                // },3000)
+
+        })
 
 
         }
