@@ -168,8 +168,8 @@ export default {
         var uploadeImg = function (config) {
             var imageList=[];
             return new Promise(function (resolve, reject) {
-                chooseImage(config).then(function (data) {
-                    return uploadImage(data,imageList,0,"")
+                chooseImage(config).then(function (localIds) {
+                    return uploadImage(localIds,imageList,0,"")
                 }).then(function (promiseData) {
                     alert(promiseData)
                     resolve(promiseData)
