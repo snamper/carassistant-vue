@@ -78,7 +78,7 @@ export default {
                         function (data) {
                             if (data.result.atMqStatus == 0) { //服务器处理中继续发送请求
                                 get(serverId, localIds, imageList, index, data.result.atId, resolve).then(function (data) {
-                                    alert('get'+data)
+                                    alert('get000000'+data)
                                     resolve(data)
                                 })
                             }
