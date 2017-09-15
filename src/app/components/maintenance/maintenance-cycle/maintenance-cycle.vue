@@ -1,86 +1,88 @@
 <template>
     <div class="maintenance-cycle" >
-        <header class='header'>
-            <div class='logo'></div>
-            <div class='search' @click="searchShow=true">
-                <i class='iconfont icon-fangziglyph_ font-12'></i>
-            </div>
-        </header>
-        <nav class='flex font-12'>
+        <div class='mask flex font-15' v-show='tipshow'>
+            <i class='iconfont icon-guanbi' @click='tipshow=!tipshow'></i>
+        </div>
+        <div v-show='!tipshow'>
+            <nav class='flex font-12 color-gray-2'>
             <div class='nav-item' v-bind:class="{ active: currentType=='baoyang' }" @click='changeType("baoyang")'>保养计划周期</div>
             <div class='nav-item' v-bind:class="{ active: currentType=='yuanchang' }" @click='changeType("yuanchang")'>原厂配件参数</div>
         </nav>
-        <section class='baoyang' v-show='currentType=="baoyang"'>
-            <div class='term flex'>
-                <div class='term-left flex'>
-                    <!--<div class='term-left-item'>-->
+            <section class='baoyang' v-show='currentType=="baoyang"'>
+                <div class='term flex'>
+                    <div class='term-left flex'>
+                        <!--<div class='term-left-item'>-->
                         <!--小保养服务-->
-                    <!--</div>-->
-                    <div class='term-left-item font-13'>
-                        <div class='status flex'>
-                            <div >保养计划</div>
-                        </div>
-                        <div class='status flex'>
-                            <div >小保养服务</div>
-                        </div>
-                        <div class='status flex'>
-                            <div >小保养服务</div>
-                        </div>
-                        <div class='status flex'>
-                            <div >小保养服务</div>
-                        </div>
-                        <div class='status flex'>
-                            <div >小保养服务</div>
-                        </div>
-                        <div class='status flex'>
-                            <div >小保养服务</div>
-                        </div>
-                        <div class='status flex'>
-                            <div >小保养服务</div>
-                        </div>
-                        <div class='status flex'>
-                            <div >小保养服务</div>
-                        </div>
-                        <div class='status flex'>
-                            <div >小保养服务</div>
-                        </div>
-                        <div class='status flex'>
-                            <div >小保养服务</div>
-                        </div>
-                        <div class='status flex'>
-                            <div >小保养服务</div>
-                        </div>
-                        <div class='status flex'>
-                            <div >小保养服务</div>
+                        <!--</div>-->
+                        <div class='term-left-item color-gray-2'>
+                            <div class='status flex font-13 '>
+                                <div >保养计划</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+
                         </div>
                     </div>
-                </div>
-                <div style='overflow: hidden'>
+                    <div style='overflow: hidden'>
 
-                </div>
-                <div class='term-right'>
+                    </div>
+                    <div class='term-right'>
                         <div class='fixbox'>
-                            <div class='term-right-top font-12'>
+                            <div class='term-right-top font-11 '>
                                 <div class='status'>
-                                    <p class='month'>6个月</p>
-                                    <p>5000KM</p>
+                                    <p class='month color-gray2'>6个月</p>
+                                    <p class='color-gray9'>5000KM</p>
                                 </div>
                                 <div class='status'>
-                                    <p class='month'>6个月</p>
-                                    <p>5000KM</p>
+                                    <p class='month color-gray2'>6个月</p>
+                                    <p class='color-gray9'>5000KM</p>
                                 </div>
                                 <div class='status '>
-                                    <p class='month'>6个月</p>
-                                    <p>5000KM</p>
+                                    <p class='month color-gray2'>6个月</p>
+                                    <p class='color-gray9'>5000KM</p>
                                 </div>
                                 <div class='status'>
-                                    <p class='month'>6个月</p>
-                                    <p>5000KM</p>
+                                    <p class='month color-gray2'>6个月</p>
+                                    <p class='color-gray9'>5000KM</p>
                                 </div>
 
                             </div>
                         </div>
-                        <div class='term-right-item' style='margin-top: 0.98rem'>
+                        <div class='term-right-item' style='margin-top: 0.9rem'>
                             <div class='status flex'>
                                 <div class='radio'></div>
                             </div>
@@ -195,91 +197,102 @@
                             </div>
                         </div>
                     </div>
-
-            </div>
-            <div class='tip flex font-11'>
-                <p>红色按钮可点击查看对应的保养推荐</p>
-                <i class='iconfont icon-quxiaoline_ font-12' ></i>
-            </div>
-            <footer class='font-12'>此数据仅供参考，请以原厂保养手册为准</footer>
-        </section>
-        <section class='ycpj' v-show='currentType=="yuanchang"'>
-            <div class='term flex'>
-                <div class='term-left flex'>
-                    <!--<div class='term-left-item'>-->
-                    <!--小保养服务-->
-                    <!--</div>-->
-                    <div class='term-left-item font-13' >
-                        <div class='status flex'>
-                            <div >配件名称</div>
-                        </div>
-                        <div class='status flex'>
-                            <div >大保养服务</div>
-                        </div>
-                        <div class='status flex'>
-                            <div >小保养服务</div>
-                        </div>
-                        <div class='status flex'>
-                            <div >内置燃油滤</div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class='term-right'>
-                    <div class='fixbox'>
-                        <div class='term-right-top font-12'>
-                            <div class='status'>
-                                <p class='month'>规格型号</p>
-                            </div>
-                            <div class='status'>
-                                <p class='month'>原厂参数</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='term-right-item' style='margin-top: 0.98rem'>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-
-                    </div>
-                    <div class='term-right-item'>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-
-                    </div>
-                    <div class='term-right-item'>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                        <div class='status flex'>
-                            <div class='radio'></div>
-                        </div>
-                    </div>
-
 
                 </div>
 
-            </div>
 
-            <div class='tip flex font-11'>
-                <p>红色按钮可点击查看对应的保养推荐</p>
-                <i class='iconfont icon-quxiaoline_ font-12' ></i>
-            </div>
-            <footer class='font-12'>此数据仅供参考，请以原厂保养手册为准</footer>
-        </section>
-        <footer>
-            <div class='font-14'>返回</div>
-            <p>
-                <i class='iconfont icon-woshenpideline_ font-12'></i><span class='font-11'>我要反馈</span>
-            </p>
-        </footer>
+            </section>
+            <section class='ycpj' v-show='currentType=="yuanchang"'>
+                <div class='term flex'>
+                    <div class='term-left flex'>
+                        <!--<div class='term-left-item'>-->
+                        <!--小保养服务-->
+                        <!--</div>-->
+                        <div class='term-left-item color-gray-2'>
+                            <div class='status flex font-13 '>
+                                <div >配件名称</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >机油</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >防冻液</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >刹车油</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style='overflow: hidden'>
+
+                    </div>
+                    <div class='term-right'>
+                        <div class='fixbox'>
+                            <div class='term-right-top font-11 '>
+                                <div class='status'>
+                                    规格型号
+                                </div>
+                                <div class='status'>
+                                    参考用量
+                                </div>
+                                <div class='status '>
+                                    大修参考用量
+                                </div>
+                                <div class='status '>
+                                    大修参考用量
+                                </div>
+                            </div>
+                        </div>
+                        <div class='term-right-item font-13' style='margin-top: 0.9rem'>
+                            <div class='status flex'>
+                                10W-40
+                            </div>
+                            <div class='status flex'>
+                                4.0
+                            </div>
+                            <div class='status flex'>
+                                -
+                            </div>
+                            <div class='status flex'>
+                                -
+                            </div>
+                        </div>
+                        <div class='term-right-item font-13'>
+                            <div class='status flex'>
+                                -
+                            </div>
+                            <div class='status flex'>
+                                -
+                            </div>
+                            <div class='status flex'>
+                                -
+                            </div>
+                        </div>
+                        <div class='term-right-item font-13'>
+                            <div class='status flex'>
+                                DOT-4
+                            </div>
+                            <div class='status flex'>
+                                -
+                            </div>
+                            <div class='status flex'>
+                                1.0L
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <footer class='font-11 flex'>
+                <p>此数据仅供参考，请以原厂保养手册为准。</p>
+                <div class='feedback '>
+                    <i class='iconfont icon-woshenpideline_ font-13'></i>
+                    <span class='font-11'>我要反馈</span>
+                </div>
+            </footer>
+        </div>
+
     </div>
 </template>
 
@@ -290,7 +303,8 @@
         name: 'maintenance-cycle',
         data() {
             return {
-                currentType:'baoyang'
+                currentType:'baoyang',
+                tipshow:true
             }
         },
         created() {

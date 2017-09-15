@@ -7,47 +7,34 @@
   min-height: 100vh;
   position: relative;
   .active{
-    color: #fed163;
-  }
-  .header{
-    height: 90/100rem;
-    background: url("../../../images/home/top.png") no-repeat top;
-    background-size: 100%;
+    color: #dd1d21;
     position: relative;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: 11;
-    logo{
-      position: absolute;
-      top:50%;
-      margin-left: 20/100rem;
-      transform:translateY(-50%);
-      height: 48/100rem;
-      width: 120/100rem;
-      background: url("../../../images/home/logo.png") no-repeat center;
-      background-size: 100%;
-    }
-    .search{
-      position: absolute;
-      top:50%;
-      right: 0;
-      transform:translateY(-50%);
-      margin-right: 20/100rem;
-      color: #fff;
-    }
+  }
+  .active:after{
+    content: '';
+    display: block;
+    height: 4/100rem;
+    width: 32/100rem;
+    background: #dd1d21;
+    position: absolute;
+    bottom: 2/100rem;
+    left: 50%;
+    margin-left: -16/100rem;
   }
   nav {
     justify-content: space-around;
-    height: 80/100rem;
     align-items: center;
     background: #fff;
-    top: 90/100rem;
+    top: 0;
     position: sticky;
     width: 100%;
     z-index: 10;
     &:after {
       .Pseudo-border-after();
+    }
+    .nav-item{
+      height: 65/100rem;
+      line-height: 65/100rem;
     }
 
   }
@@ -58,24 +45,24 @@
         float: left;
         width: @diff;
         justify-content: center;
-        min-height: 736/100rem;
+        min-height: 10.1rem;
         .status{
-          height: 98/100rem;
+          height: 90/100rem;
           float: left;
           align-items: center;
           justify-content: center;
           width: 100%;
-          background: #fff;
-
         }
         .status:nth-child(1){
-          height: 0.98rem;
+          height: 0.9rem;
           position: sticky;
-          top:1.7rem;
+          top:0.64rem;
           width: 1.9rem;
+          z-index: 10;
+          background: #fff;
         }
         .term-left-item{
-          box-shadow:0px 0px 20px #EFF2F7;
+          background:  #f8f8f8;
         }
       }
       .term-right {
@@ -90,26 +77,26 @@
         }
         .fixbox{
           position: fixed;
-          width: calc(~"100% - @{diff}");
+          width: 100%;
+          padding-left: 1.9rem;
+          margin-left: -1.9rem;
           overflow: hidden;
+          box-shadow: 0 8/100rem 14/100rem #a8a8a8;
         }
         .term-right-top{
           width:max-content;
           overflow: auto;
           background: #fff;
-          height: 0.98rem;
+          height: 0.9rem;
           position: sticky;
           top: 1.7rem;
-          &:after {
-            .Pseudo-border-after();
-          }
           .status {
             width: 1.5rem;
             float: left;
             text-align: center;
 
             .month{
-              margin-bottom: 10/100rem;
+              margin-bottom: 8/100rem;
               margin-top: 20/100rem;
             }
           }
@@ -118,46 +105,26 @@
 
         .term-right-item {
           width:max-content;
-          overflow: hidden;
-
+          height: 0.9rem;
+          border-bottom: 1px dotted #ccc;
+          margin-left: 15/100rem;
           .flex {
             width: 1.5rem;
-            height: 98/100rem;
+            height: 90/100rem;
             float: left;
             align-items: center;
             justify-content: center;
-            border-bottom: 1px dashed #ccc;
+          }
+          .flex:nth-child(1){
+            margin-left: -15/100rem;
           }
         }
         .radio{
-          height: 7px;
-          width: 7px;
+          height: 8px;
+          width: 8px;
           border-radius:50%;
-          background: red;
+          border:1.5px solid #ffd71A;
         }
-      }
-    }
-    .tip{
-      position: fixed;
-      bottom:246/100rem ;
-      width: 468/100rem;
-      height: 70/100rem;
-      align-items: center;
-      border-radius: 100px;
-      background: rgba(0,0,0,0.4);
-      color: #fff;
-      padding:0 30/100rem;
-      left: 50%;
-      transform: translateX(-50%);
-      justify-content: space-between;
-      z-index: 9;
-    }
-    footer{
-      color: #a2aab6;
-      padding-top: 20/100rem;
-      position: relative;
-      &:before {
-        .Pseudo-border-before();
       }
     }
   }
@@ -167,31 +134,31 @@
         float: left;
         width: @diff;
         justify-content: center;
-        min-height: 736/100rem;
-        line-height: 1;
+        min-height: 10.1rem;
         .status{
-          height: 98/100rem;
+          height: 90/100rem;
           float: left;
           align-items: center;
           justify-content: center;
           width: 100%;
-          background: #fff;
-
         }
         .status:nth-child(1){
-          height: 0.98rem;
+          height: 0.9rem;
           position: sticky;
-          top:1.7rem;
+          top:0.64rem;
           width: 1.9rem;
+          z-index: 10;
+          background: #fff;
         }
         .term-left-item{
-          box-shadow:0px 0px 20px #EFF2F7;
+          background:  #f8f8f8;
         }
       }
       .term-right {
         float: right;
         overflow: scroll;
         width: calc(~"100% - @{diff}");
+        line-height:1;
         ::-webkit-scrollbar{
           width: 16px;
           height: 16px;
@@ -199,50 +166,54 @@
         }
         .fixbox{
           position: fixed;
-          width: calc(~"100% - @{diff}");
-          overflow: auto;
-          background: #fff;
-          &:after {
-            .Pseudo-border-after();
-          }
+          width: 100%;
+          padding-left: 1.9rem;
+          margin-left: -1.9rem;
+          overflow: hidden;
+          box-shadow: 0 8/100rem 14/100rem #a8a8a8;
         }
         .term-right-top{
           width:max-content;
           overflow: auto;
           background: #fff;
-          height: 0.98rem;
-          line-height: 0.98rem;
+          height: 0.9rem;
           position: sticky;
           top: 1.7rem;
-
           .status {
             width: 1.5rem;
             float: left;
             text-align: center;
-
+            height: 0.9rem;
+            line-height: 0.9rem;
+            .month{
+              margin-bottom: 8/100rem;
+              margin-top: 20/100rem;
+            }
           }
 
         }
 
         .term-right-item {
           width:max-content;
-          overflow: hidden;
-          border-bottom: 1px dashed #ccc;
-          min-width: 100%;
+          height: 0.9rem;
+          border-bottom: 1px dotted #ccc;
+          margin-left: 15/100rem;
           .flex {
             width: 1.5rem;
-            height: 98/100rem;
+            height: 90/100rem;
             float: left;
             align-items: center;
             justify-content: center;
-
+          }
+          .flex:nth-child(1){
+            margin-left: -15/100rem;
           }
         }
         .radio{
-          height: 7px;
-          width: 7px;
+          height: 8px;
+          width: 8px;
           border-radius:50%;
-          background: red;
+          border:1.5px solid #ffd71A;
         }
       }
     }
@@ -261,36 +232,35 @@
       justify-content: space-between;
       z-index: 9;
     }
-    footer{
-      color: #a2aab6;
-      padding-top: 20/100rem;
-      position: relative;
-      &:before {
-        .Pseudo-border-before();
-      }
-    }
   }
 
   footer{
-    padding: 60/100rem 20/100rem 30/100rem 20/100rem;
-    div{
-      width: 100%;
-      height: 90/100rem;
-      border-radius: 50/100rem;
-      background: #ff5757;
-      color: #fff;
-      text-align: center;
-      line-height: 90/100rem;
+    color: #fff;
+    background: #FFD301;
+    height: 62/100rem;
+    line-height: 62/100rem;
+    position: fixed;
+    bottom:0;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 20/100rem;
+    .feedback{
     }
-    p{
-      color: #697Fac;
-      text-align: center;
-      line-height: 1;
-      margin-top: 20/100rem;
-      span{
-
-        margin-left: 10/100rem;
-      }
+  }
+  .mask{
+    height: 100vh;
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: url("../../../images/maintenance/tip.png") no-repeat center;
+    background-size: 100% 100%;
+    color: #fff;
+    i{
+      position: absolute;
+      right: 30/100rem;
+      top:30/100rem;
     }
   }
 
