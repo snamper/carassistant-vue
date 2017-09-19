@@ -253,10 +253,6 @@
                 this.$router.push({path:'/maintenance/maintenance-recommend',query: {id:"1"}});
             },
             goAnchor(index) {
-                var x=event.changedTouches[0].screenY-343
-                console.log(event.changedTouches[0].screenY)
-                console.log(x/18)
-                var index=parseInt(x/16)
                 var anchor = this.$el.querySelector('#anchor-'+index)
                 console.log(anchor)
                 document.body.scrollTop = anchor.offsetTop-45
@@ -264,7 +260,15 @@
                 $('.nav-item').removeClass('nav-item-active')
                 $('.nav-item').eq(index).addClass('nav-item-active')
                 $('.bubble').eq(index).show()
+                setTimeout(function () {
+                    $('.bubble').hide()
+                    $('.nav-item').removeClass('nav-item-active')
+                },500)
             },
+            move(){
+
+            },
+
         },
         components: {}
     }
