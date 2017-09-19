@@ -60,7 +60,7 @@
                 <div class='nav-bar'>
                     <div class='nav-item ' v-for='(item,index) in brandList'>
                         <div class='bubble font-20' v-text='item.initials' >A</div>
-                        <div class='indexes font-9' v-text='item.initials' @touchstart="start(index)" >A</div>
+                        <div class='indexes font-9' v-text='item.initials' @click="goAnchor(index)" >A</div>
                     </div>
 
                 </div>
@@ -265,21 +265,6 @@
                 $('.nav-item').eq(index).addClass('nav-item-active')
                 $('.bubble').eq(index).show()
             },
-            move(){
-                setTimeout(function () {
-                    $('.bubble').hide()
-                    $('.nav-item').removeClass('nav-item-active')
-                },500)
-            },
-            start(index){
-                var anchor = this.$el.querySelector('#anchor-'+index)
-                console.log(anchor)
-                document.body.scrollTop = anchor.offsetTop-45
-                $('.bubble').hide()
-                $('.nav-item').removeClass('nav-item-active')
-                $('.nav-item').eq(index).addClass('nav-item-active')
-                $('.bubble').eq(index).show()
-            }
         },
         components: {}
     }
