@@ -9,8 +9,8 @@
                 <div class='nav-item' v-bind:class="{ active: currentType=='yuanchang' }" @click='changeType("yuanchang")'>原厂配件参数</div>
             </nav>
             <section class='baoyang' v-show='currentType=="baoyang"'>
-                <div class='title'>
-                    <div class='left'>保养计划</div>
+                <div class='title color-gray-2 font-13'>
+                    <div class='left flex'>保养计划</div>
                     <div class='right'>
                         <div class='fixbox'>
                             <div class='term-right-top font-11 '>

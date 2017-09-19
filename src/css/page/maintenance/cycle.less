@@ -30,8 +30,6 @@
     position: fixed;
     width: 100%;
     z-index: 3;
-    height: 1.55rem;
-    box-shadow: 0 8/100rem 14/100rem #a8a8a8;
     &:after {
       .Pseudo-border-after();
     }
@@ -45,10 +43,17 @@
   .baoyang{
     .title{
       position: fixed;
+      height: 0.9rem;
+      top:0.65rem;
       z-index: 11;
+      background: #fff;
+      box-shadow: 0 8/100rem 14/100rem #a8a8a8;
       .left{
         float: left;
         width: @diff;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
       }
       .right{
         float: right;
@@ -58,7 +63,7 @@
       .fixbox{
         overflow: hidden;
         z-index: 11;
-        background: red;
+
       }
       .term-right-top{
         width:max-content;
@@ -66,6 +71,7 @@
         height: 0.9rem;
         position: sticky;
         top: 1.7rem;
+        line-height: 1;
         .status {
           width: 1.5rem;
           float: left;
@@ -93,15 +99,8 @@
           justify-content: center;
           width: 100%;
         }
+
         .status:nth-child(1){
-          height: 0.9rem;
-          position: fixed;
-          top:0.65rem;
-          width: 1.9rem;
-          z-index: 10;
-          background: #fff;
-        }
-        .status:nth-child(2){
           margin-top: 1.55rem;
         }
         .term-left-item{
@@ -149,7 +148,7 @@
         .term-right-item {
           width:max-content;
           height: 0.9rem;
-position: relative;
+          position: relative;
           margin-left: 15/100rem;
           &:after {
             .Pseudo-btnBorder-after(@border-width:0px 0px 1px 0px,@border-color: @hr-border-color,@border-style: dotted,@radius:0px);
