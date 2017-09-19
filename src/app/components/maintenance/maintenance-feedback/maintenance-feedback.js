@@ -2,7 +2,7 @@ import maintenanceFeedback from './maintenance-feedback.vue';
 
 
 let maintenanceFeedbackModule = [
-    { path: '/maintenance/maintenance-feedback', component: maintenanceFeedback,meta:{title:''} },
+    { path: '/maintenance/maintenance-feedback', component: maintenanceFeedback,meta:{title:'maintenance-feedback'} },
 ]
 maintenanceFeedbackModule=maintenanceFeedbackModule.concat(
 

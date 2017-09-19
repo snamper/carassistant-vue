@@ -1,0 +1,95 @@
+@import "../../../css/config/variables";
+@import "../../../css/config/mixins/border";
+
+.maintenance-config {
+  //页面样式
+  background: #fff;
+  min-height: 100vh;
+  header{
+    padding: 40/100rem 30/100rem;
+    line-height: 1;
+    position: relative;
+    &:after {
+      .Pseudo-border-after();
+    }
+    .title{
+      margin-top: 30/100rem;
+    }
+    .feedback{
+      position: absolute;
+      top:20/100rem;
+      right: 20/100rem;
+      text-align: center;
+      line-height: 1;
+      color: #FFD301;
+      align-items: center;
+      span{
+        line-height: 1;
+        margin-left: 8/100rem;
+      }
+      i{
+        line-height: 1;
+      }
+    }
+  }
+  section{
+    ul{
+      padding: 0 30/100rem;
+      li{
+        width: 50%;
+        float: left;
+        padding: 30/100rem 0;
+        position: relative;
+        line-height: 1;
+        &:after {
+          .Pseudo-border-after();
+        }
+        .edition{
+          margin-bottom: 15/100rem;
+        }
+      }
+      li:nth-child(2n){
+        padding-left: 30/100rem;
+        &:before {
+          .Pseudo-border-before();
+          content: '';
+          height: 66/100rem;
+          width: 1/100rem;
+          display: block;
+          position: absolute;
+          left: 0;
+          top:50%;
+          margin-top: -33/100rem;
+          transform: scaleX(0.5);
+          background: #ccc;
+        }
+      }
+      li:nth-last-child(1){
+        &:after{
+          height: 0;
+        }
+      }
+      li:nth-last-child(2){
+        &:after{
+          height: 0;
+        }
+      }
+    }
+  }
+  footer{
+    position: fixed;
+    width: 100%;
+    justify-content: center;
+    bottom:30/100rem;
+    .back{
+      height: 80/100rem;
+      line-height: 80/100rem;
+      text-align: center;
+      width: 580/100rem;
+      color: #fff;
+      background: #dd1d21;
+      border-radius: 80/100rem;
+      font-size: 307/1000rem;
+    }
+  }
+}

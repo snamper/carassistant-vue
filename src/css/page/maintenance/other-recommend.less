@@ -1,0 +1,80 @@
+@import "../../../css/config/variables";
+@import "../../../css/config/mixins/border";
+
+.maintenance-other-recommend {
+  background: #fff;
+  min-height: 100vh;
+  //页面样式
+  header{
+    padding: 50/100rem 20/100rem 25/100rem 20/100rem;
+  }
+  section{
+    ul{
+      padding: 0 20/100rem;
+      .item{
+        line-height: 1;
+        .preview{
+          justify-content: space-between;
+          align-items: center;
+          position: relative;
+          padding: 25/100rem 0;
+          &:after {
+            .Pseudo-border-after();
+          }
+          i{
+            color: #ccc;
+          }
+          .describe{
+            margin-top: 10/100rem;
+          }
+        }
+
+        .detail{
+          .detail-item{
+            overflow: hidden;
+            margin-bottom: 30/100rem;
+            .brand{
+              overflow: hidden;
+              img{
+                float: left;
+                width: 1.1rem;
+                height: 36/100rem;
+                background: #ccc;
+                margin-right: 15/100rem;
+              }
+            }
+            .brand-item{
+
+              background: #f7f7f7;
+              padding: 0 15/100rem;
+              p{
+                position: relative;
+                height: 80/100rem;
+                align-items: center;
+                justify-content: space-between;
+                &:after {
+                  .Pseudo-btnBorder-after(@border-width:0px 0px 1px 0px,@border-color: @hr-border-color,@border-style: dotted,@radius:0px);
+                  width: 100%;
+                }
+              }
+
+            }
+          }
+        }
+      }
+    }
+  }
+  footer{
+    color: #fff;
+    background: #FFD301;
+    height: 62/100rem;
+    line-height: 62/100rem;
+    position: fixed;
+    bottom:0;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 20/100rem;
+    .feedback{
+    }
+  }
+}

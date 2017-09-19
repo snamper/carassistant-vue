@@ -106,8 +106,12 @@
         .term-right-item {
           width:max-content;
           height: 0.9rem;
-          border-bottom: 1px dotted #ccc;
+position: relative;
           margin-left: 15/100rem;
+          &:after {
+            .Pseudo-btnBorder-after(@border-width:0px 0px 1px 0px,@border-color: @hr-border-color,@border-style: dotted,@radius:0px);
+            width: 100%;
+          }
           .flex {
             width: 1.5rem;
             height: 90/100rem;
@@ -196,8 +200,12 @@
         .term-right-item {
           width:max-content;
           height: 0.9rem;
-          border-bottom: 1px dotted #ccc;
+          position: relative;
           margin-left: 15/100rem;
+          &:after {
+            .Pseudo-btnBorder-after(@border-width:0px 0px 1px 0px,@border-color: @hr-border-color,@border-style: dotted,@radius:0px);
+            width: 100%;
+          }
           .flex {
             width: 1.5rem;
             height: 90/100rem;
