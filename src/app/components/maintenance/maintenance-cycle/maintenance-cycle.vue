@@ -84,30 +84,9 @@
                         </div>
                     </div>
                     <div class='term-right'>
-                        <!--<div class='fixbox'>-->
-                            <!--<div class='term-right-top font-11 '>-->
-                                <!--<div class='status'>-->
-                                    <!--<p class='month color-gray2'>6个月</p>-->
-                                    <!--<p class='color-gray9'>5000KM</p>-->
-                                <!--</div>-->
-                                <!--<div class='status'>-->
-                                    <!--<p class='month color-gray2'>6个月</p>-->
-                                    <!--<p class='color-gray9'>5000KM</p>-->
-                                <!--</div>-->
-                                <!--<div class='status '>-->
-                                    <!--<p class='month color-gray2'>6个月</p>-->
-                                    <!--<p class='color-gray9'>5000KM</p>-->
-                                <!--</div>-->
-                                <!--<div class='status'>-->
-                                    <!--<p class='month color-gray2'>6个月</p>-->
-                                    <!--<p class='color-gray9'>5000KM</p>-->
-                                <!--</div>-->
-
-                            <!--</div>-->
-                        <!--</div>-->
                         <div class='term-right-item' style='margin-top: 1.55rem'>
                             <div class='status flex'>
-                                <div class='radio'></div>
+                                <div class='radio' @click='goOtherRecommend()'></div>
                             </div>
                             <div class='status flex'>
                                 <div class='radio'></div>
@@ -226,15 +205,36 @@
 
             </section>
             <section class='ycpj' v-show='currentType=="yuanchang"'>
+                <div class='title color-gray-2 font-13'>
+                    <div class='left flex'>保养计划</div>
+                    <div class='right'>
+                        <div class='fixbox'>
+                            <div class='term-right-top font-11 '>
+                                <div class='status'>
+                                    <p class='month color-gray2'>6个月</p>
+                                    <p class='color-gray9'>5000KM</p>
+                                </div>
+                                <div class='status'>
+                                    <p class='month color-gray2'>6个月</p>
+                                    <p class='color-gray9'>5000KM</p>
+                                </div>
+                                <div class='status '>
+                                    <p class='month color-gray2'>6个月</p>
+                                    <p class='color-gray9'>5000KM</p>
+                                </div>
+                                <div class='status'>
+                                    <p class='month color-gray2'>6个月</p>
+                                    <p class='color-gray9'>5000KM</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class='term flex'>
                     <div class='term-left flex'>
-                        <!--<div class='term-left-item'>-->
-                        <!--小保养服务-->
-                        <!--</div>-->
                         <div class='term-left-item color-gray-2'>
-                            <div class='status flex font-13 '>
-                                <div >配件名称</div>
-                            </div>
+
                             <div class='status flex font-12'>
                                 <div >机油</div>
                             </div>
@@ -250,22 +250,6 @@
 
                     </div>
                     <div class='term-right'>
-                        <div class='fixbox'>
-                            <div class='term-right-top font-11 '>
-                                <div class='status'>
-                                    规格型号
-                                </div>
-                                <div class='status'>
-                                    参考用量
-                                </div>
-                                <div class='status '>
-                                    大修参考用量
-                                </div>
-                                <div class='status '>
-                                    大修参考用量
-                                </div>
-                            </div>
-                        </div>
                         <div class='term-right-item font-13' style='margin-top: 1.55rem'>
                             <div class='status flex'>
                                 10W-40
@@ -309,7 +293,7 @@
             </section>
             <footer class='font-11 flex'>
                 <p>此数据仅供参考，请以原厂保养手册为准。</p>
-                <div class='feedback '>
+                <div class='feedback' @click='feedback()'>
                     <i class='iconfont icon-woshenpideline_ font-13'></i>
                     <span class='font-11'>我要反馈</span>
                 </div>
@@ -320,7 +304,6 @@
 </template>
 
 <script>
-    import {swiper, swiperSlide} from 'vue-awesome-swiper'
     export default {
 
         name: 'maintenance-cycle',
@@ -333,8 +316,7 @@
         created() {
             //页面创建完成后
             //自定义标题
-            swiperSlide
-            this.page.setTitle("maintenance-cycle");
+            this.page.setTitle("保养推荐");
 
             console.log(this.$refs.mySwiper)
 
@@ -348,6 +330,14 @@
             changeType (type) {
                 this.currentType=type
             },
+            //其他保养项目推荐
+            goOtherRecommend(){
+                this.$router.push({path:'/maintenance/maintenance-other-recommend',query: {id:"1"}});
+            },
+            //反馈
+            feedback(){
+                this.$router.push({path:'/maintenance/maintenance-feedback',query: {id:"1"}});
+            }
 
         },
         components: {},

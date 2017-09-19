@@ -74,7 +74,7 @@
         </section>
         <footer class='font-11 flex'>
             <p>此数据仅供参考，请以原厂保养手册为准。</p>
-            <div class='feedback '>
+            <div class='feedback' @click='feedback()'>
                 <i class='iconfont icon-woshenpideline_ font-13'></i>
                 <span class='font-11'>我要反馈</span>
             </div>
@@ -100,6 +100,10 @@
         },
         methods: {
             //页面方法
+            //反馈
+            feedback(){
+                this.$router.push({path:'/maintenance/maintenance-feedback',query: {id:"1"}});
+            }
         },
         components:{
         }

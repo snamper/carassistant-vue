@@ -54,6 +54,19 @@
         justify-content: center;
         align-items: center;
         height: 100%;
+        position: relative;
+        &:after{
+          content: '';
+          display: block;
+          height: 30/100rem;
+          width: 1px;
+          background: #ccc;
+          position: absolute;
+          right: 0;
+          top:50%;
+          margin-top: -15/100rem;
+          transform: scaleX(0.5);
+        }
       }
       .right{
         float: right;
@@ -85,7 +98,6 @@
 
       }
     }
-
     .term {
       .term-left {
         float: left;
@@ -112,39 +124,6 @@
         overflow: scroll;
         width: calc(~"100% - @{diff}");
         line-height:1;
-        ::-webkit-scrollbar{
-          width: 16px;
-          height: 16px;
-          background-color: #F5F5F5;
-        }
-        .fixbox{
-          position: fixed;
-          top: 0.65rem;
-          left: 1.9rem;
-          width: calc(~"100% - @{diff}");
-          overflow: hidden;
-          z-index: 11;
-          background: red;
-        }
-        .term-right-top{
-          width:max-content;
-          overflow: auto;
-          height: 0.9rem;
-          position: sticky;
-          top: 1.7rem;
-          .status {
-            width: 1.5rem;
-            float: left;
-            text-align: center;
-
-            .month{
-              margin-bottom: 8/100rem;
-              margin-top: 20/100rem;
-            }
-          }
-
-        }
-
         .term-right-item {
           width:max-content;
           height: 0.9rem;
@@ -175,6 +154,63 @@
     }
   }
   .ycpj{
+    .title{
+      position: fixed;
+      height: 0.9rem;
+      top:0.65rem;
+      z-index: 11;
+      background: #fff;
+      box-shadow: 0 8/100rem 14/100rem #a8a8a8;
+      .left{
+        float: left;
+        width: @diff;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        position: relative;
+        &:after{
+          content: '';
+          display: block;
+          height: 30/100rem;
+          width: 1px;
+          background: #ccc;
+          position: absolute;
+          right: 0;
+          top:50%;
+          margin-top: -15/100rem;
+          transform: scaleX(0.5);
+        }
+      }
+      .right{
+        float: right;
+        width: calc(~"100% - @{diff}");
+        overflow: hidden;
+      }
+      .fixbox{
+        overflow: hidden;
+        z-index: 11;
+
+      }
+      .term-right-top{
+        width:max-content;
+        overflow: auto;
+        height: 0.9rem;
+        position: sticky;
+        top: 1.7rem;
+        line-height: 1;
+        .status {
+          width: 1.5rem;
+          float: left;
+          text-align: center;
+
+          .month{
+            margin-bottom: 8/100rem;
+            margin-top: 20/100rem;
+          }
+        }
+
+      }
+    }
     .term {
       .term-left {
         float: left;
@@ -188,13 +224,9 @@
           justify-content: center;
           width: 100%;
         }
+
         .status:nth-child(1){
-          height: 0.9rem;
-          position: sticky;
-          top:0.64rem;
-          width: 1.9rem;
-          z-index: 10;
-          background: #fff;
+          margin-top: 1.55rem;
         }
         .term-left-item{
           background:  #f8f8f8;
@@ -205,42 +237,6 @@
         overflow: scroll;
         width: calc(~"100% - @{diff}");
         line-height:1;
-        ::-webkit-scrollbar{
-          width: 16px;
-          height: 16px;
-          background-color: #F5F5F5;
-        }
-        .fixbox{
-          position: fixed;
-          top: 0.65rem;
-          width: 100%;
-          padding-left: 1.9rem;
-          margin-left: -1.9rem;
-          overflow: hidden;
-          box-shadow: 0 8/100rem 14/100rem #a8a8a8;
-          z-index: 4;
-        }
-        .term-right-top{
-          width:max-content;
-          overflow: auto;
-          background: #fff;
-          height: 0.9rem;
-          position: sticky;
-          top: 1.7rem;
-          .status {
-            width: 1.5rem;
-            float: left;
-            text-align: center;
-            height: 0.9rem;
-            line-height: 0.9rem;
-            .month{
-              margin-bottom: 8/100rem;
-              margin-top: 20/100rem;
-            }
-          }
-
-        }
-
         .term-right-item {
           width:max-content;
           height: 0.9rem;
