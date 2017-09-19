@@ -5,62 +5,13 @@
         </div>
         <div v-show='!tipshow'>
             <nav class='flex font-12 color-gray-2'>
-            <div class='nav-item' v-bind:class="{ active: currentType=='baoyang' }" @click='changeType("baoyang")'>保养计划周期</div>
-            <div class='nav-item' v-bind:class="{ active: currentType=='yuanchang' }" @click='changeType("yuanchang")'>原厂配件参数</div>
-        </nav>
+                <div class='nav-item' v-bind:class="{ active: currentType=='baoyang' }" @click='changeType("baoyang")'>保养计划周期</div>
+                <div class='nav-item' v-bind:class="{ active: currentType=='yuanchang' }" @click='changeType("yuanchang")'>原厂配件参数</div>
+            </nav>
             <section class='baoyang' v-show='currentType=="baoyang"'>
-                <div class='term flex'>
-                    <div class='term-left flex'>
-                        <!--<div class='term-left-item'>-->
-                        <!--小保养服务-->
-                        <!--</div>-->
-                        <div class='term-left-item color-gray-2'>
-                            <div class='status flex font-13 '>
-                                <div >保养计划</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div style='overflow: hidden'>
-
-                    </div>
-                    <div class='term-right'>
+                <div class='title'>
+                    <div class='left'>保养计划</div>
+                    <div class='right'>
                         <div class='fixbox'>
                             <div class='term-right-top font-11 '>
                                 <div class='status'>
@@ -82,6 +33,78 @@
 
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class='term flex'>
+                    <div class='term-left flex'>
+                        <!--<div class='term-left-item'>-->
+                        <!--小保养服务-->
+                        <!--</div>-->
+                        <div class='term-left-item color-gray-2'>
+                            <!--<div class='status flex font-13 '>-->
+                                <!--<div >保养计划</div>-->
+                            <!--</div>-->
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+                            <div class='status flex font-12'>
+                                <div >小保养服务</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class='term-right'>
+                        <!--<div class='fixbox'>-->
+                            <!--<div class='term-right-top font-11 '>-->
+                                <!--<div class='status'>-->
+                                    <!--<p class='month color-gray2'>6个月</p>-->
+                                    <!--<p class='color-gray9'>5000KM</p>-->
+                                <!--</div>-->
+                                <!--<div class='status'>-->
+                                    <!--<p class='month color-gray2'>6个月</p>-->
+                                    <!--<p class='color-gray9'>5000KM</p>-->
+                                <!--</div>-->
+                                <!--<div class='status '>-->
+                                    <!--<p class='month color-gray2'>6个月</p>-->
+                                    <!--<p class='color-gray9'>5000KM</p>-->
+                                <!--</div>-->
+                                <!--<div class='status'>-->
+                                    <!--<p class='month color-gray2'>6个月</p>-->
+                                    <!--<p class='color-gray9'>5000KM</p>-->
+                                <!--</div>-->
+
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class='term-right-item' style='margin-top: 1.55rem'>
                             <div class='status flex'>
                                 <div class='radio'></div>
