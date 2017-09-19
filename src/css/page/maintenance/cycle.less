@@ -25,12 +25,13 @@
   }
   nav {
     justify-content: space-around;
-    align-items: center;
     background: #fff;
     top: 0;
     position: fixed;
     width: 100%;
     z-index: 10;
+    height: 1.55rem;
+    box-shadow: 0 8/100rem 14/100rem #a8a8a8;
     &:after {
       .Pseudo-border-after();
     }
@@ -83,11 +84,9 @@
         .fixbox{
           position: fixed;
           top: 0.65rem;
-          width: 100%;
-          padding-left: 1.9rem;
-          margin-left: -1.9rem;
+          width: calc(~"100% - @{diff}");
           overflow: hidden;
-          box-shadow: 0 8/100rem 14/100rem #a8a8a8;
+
           z-index: 11;
           background: #fff;
         }
