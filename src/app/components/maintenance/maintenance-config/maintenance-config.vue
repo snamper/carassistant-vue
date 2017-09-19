@@ -4,7 +4,7 @@
         <header>
             <div class='type font-18 color-gray2'>大众-朗逸</div>
             <div class='title font-12 color-gray9'>上海大众</div>
-            <div class='feedback flex'>
+            <div class='feedback flex' @click='feedback()'>
                 <i class='iconfont icon-woshenpideline_ font-16'></i>
                 <span class='font-8'>我要反馈</span>
             </div>
@@ -61,6 +61,9 @@
         },
         methods: {
             //页面方法
+            feedback(){
+                this.$router.push({path:'/maintenance/maintenance-feedback',query: {id:"1"}});
+            }
         },
         components:{
         }

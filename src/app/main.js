@@ -89,7 +89,7 @@ function parseURL(url) {
 }
 
 var _identifier = "shellhero";
-var url = AppConfig.API.BASE_URL + 'xacy' +"/Common/Frontend/Member/JsLogin";
+var url = AppConfig.API.BASE_URL + 'api/login/wechat';
 var params = parseURL(window.location.href).params;
 
 // 如果不包含code,是用户打开,需要获得用户信息
@@ -98,10 +98,13 @@ if(params.hasOwnProperty('code') && !!params.code) {
     window.location.hash = HashMap(decodeURIComponent(params['_fronthash']));
     app_bootstrap(params['code']);
 } else {
+    var x=window.location.hash.replace("#/",'')
     document.getElementById('authRequestFrame').src = url + "?_ts_="+new Date().getTime()
-        +"&_identifier="+_identifier
-        +"&_fronturl="+window.encodeURIComponent(window.location.href)
-        +"&_env=dev";
+       // +"&_identifier="+_identifier
+        +"&front_url="+x
+     //   +"&_env=dev";
+    console.log(x)
+
 }
 
 /**
@@ -110,6 +113,7 @@ if(params.hasOwnProperty('code') && !!params.code) {
  * @param auth
  */
 window.authComplete = function (auth) {
+    debugger
     app_bootstrap(auth);
 }
 
@@ -118,7 +122,7 @@ function app_bootstrap(code) {
     var auth = code.result.jscfg;
     // 获取用户信息
     wxsdk.config({
-        debug: false,
+        debug: true,
         appId: auth.appid,
         timestamp: auth.timestamp,
         nonceStr: auth.noncestr,
@@ -127,13 +131,13 @@ function app_bootstrap(code) {
         /*'disableSharing','hideOptionMenu',*/
     });
     wxsdk.ready(function () {
-        //alert(1)
+        alert(1)
         //resolve(data.result);
     });
 
     wxsdk.error(function (err) {
-       // reject(JSON.stringify(err));
-       // alert(0)
+        reject(JSON.stringify(err));
+        alert(0)
     });
 
 }

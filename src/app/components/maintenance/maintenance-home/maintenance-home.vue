@@ -8,7 +8,7 @@
                     <span class='font-13 color-gray9' @click='searchShow=!searchShow'>请输入17位VIN码或车辆名称</span>
                     <i class='camera iconfont icon-xiangjiline_ font-13 color-gray9' ></i>
                 </div>
-                <div class='feedback '>
+                <div class='feedback' @click='feedback()'>
                     <i class='iconfont icon-woshenpideline_ font-16'></i>
                     <span class='font-9'>反馈</span>
                 </div>
@@ -255,7 +255,7 @@
             goAnchor(index) {
                 var anchor = this.$el.querySelector('#anchor-'+index)
                 console.log(anchor)
-                document.body.scrollTop = anchor.offsetTop-45
+                document.body.scrollTop = anchor.offsetTop-48
                 $('.bubble').hide()
                 $('.nav-item').removeClass('nav-item-active')
                 $('.nav-item').eq(index).addClass('nav-item-active')
@@ -268,6 +268,9 @@
             move(){
 
             },
+            feedback(){
+                this.$router.push({path:'/maintenance/maintenance-feedback',query: {id:"1"}});
+            }
 
         },
         components: {}

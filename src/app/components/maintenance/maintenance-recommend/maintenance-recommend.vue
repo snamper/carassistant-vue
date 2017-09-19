@@ -7,7 +7,7 @@
                     <span class='font-15'>长安福特-经典福克斯</span>
                     <i class='iconfont icon-arrowR font-10'></i>
                 </div>
-                <div class='feedback'>
+                <div class='feedback' @click='feedback()'>
                     <i class='iconfont icon-woshenpideline_ font-16'></i>
                     <span class='font-8'>反馈</span>
                 </div>
@@ -154,6 +154,10 @@
                     this.$router.push({path:'/maintenance/maintenance-config',query: {id:"1"}});
                 }
 
+            },
+            //反馈
+            feedback(){
+                this.$router.push({path:'/maintenance/maintenance-feedback',query: {id:"1"}});
             }
 
         },
