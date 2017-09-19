@@ -2,7 +2,7 @@
     <div class="home" >
         <div class='mask' v-show='changeShow'></div>
         <div v-show='!searchShow'>
-            <header class='header' >
+            <header class='header flex' >
                 <div class='searchBox flex' >
                     <i class='iconfont icon-csousuo font-13'></i>
                     <span class='font-13 color-gray9' @click='searchShow=!searchShow'>请输入17位VIN码或车辆名称</span>
