@@ -28,7 +28,7 @@
     align-items: center;
     background: #fff;
     top: 0;
-    position: sticky;
+    position: fixed;
     width: 100%;
     z-index: 10;
     &:after {
@@ -64,7 +64,7 @@
           background: #fff;
         }
         .status:nth-child(2){
-          margin-top: 0.9rem;
+          margin-top: 1.55rem;
         }
         .term-left-item{
           background:  #f8f8f8;
@@ -82,6 +82,7 @@
         }
         .fixbox{
           position: fixed;
+          top: 0.65rem;
           width: 100%;
           padding-left: 1.9rem;
           margin-left: -1.9rem;
@@ -176,11 +177,13 @@ position: relative;
         }
         .fixbox{
           position: fixed;
+          top: 0.65rem;
           width: 100%;
           padding-left: 1.9rem;
           margin-left: -1.9rem;
           overflow: hidden;
           box-shadow: 0 8/100rem 14/100rem #a8a8a8;
+          z-index: 4;
         }
         .term-right-top{
           width:max-content;

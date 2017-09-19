@@ -82,7 +82,7 @@
 
                             </div>
                         </div>
-                        <div class='term-right-item' style='margin-top: 0.9rem'>
+                        <div class='term-right-item' style='margin-top: 1.55rem'>
                             <div class='status flex'>
                                 <div class='radio'></div>
                             </div>
@@ -243,7 +243,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class='term-right-item font-13' style='margin-top: 0.9rem'>
+                        <div class='term-right-item font-13' style='margin-top: 1.55rem'>
                             <div class='status flex'>
                                 10W-40
                             </div>
