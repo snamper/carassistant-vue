@@ -9,7 +9,7 @@
                     <i class='camera iconfont icon-xiangjiline_ font-13 color-gray9' ></i>
                 </div>
                 <div class='feedback '>
-                    <i class='iconfont icon-woshenpideline_ font-13'></i>
+                    <i class='iconfont icon-woshenpideline_ font-16'></i>
                     <span class='font-9'>反馈</span>
                 </div>
             </header>
@@ -57,10 +57,10 @@
                     </div>
 
                 </div>
-                <div class='nav-bar' @touchend='move()'>
+                <div class='nav-bar'>
                     <div class='nav-item ' v-for='(item,index) in brandList'>
                         <div class='bubble font-20' v-text='item.initials' >A</div>
-                        <div class='indexes font-9' v-text='item.initials' @touchstart="start(index)" @touchmove="goAnchor(index)">A</div>
+                        <div class='indexes font-9' v-text='item.initials' @touchstart="start(index)" >A</div>
                     </div>
 
                 </div>

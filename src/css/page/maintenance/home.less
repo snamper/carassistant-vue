@@ -1,10 +1,13 @@
 .home {
+  @import "../../../css/config/variables";
+  @import "../../../css/config/mixins/border";
+  @font-family-default: "Microsoft YaHei UI" !important;
+  font-family: @font-family-default;
   position: relative;
   background: #FFD301;
   //页面样式
   overflow: hidden;
-  @import "../../../css/config/variables";
-  @import "../../../css/config/mixins/border";
+
   .p-t-9{
     padding-top: 0.99rem;
   }
@@ -39,16 +42,18 @@
       margin-top: -0.05rem;
 
       float: right;
-      width: 0.5rem;
       text-align: center;
       line-height: 1;
       span{
         color: #fff;
         line-height: 1;
+        display: block;
+        margin-top: 8/100rem;
       }
       i{
         color: #fff;
         line-height: 1;
+        display: block;
       }
     }
   }
