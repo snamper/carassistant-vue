@@ -100,11 +100,14 @@ if(params.hasOwnProperty('code') && !!params.code) {
     app_bootstrap(params['code']);
 } else {
     var x=window.location.hash.replace("#/",'')
-    document.getElementById('authRequestFrame').src = url + "?_ts_="+new Date().getTime()
+    document.getElementById('authRequestFrame').src = url
+
+        + "?_ts_="+new Date().getTime()
        // +"&_identifier="+_identifier
         +"&front_url="+x
      //   +"&_env=dev";
     console.log(x)
+    console.log(document.getElementById('authRequestFrame'))
 
 }
 
