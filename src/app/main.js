@@ -107,6 +107,7 @@ if(params.hasOwnProperty('code') && !!params.code) {
     }).$mount("#app");
 } else {
     var x=window.encodeURIComponent(window.location.href) //URI地址，把#转化可以进行传参
+    alert(x)
     document.getElementById('authRequestFrame').src = url
         + "?_ts_="+new Date().getTime()
        // +"&_identifier="+_identifier
