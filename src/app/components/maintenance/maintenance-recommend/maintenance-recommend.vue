@@ -3,7 +3,7 @@
     <div class="maintenance-recommend">
         <header CLASS='header'>
             <div class='top flex'>
-                <div class='title'>
+                <div class='title flex'>
                     <span class='font-15'>长安福特-经典福克斯</span>
                     <i class='iconfont icon-arrowR font-10'></i>
                 </div>
