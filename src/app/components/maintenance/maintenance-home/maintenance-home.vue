@@ -68,7 +68,7 @@
             <div class='changeTime' v-show='changeShow=="changBrand"'>
                 <div class='car-name font-11' >
                     <span class='color-gray5'>安驰</span>
-                    <i class='close iconfont icon-guanbi font-10 color-grayC'></i>
+                    <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
                 </div>
                 <div class='car-time font-14 color-gray2'>
                     <div class='time-item ' @click='goChangeType()'>
@@ -89,7 +89,7 @@
             <div class='changeTime' v-show='changeShow=="changeType"'>
                 <div class='car-name font-11' >
                     <span class='ddid21' v-text='brand'>安驰</span><i class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5' v-text='name'>安驰</span>
-                    <i class='close iconfont icon-guanbi font-10 color-grayC'></i>
+                    <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
                 </div>
                 <div class='car-time font-14 color-gray2'>
                     <div class='time-item ' @click='goChangeTime()'>
@@ -113,7 +113,7 @@
             <div class='changeTime' v-show='changeShow=="changeTime"'>
                 <div class='car-name font-11'>
                     <span class='ddid21' v-text='brand'>安驰</span><i class='iconfont icon-arrowR font-10 color-grayC'></i><span class='ddid21' v-text='name'>安驰</span><i class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5' v-text='type'>安驰</span>
-                    <i class='close iconfont icon-guanbi font-10 color-grayC'></i>
+                    <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
                 </div>
                 <div class='car-time font-14'>
                     <div class='time-item' @click='gopage()'>
@@ -248,6 +248,9 @@
             goChangeTime(item){
                 this.changeShow = 'changeTime'
                 this.type='2.0T'
+            },
+            cancelChoose(){
+                this.changeShow='';
             },
             gopage(){
                 this.$router.push({path:'/maintenance/maintenance-recommend',query: {id:"1"}});
