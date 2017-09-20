@@ -246,9 +246,6 @@
                             </div>
                         </div>
                     </div>
-                    <div style='overflow: hidden'>
-
-                    </div>
                     <div class='term-right'>
                         <div class='term-right-item font-13' style='margin-top: 1.55rem'>
                             <div class='status flex'>
