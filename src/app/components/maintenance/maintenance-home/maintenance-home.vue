@@ -143,7 +143,7 @@
                         <div class='search-icon '>
                             <i class='iconfont icon-csousuo font-11'></i>
                         </div>
-                        <input id='input' class='font-13 color-gray2' type="text" placeholder='请输入17位VIN码或车辆名称1'/>
+                        <input id='input' class='font-13 color-gray2' type="text" placeholder='请输入17位VIN码或车辆名称'/>
                         <i class='iconfont icon-quxiaoglyph_ font-13'></i>
 
                     </div>
