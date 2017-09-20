@@ -74,7 +74,7 @@
         </section>
         <footer class='font-11 flex'>
             <p>此数据仅供参考，请以原厂保养手册为准。</p>
-            <div class='feedback' @click='feedback()'>
+            <div class='feedback flex' @click='feedback()'>
                 <i class='iconfont icon-woshenpideline_ font-13'></i>
                 <span class='font-11'>我要反馈</span>
             </div>

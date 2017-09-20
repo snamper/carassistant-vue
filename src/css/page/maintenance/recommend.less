@@ -5,8 +5,14 @@
   //页面样式
   @font-family-default: "Microsoft YaHei UI" !important;
   font-family: @font-family-default;
+  background: url("../../../images/maintenance/background.png");
+  background-size: contain;
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  overflow: scroll;
   .header{
-    background: #FFD301;
+    background: rgba(255, 211, 1,0.8);
     padding: 0 20/100rem;
     padding-bottom: 30/100rem;
     .top{
@@ -51,6 +57,7 @@
       overflow: hidden;
       color: #fff;
       padding: 30/100rem 0;
+      line-height: 1;
       .cycle,.config{
         position: relative;
         width: 50%;
@@ -111,8 +118,7 @@
   }
   .main{
     padding: 20/100rem 15/100rem 30/100rem 15/100rem;
-    background: url("../../../images/maintenance/background.png");
-    background-size: contain;
+
     .recommend{
       background: #fff;
       border-radius: 8/100rem;
@@ -127,7 +133,7 @@
         }
       }
       .content{
-        padding: 0 20/100rem 15/100rem 20/100rem;
+        padding: 0 20/100rem 30/100rem 20/100rem;
         justify-content: space-between;
         .item{
           width: 2.8rem;
@@ -136,8 +142,32 @@
             height: 2.8rem;
           }
           p{
+            float: left;
             line-height: 34/100rem;
-            border-bottom: 8/100rem solid #DD1D21;
+            position: relative;
+            padding-bottom: 15/100rem;
+            &:after{
+              content: '';
+              display: block;
+              width: 100%;
+              height: 8/100rem;
+              background: #DD1D21;
+              position: absolute;
+              bottom: 0/100rem;
+            }
+            &:before{
+              content: '最佳';
+              display: block;
+              width: 50/100rem;
+              text-align: center;
+              font-size: 10px;
+              height: 28/100rem;
+              line-height: 28/100rem;
+              float: left;
+              border: 1px solid #DD1D21;
+              color: #DD1D21;
+              margin-right: 10/100rem;
+            }
           }
         }
       }

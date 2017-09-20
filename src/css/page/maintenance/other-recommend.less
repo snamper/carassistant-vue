@@ -32,9 +32,14 @@
         }
 
         .detail{
+          position: relative;
+          overflow: hidden;
+          &:after {
+            .Pseudo-border-after();
+          }
           .detail-item{
             overflow: hidden;
-            margin-bottom: 30/100rem;
+            margin-bottom: 25/100rem;
             .brand{
               overflow: hidden;
               img{
@@ -77,6 +82,10 @@
     justify-content: space-between;
     padding: 0 20/100rem;
     .feedback{
+      align-items: center;
+      i{
+        margin-right: 8/100rem;
+      }
     }
   }
 }

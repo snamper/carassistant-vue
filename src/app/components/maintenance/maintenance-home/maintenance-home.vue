@@ -1,8 +1,8 @@
 <template>
     <div class="home" >
         <div class='mask' v-show='changeShow'></div>
-        <div v-show='!searchShow'>
-            <header class='header flex' >
+        <div class='main' v-bind:class="{'filter':searchShow,'hide222':changeShow}">
+            <header class='header flex' v-bind:class="{'filter':searchShow}">
                 <div class='searchBox flex' >
                     <i class='iconfont icon-csousuo font-13'></i>
                     <span class='font-13 color-gray9' @click='searchShow=!searchShow'>请输入17位VIN码或车辆名称</span>
@@ -13,7 +13,7 @@
                     <span class='font-9'>反馈</span>
                 </div>
             </header>
-            <div class='content' v-bind:class="{'p-t-9':!searchShow}">
+            <div class='content p-t-9'>
                 <div class='hot'>
                     <div class='font-18 color-gray2 title'>
                         <span>热门品牌</span>
@@ -65,77 +65,77 @@
 
                 </div>
             </div>
-            <div class='changeTime' v-show='changeShow=="changBrand"'>
-                <div class='car-name font-11' >
-                    <span class='color-gray5'>安驰</span>
-                    <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
+        </div>
+        <div class='changeTime' v-show='changeShow=="changBrand"'>
+            <div class='car-name font-11' >
+                <span class='color-gray5'>安驰</span>
+                <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
+            </div>
+            <div class='car-time font-14 color-gray2'>
+                <div class='time-item ' @click='goChangeType()'>
+                    <span>威宝</span>
+                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
                 </div>
-                <div class='car-time font-14 color-gray2'>
-                    <div class='time-item ' @click='goChangeType()'>
-                        <span>威宝</span>
-                        <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                    </div>
-                    <div class='time-item ' @click='goChangeType()'>
-                        <span>小公主</span>
-                        <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                    </div>
-                    <div class='time-item ' @click='goChangeType()'>
-                        <span>雪豹</span>
-                        <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                    </div>
+                <div class='time-item ' @click='goChangeType()'>
+                    <span>小公主</span>
+                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
+                </div>
+                <div class='time-item ' @click='goChangeType()'>
+                    <span>雪豹</span>
+                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
+                </div>
 
-                </div>
             </div>
-            <div class='changeTime' v-show='changeShow=="changeType"'>
-                <div class='car-name font-11' >
-                    <span class='ddid21' v-text='brand'>安驰</span><i class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5' v-text='name'>安驰</span>
-                    <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
-                </div>
-                <div class='car-time font-14 color-gray2'>
-                    <div class='time-item ' @click='goChangeTime()'>
-                        <span>2.0L</span>
-                        <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                    </div>
-                    <div class='time-item ' @click='goChangeTime()'>
-                        <span>2.0T-柴油</span>
-                        <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                    </div>
-                    <div class='time-item ' @click='goChangeTime()'>
-                        <span>2.2L</span>
-                        <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                    </div>
-                    <div class='time-item ' @click='goChangeTime()'>
-                        <span>2.2T-柴油</span>
-                        <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                    </div>
-                </div>
+        </div>
+        <div class='changeTime' v-show='changeShow=="changeType"'>
+            <div class='car-name font-11' >
+                <span class='ddid21' v-text='brand'>安驰</span><i class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5' v-text='name'>安驰</span>
+                <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
             </div>
-            <div class='changeTime' v-show='changeShow=="changeTime"'>
-                <div class='car-name font-11'>
-                    <span class='ddid21' v-text='brand'>安驰</span><i class='iconfont icon-arrowR font-10 color-grayC'></i><span class='ddid21' v-text='name'>安驰</span><i class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5' v-text='type'>安驰</span>
-                    <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
+            <div class='car-time font-14 color-gray2'>
+                <div class='time-item ' @click='goChangeTime()'>
+                    <span>2.0L</span>
+                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
                 </div>
-                <div class='car-time font-14'>
-                    <div class='time-item' @click='gopage()'>
-                        <span>2015年产</span>
-                        <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                    </div>
-                    <div class='time-item '>
-                        <span>2015年产</span>
-                        <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                    </div>
-                    <div class='time-item '>
-                        <span>2015年产</span>
-                        <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                    </div>
-                    <div class='time-item'>
-                        <span>2015年产</span>
-                        <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                    </div>
+                <div class='time-item ' @click='goChangeTime()'>
+                    <span>2.0T-柴油</span>
+                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
+                </div>
+                <div class='time-item ' @click='goChangeTime()'>
+                    <span>2.2L</span>
+                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
+                </div>
+                <div class='time-item ' @click='goChangeTime()'>
+                    <span>2.2T-柴油</span>
+                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
                 </div>
             </div>
         </div>
-        <div class='searchPage' v-show='searchShow'>
+        <div class='changeTime' v-show='changeShow=="changeTime"'>
+            <div class='car-name font-11'>
+                <span class='ddid21' v-text='brand'>安驰</span><i class='iconfont icon-arrowR font-10 color-grayC'></i><span class='ddid21' v-text='name'>安驰</span><i class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5' v-text='type'>安驰</span>
+                <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
+            </div>
+            <div class='car-time font-14'>
+                <div class='time-item' @click='gopage()'>
+                    <span>2015年产</span>
+                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
+                </div>
+                <div class='time-item '>
+                    <span>2015年产</span>
+                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
+                </div>
+                <div class='time-item '>
+                    <span>2015年产</span>
+                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
+                </div>
+                <div class='time-item'>
+                    <span>2015年产</span>
+                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
+                </div>
+            </div>
+        </div>
+        <div class='searchPage' v-bind:class="{'opacity':searchShow}">
             <div class='search-default font-13 color-gray9'>
                 <div class='searchBox' @click="searchDefault=true">
                     <i class='back iconfont icon-arrowL font-10' @click='searchShow=!searchShow'></i>
@@ -173,8 +173,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 
 </template>
@@ -265,7 +263,7 @@
                 $('.bubble').eq(index).show()
                 setTimeout(function () {
                     $('.bubble').hide()
-                    $('.nav-item').removeClass('nav-item-active')
+                  //  $('.nav-item').removeClass('nav-item-active')
                 },500)
             },
             move(){

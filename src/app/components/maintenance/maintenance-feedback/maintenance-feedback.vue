@@ -44,6 +44,9 @@
                 </div>
             </div>
         </section>
+        <footer>
+            <div class='submit'>提交</div>
+        </footer>
     </div>
 </template>
 
