@@ -48,7 +48,7 @@
                     </div>
                     <div class='item'>
                         <img src="https://img10.360buyimg.com/n1/s150x150_jfs/t4513/294/3661337820/220322/40a3cab6/5901638dN7c8c4ce0.jpg" alt="">
-                        <p class='font-12 color-gray2'>超凡喜力5W-40全合成汽车润滑油</p>
+                        <p class='font-12 color-gray2'><span class='chiji font-10 flex'>最佳</span>超凡喜力5W-40全合成汽车润滑油</p>
                     </div>
                 </div>
             </section>
