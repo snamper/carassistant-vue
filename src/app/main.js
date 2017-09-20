@@ -98,16 +98,23 @@ console.log('params'+params)
 if(params.hasOwnProperty('code') && !!params.code) {
     window.location.hash = HashMap(decodeURIComponent(params['_fronthash']));
     app_bootstrap(params['code']);
+    var app = new Vue({
+        router:Router,
+        render: h => h(App)
+        // (function (h) {
+        //     return h(App)
+        // })
+    }).$mount("#app");
 } else {
     var x=window.location.hash.replace("#/",'')
-    // document.getElementById('authRequestFrame').src = url
-    //
-    //     + "?_ts_="+new Date().getTime()
-    //    // +"&_identifier="+_identifier
-    //     +"&front_url="+x
-    //  //   +"&_env=dev";
-    // console.log(x)
-    // console.log(document.getElementById('authRequestFrame'))
+    document.getElementById('authRequestFrame').src = url
+
+        + "?_ts_="+new Date().getTime()
+       // +"&_identifier="+_identifier
+        +"&front_url="+x
+     //   +"&_env=dev";
+    console.log(x)
+    console.log(document.getElementById('authRequestFrame'))
 
 }
 
@@ -148,10 +155,4 @@ function app_bootstrap(code) {
 }
 
 
-var app = new Vue({
-    router:Router,
-    render: h => h(App)
-    // (function (h) {
-    //     return h(App)
-    // })
-}).$mount("#app");
+
