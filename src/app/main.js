@@ -143,12 +143,12 @@ function app_bootstrap(code) {
         reject(JSON.stringify(err));
         alert(0)
     });
+    var app = new Vue({
+        router:Router,
+        render: h => h(App)
+        // (function (h) {
+        //     return h(App)
+        // })
+    }).$mount("#app");
 }
 
-var app = new Vue({
-    router:Router,
-    render: h => h(App)
-    // (function (h) {
-    //     return h(App)
-    // })
-}).$mount("#app");
