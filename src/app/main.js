@@ -96,18 +96,22 @@ console.log('params'+params)
 // 如果不包含code,是用户打开,需要获得用户信息
 // 如果参数里面包含code,说明是微信授权返回
 if(params.hasOwnProperty('code') && !!params.code) {
-    window.location.hash = HashMap(decodeURIComponent(params['_fronthash']));
+    window.location.hash = HashMap(decodeURIComponent(params['front_url']));
     app_bootstrap(params['code']);
+    var app = new Vue({
+        router:Router,
+        render: h => h(App)
+        // (function (h) {
+        //     return h(App)
+        // })
+    }).$mount("#app");
 } else {
-    // var x=window.location.hash.replace("#/",'')
-    // document.getElementById('authRequestFrame').src = url
-    //
-    //     + "?_ts_="+new Date().getTime()
-    //    // +"&_identifier="+_identifier
-    //     +"&front_url="+x
-    //  //   +"&_env=dev";
-    // console.log(x)
-    // console.log(document.getElementById('authRequestFrame'))
+    var x=window.encodeURIComponent(window.location.href) //URI地址，把#转化可以进行传参
+    document.getElementById('authRequestFrame').src = url
+        + "?_ts_="+new Date().getTime()
+       // +"&_identifier="+_identifier
+        +"&front_url="+x
+     //   +"&_env=dev";
 
 }
 
@@ -144,14 +148,5 @@ function app_bootstrap(code) {
         reject(JSON.stringify(err));
         alert(0)
     });
-
 }
 
-
-var app = new Vue({
-    router:Router,
-    render: h => h(App)
-    // (function (h) {
-    //     return h(App)
-    // })
-}).$mount("#app");
