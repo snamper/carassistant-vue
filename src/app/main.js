@@ -90,7 +90,7 @@ function parseURL(url) {
 
 var _identifier = "shellhero";
 var url = AppConfig.API.BASE_URL + 'api/login/wechat';
-debugger
+
 var params = parseURL(window.location.href).params;
 var hash = parseURL(window.location.href).hash;
 console.dir('hash'+hash)
@@ -100,12 +100,13 @@ console.dir('hash'+hash)
 if(params.hasOwnProperty('code') && !!params.code) {
     window.location.hash = HashMap(decodeURIComponent(params['_fronthash']));
     app_bootstrap(params['code']);
+    debugger
 } else {
     document.getElementById('authRequestFrame').src = url + "?_ts_="+new Date().getTime()
        // +"&_identifier="+_identifier
         +"&front_url="+hash
      //   +"&_env=dev";
-    
+
 }
 
 /**
