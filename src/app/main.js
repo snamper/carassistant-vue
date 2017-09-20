@@ -81,7 +81,7 @@ function parseURL(url) {
             return ret;
         })(),
         file: (a.pathname.match(/\/([^\/?#]+)$/i) || [,''])[1],
-        hash: a.hash.replace('#',''),
+        hash: a.hash.replace('#/',''),
         path: a.pathname.replace(/^([^\/])/,'/$1'),
         relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [,''])[1],
         segments: a.pathname.replace(/^\//,'').split('/')
@@ -90,7 +90,10 @@ function parseURL(url) {
 
 var _identifier = "shellhero";
 var url = AppConfig.API.BASE_URL + 'api/login/wechat';
+debugger
 var params = parseURL(window.location.href).params;
+var hash = parseURL(window.location.href).hash;
+console.dir('hash'+hash)
 
 // 如果不包含code,是用户打开,需要获得用户信息
 // 如果参数里面包含code,说明是微信授权返回
@@ -98,13 +101,11 @@ if(params.hasOwnProperty('code') && !!params.code) {
     window.location.hash = HashMap(decodeURIComponent(params['_fronthash']));
     app_bootstrap(params['code']);
 } else {
-    var x=window.location.hash.replace("#/",'')
     document.getElementById('authRequestFrame').src = url + "?_ts_="+new Date().getTime()
        // +"&_identifier="+_identifier
-        +"&front_url="+x
+        +"&front_url="+hash
      //   +"&_env=dev";
-    console.log(x)
-
+    
 }
 
 /**
@@ -136,6 +137,7 @@ function app_bootstrap(code) {
     });
 
     wxsdk.error(function (err) {
+        debugger
         reject(JSON.stringify(err));
         alert(0)
     });
