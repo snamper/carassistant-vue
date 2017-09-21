@@ -1,18 +1,18 @@
 <template>
     <div class="home" v-show='loadData'>
         <div class='mask' v-show='changeShow'></div>
+        <header class='header flex' v-bind:class="{'filter':searchShow}">
+            <div class='searchBox flex' >
+                <i class='iconfont icon-csousuo font-13'></i>
+                <span class='font-13 color-gray9' @click='searchShow=!searchShow'>请输入17位VIN码或车辆名称</span>
+                <i class='camera iconfont icon-xiangjiline_ font-13 color-gray9' ></i>
+            </div>
+            <div class='feedback' @click='feedback()'>
+                <i class='iconfont icon-woshenpideline_ font-16'></i>
+                <span class='font-9'>反馈</span>
+            </div>
+        </header>
         <div class='main' v-bind:class="{'filter':searchShow,'hide222':changeShow}">
-            <header class='header flex' v-bind:class="{'filter':searchShow}">
-                <div class='searchBox flex' >
-                    <i class='iconfont icon-csousuo font-13'></i>
-                    <span class='font-13 color-gray9' @click='searchShow=!searchShow'>请输入17位VIN码或车辆名称</span>
-                    <i class='camera iconfont icon-xiangjiline_ font-13 color-gray9' ></i>
-                </div>
-                <div class='feedback' @click='feedback()'>
-                    <i class='iconfont icon-woshenpideline_ font-16'></i>
-                    <span class='font-9'>反馈</span>
-                </div>
-            </header>
             <div class='content p-t-9'>
                 <div class='hot'>
                     <div class='font-18 color-gray2 title'>
@@ -46,11 +46,13 @@
                         <div class='item-title'>
                             <span class='font-16' v-text='item.initials'>A</span>
                         </div>
-                        <div class='item-detail flex' @click='choose(1,type)'  v-for="(type,index) in item.data">
+                        <div class='item-detail flex'  v-for="(type,index) in item.data">
                             <div class='sign'>
                                 <img v-bind:src="type.logo">
                             </div>
-                            <div class='name font-13 color-gray2' v-text='type.name' v-bind:class="{'last-no-bd':index==item.data.length-1}">兰博基尼</div>
+                            <div class='name font-13 color-gray2' v-bind:class="{'last-no-bd':index==item.data.length-1}">
+                                <span v-text='type.name' @click='choose(1,type)'></span>
+                            </div>
                         </div>
                     </div>
 
