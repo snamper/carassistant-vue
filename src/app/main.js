@@ -100,7 +100,7 @@ if(params.hasOwnProperty('code') && !!params.code) {
     app_bootstrap(params['code']);
 
 } else {
-    var x=window.encodeURIComponent(window.location.href) //URI地址，把#转化可以进行传参
+    var x=window.encodeURIComponent(window.location.href) //URI地址，把#转换可以进行传参
     alert(x)
     document.getElementById('authRequestFrame').src = url
         + "?_ts_="+new Date().getTime()
@@ -123,7 +123,7 @@ window.authComplete = function (auth) {
 function app_bootstrap(code) {
 
     var auth = code.result.jscfg;
-    debugger
+    alert('auth'+auth)
     // 获取用户信息
     wxsdk.config({
         debug: true,
@@ -144,12 +144,12 @@ function app_bootstrap(code) {
         reject(JSON.stringify(err));
         alert(0)
     });
+    var app = new Vue({
+        router:Router,
+        render: h => h(App)
+        // (function (h) {
+        //     return h(App)
+        // })
+    }).$mount("#app");
 }
 
-var app = new Vue({
-    router:Router,
-    render: h => h(App)
-    // (function (h) {
-    //     return h(App)
-    // })
-}).$mount("#app");
