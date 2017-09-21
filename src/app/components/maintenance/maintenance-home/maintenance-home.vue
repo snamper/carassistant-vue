@@ -2,10 +2,10 @@
     <div class="home" v-show='loadData'>
         <div class='mask' v-show='changeShow'></div>
         <header class='header flex' v-bind:class="{'filter':searchShow}">
-            <div class='searchBox flex' >
+            <div class='searchBox flex'>
                 <i class='iconfont icon-csousuo font-13'></i>
                 <span class='font-13 color-gray9' @click='searchShow=!searchShow'>请输入17位VIN码或车辆名称</span>
-                <i class='camera iconfont icon-xiangjiline_ font-13 color-gray9' ></i>
+                <i class='camera iconfont icon-xiangjiline_ font-13 color-gray9'></i>
             </div>
             <div class='feedback' @click='feedback()'>
                 <i class='iconfont icon-woshenpideline_ font-16'></i>
@@ -31,7 +31,7 @@
                         </div>
                         <div class='column flex'>
                             <div class='hot-brand' v-for="item in htoBrandList2">
-                                    <div @click='choose(1,item)'>
+                                <div @click='choose(1,item)'>
                                     <div class='brand-logo'>
                                         <img v-bind:src="item.logo" alt="">
                                     </div>
@@ -46,28 +46,29 @@
                         <div class='item-title'>
                             <span class='font-16' v-text='item.initials'>A</span>
                         </div>
-                        <div class='item-detail flex'  v-for="(type,index) in item.data">
+                        <div class='item-detail flex' v-for="(type,index) in item.data">
                             <div class='sign'>
                                 <img v-bind:src="type.logo">
                             </div>
-                            <div class='name font-13 color-gray2' v-bind:class="{'last-no-bd':index==item.data.length-1}">
+                            <div class='name font-13 color-gray2'
+                                 v-bind:class="{'last-no-bd':index==item.data.length-1}">
                                 <span v-text='type.name' @click='choose(1,type)'></span>
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <div class='nav-bar'>
-                    <div class='nav-item ' v-for='(item,index) in brandList'>
-                        <div class='bubble font-20' v-text='item.initials' >A</div>
-                        <div class='indexes font-9' v-text='item.initials' @click="goAnchor(index)" >A</div>
-                    </div>
-
-                </div>
             </div>
         </div>
+        <div class='nav-bar' v-show='!changeShow'>
+            <div class='nav-item ' v-for='(item,index) in brandList'>
+                <div class='bubble font-20' v-text='item.initials'>A</div>
+                <div class='indexes font-9' v-text='item.initials' @click="goAnchor(index)">A</div>
+            </div>
+
+        </div>
         <div class='changeTime' v-show='changeShow=="changBrand"'>
-            <div class='car-name font-11' >
+            <div class='car-name font-11'>
                 <span class='color-gray5' v-text='currentChoosed.brand'>安驰</span>
                 <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
             </div>
@@ -79,8 +80,10 @@
             </div>
         </div>
         <div class='changeTime' v-show='changeShow=="changeType"'>
-            <div class='car-name font-11' >
-                <span class='ddid21' v-text='currentChoosed.brand' @click='back(1)'>安驰</span><i class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5' v-text='currentChoosed.name'>安驰</span>
+            <div class='car-name font-11'>
+                <span class='ddid21' v-text='currentChoosed.brand' @click='back(1)'>安驰</span><i
+                class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5'
+                                                                           v-text='currentChoosed.name'>安驰</span>
                 <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
             </div>
             <div class='car-time font-14 color-gray2'>
@@ -93,7 +96,11 @@
         </div>
         <div class='changeTime' v-show='changeShow=="changeTime"'>
             <div class='car-name font-11'>
-                <span class='ddid21' v-text='currentChoosed.brand' @click='back(1)'>安驰</span><i class='iconfont icon-arrowR font-10 color-grayC'></i><span class='ddid21' @click='back(2)' v-text='currentChoosed.name'>安驰</span><i class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5' v-text='currentChoosed.type'>安驰</span>
+                <span class='ddid21' v-text='currentChoosed.brand' @click='back(1)'>安驰</span><i
+                class='iconfont icon-arrowR font-10 color-grayC'></i><span class='ddid21' @click='back(2)'
+                                                                           v-text='currentChoosed.name'>安驰</span><i
+                class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5'
+                                                                           v-text='currentChoosed.type'>安驰</span>
                 <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
             </div>
             <div class='car-time font-14'>
@@ -123,7 +130,8 @@
                         <div class='search-icon '>
                             <i class='iconfont icon-csousuo font-11'></i>
                         </div>
-                        <input id='input' v-model='searchData' class='font-13 color-gray2' type="text" placeholder='请输入17位VIN码或车辆名称'/>
+                        <input id='input' v-model='searchData' class='font-13 color-gray2' type="text"
+                               placeholder='请输入17位VIN码或车辆名称'/>
                         <i class='iconfont icon-quxiaoglyph_ font-13'></i>
 
                     </div>
@@ -133,19 +141,27 @@
                 <div class='result' v-show='searchDefault'>
                     <ul>
                         <li class='font-14 flex color-gray2'>
-                            <img src="http://image.bitautoimg.com/bt/car/default/images/logo/masterbrand/png/100/m_92_100.png" alt="">
+                            <img
+                                src="http://image.bitautoimg.com/bt/car/default/images/logo/masterbrand/png/100/m_92_100.png"
+                                alt="">
                             <span>奥迪</span>
                         </li>
                         <li class='font-14 flex color-gray2'>
-                            <img src="http://image.bitautoimg.com/bt/car/default/images/logo/masterbrand/png/100/m_92_100.png" alt="">
+                            <img
+                                src="http://image.bitautoimg.com/bt/car/default/images/logo/masterbrand/png/100/m_92_100.png"
+                                alt="">
                             <span>奥迪</span>
                         </li>
                         <li class='font-14 flex color-gray2'>
-                            <img src="http://image.bitautoimg.com/bt/car/default/images/logo/masterbrand/png/100/m_92_100.png" alt="">
+                            <img
+                                src="http://image.bitautoimg.com/bt/car/default/images/logo/masterbrand/png/100/m_92_100.png"
+                                alt="">
                             <span>奥迪</span>
                         </li>
                         <li class='font-14 flex color-gray2'>
-                            <img src="http://image.bitautoimg.com/bt/car/default/images/logo/masterbrand/png/100/m_92_100.png" alt="">
+                            <img
+                                src="http://image.bitautoimg.com/bt/car/default/images/logo/masterbrand/png/100/m_92_100.png"
+                                alt="">
                             <span>奥迪</span>
                         </li>
 
@@ -159,25 +175,25 @@
 
 <script>
     import api from "../../../api/maintenance-api";
+
     export default {
         name: 'home',
         data() {
             return {
-                items: [111, 2222, 3, 4,5],
                 changeShow: false,
                 searchShow: false,
                 searchDefault: false,
-                brandList:[],
-                searchData:'',
-                htoBrandList1:[],
-                htoBrandList2:[],
-                currentChoosedNameList:[],
-                currentChoosedDisplacementList:[],
-                currentChoosed:{
-                    brand:'',
-                    name:'',
-                    type:'',
-                    time:''
+                brandList: [],
+                searchData: '',
+                htoBrandList1: [],
+                htoBrandList2: [],
+                currentChoosedNameList: [],
+                currentChoosedDisplacementList: [],
+                currentChoosed: {
+                    brand: '',
+                    name: '',
+                    type: '',
+                    time: ''
                 }
             }
         },
@@ -194,89 +210,110 @@
         },
         methods: {
             //页面方法
-            init(){
+            init() {
                 this.getData()
             },
-            getData(){
-                let self=this;
-                self.loadData=false
-                let loading=self.$loading
+            getData() {
+                let self = this;
+                self.loadData = false
+                let loading = self.$loading
                 loading.show('加载中...')
                 //车型列表
-                api.carBrandList().then(function (data) {
-                    if(data.result_code == 0){
-                        self.brandList=data.response.list
+                api.carBrandList().then((data) => {
+                    if (data.result_code == 0) {
+                        self.brandList = data.response.list
                         loading.hide()
-                        self.loadData=true
+                        self.loadData = true
                     }
                 });
                 //热门列表
-                api.hotBrand().then(function (data) {
-                    if(data.result_code == 0){
-                        self.htoBrandList=data.response.list;
-                        self.htoBrandList1=self.htoBrandList.slice(0,4)
-                        self.htoBrandList2=self.htoBrandList.slice(5,8)
+                api.hotBrand().then((data) => {
+                    if (data.result_code == 0) {
+                        self.htoBrandList = data.response.list;
+                        self.htoBrandList1 = self.htoBrandList.slice(0, 4)
+                        self.htoBrandList2 = self.htoBrandList.slice(5, 8)
                     }
                 });
 
 
-
-             },
-            search(){
-                let self=this;
+            },
+            search() {
+                let self = this;
                 console.log(self.searchData)
-                self.brandList.forEach((currentValue, index, array)=>{
-                    if(currentValue==self.searchData){}
+                self.brandList.forEach((currentValue, index, array) => {
+                    if (currentValue == self.searchData) {
+                    }
                     //console.log(currentValue, index, array)
                 })
             },
             back(index) {
-                var self=this;
-                if(index==1){
+                var self = this;
+                if (index == 1) {
                     self.changeShow = 'changBrand'
                 }
-                if(index==2){
+                if (index == 2) {
                     self.changeShow = 'changeType'
                 }
             },
             //选择车辆
-            choose(index,current){
-                let self=this;
-                if(index==1){
+            choose(index, current) {
+
+                let self = this;
+                let loading = self.$loading
+                loading.show('加载中...')
+                if (index == 1) {
                     self.changeShow = 'changBrand'
-                    self.currentChoosed.brand=current.name
-                    api.choosType({brandName:self.currentChoosed.brand}).then(function (data) {
-                        if(data.result_code == 0){
-                            self.currentChoosedNameList=data.response
+                    self.currentChoosed.brand = current.name
+                    api.choosType({brandName: self.currentChoosed.brand}).then((data) => {
+                        if (data.result_code == 0) {
+                            self.currentChoosedNameList = data.response
+                        } else {
+                            self.$toast.show({
+                                showTime: 2,
+                                message: data.message,
+                                style: 'error'
+                            });
                         }
-
+                        loading.hide()
                     });
                 }
-                if(index==2){
+                if (index == 2) {
                     self.changeShow = 'changeType'
-                    self.currentChoosed.name=current
-                    api.chooseDisplacement({brand:self.currentChoosed.brand,models:self.currentChoosed.name}).then(function (data) {
-                        if(data.result_code == 0){
-                            self.currentChoosedDisplacementList=data.response.specList
+                    self.currentChoosed.name = current
+                    api.chooseDisplacement({
+                        brand: self.currentChoosed.brand,
+                        models: self.currentChoosed.name
+                    }).then((data) => {
+                        if (data.result_code == 0) {
+                            self.currentChoosedDisplacementList = data.response.specList
+                        } else {
+                            self.$toast.show({
+                                showTime: 2,
+                                message: data.message,
+                                style: 'error'
+                            });
                         }
+                        loading.hide()
 
                     });
                 }
-                if(index==3){
+                if (index == 3) {
                     this.changeShow = 'changeTime'
-                    this.currentChoosed.type=current.fuelType+'-'+current.displacement
+                    this.currentChoosed.type = current.fuelType + '-' + current.displacement
+                    loading.hide()
                 }
-                if(index==4){
-                    this.$router.push({path:'/maintenance/maintenance-recommend',query: {id:"1"}});
+                if (index == 4) {
+                    this.$router.push({path: '/maintenance/maintenance-recommend', query: {id: "1"}});
+                    loading.hide()
                 }
             },
-            cancelChoose(){
-                this.changeShow='';
+            cancelChoose() {
+                this.changeShow = '';
             },
             goAnchor(index) {
-                var anchor = this.$el.querySelector('#anchor-'+index)
+                var anchor = this.$el.querySelector('#anchor-' + index)
                 $('.main').animate({
-                    scrollTop: anchor.offsetTop -36
+                    scrollTop: anchor.offsetTop - 36
                 }, 300);
                 $('.bubble').hide()
                 $('.nav-item').removeClass('nav-item-active')
@@ -284,11 +321,11 @@
                 $('.bubble').eq(index).show()
                 setTimeout(function () {
                     $('.bubble').hide()
-                  //  $('.nav-item').removeClass('nav-item-active')
-                },500)
+                    //  $('.nav-item').removeClass('nav-item-active')
+                }, 500)
             },
-            feedback(){
-                this.$router.push({path:'/maintenance/maintenance-feedback',query: {id:"1"}});
+            feedback() {
+                this.$router.push({path: '/maintenance/maintenance-feedback', query: {id: "1"}});
             }
 
         },

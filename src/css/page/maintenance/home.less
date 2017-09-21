@@ -265,53 +265,54 @@
       }
 
     }
-    .nav-bar {
-      position: fixed;
-      right: 20/100rem;
-      top:3rem;
+
+  }
+  .nav-bar {
+    position: fixed;
+    right: 20/100rem;
+    top:3rem;
+    color: #a2aab6;
+    .nav-item-active{
+      background: #dd1d21 !important;
+      color: #fff !important;
+    }
+    .nav-item {
       color: #a2aab6;
-      .nav-item-active{
-        background: #dd1d21 !important;
-        color: #fff !important;
-      }
-      .nav-item {
-        color: #a2aab6;
-        margin-top: 4/100rem ;
+      margin-top: 4/100rem ;
+      text-align: center;
+      position: relative;
+      width: 14px;
+      height: 14px;
+      line-height: 14px;
+      border-radius: 14px;
+      .bubble{
+        width: 35px;
+        height: 35px;
+        color: #fff;
+        background: #FFD301;
+        position: absolute;
+        left: -100/100rem;
+        border-radius: 100%;
         text-align: center;
-        position: relative;
-        width: 14px;
-        height: 14px;
-        line-height: 14px;
-        border-radius: 14px;
-        .bubble{
-          width: 35px;
-          height: 35px;
-          color: #fff;
-          background: #FFD301;
-          position: absolute;
-          left: -100/100rem;
-          border-radius: 100%;
-          text-align: center;
-          line-height: 35px;
-          top:50%;
-          transform: translateY(-50%);
-          display: none;
-        }
-        .bubble:after{
-         // background: #FFD301;
-          content: '';
-          height: 0/100rem;
-          width: 0/100rem;
-          display: block;
-          position: absolute;
-          right: -0.08rem;
-          top:50%;
-          transform: translateY(-50%);
-          border-width:10/100rem 0 10/100rem 10/100rem;
-          border-style:solid;
-          border-color:transparent transparent transparent #FFD301;/*透明 透明 透明 黄*/
-          position:absolute;
-        }
+        line-height: 35px;
+        top:50%;
+        transform: translateY(-50%);
+        display: none;
+      }
+      .bubble:after{
+        // background: #FFD301;
+        content: '';
+        height: 0/100rem;
+        width: 0/100rem;
+        display: block;
+        position: absolute;
+        right: -0.08rem;
+        top:50%;
+        transform: translateY(-50%);
+        border-width:10/100rem 0 10/100rem 10/100rem;
+        border-style:solid;
+        border-color:transparent transparent transparent #FFD301;/*透明 透明 透明 黄*/
+        position:absolute;
       }
     }
   }
