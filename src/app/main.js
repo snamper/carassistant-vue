@@ -87,12 +87,8 @@ function parseURL(url) {
         segments: a.pathname.replace(/^\//,'').split('/')
     };
 }
-
-var _identifier = "shellhero";
 var url = AppConfig.API.BASE_URL + 'api/login/wechat';
 var params = parseURL(window.location.href).params;
-alert('params'+params.code)
-
 // 如果不包含code,是用户打开,需要获得用户信息
 // 如果参数里面包含code,说明是微信授权返回
 if(params.hasOwnProperty('code') && !!params.code) {
@@ -101,13 +97,11 @@ if(params.hasOwnProperty('code') && !!params.code) {
     app_bootstrap(params['code']);
 } else {
     var x=window.encodeURIComponent(window.location.href) //URI地址，把#转换可以进行传参
-    //alert(x)
     document.getElementById('authRequestFrame').src = url
         + "?_ts_="+new Date().getTime()
-       // +"&_identifier="+_identifier
         +"&front_url="+x
-     //   +"&_env=dev";
-
+    alert(document.getElementById('authRequestFrame'))
+   // console.log(document.getElementById('authRequestFrame'))
 }
 
 /**
