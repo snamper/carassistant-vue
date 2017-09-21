@@ -5,7 +5,7 @@
             <div class='searchBox flex'>
                 <i class='iconfont icon-csousuo font-13'></i>
                 <span class='font-13 color-gray9' @click='searchShow=!searchShow'>请输入17位VIN码或车辆名称</span>
-                <i class='camera iconfont icon-xiangjiline_ font-13 color-gray9'></i>
+                <i class='camera iconfont icon-xiangjiline_ font-13 color-gray9' @click='Photograph()'></i>
             </div>
             <div class='feedback' @click='feedback()'>
                 <i class='iconfont icon-woshenpideline_ font-16'></i>
@@ -175,7 +175,7 @@
 
 <script>
     import api from "../../../api/maintenance-api";
-
+    import wxsdk from 'weixin-js-sdk';
     export default {
         name: 'home',
         data() {
@@ -313,7 +313,7 @@
             goAnchor(index) {
                 var anchor = this.$el.querySelector('#anchor-' + index)
                 $('.main').animate({
-                    scrollTop: anchor.offsetTop - 36
+                    scrollTop: anchor.offsetTop - 48
                 }, 300);
                 $('.bubble').hide()
                 $('.nav-item').removeClass('nav-item-active')
@@ -326,11 +326,61 @@
             },
             feedback() {
                 this.$router.push({path: '/maintenance/maintenance-feedback', query: {id: "1"}});
-            }
-
+            },
+            Photograph(){
+                chooseImage()
+                    .then((localIds)=>(uploadImageToWx(localIds)))
+                    .then((serverId)=>(api.getVinByImg({vinImgId: serverId}))
+                    .then((data) => {
+                            if (data.result_code == 0) {
+                                self.currentChoosedNameList = data.response
+                            } else {
+                                self.$toast.show({
+                                    showTime: 2,
+                                    message: data.message,
+                                    style: 'error'
+                                });
+                            }
+                            loading.hide()
+                        })
+                    )
+            },
         },
         components: {}
     }
+    function chooseImage() {
+        return new Promise((resolve, reject) => {
+            wxsdk.chooseImage({
+                count: 1, // 默认9
+                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有,
+                success: function (res) {
+                    var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                    if (res) {
+                        resolve(
+                            localIds
+                        )
+                    } else {
+                        reject('上传失败')
+                    }
+                }
+            })
+        })
+    }
+    function uploadImageToWx(localIds) {
+                 return new Promise((resolve) => {
+                     wxsdk.uploadImage({
+                         isShowProgressTips: 0,
+                         localId: localIds[0],
+                         success: function (res) {
+                             var serverId = res.serverId
+                             resolve(serverId)
+                         }
+                     });
+
+                 })
+
+             }
 </script>
 
 <style lang="less" scoped>

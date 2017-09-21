@@ -20,5 +20,10 @@ export default {
     //根据车辆品牌以及车型参数获取排量-油品
     chooseDisplacement(params){
         return http.get("front/car/spec_list",params);
+    },
+    //根据图片获取vin码
+    getVinByImg(params){
+        return http.get("front/car/by_vin_img",params);
+
     }
 }
