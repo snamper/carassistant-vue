@@ -116,13 +116,14 @@ if(params.hasOwnProperty('code') && !!params.code) {
  * @param auth
  */
 window.authComplete = function (auth) {
-    debugger
+    alert(auth)
     app_bootstrap(auth);
 }
 
 function app_bootstrap(code) {
 
     var auth = code.result.jscfg;
+    debugger
     // 获取用户信息
     wxsdk.config({
         debug: true,
@@ -143,12 +144,12 @@ function app_bootstrap(code) {
         reject(JSON.stringify(err));
         alert(0)
     });
-    var app = new Vue({
-        router:Router,
-        render: h => h(App)
-        // (function (h) {
-        //     return h(App)
-        // })
-    }).$mount("#app");
 }
 
+var app = new Vue({
+    router:Router,
+    render: h => h(App)
+    // (function (h) {
+    //     return h(App)
+    // })
+}).$mount("#app");
