@@ -101,7 +101,7 @@ if(params.hasOwnProperty('code') && !!params.code) {
 
 } else {
     var x=window.encodeURIComponent(window.location.href) //URI地址，把#转换可以进行传参
-    alert(x)
+    //alert(x)
     document.getElementById('authRequestFrame').src = url
         + "?_ts_="+new Date().getTime()
        // +"&_identifier="+_identifier
@@ -144,12 +144,12 @@ function app_bootstrap(code) {
         reject(JSON.stringify(err));
         alert(0)
     });
-    var app = new Vue({
-        router:Router,
-        render: h => h(App)
-        // (function (h) {
-        //     return h(App)
-        // })
-    }).$mount("#app");
-}
 
+}
+var app = new Vue({
+    router:Router,
+    render: h => h(App)
+    // (function (h) {
+    //     return h(App)
+    // })
+}).$mount("#app");

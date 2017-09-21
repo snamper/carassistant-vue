@@ -1,5 +1,5 @@
 <template>
-    <div class="home" >
+    <div class="home" v-show='loadData'>
         <div class='mask' v-show='changeShow'></div>
         <div class='main' v-bind:class="{'filter':searchShow,'hide222':changeShow}">
             <header class='header flex' v-bind:class="{'filter':searchShow}">
@@ -20,24 +20,22 @@
                     </div>
                     <div class='brand flex'>
                         <div class='column flex'>
-                            <div class='hot-brand' v-for="item in items">
-                                <div @click='changeBrand()'>
+                            <div class='hot-brand' v-for="item in htoBrandList1">
+                                <div @click='choose(1,item)'>
                                     <div class='brand-logo'>
-                                        <img src="http://image.bitautoimg.com/bt/car/default/images/logo/masterbrand/png/100/m_92_100.png"
-                                             alt="">
+                                        <img v-bind:src="item.logo" alt="">
                                     </div>
-                                    <div class='brand-name font-11 color-gray5'>宝马</div>
+                                    <div class='brand-name font-11 color-gray5' v-text='item.name'>宝马</div>
                                 </div>
                             </div>
                         </div>
                         <div class='column flex'>
-                            <div class='hot-brand' v-for="item in items">
-                                    <div @click='changTime()'>
+                            <div class='hot-brand' v-for="item in htoBrandList2">
+                                    <div @click='choose(1,item)'>
                                     <div class='brand-logo'>
-                                        <img src="http://image.bitautoimg.com/bt/car/default/images/logo/masterbrand/png/100/m_92_100.png"
-                                             alt="">
+                                        <img v-bind:src="item.logo" alt="">
                                     </div>
-                                    <div class='brand-name font-10 color-gray5'>宝马</div>
+                                    <div class='brand-name font-10 color-gray5' v-text='item.item'>宝马</div>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +46,7 @@
                         <div class='item-title'>
                             <span class='font-16' v-text='item.initials'>A</span>
                         </div>
-                        <div class='item-detail flex'  v-for="(type,index) in item.data">
+                        <div class='item-detail flex' @click='choose(1,type)'  v-for="(type,index) in item.data">
                             <div class='sign'>
                                 <img v-bind:src="type.logo">
                             </div>
@@ -68,56 +66,36 @@
         </div>
         <div class='changeTime' v-show='changeShow=="changBrand"'>
             <div class='car-name font-11' >
-                <span class='color-gray5'>安驰</span>
+                <span class='color-gray5' v-text='currentChoosed.brand'>安驰</span>
                 <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
             </div>
             <div class='car-time font-14 color-gray2'>
-                <div class='time-item ' @click='goChangeType()'>
-                    <span>威宝</span>
+                <div class='time-item' v-for='item in currentChoosedNameList' @click='choose(2,item)'>
+                    <span v-text='item'>威宝</span>
                     <i class='iconfont icon-arrowR font-10 color-grayC'></i>
                 </div>
-                <div class='time-item ' @click='goChangeType()'>
-                    <span>小公主</span>
-                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                </div>
-                <div class='time-item ' @click='goChangeType()'>
-                    <span>雪豹</span>
+            </div>
+        </div>
+        <div class='changeTime' v-show='changeShow=="changeType"'>
+            <div class='car-name font-11' >
+                <span class='ddid21' v-text='currentChoosed.brand' @click='back(1)'>安驰</span><i class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5' v-text='currentChoosed.name'>安驰</span>
+                <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
+            </div>
+            <div class='car-time font-14 color-gray2'>
+                <div class='time-item' v-for='item in currentChoosedDisplacementList' @click='choose(3,item)'>
+                    <span>{{item.fuelType}}-{{item.displacement}}</span>
                     <i class='iconfont icon-arrowR font-10 color-grayC'></i>
                 </div>
 
             </div>
         </div>
-        <div class='changeTime' v-show='changeShow=="changeType"'>
-            <div class='car-name font-11' >
-                <span class='ddid21' v-text='brand'>安驰</span><i class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5' v-text='name'>安驰</span>
-                <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
-            </div>
-            <div class='car-time font-14 color-gray2'>
-                <div class='time-item ' @click='goChangeTime()'>
-                    <span>2.0L</span>
-                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                </div>
-                <div class='time-item ' @click='goChangeTime()'>
-                    <span>2.0T-柴油</span>
-                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                </div>
-                <div class='time-item ' @click='goChangeTime()'>
-                    <span>2.2L</span>
-                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                </div>
-                <div class='time-item ' @click='goChangeTime()'>
-                    <span>2.2T-柴油</span>
-                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                </div>
-            </div>
-        </div>
         <div class='changeTime' v-show='changeShow=="changeTime"'>
             <div class='car-name font-11'>
-                <span class='ddid21' v-text='brand'>安驰</span><i class='iconfont icon-arrowR font-10 color-grayC'></i><span class='ddid21' v-text='name'>安驰</span><i class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5' v-text='type'>安驰</span>
+                <span class='ddid21' v-text='currentChoosed.brand' @click='back(1)'>安驰</span><i class='iconfont icon-arrowR font-10 color-grayC'></i><span class='ddid21' @click='back(2)' v-text='currentChoosed.name'>安驰</span><i class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5' v-text='currentChoosed.type'>安驰</span>
                 <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
             </div>
             <div class='car-time font-14'>
-                <div class='time-item' @click='gopage()'>
+                <div class='time-item' @click='choose(4)'>
                     <span>2015年产</span>
                     <i class='iconfont icon-arrowR font-10 color-grayC'></i>
                 </div>
@@ -143,11 +121,11 @@
                         <div class='search-icon '>
                             <i class='iconfont icon-csousuo font-11'></i>
                         </div>
-                        <input id='input' class='font-13 color-gray2' type="text" placeholder='请输入17位VIN码或车辆名称'/>
+                        <input id='input' v-model='searchData' class='font-13 color-gray2' type="text" placeholder='请输入17位VIN码或车辆名称'/>
                         <i class='iconfont icon-quxiaoglyph_ font-13'></i>
 
                     </div>
-                    <span>搜索</span>
+                    <span @click='search()'>搜索</span>
                 </div>
 
                 <div class='result' v-show='searchDefault'>
@@ -187,16 +165,18 @@
                 changeShow: false,
                 searchShow: false,
                 searchDefault: false,
-                swiperOption: {
-                    scrollbar: '.swiper-scrollbar',
-                    scrollbarHide: true,
-                    slidesPerView: 'auto',
-                    freeMode: true,
-                    setWrapperSize: true,
-
-                    //setWrapperSize :true,
-                },
                 brandList:[],
+                searchData:'',
+                htoBrandList1:[],
+                htoBrandList2:[],
+                currentChoosedNameList:[],
+                currentChoosedDisplacementList:[],
+                currentChoosed:{
+                    brand:'',
+                    name:'',
+                    type:'',
+                    time:''
+                }
             }
         },
         created() {
@@ -213,53 +193,89 @@
         methods: {
             //页面方法
             init(){
-                this.brand='';
-                this.name='';
-                this.type='';
-                this.time='';
                 this.getData()
             },
             getData(){
-                api.brandList().then(function (data) {
-                    if(data.errcode == 0){
-                        alert("登录成功")
-                        this.brandList=data.response.list
-                        console.dir(this.brandList)
+                let self=this;
+                self.loadData=false
+                let loading=self.$loading
+                loading.show('加载中...')
+                //车型列表
+                api.carBrandList().then(function (data) {
+                    if(data.result_code == 0){
+                        self.brandList=data.response.list
+                        loading.hide()
+                        self.loadData=true
+                    }
+                });
+                //热门列表
+                api.hotBrand().then(function (data) {
+                    if(data.result_code == 0){
+                        self.htoBrandList=data.response.list;
+                        self.htoBrandList1=self.htoBrandList.slice(0,4)
+                        self.htoBrandList2=self.htoBrandList.slice(5,8)
                     }
                 });
 
+
+
              },
-            back (type) {
-                this.changeShow = type
+            search(){
+                let self=this;
+                console.log(self.searchData)
+                self.brandList.forEach((currentValue, index, array)=>{
+                    if(currentValue==self.searchData){}
+                    //console.log(currentValue, index, array)
+                })
             },
-            changeTimeOk(){
-                this.changeShow = 'changeType'
+            back(index) {
+                var self=this;
+                if(index==1){
+                    self.changeShow = 'changBrand'
+                }
+                if(index==2){
+                    self.changeShow = 'changeType'
+                }
             },
-            changeTime(){
-                this.changeShow = 'changeTime'
-            },
-            changeBrand(item){
-                this.changeShow = 'changBrand'
-                this.brand='安驰'
-            },
-            goChangeType(item){
-                this.changeShow = 'changeType'
-                this.name='小公主'
-            },
-            goChangeTime(item){
-                this.changeShow = 'changeTime'
-                this.type='2.0T'
+            //选择车辆
+            choose(index,current){
+                let self=this;
+                if(index==1){
+                    self.changeShow = 'changBrand'
+                    self.currentChoosed.brand=current.name
+                    api.choosType({brandName:self.currentChoosed.brand}).then(function (data) {
+                        if(data.result_code == 0){
+                            self.currentChoosedNameList=data.response
+                        }
+
+                    });
+                }
+                if(index==2){
+                    self.changeShow = 'changeType'
+                    self.currentChoosed.name=current
+                    api.chooseDisplacement({brand:self.currentChoosed.brand,models:self.currentChoosed.name}).then(function (data) {
+                        if(data.result_code == 0){
+                            self.currentChoosedDisplacementList=data.response.specList
+                        }
+
+                    });
+                }
+                if(index==3){
+                    this.changeShow = 'changeTime'
+                    this.currentChoosed.type=current.fuelType+'-'+current.displacement
+                }
+                if(index==4){
+                    this.$router.push({path:'/maintenance/maintenance-recommend',query: {id:"1"}});
+                }
             },
             cancelChoose(){
                 this.changeShow='';
             },
-            gopage(){
-                this.$router.push({path:'/maintenance/maintenance-recommend',query: {id:"1"}});
-            },
             goAnchor(index) {
                 var anchor = this.$el.querySelector('#anchor-'+index)
-                console.log(anchor)
-                document.body.scrollTop = anchor.offsetTop-48
+                $('.main').animate({
+                    scrollTop: anchor.offsetTop -36
+                }, 300);
                 $('.bubble').hide()
                 $('.nav-item').removeClass('nav-item-active')
                 $('.nav-item').eq(index).addClass('nav-item-active')
@@ -268,9 +284,6 @@
                     $('.bubble').hide()
                   //  $('.nav-item').removeClass('nav-item-active')
                 },500)
-            },
-            move(){
-
             },
             feedback(){
                 this.$router.push({path:'/maintenance/maintenance-feedback',query: {id:"1"}});

@@ -7,6 +7,6 @@ export default {
         return http.get("xacy/Common/Api/Debug/Login/SetCookie",params);
     },
     jsLogin(params){
-        return http.post(url,params);
+        return http.get(url,params);
     }
 }

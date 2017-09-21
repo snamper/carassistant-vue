@@ -28,7 +28,7 @@
         top: 0;
         bottom: 0;
         background: rgba(255, 255, 255, 0);
-        z-index: 2;
+        z-index: 998;
     }
     .loading-center {
         position: fixed;

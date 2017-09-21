@@ -45,15 +45,16 @@ function checkCode (res) {
 export default {
     post (url, data) {
         return axios({
-            method: 'post',
+            method: 'POST',
             baseURL: AppConfig.API.BASE_URL,
             url,
             data: data,
             timeout: 10000,
             headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            }
+                // 'X-Requested-With': 'XMLHttpRequest',
+                // 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            withCredentials: true //解决跨域cookie问题
         }).then(
             (response) => {
                 return checkStatus(response)
@@ -66,14 +67,15 @@ export default {
     },
     get (url, params) {
         return axios({
-            method: 'get',
+            method: 'GET',
             baseURL: AppConfig.API.BASE_URL,
             url,
             params, // get 请求时带的参数
             timeout: 10000,
             headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
+              //  'X-Requested-With': 'XMLHttpRequest'
+            },
+            withCredentials: true //解决跨域cookie问题
         }).then(
             (response) => {
                 return checkStatus(response)
