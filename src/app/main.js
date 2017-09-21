@@ -96,6 +96,7 @@ console.log('params'+params)
 // 如果不包含code,是用户打开,需要获得用户信息
 // 如果参数里面包含code,说明是微信授权返回
 if(params.hasOwnProperty('code') && !!params.code) {
+    alert('front_url'+decodeURIComponent(params['front_url']))
     window.location.hash = HashMap(decodeURIComponent(params['front_url']));
     app_bootstrap(params['code']);
 
