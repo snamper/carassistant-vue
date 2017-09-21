@@ -97,13 +97,6 @@ console.log('params'+params)
 // 如果参数里面包含code,说明是微信授权返回
 if(params.hasOwnProperty('code') && !!params.code) {
     window.location.hash = HashMap(decodeURIComponent(params['front_url']));
-    var app = new Vue({
-        router:Router,
-        render: h => h(App)
-        // (function (h) {
-        //     return h(App)
-        // })
-    }).$mount("#app");
     app_bootstrap(params['code']);
 
 } else {
@@ -123,20 +116,18 @@ if(params.hasOwnProperty('code') && !!params.code) {
  * @param auth
  */
 window.authComplete = function (auth) {
-    alert(auth)
     app_bootstrap(auth);
 }
 
 function app_bootstrap(code) {
-
-    var auth = code.result.jscfg;
+    var auth = code.jsConfig;
     alert('auth'+auth)
     // 获取用户信息
     wxsdk.config({
         debug: true,
-        appId: auth.appid,
+        appId: auth.appId,
         timestamp: auth.timestamp,
-        nonceStr: auth.noncestr,
+        nonceStr: auth.nonceStr,
         signature: auth.signature,
         jsApiList: jsApiList
         /*'disableSharing','hideOptionMenu',*/
@@ -153,4 +144,10 @@ function app_bootstrap(code) {
     });
 
 }
-
+var app = new Vue({
+    router:Router,
+    render: h => h(App)
+    // (function (h) {
+    //     return h(App)
+    // })
+}).$mount("#app");
