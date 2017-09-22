@@ -51,8 +51,8 @@ export default {
             data: data,
             timeout: 10000,
             headers: {
-                // 'X-Requested-With': 'XMLHttpRequest',
-                // 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                 'X-Requested-With': 'XMLHttpRequest',
+                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             },
             withCredentials: true //解决跨域cookie问题
         }).then(
