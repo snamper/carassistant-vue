@@ -34,7 +34,7 @@ export default {
 
                     }
                 })
-                //resolve('zzzz')
+               // resolve('zzzz')
 
             })
         }
@@ -114,6 +114,7 @@ export default {
             });
         }
         var uploadeImg = function (config) {
+            var imageList = [];
             return new Promise( (resolve)=> {
                 chooseImage(config).then(function (localIds) {
                     alert('localIds'+localIds)
