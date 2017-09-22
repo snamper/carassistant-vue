@@ -1,5 +1,6 @@
 
 import wxsdk from 'weixin-js-sdk';
+import api from './../api/public-api';
 
 export default {
     /**
@@ -69,19 +70,15 @@ export default {
         function uploadImage(localIds, imageList, index, atId) {
             return new Promise((resolve) => {
                 uploadImageToWx(localIds).then(function (serverId) {
-                    $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
-                        {
-                            atId: atId,
-                            wxid: serverId,
-                            _identifier: 'shellhero',
-                        },
-                        function (data) {
-                            if (data.result.atMqStatus == 0) { //服务器处理中继续发送请求
-                                get(serverId, localIds, imageList, index, data.result.atId, resolve)
-                            }
-                        },
-                        "json");//这里返回的类型有：json,html,xml,text
+                    api.uploadImg({
+                        wxid: serverId,
+                    }).then((data) => {
+                        if (data.response.atMqStatus == 0) {
+                            get(serverId, localIds, imageList, index, data.response.wxId, resolve)
+                        } else {
 
+                        }
+                    });
                 })
             })
         }
@@ -91,40 +88,35 @@ export default {
         * @resolve      返回本地服务器图片信息
         * */
         function get( serverId, localIds, imageList, index, atId, resolve) {
-            $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
-                {
-                    atId: atId,
-                    wxid: serverId,
-                    _identifier: 'shellhero',
-                },
-                function (data) {
-                    if (data.result.atMqStatus == 0) { //服务器处理中继续发送请求
-                        get(serverId, localIds, imageList, index, data.result.atId, resolve)
+            api.uploadImg({
+                wxid: serverId,
+            }).then((data) => {
+                if (data.response.atMqStatus == 0) {
+                    get(serverId, localIds, imageList, index, data.response.wxId, resolve)
+                }
+                if (data.response.atMqStatus == 1) { //当前serverIds服务器处理完成 并且有剩余serverIds未处理
+                    imageList.push(data.response);
+                    if (localIds.length == 1) {
+                        loading.hide();
+                        resolve([data.response])
+                        return false;
                     }
-                    if (data.result.atMqStatus == 1) { //当前serverIds服务器处理完成 并且有剩余serverIds未处理
-                        imageList.push(data.result);
-                        if (localIds.length == 1) {
+                    //如果还有未上传的图片继续请求
+                    setTimeout(function () {
+                        index++;
+                        uploadImage(localIds.slice(1), imageList, index).then(function (resDate) {
+                            alert('resDate'+resDate)
                             loading.hide();
-                            resolve([data.result])
-                            return false;
-                        }
-                        //如果还有未上传的图片继续请求
-                        setTimeout(function () {
-                            index++;
-                            uploadImage(localIds.slice(1), imageList, index).then(function (resDate) {
-                                alert('resDate'+resDate)
-                                loading.hide();
-                                resolve([data.result].concat(resDate));
-                            });
-                        })
-                    }
-                },
-                "json"
-            );
+                            resolve([data.response].concat(resDate));
+                        });
+                    })
+                }
+            });
         }
         var uploadeImg = function (config) {
             return new Promise( (resolve)=> {
                 chooseImage(config).then(function (localIds) {
+                    alert('localIds'+localIds)
                     uploadImage(localIds, imageList, 0, "")
                         .then(function (promiseData) {
                             alert('promiseData' + promiseData)
