@@ -6,7 +6,7 @@
   @font-family-default: "Microsoft YaHei UI" !important;
   font-family: @font-family-default;
   background: #fff;
-  min-height: 100vh;
+  overflow: hidden;
   header{
     padding: 40/100rem 30/100rem;
     line-height: 1;
@@ -37,6 +37,8 @@
     }
   }
   section{
+    margin-bottom: 1.1rem;
+    overflow: hidden;
     ul{
       padding: 0 30/100rem;
       li{
@@ -72,6 +74,9 @@
         &:after{
           height: 0;
         }
+        &:before {
+          width: 0
+        }
       }
       li:nth-last-child(2){
         &:after{
@@ -84,7 +89,9 @@
     position: fixed;
     width: 100%;
     justify-content: center;
-    bottom:30/100rem;
+    padding-bottom: 30/100rem;
+    bottom: 0;
+    background: #fff;
     .back{
       height: 80/100rem;
       line-height: 80/100rem;

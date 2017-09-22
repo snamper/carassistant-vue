@@ -1,9 +1,9 @@
 
 <template>
-    <div class="maintenance-config">
+    <div class="maintenance-config" v-show='loadData'>
         <header>
-            <div class='type font-18 color-gray2'>大众-朗逸</div>
-            <div class='title font-12 color-gray9'>上海大众</div>
+            <div class='type font-18 color-gray2' v-text='title.brand'>大众-朗逸</div>
+            <div class='title font-12 color-gray9' v-text='title.models'>上海大众</div>
             <div class='feedback flex' @click='feedback()'>
                 <i class='iconfont icon-woshenpideline_ font-16'></i>
                 <span class='font-8'>我要反馈</span>
@@ -11,50 +11,38 @@
         </header>
         <section>
             <ul>
-                <li>
-                    <p class='edition font-12 color-gray9'>销售版本</p>
-                    <p class='describe font-14 color-gray2'>品优版</p>
-                </li>
-                <li class='border-left'>
-                    <p class='edition font-12 color-gray9'>销售版本</p>
-                    <p class='describe font-14 color-gray2'>品优版</p>
-                </li>
-                <li>
-                    <p class='edition font-12 color-gray9'>销售版本</p>
-                    <p class='describe font-14 color-gray2'>品优版</p>
-                </li>
-                <li>
-                    <p class='edition font-12 color-gray9'>销售版本</p>
-                    <p class='describe font-14 color-gray2'>品优版</p>
-                </li>
-                <li>
-                    <p class='edition font-12 color-gray9'>销售版本</p>
-                    <p class='describe font-14 color-gray2'>品优版</p>
-                </li>
-                <li>
-                    <p class='edition font-12 color-gray9'>销售版本</p>
-                    <p class='describe font-14 color-gray2'>品优版</p>
+                <li v-for='item in configList'>
+                    <p class='edition font-12 color-gray9' v-text='item.field_name'>销售版本</p>
+                    <p class='describe font-14 color-gray2' v-text='item.field_value'>品优版</p>
                 </li>
             </ul>
         </section>
-        <footer class='flex'>
+        <footer class='flex' @click='back()'>
             <div class='back'>返回</div>
         </footer>
     </div>
 </template>
 
 <script>
-
+    import api from "../../../api/maintenance-api";
     export default {
         name: 'maintenance-config',
         data() {
             return {
+                title:{
+                    brand:'',
+                    models:'',
+                    levelId:''
+                },
+                configList:[],
+                loadData:false
             }
         },
         created() {
             //页面创建完成后
             //自定义标题
             this.page.setTitle("maintenance-config");
+            this.getDetail()
         },
         watch: {
             //监听动态路由
@@ -63,6 +51,41 @@
             //页面方法
             feedback(){
                 this.$router.push({path:'/maintenance/maintenance-feedback',query: {id:"1"}});
+            },
+            getDetail(){
+                let self=this;
+                let loading = self.$loading;
+                loading.show('加载中...')
+                self.levelId=self.$router.currentRoute.query.levelId
+                api.getConfig({
+                    levelId: self.levelId,
+                }).then((data) => {
+                    if (data.result_code == 0) {
+                        if(data.response.total%2!=0){
+                            data.response.fields.push({})
+                        }
+                        self.configList = data.response.fields
+                        self.configList.forEach((currentValue, index, array) => {
+                            if (currentValue.field_id == 'brand') {
+                                self.title.brand=currentValue.field_value
+                            }
+                            if (currentValue.field_id == 'models') {
+                                self.title.models=currentValue.field_value
+                            }
+                        })
+                    } else {
+                        self.$toast.show({
+                            showTime: 2,
+                            message: data.message,
+                            style: 'error'
+                        });
+                    }
+                    self.loadData=true
+                    loading.hide()
+                });
+            },
+            back(){
+                this.$router.push({path:'/maintenance/maintenance-recommend',query: {levelId:this.levelId}});
             }
         },
         components:{

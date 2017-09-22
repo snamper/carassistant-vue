@@ -143,7 +143,14 @@
             //自定义标题
             this.page.setTitle("保养推荐");
             var self=this
-            self.recommendData=self.$router.currentRoute.query.recommendData
+            if(self.$router.currentRoute.query.recommendData){
+                self.recommendData=self.$router.currentRoute.query.recommendData;
+                self.levelId=self.recommendData;
+            }
+            if(self.$router.currentRoute.query.levelId){
+                self.levelId=self.$router.currentRoute.query.levelId
+            }
+
             console.log(self.recommendData)
         },
         watch: {
@@ -155,9 +162,8 @@
                 if(type==1){
                     this.$router.push({path:'/maintenance/maintenance-cycle',query: {id:"1"}});
                 }else{
-                    this.$router.push({path:'/maintenance/maintenance-config',query: {id:"1"}});
+                    this.$router.push({path:'/maintenance/maintenance-config',query: {levelId:this.levelId}});
                 }
-
             },
             //反馈
             feedback(){

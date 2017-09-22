@@ -39,5 +39,13 @@ export default {
     searchData(params){
         return http.get("front/brand/get_brands",params);
 
+    },
+    /*
+    * 车辆配置
+    * */
+    //根据 levelId 获取车辆配置详情接口
+    getConfig(params){
+        return http.get("front/car/detail",params);
+
     }
 }

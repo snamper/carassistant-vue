@@ -122,14 +122,11 @@ function app_bootstrap(code) {
         /*'disableSharing','hideOptionMenu',*/
     });
     wxsdk.ready(function () {
-        alert(1)
         //resolve(data.result);
     });
 
     wxsdk.error(function (err) {
-        debugger
         reject(JSON.stringify(err));
-        alert(0)
     });
 
 }
