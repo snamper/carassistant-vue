@@ -89,7 +89,6 @@ function parseURL(url) {
 }
 var url = AppConfig.API.BASE_URL + 'api/login/wechat';
 var params = parseURL(window.location.href).params;
-alert(params)
 // 如果不包含code,是用户打开,需要获得用户信息
 // 如果参数里面包含code,说明是微信授权返回
 if(params.hasOwnProperty('code') && !!params.code) {

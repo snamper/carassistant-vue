@@ -1,4 +1,3 @@
-import $ from 'jquery'
 
 import wxsdk from 'weixin-js-sdk';
 
@@ -11,64 +10,31 @@ export default {
     install(Vue, pluginOptions = {}) {
         let loading = Vue.loading;
         let wx = wxsdk;
-        var z=5000
-        var xarr=['http://www.quanjing.com/image/2016index/yd4.jpg?v=02',
-            'http://www.quanjing.com/search.aspx?q=pe0060887&Fr=4',
-            'http://www.quanjing.com/image/2016index/ly3.jpg?v=02',
-            'http://www.quanjing.com/image/2016index/ms3.jpg?v=02',
-            'http://www.quanjing.com/image/2016index/ss2.jpg?v=02'
-        ]
-        // 预处理图片
-        function preLoadImg(source){
-            let pr = [];
-            var Q=$.Deferred();
-            xarr.forEach(url => {// 预加载图片
-                z=z+1000
-                let p = loadImage(url,z)
-                    .then(function(img){
-                        Q.resolve(img)
-                        console.log(img)
-                    })
-                    .catch(err => console.log(err))
-                pr.push(p);
-            })
-            return Q.promise()
-
-
-
-            // // 图片全部加载完
-            // Promise.race(pr)
-            //     .then((x) => {
-            //        console.log(x)
-            //     });
-
-        }
-        // 预加载图片
-
-        function loadImage(url,x) {
-            return new Promise((resolve, reject) => {
-                // let img = new Image();
-                // img.onload = () => {
-                //     setTimeout(function () {
-                //         resolve(1)
-                //     },1000)
-                //     };
-                // img.onerror = reject;
-                // img.src = url;
-                setTimeout(function () {
-                    resolve(1)
-                },x)
-            })
-        }
 
         /*
         *  用来吊起微信选择图片
         *  resolve 选择的图片localIds数组
         * */
         function chooseImage(config) {
-            debugger
             return new Promise((resolve, reject) => {
-                resolve([1,2,3,4])
+                wx.chooseImage({
+                    count: config.count, // 默认9
+                    sizeType: config.sizeType, // 可以指定是原图还是压缩图，默认二者都有
+                    sourceType: config.sourceType, // 可以指定来源是相册还是相机，默认二者都有,
+                    success: function (res) {
+                        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                        if (res) {
+                            resolve(
+                                localIds
+                            )
+                        } else {
+                            reject('上传失败')
+                        }
+
+                    }
+                })
+                //resolve('zzzz')
+
             })
         }
 
@@ -79,8 +45,17 @@ export default {
         * */
         function uploadImageToWx(localIds) {
             return new Promise((resolve) => {
-                resolve(1);
+                wx.uploadImage({
+                    isShowProgressTips: 0,
+                    localId: localIds[0],
+                    success: function (res) {
+                        var serverId = res.serverId
+                        resolve(serverId)
+                    }
+                });
+                //resolve('jjjjjj')
             })
+
         }
 
         /*
@@ -94,7 +69,19 @@ export default {
         function uploadImage(localIds, imageList, index, atId) {
             return new Promise((resolve) => {
                 uploadImageToWx(localIds).then(function (serverId) {
-                    get(localIds,resolve)
+                    $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
+                        {
+                            atId: atId,
+                            wxid: serverId,
+                            _identifier: 'shellhero',
+                        },
+                        function (data) {
+                            if (data.result.atMqStatus == 0) { //服务器处理中继续发送请求
+                                get(serverId, localIds, imageList, index, data.result.atId, resolve)
+                            }
+                        },
+                        "json");//这里返回的类型有：json,html,xml,text
+
                 })
             })
         }
@@ -103,37 +90,61 @@ export default {
         * 用来获取本地图片地址，并发上传所有图片
         * @resolve      返回本地服务器图片信息
         * */
-        function get( localIds,resolve) {
-            debugger
-            if(localIds.length==1){
-                resolve([1])
-                return false;
-            }
-            setTimeout(function () {
-                uploadImage(localIds.slice(1)).then(function (resDate) {
-                    console.log('resDate'+resDate)
-                    resolve([1].concat(resDate));
-                },1000)
-
-            })
+        function get( serverId, localIds, imageList, index, atId, resolve) {
+            $.post("https://dhr-shell.vchangyi.com/xacy/Common/Api/Attachment/UploadImg",
+                {
+                    atId: atId,
+                    wxid: serverId,
+                    _identifier: 'shellhero',
+                },
+                function (data) {
+                    if (data.result.atMqStatus == 0) { //服务器处理中继续发送请求
+                        get(serverId, localIds, imageList, index, data.result.atId, resolve)
+                    }
+                    if (data.result.atMqStatus == 1) { //当前serverIds服务器处理完成 并且有剩余serverIds未处理
+                        imageList.push(data.result);
+                        if (localIds.length == 1) {
+                            loading.hide();
+                            resolve([data.result])
+                            return false;
+                        }
+                        //如果还有未上传的图片继续请求
+                        setTimeout(function () {
+                            index++;
+                            uploadImage(localIds.slice(1), imageList, index).then(function (resDate) {
+                                alert('resDate'+resDate)
+                                loading.hide();
+                                resolve([data.result].concat(resDate));
+                            });
+                        })
+                    }
+                },
+                "json"
+            );
         }
         var uploadeImg = function (config) {
-            var Q=$.Deferred();
-            var imageList = [];
-            chooseImage(config).then(function (localIds) {
-                uploadImage(localIds, imageList, 0, "")
-                    .then(function (promiseData) {
-                        console.log('promiseData' + promiseData)
-                        Q.resolve(promiseData)
+            return new Promise( (resolve)=> {
+                chooseImage(config).then(function (localIds) {
+                    uploadImage(localIds, imageList, 0, "")
+                        .then(function (promiseData) {
+                            alert('promiseData' + promiseData)
+                            resolve(promiseData)
+                        })
                 })
             })
-            return{
-                promise:Q.promise()
-            }
+            // var Q=$.Deferred();
+            // var imageList = [];
+            // chooseImage(config).then(function (localIds) {
+            //     uploadImage(localIds, imageList, 0, "")
+            //         .then(function (promiseData) {
+            //             alert('promiseData' + promiseData)
+            //             Q.resolve(promiseData)
+            //     })
+            // })
+            // return{
+            //     promise:Q.promise()
+            // }
         }
-        // var x=function () {
-        //     preLoadImg(xarr)
-        // }
-        Vue.uploade = Vue.prototype.uploade = preLoadImg;
+        Vue.uploade = Vue.prototype.uploade = uploadeImg;
     }
 }

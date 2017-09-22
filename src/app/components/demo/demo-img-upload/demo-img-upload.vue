@@ -1,13 +1,13 @@
 
 <template>
     <div class="demo-img-upload">
-        demo-img-upload  点击预览123
+        demo-img-upload  点击预览
+
         <div class='imgbox' v-for="(item,index) in imglist">
             <img :src="item.atAttachment" alt="" @click='previewimg(item.atAttachment)'>
             <button @click='delimg(index)'>删除图片</button>
         </div>
         <p @click='upload()'>上传图片</p>
-        <p v-text='str'>上传图片</p>
     </div>
 </template>
 
@@ -17,7 +17,6 @@
         name: 'demo-img-upload',
         data() {
             return {
-                str:'',
                 imglist:[{'atAttachment':'http://img95.699pic.com/photo/50004/2199.jpg_wh300.jpg'}]
             }
         },
@@ -32,32 +31,23 @@
         methods: {
             //页面方法
             upload(){
-                let loading=this.$loading
                 var self=this;
-//                var res=self.uploade({
-//                    count: 6-this.imglist.length, // 默认9
-//                    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-//                    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-//                })
-                var res=self.uploade()
-
+                let loading=this.$loading
+                var res=self.uploade({
+                    count: 6-this.imglist.length, // 默认9
+                    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                })
                 res.then(function (data) {
                     //self.imglist=self.imglist.concat(data);
                     console.log(data)
-                    self.str=data
-                   // alert(self.imglist)
-                   // loading.hide()
+                    //alert(self.imglist)
+                    loading.hide()
                 })
-//                res.catch(function (err) {
-//                    loading.hide()
-//                    console.log(err)
-//                })
-//                res.promise.then(function (data) {
-//                    self.imglist=self.imglist.concat(data);
-////                    console.log(data)
-//                }, function (error) {
-//                    //console.log('失败'+JSON.stringify(error));
-//                });
+                res.catch(function (err) {
+                    loading.hide()
+                    console.log(err)
+                })
             },
             previewimg(atAttachment){
                 debugger
