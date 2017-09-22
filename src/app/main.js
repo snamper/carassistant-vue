@@ -89,11 +89,12 @@ function parseURL(url) {
 }
 var url = AppConfig.API.BASE_URL + 'api/login/wechat';
 var params = parseURL(window.location.href).params;
+alert(params)
 // 如果不包含code,是用户打开,需要获得用户信息
 // 如果参数里面包含code,说明是微信授权返回
 if(params.hasOwnProperty('code') && !!params.code) {
     window.location.hash = HashMap(decodeURIComponent(params['front_url']));
-   // app_bootstrap(params['code']);
+    app_bootstrap(params['code']);
 } else {
     var x=window.encodeURIComponent(window.location.href) //URI地址，把#转换可以进行传参
     var redirect_url = url + "?_ts_="+new Date().getTime()+"&front_url="+x
