@@ -18,6 +18,7 @@ import listmore from './plugins/loadmore'  //滚动加载
 import upfiled from './plugins/file'  //滚动加载
 import previewImg from './plugins/preview'
 import drag from './plugins/loadmore'
+import autotextauto from './plugins/auto-textarea'
 import 'babel-polyfill'
 Vue.prototype.wxsdk=wxsdk;
 Vue.use(listmore,{})
@@ -32,6 +33,7 @@ Vue.use(uploadImg,{})
 Vue.use(previewImg,{})
 //console.log(page)
 Vue.use(Page);
+Vue.use(autotextauto);
 
 Vue.config.debug = true;//开启错误提示
 

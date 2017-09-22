@@ -13,7 +13,7 @@
                     <span class='title-en font-10 color-gray9'>Contact The Manuscript</span>
                 </p>
                 <div class='input'>
-                    <input class='font-14 color-gray9' type="text" placeholder='请输入'>
+                    <textarea v-autoheight='' class='font-14 color-gray9' type="text" placeholder='请输入'></textarea>
                 </div>
             </div>
             <div class='feedback-img'>
