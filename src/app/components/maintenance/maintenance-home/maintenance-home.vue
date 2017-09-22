@@ -185,7 +185,7 @@
                 let loading = self.$loading
                 loading.show('加载中...')
                 //车型列表
-                api.carBrandList().then(data => {
+                api.carBrandList().then((data) => {
                     if (data.result_code == 0) {
                         self.brandList = data.response.list
                         loading.hide()
@@ -193,7 +193,7 @@
                     }
                 });
                 //热门列表
-                api.hotBrand().then(data => {
+                api.hotBrand().then((data) => {
                     if (data.result_code == 0) {
                         self.htoBrandList = data.response.list;
                         self.htoBrandList1 = self.htoBrandList.slice(0, 4)
@@ -208,7 +208,7 @@
                 let loading = self.$loading
                 api.searchData({
                     name: self.searchName
-                }).then(data => {
+                }).then((data) => {
                     if (data.result_code == 0) {
                         self.searchDataList = data.response
                     } else {
@@ -245,7 +245,7 @@
                     self.currentChoosed.brand = current.name
                     api.choosType({
                         brandName: self.currentChoosed.brand
-                    }).then(data => {
+                    }).then((data) => {
                         if (data.result_code == 0) {
                             self.currentChoosedNameList = data.response
                         } else {
@@ -264,7 +264,7 @@
                     api.chooseDisplacement({
                         brandName: self.currentChoosed.brand,
                         models: self.currentChoosed.name
-                    }).then(data => {
+                    }).then((data) => {
                         if (data.result_code == 0) {
                             self.currentChoosedDisplacementList = data.response.specList
                         } else {
@@ -289,7 +289,7 @@
                         models: self.currentChoosed.name,
                         displacement: self.currentChoosed.type.displacement,
                         fuelType: self.currentChoosed.type.fuelType,
-                    }).then(data => {
+                    }).then((data) => {
                         if (data.result_code == 0) {
                             self.currentChoosedYearList = data.response
                         } else {
@@ -311,7 +311,7 @@
                         displacement: self.currentChoosed.type.displacement,
                         fuelType: self.currentChoosed.type.fuelType,
                         modelYear: current,
-                    }).then(data => {
+                    }).then((data) => {
                         if (data.result_code == 0) {
                             recommendData = data.response
                             this.$router.push({path:'/maintenance/maintenance-recommend',query: {recommendData:recommendData}});
@@ -347,36 +347,24 @@
             feedback() {
                 this.$router.push({path: '/maintenance/maintenance-feedback', query: {id: "1"}});
             },
-            getVinByImg(serverId){
-                var recommendData
-                return new Promise((resolve, reject) => {
-                    api.getVinByImg({
-                        vinImgId: serverId
-                    }).then(data=>{
-                        if (data.result_code == 0) {
-                            recommendData = data.response
-                            alert(recommendData)
-                            resolve(recommendData)
-                        } else {
-                            self.$toast.show({
-                                showTime: 2,
-                                message: data.message,
-                                style: 'error'
-                            });
-                        }
-                    })
-                })
-            },
             Photograph(){
                 chooseImage()
                     .then((localIds)=>(uploadImageToWx(localIds)))
-                    .then((serverId)=>(getVinByImg(serverId))
+                    .then((serverId)=>(api.getVinByImg({vinImgId: serverId}))
                     .then((data) => {
-                        alert(data)
-                        this.$router.push({path:'/maintenance/maintenance-recommend',query: {recommendData:data}});
-
-                    })
-                )
+                            if (data.result_code == 0) {
+                                self.currentChoosedNameList = data.response
+                                alert(self.currentChoosedNameList)
+                            } else {
+                                self.$toast.show({
+                                    showTime: 2,
+                                    message: data.message,
+                                    style: 'error'
+                                });
+                            }
+                            loading.hide()
+                        })
+                    )
             },
         },
         components: {}
