@@ -92,9 +92,8 @@ var params = parseURL(window.location.href).params;
 // 如果不包含code,是用户打开,需要获得用户信息
 // 如果参数里面包含code,说明是微信授权返回
 if(params.hasOwnProperty('code') && !!params.code) {
-    alert('front_url'+decodeURIComponent(params['front_url']))
     window.location.hash = HashMap(decodeURIComponent(params['front_url']));
-    app_bootstrap(params['code']);
+   // app_bootstrap(params['code']);
 } else {
     var x=window.encodeURIComponent(window.location.href) //URI地址，把#转换可以进行传参
     var redirect_url = url + "?_ts_="+new Date().getTime()+"&front_url="+x
@@ -107,13 +106,11 @@ if(params.hasOwnProperty('code') && !!params.code) {
  * @param auth
  */
 window.authComplete = function (auth) {
-    alert('11111')
     app_bootstrap(auth);
 }
 
 function app_bootstrap(code) {
     var auth = code.jsConfig;
-    alert('auth'+auth)
     // 获取用户信息
     wxsdk.config({
         debug: true,
@@ -136,10 +133,10 @@ function app_bootstrap(code) {
     });
 
 }
-// var app = new Vue({
-//     router:Router,
-//     render: h => h(App)
-//     // (function (h) {
-//     //     return h(App)
-//     // })
-// }).$mount("#app");
+var app = new Vue({
+    router:Router,
+    render: h => h(App)
+    // (function (h) {
+    //     return h(App)
+    // })
+}).$mount("#app");

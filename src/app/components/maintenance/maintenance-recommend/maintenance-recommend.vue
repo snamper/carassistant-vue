@@ -134,13 +134,17 @@
         name: 'maintenance-recommend',
         data() {
             return {
-                isActive:false
+                isActive:false,
+                recommendData:''
             }
         },
         created() {
             //页面创建完成后
             //自定义标题
             this.page.setTitle("保养推荐");
+            var self=this
+            self.recommendData=self.$router.currentRoute.query.recommendData
+            console.log(self.recommendData)
         },
         watch: {
             //监听动态路由

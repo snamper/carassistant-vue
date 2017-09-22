@@ -1,7 +1,7 @@
 <template>
     <div class="home" v-show='loadData'>
         <div class='mask' v-show='changeShow'></div>
-        <header class='header flex' v-bind:class="{'filter':searchShow}">
+        <header class='header flex' v-bind:class="{'filter':searchShow,'hide222':changeShow}">
             <div class='searchBox flex'>
                 <i class='iconfont icon-csousuo font-13'></i>
                 <span class='font-13 color-gray9' @click='searchShow=!searchShow'>请输入17位VIN码或车辆名称</span>
@@ -100,29 +100,17 @@
                 class='iconfont icon-arrowR font-10 color-grayC'></i><span class='ddid21' @click='back(2)'
                                                                            v-text='currentChoosed.name'>安驰</span><i
                 class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5'
-                                                                           v-text='currentChoosed.type'>安驰</span>
+                                                                           v-text='currentChoosed.type.fuelType+"-"+currentChoosed.type.displacement'>安驰</span>
                 <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
             </div>
             <div class='car-time font-14'>
-                <div class='time-item' @click='choose(4)'>
-                    <span>2015年产</span>
-                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                </div>
-                <div class='time-item '>
-                    <span>2015年产</span>
-                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                </div>
-                <div class='time-item '>
-                    <span>2015年产</span>
-                    <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                </div>
-                <div class='time-item'>
-                    <span>2015年产</span>
+                <div class='time-item' @click='choose(4,item)' v-for='item in currentChoosedYearList'>
+                    <span v-text='item'>2015年产</span>
                     <i class='iconfont icon-arrowR font-10 color-grayC'></i>
                 </div>
             </div>
         </div>
-        <div class='searchPage' v-bind:class="{'opacity':searchShow}">
+        <div class='searchPage' v-bind:class="{'opacity':searchShow&&!changeShow,'hide222':changeShow,}">
             <div class='search-default font-13 color-gray9'>
                 <div class='searchBox' @click="searchDefault=true">
                     <i class='back iconfont icon-arrowL font-10' @click='searchShow=!searchShow'></i>
@@ -130,7 +118,7 @@
                         <div class='search-icon '>
                             <i class='iconfont icon-csousuo font-11'></i>
                         </div>
-                        <input id='input' v-model='searchData' class='font-13 color-gray2' type="text"
+                        <input id='input' v-model='searchName' class='font-13 color-gray2' type="text"
                                placeholder='请输入17位VIN码或车辆名称'/>
                         <i class='iconfont icon-quxiaoglyph_ font-13'></i>
 
@@ -140,31 +128,12 @@
 
                 <div class='result' v-show='searchDefault'>
                     <ul>
-                        <li class='font-14 flex color-gray2'>
-                            <img
-                                src="http://image.bitautoimg.com/bt/car/default/images/logo/masterbrand/png/100/m_92_100.png"
-                                alt="">
-                            <span>奥迪</span>
+                        <li class='font-14 flex color-gray2' v-for='item in searchDataList' @click='choose(1,item)'>
+                            <div class='img'>
+                                <img v-bind:src="item.logo">
+                            </div>
+                            <span v-text='item.name'>奥迪</span>
                         </li>
-                        <li class='font-14 flex color-gray2'>
-                            <img
-                                src="http://image.bitautoimg.com/bt/car/default/images/logo/masterbrand/png/100/m_92_100.png"
-                                alt="">
-                            <span>奥迪</span>
-                        </li>
-                        <li class='font-14 flex color-gray2'>
-                            <img
-                                src="http://image.bitautoimg.com/bt/car/default/images/logo/masterbrand/png/100/m_92_100.png"
-                                alt="">
-                            <span>奥迪</span>
-                        </li>
-                        <li class='font-14 flex color-gray2'>
-                            <img
-                                src="http://image.bitautoimg.com/bt/car/default/images/logo/masterbrand/png/100/m_92_100.png"
-                                alt="">
-                            <span>奥迪</span>
-                        </li>
-
                     </ul>
                 </div>
             </div>
@@ -184,16 +153,18 @@
                 searchShow: false,
                 searchDefault: false,
                 brandList: [],
-                searchData: '',
+                searchName: '',
                 htoBrandList1: [],
                 htoBrandList2: [],
                 currentChoosedNameList: [],
                 currentChoosedDisplacementList: [],
+                currentChoosedYearList: [],
+                searchDataList:[],
                 currentChoosed: {
                     brand: '',
                     name: '',
                     type: '',
-                    time: ''
+                    time: '',
                 }
             }
         },
@@ -201,18 +172,13 @@
             //页面创建完成后
             //自定义标题
             this.page.setTitle("home");
-            //  swiper,
-            this.init()
-
+            this.getData()
         },
         watch: {
             //监听动态路由
         },
         methods: {
             //页面方法
-            init() {
-                this.getData()
-            },
             getData() {
                 let self = this;
                 self.loadData = false
@@ -239,12 +205,25 @@
             },
             search() {
                 let self = this;
-                console.log(self.searchData)
-                self.brandList.forEach((currentValue, index, array) => {
-                    if (currentValue == self.searchData) {
+                let loading = self.$loading
+                api.searchData({
+                    name: self.searchName
+                }).then((data) => {
+                    if (data.result_code == 0) {
+                        self.searchDataList = data.response
+                    } else {
+                        self.$toast.show({
+                            showTime: 2,
+                            message: data.message,
+                            style: 'error'
+                        });
                     }
-                    //console.log(currentValue, index, array)
-                })
+                    loading.hide()
+                });
+//                self.brandList.forEach((currentValue, index, array) => {
+//                    if (currentValue == self.searchData) {
+//                    }
+//                })
             },
             back(index) {
                 var self = this;
@@ -264,7 +243,9 @@
                 if (index == 1) {
                     self.changeShow = 'changBrand'
                     self.currentChoosed.brand = current.name
-                    api.choosType({brandName: self.currentChoosed.brand}).then((data) => {
+                    api.choosType({
+                        brandName: self.currentChoosed.brand
+                    }).then((data) => {
                         if (data.result_code == 0) {
                             self.currentChoosedNameList = data.response
                         } else {
@@ -281,7 +262,7 @@
                     self.changeShow = 'changeType'
                     self.currentChoosed.name = current
                     api.chooseDisplacement({
-                        brand: self.currentChoosed.brand,
+                        brandName: self.currentChoosed.brand,
                         models: self.currentChoosed.name
                     }).then((data) => {
                         if (data.result_code == 0) {
@@ -298,13 +279,52 @@
                     });
                 }
                 if (index == 3) {
-                    this.changeShow = 'changeTime'
-                    this.currentChoosed.type = current.fuelType + '-' + current.displacement
-                    loading.hide()
+                    self.changeShow = 'changeTime'
+                    self.currentChoosed.type = {
+                        fuelType:current.fuelType,
+                        displacement:current.displacement
+                    }
+                    api.chooseYear({
+                        brandName: self.currentChoosed.brand,
+                        models: self.currentChoosed.name,
+                        displacement: self.currentChoosed.type.displacement,
+                        fuelType: self.currentChoosed.type.fuelType,
+                    }).then((data) => {
+                        if (data.result_code == 0) {
+                            self.currentChoosedYearList = data.response
+                        } else {
+                            self.$toast.show({
+                                showTime: 2,
+                                message: data.message,
+                                style: 'error'
+                            });
+                        }
+                        loading.hide()
+                    });
                 }
                 if (index == 4) {
-                    this.$router.push({path: '/maintenance/maintenance-recommend', query: {id: "1"}});
-                    loading.hide()
+                    var recommendData
+                    self.changeShow = 'changeTime'
+                    api.get_recommend({
+                        brandName: self.currentChoosed.brand,
+                        models: self.currentChoosed.name,
+                        displacement: self.currentChoosed.type.displacement,
+                        fuelType: self.currentChoosed.type.fuelType,
+                        modelYear: current,
+                    }).then((data) => {
+                        if (data.result_code == 0) {
+                            recommendData = data.response
+                            this.$router.push({path:'/maintenance/maintenance-recommend',query: {recommendData:recommendData}});
+                        } else {
+                            self.$toast.show({
+                                showTime: 2,
+                                message: data.message,
+                                style: 'error'
+                            });
+                        }
+                        loading.hide()
+                    });
+
                 }
             },
             cancelChoose() {
@@ -334,6 +354,7 @@
                     .then((data) => {
                             if (data.result_code == 0) {
                                 self.currentChoosedNameList = data.response
+                                alert(self.currentChoosedNameList)
                             } else {
                                 self.$toast.show({
                                     showTime: 2,

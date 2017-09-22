@@ -142,11 +142,20 @@
             position: relative;
             color: #555;
             align-items: center;
-            img{
-              width: 46/100rem;
-              height: 46/100rem;
+            .img{
+              width: 0.46rem;
+              height: 0.46rem;
+              float: left;
+              position: relative;
               margin-right: 15/100rem;
+              img{
+                position: absolute;
+                top: 50%;
+                width: 100%;
+                transform: translateY(-50%);
+              }
             }
+
             &:after {
               .Pseudo-border-after();
             }
@@ -332,7 +341,7 @@
     opacity:0.8;
     overflow: scroll;
     .car-name {
-      height: 70/100rem;
+      min-height: 70/100rem;
       line-height: 70/100rem;
       position: relative;
       .ddid21{
