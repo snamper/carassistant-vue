@@ -72,7 +72,7 @@ export default {
                 uploadImageToWx(localIds).then(function (serverId) {
                     alert("wxid-----"+serverId)
                     api.uploadImg({
-                        wxid: serverId,
+                        wxId: serverId,
                     }).then((data) => {
                         if (data.response.atMqStatus == 0) {
                             get(serverId, localIds, imageList, index, data.response.wxId, resolve)
@@ -90,7 +90,7 @@ export default {
         * */
         function get( serverId, localIds, imageList, index, atId, resolve) {
             api.uploadImg({
-                wxid: serverId,
+                wxId: serverId,
             }).then((data) => {
                 if (data.response.atMqStatus == 0) {
                     get(serverId, localIds, imageList, index, data.response.wxId, resolve)
