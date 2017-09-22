@@ -97,11 +97,8 @@ if(params.hasOwnProperty('code') && !!params.code) {
     app_bootstrap(params['code']);
 } else {
     var x=window.encodeURIComponent(window.location.href) //URI地址，把#转换可以进行传参
-    document.getElementById('authRequestFrame').src = url
-        + "?_ts_="+new Date().getTime()
-        +"&front_url="+x
-    alert(document.getElementById('authRequestFrame'))
-   // console.log(document.getElementById('authRequestFrame'))
+    var redirect_url = url + "?_ts_="+new Date().getTime()+"&front_url="+x
+    document.getElementById('authRequestFrame').src = redirect_url
 }
 
 /**
@@ -110,6 +107,7 @@ if(params.hasOwnProperty('code') && !!params.code) {
  * @param auth
  */
 window.authComplete = function (auth) {
+    alert('11111')
     app_bootstrap(auth);
 }
 
@@ -138,10 +136,10 @@ function app_bootstrap(code) {
     });
 
 }
-var app = new Vue({
-    router:Router,
-    render: h => h(App)
-    // (function (h) {
-    //     return h(App)
-    // })
-}).$mount("#app");
+// var app = new Vue({
+//     router:Router,
+//     render: h => h(App)
+//     // (function (h) {
+//     //     return h(App)
+//     // })
+// }).$mount("#app");

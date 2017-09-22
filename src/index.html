@@ -17,6 +17,7 @@
                 docEl.style.fontSize = deviceWidth / 6.4 + 'px';
             };
             recalc();
+
         })(document, window);
 
     </script>
@@ -28,10 +29,21 @@
     <meta name="description" content="">
 </head>
 <body>
-<iframe id="authRequestFrame" style="opacity: 0;"></iframe>
+<script id="authRequestFrame" ></script>
  <div id="app">
 
  </div>
 
 </body>
+<script>
+
+    (function (window) {
+        // Fixme 对用户访问的 hash 做出处理是为了以后代码改变结构过后可以对老用户做一个升级过度转换
+        var x=window.encodeURIComponent(window.location.href) //URI地址，把#转换可以进行传参
+        var redirect_url =
+            'https://keepup-car.vchangyi.com/api/login/wechat?_ts_=1505994201951&front_url=http%3A%2F%2Flocalhost%3A3000%2F%23%2Fmaintenance%2Fmaintenance-recommend%3Fid%3D1'
+        document.getElementById('authRequestFrame').src = redirect_url
+        //alert(document.getElementById('authRequestFrame'))
+    })(window, undefined);
+</script>
 </html>
