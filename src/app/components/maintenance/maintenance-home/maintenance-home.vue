@@ -354,7 +354,6 @@
                     .then((data) => {
                             if (data.result_code == 0) {
                                 self.currentChoosedNameList = data.response
-                                alert(self.currentChoosedNameList)
                             } else {
                                 self.$toast.show({
                                     showTime: 2,
