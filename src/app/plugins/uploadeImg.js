@@ -70,7 +70,6 @@ export default {
         function uploadImage(localIds, imageList, index, atId) {
             return new Promise((resolve) => {
                 uploadImageToWx(localIds).then(function (serverId) {
-                    alert("wxid-----"+serverId)
                     api.uploadImg({
                         wxId: serverId,
                     }).then((data) => {
@@ -133,7 +132,8 @@ export default {
             var imageList = [];
             return new Promise( (resolve)=> {
                 chooseImage(config).then(function (localIds) {
-                    alert('localIds'+localIds)
+
+
                     uploadImage(localIds, imageList, 0, "")
                         .then(function (promiseData) {
                             alert('promiseData' + promiseData)
