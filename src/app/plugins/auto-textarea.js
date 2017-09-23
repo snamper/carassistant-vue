@@ -22,7 +22,7 @@ export default {
                     $('.hidebox').css('fontSize',fontSize)
                     $('.hidebox').css('fontFamily',fontStyle)
                 }
-                el.onchange=function () {
+                el.onkeyup=function () {
                     //if($(this).height()<62){
                         $('.hidebox').text(el.value)
                         $(this).height($('.hidebox').height())
