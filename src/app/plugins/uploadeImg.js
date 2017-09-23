@@ -77,8 +77,23 @@ export default {
                         if (data.response.atMqStatus == 0) {
                             get(serverId, localIds, imageList, index, data.response.wxId, resolve)
                         } else {
-
-                        }
+                                imageList.push(data.result);
+                                if(localIds.length == 1){
+                                    loading.hide();
+                                    resolve([data.response]);
+                                    return false;
+                                }
+                                setTimeout(function () {
+                                    index++;
+                                    uploadImage(localIds.slice(1),imageList,index).then(function(resDate) {
+                                        loading.hide();
+                                        resolve([data.result].concat(resDate));
+                                    },function(err){
+                                        loading.hide();
+                                        reject(err);
+                                    });
+                                })
+                            }
                     });
                 })
             })
