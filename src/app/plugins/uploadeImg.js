@@ -76,7 +76,7 @@ export default {
                         if (data.response.atMqStatus == 0) {
                             get(serverId, localIds, imageList, index, data.response.wxId, resolve)
                         } else {
-                                imageList.push(data.result);
+                                imageList.push(data.response);
                                 if(localIds.length == 1){
                                     loading.hide();
                                     resolve([data.response]);
@@ -86,7 +86,7 @@ export default {
                                     index++;
                                     uploadImage(localIds.slice(1),imageList,index).then(function(resDate) {
                                         loading.hide();
-                                        resolve([data.result].concat(resDate));
+                                        resolve([data.response].concat(resDate));
                                     },function(err){
                                         loading.hide();
                                         reject(err);
