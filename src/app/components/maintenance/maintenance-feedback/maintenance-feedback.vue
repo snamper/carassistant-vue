@@ -7,13 +7,15 @@
             <p class='title-en font-12 color-gray9'>Submit the feedback</p>
         </header>
         <section>
-            <div class='feedback-content'>
+            <div class='feedback-content' v-bind:class="{'focus':focus}">
                 <p>
                     <span class='title-cn font-12 color-gray2'>反馈内容</span>
                     <span class='title-en font-10 color-gray9'>Contact The Manuscript</span>
                 </p>
                 <div class='input'>
-                    <textarea v-autoheight='' class='font-14 color-gray9' type="text" placeholder='请输入'></textarea>
+                    <textarea @focus='focus=true' @blur='focus=false' v-autoheight='' class='font-14 color-gray9'
+                              type="text"
+                              placeholder='请输入'></textarea>
                 </div>
             </div>
             <div class='feedback-img'>
@@ -45,7 +47,8 @@
         data() {
             return {
                 imglist:[],
-                data:'111'
+                data:'111',
+                focus:false
             }
         },
         created() {
