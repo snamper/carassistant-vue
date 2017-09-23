@@ -22,8 +22,6 @@
                     <span class='title-en font-10 color-gray9'>Image upload</span>
                 </p>
                 <div class='imgbox'>
-                    {{imglist}}
-                    {{data}}
                     <div class='item' v-for="(item,index) in imglist">
                             <i class='iconfont icon-quxiaoglyph_ font-12' @click='delimg(index)'></i>
                         <img :src="item.atAttachment" alt="" @click='previewimg(item.atAttachment)'>

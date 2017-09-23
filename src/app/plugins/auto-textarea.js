@@ -16,17 +16,18 @@ export default {
                 el.onfocus=function () {
                     var fontSize = $(this).css('font-size')
                     var fontStyle = $(this).css('font-family')
+                    $(this).css('maxHeight','0.34rem')
+                    $(this).css('overflow','auto')
                     $('.hidebox').width(el.offsetWidth)
                     $('.hidebox').css('fontSize',fontSize)
                     $('.hidebox').css('fontFamily',fontStyle)
                 }
-                el.onkeyup=function () {
-                    if($(this).height()<62){
+                el.onchange=function () {
+                    //if($(this).height()<62){
                         $('.hidebox').text(el.value)
                         $(this).height($('.hidebox').height())
                         console.log($(this).height())
-                    }
-
+                //    }
                 }
             },
             update(el,binding,vnode){
