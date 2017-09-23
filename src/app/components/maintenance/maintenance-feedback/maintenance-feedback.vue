@@ -23,6 +23,7 @@
                 </p>
                 <div class='imgbox'>
                     {{imglist}}
+                    {{data}}
                     <div class='item' v-for="(item,index) in imglist">
                             <i class='iconfont icon-quxiaoglyph_ font-12' @click='delimg(index)'></i>
                         <img :src="item.atAttachment" alt="" @click='previewimg(item.atAttachment)'>
@@ -45,7 +46,8 @@
         name: 'maintenance-feedback',
         data() {
             return {
-                imglist:[]
+                imglist:[],
+                data:'111'
             }
         },
         created() {
@@ -67,6 +69,7 @@
                     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 })
                 res.then(function (data) {
+self.data=data
                     self.imglist=self.imglist.concat(data);
                     console.log(data)
                     //alert(self.imglist)
