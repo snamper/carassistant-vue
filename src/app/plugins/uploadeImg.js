@@ -18,23 +18,23 @@ export default {
         * */
         function chooseImage(config) {
             return new Promise((resolve, reject) => {
-                wx.chooseImage({
-                    count: config.count, // 默认9
-                    sizeType: config.sizeType, // 可以指定是原图还是压缩图，默认二者都有
-                    sourceType: config.sourceType, // 可以指定来源是相册还是相机，默认二者都有,
-                    success: function (res) {
-                        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                        if (res) {
-                            resolve(
-                                localIds
-                            )
-                        } else {
-                            reject('上传失败')
-                        }
-
-                    }
-                })
-               // resolve('zzzz')
+                // wx.chooseImage({
+                //     count: config.count, // 默认9
+                //     sizeType: config.sizeType, // 可以指定是原图还是压缩图，默认二者都有
+                //     sourceType: config.sourceType, // 可以指定来源是相册还是相机，默认二者都有,
+                //     success: function (res) {
+                //         var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                //         if (res) {
+                //             resolve(
+                //                 localIds
+                //             )
+                //         } else {
+                //             reject('上传失败')
+                //         }
+                //
+                //     }
+                // })
+                resolve('zzzz')
 
             })
         }
@@ -46,15 +46,15 @@ export default {
         * */
         function uploadImageToWx(localIds) {
             return new Promise((resolve) => {
-                wx.uploadImage({
-                    isShowProgressTips: 0,
-                    localId: localIds[0],
-                    success: function (res) {
-                        var serverId = res.serverId
-                        resolve(serverId)
-                    }
-                });
-                //resolve('jjjjjj')
+                // wx.uploadImage({
+                //     isShowProgressTips: 0,
+                //     localId: localIds[0],
+                //     success: function (res) {
+                //         var serverId = res.serverId
+                //         resolve(serverId)
+                //     }
+                // });
+                resolve('jjjjjj')
             })
 
         }
@@ -72,7 +72,7 @@ export default {
                 uploadImageToWx(localIds).then(function (serverId) {
                     alert("wxid-----"+serverId)
                     api.uploadImg({
-                        wxId: serverId,
+                        wxId: 'TwgISTgozBxN9T3b3xBqMX18m5wiEHGh7IWXGbVKftwcghjWVxd7UdSFQbGR7xtQ',
                     }).then((data) => {
                         if (data.response.atMqStatus == 0) {
                             get(serverId, localIds, imageList, index, data.response.wxId, resolve)

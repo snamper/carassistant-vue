@@ -43,12 +43,14 @@ function checkCode (res) {
 }
 
 export default {
+
     post (url, data) {
+        var qs = require('qs');
         return axios({
-            method: 'POST',
+            method: 'post',
             baseURL: AppConfig.API.BASE_URL,
             url,
-            data: data,
+            data:qs.stringify(data),
             timeout: 10000,
             headers: {
                  'X-Requested-With': 'XMLHttpRequest',
