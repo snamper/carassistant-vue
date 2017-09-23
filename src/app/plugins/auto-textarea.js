@@ -16,11 +16,13 @@ export default {
                 el.onfocus=function () {
                     var fontSize = $(this).css('font-size')
                     var fontStyle = $(this).css('font-family')
+                    var lineHeight = $(this).css('line-height')
                     $(this).css('maxHeight','1.35rem')
                     $(this).css('overflow','auto')
                     $('.hidebox').width(el.offsetWidth)
                     $('.hidebox').css('fontSize',fontSize)
                     $('.hidebox').css('fontFamily',fontStyle)
+                    $('.hidebox').css('lineHeight',lineHeight)
                 }
                 el.onkeyup=function () {
 
