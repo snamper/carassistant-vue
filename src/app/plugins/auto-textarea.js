@@ -9,10 +9,9 @@ export default {
             //  componentUpdated: 被绑定元素所在模板完成一次更新周期时调用。
             //  unbind: 只调用一次，指令与元素解绑时调用。
             bind(el,binding){
-
-
                 $('body').append("<div class='hidebox'></div>")
                 $('.hidebox').css('wordBreak','break-all')
+                $('.hidebox').hide()
                 el.onfocus=function () {
                     var fontSize = $(this).css('font-size')
                     var fontStyle = $(this).css('font-family')

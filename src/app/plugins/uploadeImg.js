@@ -69,6 +69,7 @@ export default {
         * */
         function uploadImage(localIds, imageList, index, atId) {
             return new Promise((resolve) => {
+                loading.show('上传中')
                 uploadImageToWx(localIds).then(function (serverId) {
                     api.uploadImg({
                         wxId: serverId,
