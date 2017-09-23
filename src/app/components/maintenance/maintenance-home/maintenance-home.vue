@@ -348,10 +348,12 @@
                 this.$router.push({path: '/maintenance/maintenance-feedback', query: {id: "1"}});
             },
             Photograph(){
+                let loading = this.$loading
                 chooseImage()
                     .then((localIds)=>(uploadImageToWx(localIds)))
                     .then((serverId)=>(api.getVinByImg({vinImgId: serverId}))
                     .then((data) => {
+                    loading.show('加载中...')
                             if (data.result_code == 0) {
                                 self.currentChoosedNameList = data.response
                             } else {
