@@ -23,6 +23,7 @@ export default {
                     $('.hidebox').css('fontSize',fontSize)
                     $('.hidebox').css('fontFamily',fontStyle)
                     $('.hidebox').css('lineHeight',lineHeight)
+                    $('.hidebox').css('paddingLeft','0.1rem')
                 }
                 el.onkeyup=function () {
 
