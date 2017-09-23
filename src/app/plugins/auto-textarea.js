@@ -16,7 +16,7 @@ export default {
                 el.onfocus=function () {
                     var fontSize = $(this).css('font-size')
                     var fontStyle = $(this).css('font-family')
-                    $(this).css('maxHeight','0.34rem')
+                    $(this).css('maxHeight','1.4rem')
                     $(this).css('overflow','auto')
                     $('.hidebox').width(el.offsetWidth)
                     $('.hidebox').css('fontSize',fontSize)
