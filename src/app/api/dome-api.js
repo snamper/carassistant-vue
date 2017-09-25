@@ -8,5 +8,8 @@ export default {
     },
     jsLogin(params){
         return http.get(url,params);
+    },
+    zjy(params){
+        return http.post('https://dhr-shell.vchangyi.com/xacy/Hsse/Api/Look/List',params);
     }
 }

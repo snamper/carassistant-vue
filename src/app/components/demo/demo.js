@@ -8,6 +8,7 @@ import demoPagelist from './demo-pagelist/demo-pagelist';
 import demoToast from './demo-toast/demo-toast';
 import demoimgUpfild from './demo-img-upload/demo-img-upload';
 import demoUpload from './demo-upload/demo-upload';
+import x from './demo-zjy/demo-zjy';
 
 
 let demoModule = [
@@ -22,7 +23,8 @@ demoModule=demoModule.concat(
     demoPagelist,
     demoToast,
     demoimgUpfild,
-    demoUpload
+    demoUpload,
+    x
 );
 
 export default demoModule;
