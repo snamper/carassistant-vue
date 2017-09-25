@@ -100,7 +100,7 @@
                 let toast=this.$toast
                 self.$loading.show('提交中...')
                 self.imglist.forEach((currentValue) => {
-                    self.imgIdlist.push(currentValue.wxId)
+                    self.imgIdlist.push(currentValue.atAttachment)
                 })
                 api.feedbacked({
                     content:self.content,
