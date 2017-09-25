@@ -59,7 +59,7 @@
                     var secondcul=secondHeight/secondLine
                     var thirdcul=thirdHeight/thirdLine
                     console.log(firstcul,secondcul,thirdcul)
-                    if(firstcul>0){
+                    if(firstcul>3){
                         $(x).height(firstLine*3)
                         $(x).attr('height',$(x).height())
                         console.log($(x).height())
