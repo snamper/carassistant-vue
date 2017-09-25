@@ -369,14 +369,7 @@
                     }]
                 }
             }
-            api.zjy({
-                limit:100
-            }).then((data) => {
-                if (data.result_code == 0) {
-                    self.list=data.result.list
-                }
-            });
-
+            self.list=data.result.list
 
         },
         watch: {
