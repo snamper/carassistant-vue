@@ -97,6 +97,7 @@
             //反馈
             submit(){
                 var self=this
+                let toast=this.$toast
                 self.$loading.show('提交中...')
                 self.imglist.forEach((currentValue) => {
                     self.imgIdlist.push(currentValue.wxId)
@@ -106,13 +107,13 @@
                     images:self.imgIdlist
                 }).then((data) => {
                     if (data.result_code == 0) {
-                        self.toast({
+                        toast.show({
                             showTime: 3,
                             message: '提交成功',
                             style:'success'
                         })
                     }else {
-                        self.toast({
+                        toast.show({
                             showTime: 3,
                             message: data.message,
                             style:'error'
