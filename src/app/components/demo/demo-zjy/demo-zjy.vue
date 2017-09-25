@@ -21,7 +21,7 @@
 
                 </div>
                 <div class='more' @click='more()'>
-                    <i class='iconfont icon-arrowT font-12'></i>
+                    <i class='iconfont icon-arrowB font-12'></i>
                 </div>
                 <div class='time font-11 color-gray9'>{{item.created | formatDate}}</div>
             </li>
