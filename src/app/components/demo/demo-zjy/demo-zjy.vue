@@ -59,6 +59,13 @@
                     var secondcul=secondHeight/secondLine
                     var thirdcul=thirdHeight/thirdLine
                     console.log(firstcul,secondcul,thirdcul)
+                    if(firstcul>0){
+                        $(x).height(firstLine*3)
+                        $(x).attr('height',$(x).height())
+                        console.log($(x).height())
+                        ishide(firstHeight,secondHeight,thirdHeight,$(x).height(),$(x))
+                        return
+                    }
                     if(firstcul>2){
                         $(x).height(firstHeight)
                         $(x).attr('height',$(x).height())
@@ -220,7 +227,7 @@
                         "created": "1505985711000",
                         "type": "PI",
                         "title": "同",
-                        "content": "你look 图来咯拖走了 all 度摩托了 all 度目录目哦额科托努目睹特特哦臀部特特哦图谋特痛图啊堵",
+                        "content": "你look 图来咯拖走了 all 度摩托了 all 度目录目哦额科托努目睹特特哦臀部特特哦图谋特痛图啊堵你look 图来咯拖走了 all 度摩托了 all 度目录目哦额科托努目睹特特哦臀部特特哦图谋特痛图啊堵",
                         "learning": "酒驾",
                         "imgUrl": ["https:\/\/dhr-shell.vchangyi.com\/xacy\/Common\/Frontend\/Attachment\/View\/Index\/atid\/A3BE446A7F000001625DCE7653E75B4A?_identifier=safetyreport"],
                         "memFace": null,
