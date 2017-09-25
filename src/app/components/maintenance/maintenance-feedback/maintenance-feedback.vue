@@ -41,7 +41,7 @@
 </template>
 
 <script>
-
+    import api from "../../../api/maintenance-api";
     export default {
         name: 'maintenance-feedback',
         data() {
