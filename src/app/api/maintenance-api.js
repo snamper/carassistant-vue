@@ -47,5 +47,11 @@ export default {
     getConfig(params){
         return http.get("front/car/detail",params);
 
+    },
+    /*
+    * 反馈
+    * */
+    feedbacked(params){
+        return http.post('front/feedback/create',params)
     }
 }

@@ -13,7 +13,7 @@
                     <span class='title-en font-10 color-gray9'>Contact The Manuscript</span>
                 </p>
                 <div class='input'>
-                    <textarea @focus='focus=true' @blur='focus=false' v-autoheight='' class='font-14 color-gray9'
+                    <textarea v-model='content' @focus='focus=true' @blur='focus=false' v-autoheight='' class='font-14 color-gray9'
                               type="text"
                               placeholder='请输入'></textarea>
                 </div>
@@ -35,7 +35,7 @@
             </div>
         </section>
         <footer>
-            <div class='submit'>提交</div>
+            <div class='submit' @click='submit()' v-show='imglist.length<6'>提交</div>
         </footer>
     </div>
 </template>
@@ -47,8 +47,9 @@
         data() {
             return {
                 imglist:[],
-                data:'111',
-                focus:false
+                focus:false,
+                content:'',
+                imgIdlist:[],
             }
         },
         created() {
@@ -70,12 +71,9 @@
                     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 })
                 res.then(function (data) {
-                    alert(data)
                     self.data=data
                     self.imglist=self.imglist.concat(data);
                     console.log(data)
-                    //alert(self.imglist)
-                    loading.hide()
                 })
                 res.catch(function (err) {
                     loading.hide()
@@ -95,9 +93,34 @@
                 var self=this;
                 console.log(index)
                 self.imglist.splice(index,1)
-            }
+            },
             //反馈
-
+            submit(){
+                var self=this
+                self.$loading.show('提交中...')
+                self.imglist.forEach((currentValue) => {
+                    self.imgIdlist.push(currentValue.wxId)
+                })
+                api.feedbacked({
+                    content:self.content,
+                    images:self.imgIdlist
+                }).then((data) => {
+                    if (data.result_code == 0) {
+                        self.toast({
+                            showTime: 3,
+                            message: '提交成功',
+                            style:'success'
+                        })
+                    }else {
+                        self.toast({
+                            showTime: 3,
+                            message: data.message,
+                            style:'error'
+                        })
+                    }
+                    self.$loading.hide()
+                });
+            }
         },
         components:{
         }

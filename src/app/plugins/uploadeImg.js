@@ -1,7 +1,5 @@
-
 import wxsdk from 'weixin-js-sdk';
 import api from './../api/public-api';
-
 export default {
     /**
      * 每个插件都有的install方法，用于安装插件
@@ -69,7 +67,7 @@ export default {
         * */
         function uploadImage(localIds, imageList, index, atId) {
             return new Promise((resolve) => {
-                loading.show('上传中')
+                loading.show('上传中...')
                 uploadImageToWx(localIds).then(function (serverId) {
                     api.uploadImg({
                         wxId: serverId,
@@ -135,23 +133,10 @@ export default {
                 chooseImage(config).then(function (localIds) {
                     uploadImage(localIds, imageList, 0, "")
                         .then(function (promiseData) {
-                            alert('promiseData' + promiseData)
                             resolve(promiseData)
                         })
                 })
             })
-            // var Q=$.Deferred();
-            // var imageList = [];
-            // chooseImage(config).then(function (localIds) {
-            //     uploadImage(localIds, imageList, 0, "")
-            //         .then(function (promiseData) {
-            //             alert('promiseData' + promiseData)
-            //             Q.resolve(promiseData)
-            //     })
-            // })
-            // return{
-            //     promise:Q.promise()
-            // }
         }
         Vue.uploade = Vue.prototype.uploade = uploadeImg;
     }

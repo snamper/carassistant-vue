@@ -200,8 +200,6 @@
                         self.htoBrandList2 = self.htoBrandList.slice(5, 8)
                     }
                 });
-
-
             },
             search() {
                 let self = this;
