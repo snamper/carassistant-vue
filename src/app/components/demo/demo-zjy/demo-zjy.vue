@@ -30,13 +30,10 @@
 </template>
 
 <script>
-    function ishide(firstHeight,secondHeight,thirdHeight,x,dom) {
-        if(firstHeight+secondHeight+thirdHeight<=x){
-            dom.next().hide()
-        }
-    }
+
     import Vue from 'vue';
     import {formatDate} from '../../../plugins/formatDate'
+    import api from "../../../api/dome-api";
     Vue.directive("zzz",{
         //  bind: 只调用一次，当指令第一次被绑定到元素时调用。
         //  inserte: 被绑定元素插入父节点时调用（父节点存在即可调用，不必存在于 document 中）。
@@ -96,8 +93,6 @@
 
         },
     })
-    import api from "../../../api/dome-api";
-
     export default {
 
         name: 'demo-zjy',
@@ -398,6 +393,11 @@
             }
         },
         components:{
+        }
+    }
+    function ishide(firstHeight,secondHeight,thirdHeight,x,dom) {
+        if(firstHeight+secondHeight+thirdHeight<=x){
+            dom.next().hide()
         }
     }
 </script>
