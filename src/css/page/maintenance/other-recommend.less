@@ -4,27 +4,31 @@
 .maintenance-other-recommend {
   background: #fff;
   min-height: 100vh;
+  padding-bottom: 0.62rem;
   //页面样式
   @font-family-default: "Microsoft YaHei UI" !important;
   font-family: @font-family-default;
   header{
     padding: 50/100rem 20/100rem 25/100rem 20/100rem;
+    line-height: 1;
   }
   section{
     ul{
       padding: 0 20/100rem;
       .item{
         line-height: 1;
+        position: relative;
+        &:after {
+          .Pseudo-border-after();
+        }
         .preview{
           justify-content: space-between;
           align-items: center;
           position: relative;
           padding: 25/100rem 0;
-          &:after {
-            .Pseudo-border-after();
-          }
           i{
             color: #ccc;
+            transition: 0.4s;
           }
           .describe{
             margin-top: 10/100rem;
@@ -67,6 +71,15 @@
             }
           }
         }
+      }
+      .item:nth-last-child(1){
+        &:after{
+          height: 0;
+        }
+
+      }
+      .show-detail{
+        transform:rotate(180deg);
       }
     }
   }

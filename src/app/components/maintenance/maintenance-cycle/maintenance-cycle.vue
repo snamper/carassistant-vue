@@ -25,9 +25,8 @@
                 <div class='term flex'>
                     <div class='term-left flex'>
                         <div class='term-left-item color-gray-2'>
-
                             <div class='status flex font-12' v-for='item in maintenanceDatalist.data'>
-                                <div v-text='item.name'>小保养服务</div>
+                                <div v-text='item.name' >小保养服务</div>
                             </div>
                         </div>
                     </div>
@@ -35,7 +34,7 @@
                         <div class='term-right-item' v-for='item in maintenanceDatalist.data'>
                             <div class='status flex' v-for='child in maintenanceDatalist.header'>
                                 <div class='radio' :class="{'cantRadio':child.state==2}" v-show='child==item.value'
-                                     @click='goOtherRecommend()'></div>
+                                     @click='goOtherRecommend(item)'></div>
                             </div>
                         </div>
                     </div>
@@ -174,8 +173,8 @@
 
             },
             //其他保养项目推荐
-            goOtherRecommend(){
-                this.$router.push({path:'/maintenance/maintenance-other-recommend',query: {id:"1"}});
+            goOtherRecommend(item){
+                this.$router.push({path:'/maintenance/maintenance-other-recommend',query: {id:item.id}});
             },
             //反馈
             feedback(){

@@ -65,6 +65,10 @@ export default {
     rawData(params){
         return http.get("front/cycle/raw_data",params);
     },
+    //其他保养数据参数
+    upkeep(params){
+        return http.get("front/cycle/upkeep",params);
+    },
     /*
     * 反馈
     * */
