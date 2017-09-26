@@ -4,7 +4,7 @@
         <header class='header flex' v-bind:class="{'filter':searchShow,'hide222':changeShow}">
             <div class='searchBox flex'>
                 <i class='iconfont icon-csousuo font-13'></i>
-                <span class='font-13 color-gray9' @click='searchShow=!searchShow'>请输入17位VIN码或车辆名称</span>
+                <span class='font-13 color-gray9' @click='searchCar()'>请输入17位VIN码或车辆名称</span>
                 <i class='camera iconfont icon-xiangjiline_ font-13 color-gray9' @click='Photograph()'></i>
             </div>
             <div class='feedback' @click='feedback()'>
@@ -200,6 +200,13 @@
                         self.htoBrandList2 = self.htoBrandList.slice(5, 8)
                     }
                 });
+            },
+            searchCar(){
+                var self=this
+                self.searchShow=!self.searchShow
+                setTimeout(function () {
+                    $('input').focus()
+                })
             },
             search() {
                 let self = this;
