@@ -1,25 +1,34 @@
 
 <template>
     <div class="maintenance-config" v-show='loadData'>
-        <header>
-            <div class='type font-18 color-gray2' v-text='title.brand'>大众-朗逸</div>
-            <div class='title font-12 color-gray9' v-text='title.models'>上海大众</div>
-            <div class='feedback flex' @click='feedback()'>
-                <i class='iconfont icon-woshenpideline_ font-16'></i>
-                <span class='font-8'>我要反馈</span>
-            </div>
-        </header>
-        <section>
-            <ul>
-                <li v-for='item in configList'>
-                    <p class='edition font-12 color-gray9' v-text='item.field_name'>销售版本</p>
-                    <p class='describe font-14 color-gray2' v-text='item.field_value'>品优版</p>
-                </li>
-            </ul>
-        </section>
-        <footer class='flex' @click='back()'>
-            <div class='back'>返回</div>
-        </footer>
+        <div v-if='loadData&& configList.length!=0'>
+            <header>
+                <div class='type font-18 color-gray2' v-text='title.brand'>大众-朗逸</div>
+                <div class='title font-12 color-gray9' v-text='title.models'>上海大众</div>
+                <div class='feedback flex' @click='feedback()'>
+                    <i class='iconfont icon-woshenpideline_ font-16'></i>
+                    <span class='font-8'>我要反馈</span>
+                </div>
+            </header>
+            <section>
+                <ul class='left'>
+                    <li v-for='(item,index) in configList' v-if='index%2==0'>
+                        <p class='edition font-12 color-gray9' v-text='item.field_name'>销售版本</p>
+                        <p class='describe font-14 color-gray2' v-text='item.field_value'>品优版</p>
+                    </li>
+                </ul>
+                <ul class='right'>
+                    <li v-for='(item,index) in configList' v-if='index%2==1'>
+                        <p class='edition font-12 color-gray9' v-text='item.field_name'>销售版本</p>
+                        <p class='describe font-14 color-gray2' v-text='item.field_value'>品优版</p>
+                    </li>
+                </ul>
+            </section>
+            <footer class='flex' @click='back()'>
+                <div class='back'>返回</div>
+            </footer>
+        </div>
+        <default-page v-show='loadData && configList.length==0'></default-page>
     </div>
 </template>
 
@@ -65,6 +74,7 @@
                             data.response.fields.push({})
                         }
                         self.configList = data.response.fields
+                        console.log(self.configList)
                         self.configList.forEach((currentValue, index, array) => {
                             if (currentValue.field_id == 'brand') {
                                 self.title.brand=currentValue.field_value

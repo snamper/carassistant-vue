@@ -1,96 +1,99 @@
 <template>
     <div class="maintenance-cycle" v-if='loadData'>
-        <div class='mask flex font-15' v-show='tipshow'>
-            <i class='iconfont icon-guanbi' @click='tipIsShow()'></i>
-        </div>
-        <div v-show='!tipshow'>
-            <nav class='flex font-12 color-gray-2'>
-                <div class='nav-item' v-bind:class="{ active: currentType=='baoyang' }" @click='changeType("baoyang")'>保养计划周期</div>
-                <div class='nav-item' v-bind:class="{ active: currentType=='yuanchang' }" @click='changeType("yuanchang")'>原厂配件参数</div>
-            </nav>
-            <section class='baoyang' v-show='currentType=="baoyang"'>
-                <div class='title color-gray-2 font-13'>
-                    <div class='left flex'>保养计划</div>
-                    <div class='right'>
-                        <div class='fixbox' >
-                            <div class='term-right-top font-11 ' >
-                                <div class='status' v-for='item in maintenanceDatalist.header'>
-                                    <!--<p class='month color-gray2'>6个月</p>-->
-                                    <p class='color-gray9' v-text='item+"KM"'>5000KM</p>
+        <section v-if='loadData && maintenanceDatalist.length!=0'>
+            <div class='mask flex font-15' v-show='tipshow'>
+                <i class='iconfont icon-guanbi' @click='tipIsShow()'></i>
+            </div>
+            <div v-show='!tipshow'>
+                <nav class='flex font-12 color-gray-2'>
+                    <div class='nav-item' v-bind:class="{ active: currentType=='baoyang' }" @click='changeType("baoyang")'>保养计划周期</div>
+                    <div class='nav-item' v-bind:class="{ active: currentType=='yuanchang' }" @click='changeType("yuanchang")'>原厂配件参数</div>
+                </nav>
+                <section class='baoyang' v-show='currentType=="baoyang"'>
+                    <div class='title color-gray-2 font-13'>
+                        <div class='left flex'>保养计划</div>
+                        <div class='right'>
+                            <div class='fixbox' >
+                                <div class='term-right-top font-11 ' >
+                                    <div class='status' v-for='item in maintenanceDatalist.header'>
+                                        <!--<p class='month color-gray2'>6个月</p>-->
+                                        <p class='color-gray9' v-text='item+"KM"'>5000KM</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class='term flex'>
-                    <div class='term-left flex'>
-                        <div class='term-left-item color-gray-2'>
-                            <div class='status flex font-12' v-for='item in maintenanceDatalist.data'>
-                                <div v-text='item.name' >小保养服务</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='term-right'>
-                        <div class='term-right-item' v-for='item in maintenanceDatalist.data'>
-                            <div class='status flex' v-for='child in maintenanceDatalist.header'>
-                                <div class='radio' :class="{'cantRadio':child.state==2}" v-show='child==item.value'
-                                     @click='goOtherRecommend(item)'></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-            </section>
-            <section class='ycpj flex' v-show='currentType=="yuanchang"'>
-                <div class='title color-gray9 font-11'>
-                    <div class='left flex'>保养计划</div>
-                    <div class='right'>
-                        <div class='fixbox'>
-                            <div class='term-right-top font-11 '>
-                                <div class='status'>
-                                    <p class='color-gray9'>规格型号</p>
-                                </div>
-                                <div class='status'>
-                                    <p class='color-gray9'>参考用量</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class='term flex'>
-                    <div class='item' v-for='item in rawDatalist'>
+                    <div class='term flex'>
                         <div class='term-left flex'>
                             <div class='term-left-item color-gray-2'>
-                                <div class='status flex font-12'>
-                                    <div v-text='item.type'>机油</div>
+                                <div class='status flex font-12' v-for='item in maintenanceDatalist.data'>
+                                    <div v-text='item.name' >小保养服务</div>
                                 </div>
                             </div>
                         </div>
                         <div class='term-right'>
-                            <div class='term-right-item font-13'>
-                                <div class='status flex' v-text='item.rule'>
-                                    10W-40
+                            <div class='term-right-item' v-for='item in maintenanceDatalist.data'>
+                                <div class='status flex' v-for='child in maintenanceDatalist.header'>
+                                    <div class='radio' :class="{'cantRadio':child.state==2}" v-show='child==item.value'
+                                         @click='goOtherRecommend(item)'></div>
                                 </div>
-                                <div class='status flex' v-text='item.filling?item.filling:"-"'>
-                                    4.0
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </section>
+                <section class='ycpj flex' v-show='currentType=="yuanchang"'>
+                    <div class='title color-gray9 font-11'>
+                        <div class='left flex'>保养计划</div>
+                        <div class='right'>
+                            <div class='fixbox'>
+                                <div class='term-right-top font-11 '>
+                                    <div class='status'>
+                                        <p class='color-gray9'>规格型号</p>
+                                    </div>
+                                    <div class='status'>
+                                        <p class='color-gray9'>参考用量</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class='term flex'>
+                        <div class='item' v-for='item in rawDatalist'>
+                            <div class='term-left flex'>
+                                <div class='term-left-item color-gray-2'>
+                                    <div class='status flex font-12'>
+                                        <div v-text='item.type'>机油</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='term-right'>
+                                <div class='term-right-item font-13'>
+                                    <div class='status flex' v-text='item.rule'>
+                                        10W-40
+                                    </div>
+                                    <div class='status flex' v-text='item.filling?item.filling:"-"'>
+                                        4.0
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
-                </div>
-            </section>
-            <footer class='font-11 flex'>
-                <p>此数据仅供参考，请以原厂保养手册为准。</p>
-                <div class='feedback' @click='feedback()'>
-                    <i class='iconfont icon-woshenpideline_ font-13'></i>
-                    <span class='font-11'>我要反馈</span>
-                </div>
-            </footer>
-        </div >
+                    </div>
+                </section>
+                <footer class='font-11 flex'>
+                    <p>此数据仅供参考，请以原厂保养手册为准。</p>
+                    <div class='feedback' @click='feedback()'>
+                        <i class='iconfont icon-woshenpideline_ font-13'></i>
+                        <span class='font-11'>我要反馈</span>
+                    </div>
+                </footer>
+            </div >
+        </section>
+        <default-page v-show='loadData && maintenanceDatalist.length==0'></default-page>
 
     </div>
 </template>

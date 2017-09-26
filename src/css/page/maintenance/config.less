@@ -39,12 +39,13 @@
   section{
     margin-bottom: 1.1rem;
     overflow: hidden;
-    ul{
-      padding: 0 30/100rem;
+    .left{
+      float: left;
+      width: 50%;
       li{
-        width: 50%;
+        padding: 30/100rem;
+        width: 100%;
         float: left;
-        padding: 30/100rem 0;
         position: relative;
         line-height: 1;
         &:after {
@@ -53,9 +54,34 @@
         .edition{
           margin-bottom: 15/100rem;
         }
+
       }
-      li:nth-child(2n){
-        padding-left: 30/100rem;
+      li:nth-last-child(1){
+        &:after{
+          height: 0;
+        }
+        &:before {
+          width: 0
+        }
+      }
+
+    }
+    .right{
+      float: right;
+      width: 50%;
+
+      li{
+        width: 100%;
+        float: left;
+        padding: 30/100rem ;
+        position: relative;
+        line-height: 1;
+        &:after {
+          .Pseudo-border-after();
+        }
+        .edition{
+          margin-bottom: 15/100rem;
+        }
         &:before {
           .Pseudo-border-before();
           content: '';
@@ -70,17 +96,13 @@
           background: #ccc;
         }
       }
+
       li:nth-last-child(1){
         &:after{
           height: 0;
         }
         &:before {
           width: 0
-        }
-      }
-      li:nth-last-child(2){
-        &:after{
-          height: 0;
         }
       }
     }

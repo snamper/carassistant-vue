@@ -1,44 +1,47 @@
 
 <template>
-    <div class="maintenance-other-recommend" v-if='datalist'>
-        <header>
-            <div class='title font-18 color-gray2'>其他保养项目推荐</div>
-        </header>
-        <section>
-            <ul>
-                <li class='item ' v-for='(item,index) in datalist'>
-                    <div class='preview flex last-no-bd'>
-                        <div class='left'>
-                            <p class='font-14 color-gray2' v-text='item.name'>火花塞</p>
-                            <p class='describe font-12 color-gray9' v-text='item.text'>超凡喜力5W-40全合成汽车润滑油</p>
+    <div class="maintenance-other-recommend">
+        <div v-if='loadData && datalist.length!=0'>
+            <header>
+                <div class='title font-18 color-gray2'>其他保养项目推荐</div>
+            </header>
+            <section>
+                <ul>
+                    <li class='item ' v-for='(item,index) in datalist'>
+                        <div class='preview flex last-no-bd'>
+                            <div class='left'>
+                                <p class='font-14 color-gray2' v-text='item.name'>火花塞</p>
+                                <p class='describe font-12 color-gray9' v-text='item.text'>超凡喜力5W-40全合成汽车润滑油</p>
+                            </div>
+                            <i class='iconfont icon-arrowB font-12' v-bind:class="{'show-detail':item.isShowDetail}"
+                               @click='showDetail(index)'></i>
                         </div>
-                        <i class='iconfont icon-arrowB font-12' v-bind:class="{'show-detail':item.isShowDetail}"
-                           @click='showDetail(index)'></i>
-                    </div>
-                    <div class='detail' v-show='item.isShowDetail'>
-                        <div class='detail-item' v-for='detail in item.data'>
-                            <div class='brand'>
-                                <img :src="detail.brandLogo" alt="">
-                                <span class='font-13 color-gray5' v-text='detail.brandName'>电装</span>
-                            </div>
-                            <div class='brand-item' v-for='child in detail.child'>
-                                <p class='flex'>
-                                    <span class='font-14 color-gray2' v-text='child.first'>专攻以铂金</span>
-                                    <span class='font-12 color-gray9' v-text='child.second'>K20R-U</span>
-                                </p>
-                            </div>
-                        </div >
-                    </div>
-                </li>
-            </ul>
-        </section>
-        <footer class='font-11 flex'>
-            <p>此数据仅供参考，请以原厂保养手册为准。</p>
-            <div class='feedback flex' @click='feedback()'>
-                <i class='iconfont icon-woshenpideline_ font-13'></i>
-                <span class='font-11'>我要反馈</span>
-            </div>
-        </footer>
+                        <div class='detail' v-show='item.isShowDetail'>
+                            <div class='detail-item' v-for='detail in item.data'>
+                                <div class='brand'>
+                                    <img :src="detail.brandLogo" alt="">
+                                    <span class='font-13 color-gray5' v-text='detail.brandName'>电装</span>
+                                </div>
+                                <div class='brand-item' v-for='child in detail.child'>
+                                    <p class='flex'>
+                                        <span class='font-14 color-gray2' v-text='child.first'>专攻以铂金</span>
+                                        <span class='font-12 color-gray9' v-text='child.second'>K20R-U</span>
+                                    </p>
+                                </div>
+                            </div >
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <footer class='font-11 flex'>
+                <p>此数据仅供参考，请以原厂保养手册为准。</p>
+                <div class='feedback flex' @click='feedback()'>
+                    <i class='iconfont icon-woshenpideline_ font-13'></i>
+                    <span class='font-11'>我要反馈</span>
+                </div>
+            </footer>
+        </div>
+        <default-page v-show='loadData && datalist.length==0'></default-page>
     </div>
 </template>
 
@@ -48,7 +51,8 @@
         name: 'maintenance-other-recommend',
         data() {
             return {
-                datalist:false
+                datalist:false,
+                loadData:false
             }
         },
         created() {
@@ -88,6 +92,7 @@
                         });
                     }
                     loading.hide()
+                    self.loadData=true
 
                 });
             },
