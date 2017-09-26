@@ -1,6 +1,6 @@
 
 <template>
-    <div class="maintenance-recommend">
+    <div class="maintenance-recommend" v-if='data'>
         <header class='header'>
             <div class='top flex'>
                 <div class='title flex'>
@@ -28,8 +28,8 @@
                     <span class='color-gray5 font-14'>当前里程数(KM)</span>
                 </div>
                 <div class='int flex'>
-                    <input class='color-gray5 font-14' type="text" placeholder='请输入'>
-                    <span class='font-13'>确认</span>
+                    <input class='color-gray5 font-14' type="text" placeholder='请输入' v-model='currentMi'>
+                    <span class='font-13' @click='getMaintenance()' v-show='currentMi.length>0'>确认</span>
                 </div>
             </div>
         </header>
@@ -38,7 +38,7 @@
                 <header class='flex'>
                     <div class='title font-18 color-gray2'>机油推荐</div>
                     <div class='type font-12 color-gray9'>(机油加注量:
-                        <span>3L</span>
+                        <span v-text='data.engineOil.filling+"L"'>3L</span>
                         )</div>
                 </header>
                 <div class='content flex'>
@@ -59,65 +59,26 @@
                     <div class='title font-18 color-gray2'>其他保养项目推荐</div>
                 </header>
                 <div class='content'>
-                    <div class='item ' v-for="item in data.other">
-                        <div class='preview flex'>
-                            <div class='left'>
-                                <p class='font-14 color-gray2' v-text='item.name'>火花塞</p>
-                                <p class='describe font-12 color-gray9'>超凡喜力5W-40全合成汽车润滑油</p>
-                            </div>
-                            <i class='iconfont icon-arrowB font-12'></i>
-                        </div>
-                    </div>
-                    <div class='item '>
-                        <div class='preview flex'>
-                            <div class='left'>
-                                <p class='font-14 color-gray2'>火花塞</p>
-                                <p class='describe font-12 color-gray9'>超凡喜力5W-40全合成汽车润滑油</p>
-                            </div>
-                            <i class='iconfont icon-arrowB font-12'></i>
-                        </div>
-                        <div class='detail'>
-
-                        </div>
-                    </div>
-                    <div class='item '>
+                    <div class='item ' v-for="(item,index) in data.other" :class="{'noborder':item.isShowDetail}">
                         <div class='preview flex last-no-bd'>
                             <div class='left'>
-                                <p class='font-14 color-gray2'>火花塞</p>
-                                <p class='describe font-12 color-gray9'>超凡喜力5W-40全合成汽车润滑油</p>
+                                <p class='font-14 color-gray2' v-text='item.name'>火花塞</p>
+                                <p class='describe font-12 color-gray9' v-text='item.text'>超凡喜力5W-40全合成汽车润滑油</p>
                             </div>
-                            <i class='iconfont icon-arrowB font-12'></i>
+                            <i class='iconfont icon-arrowB font-12' v-bind:class="{'show-detail':item.isShowDetail}"
+                               @click='showDetail(index)'></i>
                         </div>
-                        <div class='detail'>
-                            <div class='detail-item'>
-                                <div class='brand'>
-                                    <img src="" alt="">
-                                    <span class='font-13 color-gray5'>电装</span>
-                                </div>
-                                <div class='brand-item'>
-                                    <p class='flex'>
-                                        <span class='font-14 color-gray2'>专攻以铂金</span>
-                                        <span class='font-12 color-gray9'>K20R-U</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class='detail-item'>
-                                <div class='brand'>
 
-                                    <img src="" alt="">
-                                    <span class='font-13 color-gray5'>电装</span>
+                        <div class='detail' v-show='item.isShowDetail'>
+                            <div class='detail-item' v-for='detail in item.data'>
+                                <div class='brand'>
+                                    <img :src="detail.brandLogo" alt="">
+                                    <span class='font-13 color-gray5' v-text='detail.brandName'>电装</span>
                                 </div>
-                                <div class='brand-item '>
+                                <div class='brand-item' v-for='child in detail.child'>
                                     <p class='flex'>
-                                        <span class='font-14 color-gray2'>专攻以铂金</span>
-                                        <span class='font-12 color-gray9'>K20R-U</span>
-                                    </p>
-
-                                </div>
-                                <div class='brand-item '>
-                                    <p class='flex'>
-                                        <span class='font-14 color-gray2'>专攻以铂金</span>
-                                        <span class='font-12 color-gray9'>K20R-U</span>
+                                        <span class='font-14 color-gray2' v-text='child.first'>专攻以铂金</span>
+                                        <span class='font-12 color-gray9' v-text='child.second'>K20R-U</span>
                                     </p>
                                 </div>
                             </div>
@@ -131,13 +92,13 @@
 </template>
 
 <script>
-
+    import api from "../../../api/maintenance-api";
     export default {
         name: 'maintenance-recommend',
         data() {
             return {
-                isActive:false,
                 recommendData:'',
+                currentMi:'',
                 data:''
             }
         },
@@ -145,518 +106,15 @@
             //页面创建完成后
             //自定义标题
             this.page.setTitle("保养推荐");
+
             var self=this
-            var data={
-                "success": true,
-                "result_code": 0,
-                "message": "请求成功",
-                "response": {
-                    "levelId": "CSV0314A0001",
-                    "car": {
-                        "brand": "大众",
-                        "models": "POLO"
-                    },
-                    "engineOil": {
-                        "filling": "3.2",
-                        "lower": "壳牌喜力HX6 10W-40",
-                        "high": "壳牌喜力HX7 5W-40",
-                        "lowerImage": "https://keepup-part.vchangyi.com/images\\engineOil/HX6-10W-40-4L.jpg",
-                        "highImage": "https://keepup-part.vchangyi.com/images\\engineOil/HX7-5W-40-4L.jpg"
-                    },
-                    "other": {
-                        "wiper": {
-                            "name": "雨刮",
-                            "text": "",
-                            "data": {
-                                "main": [
-                                    {
-                                        "brandName": "海拉(HELLA)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/海拉(HELLA).jpg",
-                                        "child": [
-                                            {
-                                                "size": "21",
-                                                "interface": "U型"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "博世(BOSCH)-神翼(双支装)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/博世(BOSCH).jpg",
-                                        "child": [
-                                            {
-                                                "size": "21",
-                                                "interface": "U型"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "博世(BOSCH)-神翼(单支装)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/博世(BOSCH).jpg",
-                                        "child": [
-                                            {
-                                                "size": "21",
-                                                "interface": "U型"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "博世(BOSCH)-风翼简版无骨(单支装)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/博世(BOSCH).jpg",
-                                        "child": [
-                                            {
-                                                "size": "21",
-                                                "interface": "U型"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "博世(BOSCH)-火翼(单支装)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/博世(BOSCH).jpg",
-                                        "child": [
-                                            {
-                                                "size": "21",
-                                                "interface": "U型"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "法雷奥(VALEO)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/法雷奥(VALEO).jpg",
-                                        "child": [
-                                            {
-                                                "size": "21",
-                                                "interface": "U型"
-                                            }
-                                        ]
-                                    }
-                                ],
-                                "vice": [
-                                    {
-                                        "brandName": "海拉(HELLA)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/海拉(HELLA).jpg",
-                                        "child": [
-                                            {
-                                                "size": "19",
-                                                "interface": "U型"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "博世(BOSCH)-神翼(双支装)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/博世(BOSCH).jpg",
-                                        "child": [
-                                            {
-                                                "size": "19"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "博世(BOSCH)-神翼(单支装)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/博世(BOSCH).jpg",
-                                        "child": [
-                                            {
-                                                "size": "19"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "博世(BOSCH)-风翼简版无骨(单支装)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/博世(BOSCH).jpg",
-                                        "child": [
-                                            {
-                                                "size": "19"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "博世(BOSCH)-火翼(单支装)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/博世(BOSCH).jpg",
-                                        "child": [
-                                            {
-                                                "size": "19"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "法雷奥(VALEO)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/法雷奥(VALEO).jpg",
-                                        "child": [
-                                            {
-                                                "size": "18"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        },
-                        "sparkplug": {
-                            "name": "火花塞",
-                            "text": "30000KM或24个月/次",
-                            "data": [
-                                {
-                                    "brandName": "电装(DENSO)",
-                                    "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/电装(DENSO).jpg",
-                                    "child": [
-                                        {
-                                            "first": "普通镍合金",
-                                            "second": "K20R-U"
-                                        },
-                                        {
-                                            "first": "TT双针白金",
-                                            "second": "PK20TT"
-                                        },
-                                        {
-                                            "first": "铱金",
-                                            "second": "IK20"
-                                        },
-                                        {
-                                            "first": "铱铂金",
-                                            "second": "VK20"
-                                        },
-                                        {
-                                            "first": "三极铱铂金",
-                                            "second": "VKB20"
-                                        },
-                                        {
-                                            "first": "双铱金",
-                                            "second": "VFK20F"
-                                        },
-                                        {
-                                            "first": "TT双铱金",
-                                            "second": "IK20TT"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "brandName": "博世(BOSCH)",
-                                    "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/博世(BOSCH).jpg",
-                                    "child": [
-                                        {
-                                            "first": "迅能",
-                                            "second": "0 242 235 666"
-                                        },
-                                        {
-                                            "first": "超能",
-                                            "second": "0 242 236 618"
-                                        },
-                                        {
-                                            "first": "锐能",
-                                            "second": ""
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        "brakeDisc": {
-                            "name": "刹车盘",
-                            "text": "检查厚度及磨损情况，必要时更换",
-                            "data": {
-                                "main": [
-                                    {
-                                        "brandName": "博世(BOSCH)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/博世(BOSCH).jpg",
-                                        "child": [
-                                            {
-                                                "model": "0 986 AB6 824"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "天合(TRW)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/天合(TRW).jpg",
-                                        "child": [
-                                            {
-                                                "model": "DF2803"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "菲罗多(FERODO)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/菲罗多(FERODO).jpg",
-                                        "child": [
-                                            {
-                                                "model": "DDF927"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "泰明顿(TEXTAR)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/泰明顿(TEXTAR).jpg",
-                                        "child": [
-                                            {
-                                                "model": "92082203"
-                                            }
-                                        ]
-                                    }
-                                ],
-                                "vice": [
-                                    {
-                                        "brandName": "博世(BOSCH)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/博世(BOSCH).jpg",
-                                        "child": [
-                                            {
-                                                "model": "0 986 AB6 871"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "天合(TRW)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/天合(TRW).jpg",
-                                        "child": [
-                                            {
-                                                "model": "DF2805"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "菲罗多(FERODO)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/菲罗多(FERODO).jpg",
-                                        "child": [
-                                            {
-                                                "model": "DDF929"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "泰明顿(TEXTAR)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/泰明顿(TEXTAR).jpg",
-                                        "child": [
-                                            {
-                                                "model": "92082503"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        },
-                        "brakePads": {
-                            "name": "刹车片",
-                            "text": "检查厚度及磨损情况，必要时更换",
-                            "data": {
-                                "main": [
-                                    {
-                                        "brandName": "博世(BOSCH)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/博世(BOSCH).jpg",
-                                        "child": [
-                                            {
-                                                "model": "0 986 AB1 185"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "天合(TRW)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/天合(TRW).jpg",
-                                        "child": [
-                                            {
-                                                "model": "GDB1984"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "菲罗多(FERODO)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/菲罗多(FERODO).jpg",
-                                        "child": [
-                                            {
-                                                "model": "FDB1094"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "泰明顿(TEXTAR)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/泰明顿(TEXTAR).jpg",
-                                        "child": [
-                                            {
-                                                "model": "D1:2313181;D2:2313105"
-                                            }
-                                        ]
-                                    }
-                                ],
-                                "vice": [
-                                    {
-                                        "brandName": "博世(BOSCH)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/博世(BOSCH).jpg",
-                                        "child": [
-                                            {
-                                                "model": "0 986 AB1 178"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "天合(TRW)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/天合(TRW).jpg",
-                                        "child": [
-                                            {
-                                                "model": "GDB1330"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "菲罗多(FERODO)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/菲罗多(FERODO).jpg",
-                                        "child": [
-                                            {
-                                                "model": "FDB541"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "brandName": "泰明顿(TEXTAR)",
-                                        "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/泰明顿(TEXTAR).jpg",
-                                        "child": [
-                                            {
-                                                "model": "D1:2355481;D2:2355412"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        },
-                        "oilFilter": {
-                            "name": "机油过滤器",
-                            "text": "7500KM或6个月/次",
-                            "data": [
-                                {
-                                    "brandName": "曼牌(MANN)",
-                                    "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/曼牌(MANN).jpg",
-                                    "child": [
-                                        {
-                                            "model": "W 712/52"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "brandName": "马勒(MAHLE)",
-                                    "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/马勒(MAHLE).jpg",
-                                    "child": [
-                                        {
-                                            "model": "OC 515"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "brandName": "博世(BOSCH)",
-                                    "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/博世(BOSCH).jpg",
-                                    "child": [
-                                        {
-                                            "model": "0986AF0302"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "brandName": "索菲玛(SOFIMA)",
-                                    "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/索菲玛(SOFIMA).jpg",
-                                    "child": [
-                                        {
-                                            "model": "S1310R"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        "airFilter": {
-                            "name": "空气过滤器",
-                            "text": "15000KM或12个月/次",
-                            "data": [
-                                {
-                                    "brandName": "曼牌(MANN)",
-                                    "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/曼牌(MANN).jpg",
-                                    "child": [
-                                        {
-                                            "model": "C 2998/5 x"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "brandName": "马勒(MAHLE)",
-                                    "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/马勒(MAHLE).jpg",
-                                    "child": [
-                                        {
-                                            "model": "LX 1721"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "brandName": "博世(BOSCH)",
-                                    "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/博世(BOSCH).jpg",
-                                    "child": [
-                                        {
-                                            "model": "0986AF2279"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "brandName": "索菲玛(SOFIMA)",
-                                    "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/索菲玛(SOFIMA).jpg",
-                                    "child": [
-                                        {
-                                            "model": "S0606A"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        "conditionerFilter": {
-                            "name": "空调过滤器",
-                            "text": "15000KM或12个月/次",
-                            "data": []
-                        },
-                        "fuelFilter": {
-                            "name": "燃油过滤器",
-                            "text": "60000KM或48个月/次",
-                            "data": [
-                                {
-                                    "brandName": "曼牌(MANN)",
-                                    "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/曼牌(MANN).jpg",
-                                    "child": [
-                                        {
-                                            "model": "WK 69/1"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "brandName": "马勒(MAHLE)",
-                                    "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/马勒(MAHLE).jpg",
-                                    "child": [
-                                        {
-                                            "model": "KL 755"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "brandName": "博世(BOSCH)",
-                                    "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/博世(BOSCH).jpg",
-                                    "child": [
-                                        {
-                                            "model": "0986AF8260"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "brandName": "索菲玛(SOFIMA)",
-                                    "brandLogo": "https://keepup-part.vchangyi.com/images/partsBrandLogo/索菲玛(SOFIMA).jpg",
-                                    "child": [
-                                        {
-                                            "model": "S1832B"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    }
-                },
-                "version": "v1",
-                "servertime": 1506323305
-            }
-            self.data=data.response
-            if(self.$router.currentRoute.query.recommendData){
-                self.recommendData=self.$router.currentRoute.query.recommendData;
-                self.levelId=self.recommendData;
-            }
+
             if(self.$router.currentRoute.query.levelId){
                 self.levelId=self.$router.currentRoute.query.levelId
             }
 
             console.log(self.recommendData)
+            this.getMaintenance();
         },
         watch: {
             //监听动态路由
@@ -665,7 +123,7 @@
             //页面方法
             gopage(type){
                 if(type==1){
-                    this.$router.push({path:'/maintenance/maintenance-cycle',query: {id:"1"}});
+                    this.$router.push({path:'/maintenance/maintenance-cycle',query: {levelId:this.levelId}});
                 }else{
                     this.$router.push({path:'/maintenance/maintenance-config',query: {levelId:this.levelId}});
                 }
@@ -673,8 +131,35 @@
             //反馈
             feedback(){
                 this.$router.push({path:'/maintenance/maintenance-feedback',query: {id:"1"}});
+            },
+            getMaintenance(){
+                let self=this;
+                let loading=this.$loading
+                    loading.show('加载中...')
+                api.getMaintenance({
+                    levelId  : self.levelId,
+                    km       : self.currentMi
+                }).then((data) => {
+                    if (data.result_code == 0) {
+                        for(var i in data.response.other){
+                            data.response.other[i].isShowDetail=false
+                        }
+                        self.data=data.response
+                    } else {
+                        self.$toast.show({
+                            showTime: 2,
+                            message: data.message,
+                            style: 'error'
+                        });
+                    }
+                    loading.hide()
+                });
+            },
+            //显示详细
+            showDetail(index){
+                this.data.other[index].isShowDetail=!this.data.other[index].isShowDetail
+                console.log(this.data.other[index].isShowDetail)
             }
-
         },
         components:{
         }

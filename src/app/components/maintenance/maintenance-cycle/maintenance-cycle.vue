@@ -1,7 +1,7 @@
 <template>
-    <div class="maintenance-cycle" >
+    <div class="maintenance-cycle" v-if='loadData'>
         <div class='mask flex font-15' v-show='tipshow'>
-            <i class='iconfont icon-guanbi' @click='tipshow=!tipshow'></i>
+            <i class='iconfont icon-guanbi' @click='tipIsShow()'></i>
         </div>
         <div v-show='!tipshow'>
             <nav class='flex font-12 color-gray-2'>
@@ -12,190 +12,30 @@
                 <div class='title color-gray-2 font-13'>
                     <div class='left flex'>保养计划</div>
                     <div class='right'>
-                        <div class='fixbox'>
-                            <div class='term-right-top font-11 '>
-                                <div class='status'>
-                                    <p class='month color-gray2'>6个月</p>
-                                    <p class='color-gray9'>5000KM</p>
+                        <div class='fixbox' >
+                            <div class='term-right-top font-11 ' >
+                                <div class='status' v-for='item in maintenanceDatalist.header'>
+                                    <!--<p class='month color-gray2'>6个月</p>-->
+                                    <p class='color-gray9' v-text='item+"KM"'>5000KM</p>
                                 </div>
-                                <div class='status'>
-                                    <p class='month color-gray2'>6个月</p>
-                                    <p class='color-gray9'>5000KM</p>
-                                </div>
-                                <div class='status '>
-                                    <p class='month color-gray2'>6个月</p>
-                                    <p class='color-gray9'>5000KM</p>
-                                </div>
-                                <div class='status'>
-                                    <p class='month color-gray2'>6个月</p>
-                                    <p class='color-gray9'>5000KM</p>
-                                </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class='term flex'>
                     <div class='term-left flex'>
-                        <!--<div class='term-left-item'>-->
-                        <!--小保养服务-->
-                        <!--</div>-->
                         <div class='term-left-item color-gray-2'>
-                            <!--<div class='status flex font-13 '>-->
-                                <!--<div >保养计划</div>-->
-                            <!--</div>-->
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >小保养服务</div>
-                            </div>
 
+                            <div class='status flex font-12' v-for='item in maintenanceDatalist.data'>
+                                <div v-text='item.name'>小保养服务</div>
+                            </div>
                         </div>
                     </div>
                     <div class='term-right'>
-                        <div class='term-right-item' style='margin-top: 1.55rem'>
-                            <div class='status flex'>
-                                <div class='radio' @click='goOtherRecommend()'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-
-                        </div>
-                        <div class='term-right-item'>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-
-                        </div>
-                        <div class='term-right-item'>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                        </div>
-                        <div class='term-right-item'>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                        </div>
-                        <div class='term-right-item'>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                        </div>
-                        <div class='term-right-item'>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                        </div>
-                        <div class='term-right-item'>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                        </div>
-                        <div class='term-right-item'>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
-                            </div>
-                            <div class='status flex'>
-                                <div class='radio'></div>
+                        <div class='term-right-item' v-for='item in maintenanceDatalist.data'>
+                            <div class='status flex' v-for='child in maintenanceDatalist.header'>
+                                <div class='radio' :class="{'cantRadio':child.state==2}" v-show='child==item.value'
+                                     @click='goOtherRecommend()'></div>
                             </div>
                         </div>
                     </div>
@@ -204,87 +44,43 @@
 
 
             </section>
-            <section class='ycpj' v-show='currentType=="yuanchang"'>
-                <div class='title color-gray-2 font-13'>
+            <section class='ycpj flex' v-show='currentType=="yuanchang"'>
+                <div class='title color-gray9 font-11'>
                     <div class='left flex'>保养计划</div>
                     <div class='right'>
                         <div class='fixbox'>
                             <div class='term-right-top font-11 '>
                                 <div class='status'>
-                                    <p class='month color-gray2'>6个月</p>
-                                    <p class='color-gray9'>5000KM</p>
+                                    <p class='color-gray9'>规格型号</p>
                                 </div>
                                 <div class='status'>
-                                    <p class='month color-gray2'>6个月</p>
-                                    <p class='color-gray9'>5000KM</p>
+                                    <p class='color-gray9'>参考用量</p>
                                 </div>
-                                <div class='status '>
-                                    <p class='month color-gray2'>6个月</p>
-                                    <p class='color-gray9'>5000KM</p>
-                                </div>
-                                <div class='status'>
-                                    <p class='month color-gray2'>6个月</p>
-                                    <p class='color-gray9'>5000KM</p>
-                                </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class='term flex'>
-                    <div class='term-left flex'>
-                        <div class='term-left-item color-gray-2'>
-
-                            <div class='status flex font-12'>
-                                <div >机油</div>
+                    <div class='item' v-for='item in rawDatalist'>
+                        <div class='term-left flex'>
+                            <div class='term-left-item color-gray-2'>
+                                <div class='status flex font-12'>
+                                    <div v-text='item.type'>机油</div>
+                                </div>
                             </div>
-                            <div class='status flex font-12'>
-                                <div >防冻液</div>
-                            </div>
-                            <div class='status flex font-12'>
-                                <div >刹车油</div>
+                        </div>
+                        <div class='term-right'>
+                            <div class='term-right-item font-13'>
+                                <div class='status flex' v-text='item.rule'>
+                                    10W-40
+                                </div>
+                                <div class='status flex' v-text='item.filling?item.filling:"-"'>
+                                    4.0
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class='term-right'>
-                        <div class='term-right-item font-13' style='margin-top: 1.55rem'>
-                            <div class='status flex'>
-                                10W-40
-                            </div>
-                            <div class='status flex'>
-                                4.0
-                            </div>
-                            <div class='status flex'>
-                                -
-                            </div>
-                            <div class='status flex'>
-                                -
-                            </div>
-                        </div>
-                        <div class='term-right-item font-13'>
-                            <div class='status flex'>
-                                -
-                            </div>
-                            <div class='status flex'>
-                                -
-                            </div>
-                            <div class='status flex'>
-                                -
-                            </div>
-                        </div>
-                        <div class='term-right-item font-13'>
-                            <div class='status flex'>
-                                DOT-4
-                            </div>
-                            <div class='status flex'>
-                                -
-                            </div>
-                            <div class='status flex'>
-                                1.0L
-                            </div>
 
-                        </div>
-                    </div>
 
                 </div>
             </section>
@@ -295,28 +91,35 @@
                     <span class='font-11'>我要反馈</span>
                 </div>
             </footer>
-        </div>
+        </div >
 
     </div>
 </template>
 
 <script>
+    import api from "../../../api/maintenance-api";
     export default {
 
         name: 'maintenance-cycle',
         data() {
             return {
                 currentType:'baoyang',
-                tipshow:true
+                tipshow:true,
+                maintenanceDatalist:'',
+                rawDatalist:'',
+                loadData:false
             }
         },
         created() {
             //页面创建完成后
             //自定义标题
             this.page.setTitle("保养推荐");
-
-            console.log(this.$refs.mySwiper)
-
+            var self=this
+            self.currentType=1
+            if(self.$router.currentRoute.query.levelId){
+                self.levelId=self.$router.currentRoute.query.levelId
+                self.changeType('baoyang')
+            }
         },
         watch: {
             //监听动态路由
@@ -325,7 +128,50 @@
         methods: {
             //页面方法
             changeType (type) {
-                this.currentType=type
+                var self=this
+                var loading=self.$loading;
+                self.currentType=type;
+                self.loadData=false
+                var loading=self.$loading
+                loading.show('加载中...')
+                if(type=='baoyang'){
+                    api.maintenanceCycle({
+                        levelId  : self.levelId,
+                    }).then((data) => {
+                        if (data.result_code == 0) {
+                            self.maintenanceDatalist = data.response;
+                            self.loadData=true
+                            self.scroll()
+                        } else {
+                            self.$toast.show({
+                                showTime: 2,
+                                message: data.message,
+                                style: 'error'
+                            });
+                        }
+                        loading.hide()
+
+                    });
+                }else{
+                    api.rawData({
+                        levelId  : self.levelId,
+                    }).then((data) => {
+                        if (data.result_code == 0) {
+                            self.rawDatalist = data.response.list;
+                            self.loadData=true
+                            self.scroll()
+                        } else {
+                            self.$toast.show({
+                                showTime: 2,
+                                message: data.message,
+                                style: 'error'
+                            });
+                        }
+                        loading.hide()
+
+                    });
+                }
+
             },
             //其他保养项目推荐
             goOtherRecommend(){
@@ -334,7 +180,33 @@
             //反馈
             feedback(){
                 this.$router.push({path:'/maintenance/maintenance-feedback',query: {id:"1"}});
+            },
+            scroll(){
+                setTimeout(function () {
+                    console.log($('.term-right').eq(0).innerWidth()+'1111')
+                    $('.baoyang .right').width($('.term-right').eq(0).innerWidth())
+                    $(".fixbox").eq(0).scroll(function(){
+                        $(".term-right").eq(0).scrollLeft($(this).scrollLeft()); // 横向滚动条
+                        console.log($(this).scrollLeft())
+                    });
+                    $(".fixbox").eq(1).scroll(function(){
+                        $(".term-right").eq(1).scrollLeft($(this).scrollLeft()); // 横向滚动条
+                        console.log($(this).scrollLeft())
+                    });
+                    $(".term-right").eq(0).scroll(function(){
+                        $(".fixbox").eq(0).scrollLeft($(this).scrollLeft());
+                    });
+                    $(".term-right").eq(1).scroll(function(){
+                        $(".fixbox").eq(1).scrollLeft($(this).scrollLeft());
+                    });
+                })
+            },
+            tipIsShow(){
+                var self=this;
+                self.tipshow=!self.tipshow
+                this.scroll()
             }
+
 
         },
         components: {},
@@ -344,14 +216,10 @@
             }
         },
         mounted() {
+
 //            this.$refs.mySwiper.swiper.params.control = this.$refs.mySwiper1.swiper
 //            this.$refs.mySwiper1.swiper.params.control = this.$refs.mySwiper.swiper;
-            $(".fixbox").scroll(function(){
-                $(".term-right").scrollLeft($(this).scrollLeft()); // 横向滚动条
-            });
-            $(".term-right").scroll(function(){
-                $(".fixbox").scrollLeft($(this).scrollLeft());
-            });
+
             //console.log(this.$refs.mySwiperA.swiper.params.control)
             //this.$refs.mySwiper1.swiper.params.control=this.$refs.mySwiper3.swiper
         }

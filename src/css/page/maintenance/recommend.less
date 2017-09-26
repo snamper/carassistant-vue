@@ -7,8 +7,9 @@
   font-family: @font-family-default;
   background: url("../../../images/maintenance/background.png");
   background-size: contain;
-  position: fixed;
-  height: 100vh;
+  position: absolute;
+  top:0;
+  height: 100%;
   width: 100%;
   overflow: scroll;
   .header{
@@ -187,6 +188,10 @@
         padding:0 20/100rem ;
         .item{
           line-height: 1;
+          position: relative;
+          &:after{
+            .Pseudo-border-after();
+          }
           .preview{
             justify-content: space-between;
             align-items: center;
@@ -197,16 +202,20 @@
             }
             i{
               color: #ccc;
+              transition: 0.4s;
             }
             .describe{
               margin-top: 10/100rem;
             }
           }
+          .show-detail{
+            transform:rotate(180deg);
+          }
 
           .detail{
             .detail-item{
               overflow: hidden;
-              margin-bottom: 30/100rem;
+              margin-top: 30/100rem;
               .brand{
                 overflow: hidden;
                 img{
@@ -226,6 +235,7 @@
                   height: 80/100rem;
                   align-items: center;
                   justify-content: space-between;
+                  word-break: break-all;
                   &:after {
                     .Pseudo-btnBorder-after(@border-width:0px 0px 1px 0px,@border-color: @hr-border-color,@border-style: dotted,@radius:0px);
                   }
@@ -233,7 +243,21 @@
 
               }
             }
+            .detail-item:nth-child(1){
+              margin: 0;
+            }
           }
+        }
+        .item:nth-last-child(1){
+          &:after{
+            height:0;
+          }
+        }
+      }
+      .noborder{
+        padding-bottom: 20/100rem;
+        &:after{
+         // height: 0 !important;
         }
       }
     }

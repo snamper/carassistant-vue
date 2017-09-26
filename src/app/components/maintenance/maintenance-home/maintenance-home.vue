@@ -301,7 +301,7 @@
                     });
                 }
                 if (index == 4) {
-                    var recommendData
+                    var levelId
                     self.changeShow = 'changeTime'
                     api.get_recommend({
                         brandName: self.currentChoosed.brand,
@@ -311,8 +311,8 @@
                         modelYear: current,
                     }).then((data) => {
                         if (data.result_code == 0) {
-                            recommendData = data.response
-                            this.$router.push({path:'/maintenance/maintenance-recommend',query: {recommendData:recommendData}});
+                            levelId = data.response.levelId
+                            this.$router.push({path:'/maintenance/maintenance-recommend',query: {levelId:levelId}});
                         } else {
                             self.$toast.show({
                                 showTime: 2,
@@ -346,6 +346,7 @@
                 this.$router.push({path: '/maintenance/maintenance-feedback', query: {id: "1"}});
             },
             Photograph(){
+                var self=this;
                 let loading = this.$loading
                 chooseImage()
                     .then((localIds)=>(uploadImageToWx(localIds)))
@@ -353,7 +354,8 @@
                     .then((data) => {
                     loading.show('加载中...')
                             if (data.result_code == 0) {
-                                self.currentChoosedNameList = data.response
+                                self.levelId = data.response.levelId
+                                self.$router.push({path:'/maintenance/maintenance-recommend',query: {levelId:levelId}});
                             } else {
                                 self.$toast.show({
                                     showTime: 2,

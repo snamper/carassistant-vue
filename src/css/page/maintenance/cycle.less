@@ -41,6 +41,7 @@
   }
   @diff: 190/100rem;
   .baoyang{
+    margin-bottom: 0.62rem;
     .title{
       position: fixed;
       height: 0.9rem;
@@ -48,6 +49,7 @@
       z-index: 11;
       background: #fff;
       box-shadow: 0 8/100rem 14/100rem #a8a8a8;
+
       .left{
         float: left;
         width: @diff;
@@ -70,8 +72,8 @@
       }
       .right{
         float: right;
-        width: calc(~"100% - @{diff}");
-        overflow: hidden;
+        width: 100%;
+        overflow: scroll;
       }
       .fixbox{
         overflow: hidden;
@@ -84,7 +86,7 @@
         height: 0.9rem;
         position: sticky;
         top: 1.7rem;
-        line-height: 1;
+        line-height: 0.9rem;
         .status {
           width: 1.5rem;
           float: left;
@@ -108,8 +110,9 @@
           float: left;
           align-items: center;
           justify-content: flex-start;
-          padding-left: 20/100rem;
+          padding:0 20/100rem;
           width: 100%;
+        //  line-height:1;
         }
 
         .status:nth-child(1){
@@ -143,11 +146,18 @@
             margin-left: -15/100rem;
           }
         }
+        .term-right-item:nth-child(1){
+          margin-top: 1.55rem;
+        }
         .radio{
           height: 8px;
           width: 8px;
           border-radius:50%;
           border:1.5px solid #ffd71A;
+        }
+        .cantRadio{
+          border: none;
+          background: #bababa;
         }
       }
     }
@@ -156,10 +166,11 @@
     .title{
       position: fixed;
       height: 0.9rem;
-      top:0.65rem;
+      top:0.8rem;
       z-index: 11;
-      background: #fff;
-      box-shadow: 0 8/100rem 14/100rem #a8a8a8;
+      background: #f8f8f8;
+      width: 100%;
+
       .left{
         float: left;
         width: @diff;
@@ -167,18 +178,6 @@
         align-items: center;
         height: 100%;
         position: relative;
-        &:after{
-          content: '';
-          display: block;
-          height: 30/100rem;
-          width: 1px;
-          background: #ccc;
-          position: absolute;
-          right: 0;
-          top:50%;
-          margin-top: -15/100rem;
-          transform: scaleX(0.5);
-        }
       }
       .right{
         float: right;
@@ -191,14 +190,14 @@
 
       }
       .term-right-top{
-        width:max-content;
+        width:100%;
         overflow: auto;
         height: 0.9rem;
         position: sticky;
         top: 1.7rem;
-        line-height: 1;
+        line-height: 0.9rem;
         .status {
-          width: 1.5rem;
+          width: 50%;
           float: left;
           text-align: center;
 
@@ -211,25 +210,28 @@
       }
     }
     .term {
+      margin-top: 1.7rem;
+      width: 100%;
+      .item{
+        width: 100%;
+        position: relative;
+        &:after{
+          .Pseudo-border-after();
+        }
+
+      }
       .term-left {
         float: left;
         width: @diff;
         justify-content: center;
-        min-height: 10.1rem;
         .status{
           height: 90/100rem;
           float: left;
           align-items: center;
           justify-content: flex-start;
-          padding-left: 20/100rem;
+          padding:0 20/100rem;
           width: 100%;
-        }
-
-        .status:nth-child(1){
-          margin-top: 1.55rem;
-        }
-        .term-left-item{
-          background:  #f8f8f8;
+         // line-height: 1;
         }
       }
       .term-right {
@@ -238,7 +240,7 @@
         width: calc(~"100% - @{diff}");
         line-height:1;
         .term-right-item {
-          width:max-content;
+          width:100%;
           height: 0.9rem;
           position: relative;
           margin-left: 15/100rem;
@@ -246,7 +248,7 @@
             .Pseudo-btnBorder-after(@border-width:0px 0px 1px 0px,@border-color: @hr-border-color,@border-style: dotted,@radius:0px);
           }
           .flex {
-            width: 1.5rem;
+            width: 50%;
             height: 90/100rem;
             float: left;
             align-items: center;
@@ -304,6 +306,7 @@
     background: url("../../../images/maintenance/tip.png") no-repeat center;
     background-size: 100% 100%;
     color: #fff;
+    z-index: 999;
     i{
       position: absolute;
       right: 30/100rem;

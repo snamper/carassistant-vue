@@ -49,6 +49,23 @@ export default {
 
     },
     /*
+    * 保养推荐
+    * */
+    //根据 levelId 获取车辆保养推荐接口
+    getMaintenance(params){
+        return http.post("front/car/by_mileage",params);
+    },
+    /*
+    * 保养周期
+    * */
+    maintenanceCycle(params){
+        return http.get("front/cycle/list",params);
+    },
+    //原厂配件参数
+    rawData(params){
+        return http.get("front/cycle/raw_data",params);
+    },
+    /*
     * 反馈
     * */
     feedbacked(params){
