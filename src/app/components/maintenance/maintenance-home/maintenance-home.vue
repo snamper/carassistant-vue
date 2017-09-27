@@ -61,7 +61,7 @@
                     </div>
                 </div>
             </div>
-            <div class='nav-bar' v-show='!changeShow'>
+            <div class='nav-bar' v-show='!changeShow' v-bind:class="{'filter':searchShow,'hide222':changeShow}">
                 <div class='nav-item ' v-for='(item,index) in brandList'>
                     <div class='bubble font-20' v-text='item.initials'>A</div>
                     <div class='indexes font-9' v-text='item.initials' @click="goAnchor(index)">A</div>
@@ -233,6 +233,13 @@
                 }).then((data) => {
                     if (data.result_code == 0) {
                         self.searchDataList = data.response
+                        if(self.searchDataList.length==0){
+                            self.$toast.show({
+                                showTime: 2,
+                                message: '暂无车辆信息',
+                                style: 'error'
+                            });
+                        }
                     } else {
                         self.$toast.show({
                             showTime: 2,
