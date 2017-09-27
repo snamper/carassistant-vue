@@ -121,7 +121,7 @@
                             </div>
                             <input id='input' v-model='searchName' class='font-13 color-gray2' type="text"
                                    placeholder='请输入17位VIN码或车辆名称'/>
-                            <i class='iconfont icon-quxiaoglyph_ font-13' ></i>
+                            <i class='iconfont icon-quxiaoglyph_ font-13' @click='searchName=""'></i>
 
                         </div>
                         <span @click='search()'>搜索</span>
@@ -227,6 +227,7 @@
             search() {
                 let self = this;
                 let loading = self.$loading
+                loading.show('加载中...')
                 api.searchData({
                     name: self.searchName
                 }).then((data) => {

@@ -23,13 +23,13 @@
                         <span class='font-14'>车辆配置</span>
                     </div>
                 </div>
-                <div class='search flex'>
+                <div class='search flex' v-if='data.engineOil && data.other'>
                     <div class='tip'>
                         <i class='iconfont icon-kepai-gongli font-13'></i>
                         <span class='color-gray5 font-14'>当前里程数(KM)</span>
                     </div>
                     <div class='int flex'>
-                        <input class='color-gray5 font-14' type="text" placeholder='请输入' v-model='currentMi'>
+                        <input class='color-gray5 font-14' type="number" placeholder='请输入' v-model='currentMi'>
                         <span class='font-13' @click='getMaintenance()' v-show='currentMi.length>0'>确认</span>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                             <span v-text='data.engineOil.filling+"L"'>3L</span>
                             )</div>
                     </header>
-                    <div class='content flex'>
+                    <div class='content flex' v-if='data.engineOil'>
                         <div class='item'>
                             <img
                                 :src="data.engineOil.lowerImage" alt="">
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                 </section>
-                <section class='other-commehernd'>
+                <section class='other-commehernd' v-if='data.other'>
                     <header class='flex'>
                         <div class='title font-18 color-gray2'>其他保养项目推荐</div>
                     </header>

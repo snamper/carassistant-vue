@@ -1,13 +1,15 @@
 <template>
-    <div class="maintenance-cycle" v-if='loadData'>
-        <section v-if='loadData && maintenanceDatalist.length!=0'>
+    <div class="maintenance-cycle" >
+        <section v-if=' maintenanceDatalist.length!=0'>
             <div class='mask flex font-15' v-show='tipshow'>
                 <i class='iconfont icon-guanbi' @click='tipIsShow()'></i>
             </div>
             <div v-show='!tipshow'>
-                <nav class='flex font-12 color-gray-2'>
-                    <div class='nav-item' v-bind:class="{ active: currentType=='baoyang' }" @click='changeType("baoyang")'>保养计划周期</div>
-                    <div class='nav-item' v-bind:class="{ active: currentType=='yuanchang' }" @click='changeType("yuanchang")'>原厂配件参数</div>
+                <nav class='flex font-12 color-gray-2' v-bind:class="{ active: currentType=='yuanchang' }">
+                    <div class='nav-item' v-bind:class="{ 'active-color': currentType=='baoyang' }"
+                         @click='changeType("baoyang")'>保养计划周期</div>
+                    <div class='nav-item' v-bind:class="{ 'active-color': currentType=='yuanchang' }"
+                         @click='changeType("yuanchang")'>原厂配件参数</div>
                 </nav>
                 <section class='baoyang' v-show='currentType=="baoyang"'>
                     <div class='title color-gray-2 font-13'>
@@ -94,7 +96,6 @@
             </div >
         </section>
         <default-page v-show='loadData && maintenanceDatalist.length==0'></default-page>
-
     </div>
 </template>
 
@@ -122,6 +123,7 @@
                 self.levelId=self.$router.currentRoute.query.levelId
                 self.changeType('baoyang')
             }
+            this.getData()
 
         },
         watch: {
@@ -129,14 +131,10 @@
         },
         methods: {
             //页面方法
-            changeType (type) {
+            getData(){
                 var self=this
                 var loading=self.$loading;
-                self.currentType=type;
-                self.loadData=false
-                var loading=self.$loading
                 loading.show('加载中...')
-                if(type=='baoyang'){
                     api.maintenanceCycle({
                         levelId  : self.levelId,
                     }).then((data) => {
@@ -144,6 +142,22 @@
                             self.maintenanceDatalist = data.response;
                             self.loadData=true
                             self.scroll()
+                            api.rawData({
+                                levelId  : self.levelId,
+                            }).then((data) => {
+                                if (data.result_code == 0) {
+                                    self.rawDatalist = data.response.list;
+                                    self.loadData=true
+                                    self.scroll()
+                                } else {
+                                    self.$toast.show({
+                                        showTime: 2,
+                                        message: data.message,
+                                        style: 'error'
+                                    });
+                                }
+                                loading.hide()
+                            });
                         } else {
                             self.$toast.show({
                                 showTime: 2,
@@ -151,29 +165,12 @@
                                 style: 'error'
                             });
                         }
-                        loading.hide()
-
                     });
-                }else{
-                    api.rawData({
-                        levelId  : self.levelId,
-                    }).then((data) => {
-                        if (data.result_code == 0) {
-                            self.rawDatalist = data.response.list;
-                            self.loadData=true
-                            self.scroll()
-                        } else {
-                            self.$toast.show({
-                                showTime: 2,
-                                message: data.message,
-                                style: 'error'
-                            });
-                        }
-                        loading.hide()
 
-                    });
-                }
-
+            },
+            changeType (type) {
+                var self=this
+                self.currentType=type;
             },
             //其他保养项目推荐
             goOtherRecommend(item){

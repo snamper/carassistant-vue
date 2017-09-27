@@ -9,21 +9,21 @@
   background: #fff;
   min-height: 100vh;
   position: relative;
-  .active{
+  .active-color{
     color: #dd1d21;
     position: relative;
   }
-  .active:after{
-    content: '';
-    display: block;
-    height: 4/100rem;
-    width: 32/100rem;
-    background: #dd1d21;
-    position: absolute;
-    bottom: 2/100rem;
-    left: 50%;
-    margin-left: -16/100rem;
-  }
+  //.active:after{
+  //  content: '';
+  //  display: block;
+  //  height: 4/100rem;
+  //  width: 32/100rem;
+  //  background: #dd1d21;
+  //  position: absolute;
+  //  bottom: 2/100rem;
+  //  left: 50%;
+  //  margin-left: -16/100rem;
+  //}
   nav {
     justify-content: space-around;
     background: #fff;
@@ -34,11 +34,29 @@
     &:after {
       .Pseudo-border-after();
     }
+    &:before{
+      content: '';
+      display: block;
+      height: 4/100rem;
+      width: 32/100rem;
+      background: #dd1d21;
+      position: absolute;
+      bottom: 2/100rem;
+      left: 25%;
+      margin-left: -16/100rem;
+      transition: 0.3s;
+    }
     .nav-item{
       height: 65/100rem;
       line-height: 65/100rem;
+      transition: 0.3s;
     }
 
+  }
+  .active{
+    &:before{
+      left: 75% !important;
+    }
   }
   @diff: 190/100rem;
   .baoyang{
