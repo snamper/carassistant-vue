@@ -386,11 +386,10 @@
                 var self=this;
                 let loading = this.$loading
                 chooseImage()
-
+                loading.show('加载中...')
                     .then((localIds)=>(uploadImageToWx(localIds)))
                     .then((serverId)=>(api.getVinByImg({vinImgId: serverId}))
                     .then((data) => {
-                        loading.show('加载中...')
                             if (data.result_code == 0) {
                                 self.levelId = data.response.levelId
                                 self.$router.push({path:'/maintenance/maintenance-recommend',query: {levelId:self.levelId}});
