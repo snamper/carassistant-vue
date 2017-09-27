@@ -32,7 +32,7 @@ export default {
     },
     //根据图片获取vin码
     getVinByImg(params){
-        return http.get("front/car/by_vin_img",params);
+        return http.post("front/car/by_vin_img",params);
 
     },
     //根据图片获取vin码

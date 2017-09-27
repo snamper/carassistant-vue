@@ -1,96 +1,99 @@
 
 <template>
-    <div class="maintenance-recommend" >
-        <section v-if='loadData&& data.length!=0'>
-            <header class='header'>
-                <div class='top flex'>
-                    <div class='title flex'>
-                        <span class='font-15' v-text="data.car.brand+'-'+data.car.models">长安福特-经典福克斯</span>
-                        <i class='iconfont icon-arrowR font-10'></i>
-                    </div>
-                    <div class='feedback' @click='feedback()'>
-                        <i class='iconfont icon-woshenpideline_ font-16'></i>
-                        <span class='font-8'>反馈</span>
-                    </div>
-                </div>
-                <div class='nav'>
-                    <div class='cycle' @click='gopage(1)'>
-                        <i class='iconfont icon-rililine_ font-13'></i>
-                        <span class='font-14'>保养周期</span>
-                    </div>
-                    <div class='config' @click='gopage(2)'>
-                        <i class='iconfont icon-kepai-peizhi font-13'></i>
-                        <span class='font-14'>车辆配置</span>
-                    </div>
-                </div>
-                <div class='search flex' v-if='data.engineOil && data.other'>
-                    <div class='tip'>
-                        <i class='iconfont icon-kepai-gongli font-13'></i>
-                        <span class='color-gray5 font-14'>当前里程数(KM)</span>
-                    </div>
-                    <div class='int flex'>
-                        <input class='color-gray5 font-14' type="number" placeholder='请输入' v-model='currentMi'>
-                        <span class='font-13' @click='getMaintenance()' v-show='currentMi.length>0'>确认</span>
-                    </div>
-                </div>
-            </header>
-            <div class='main'>
-                <section class='recommend'>
-                    <header class='flex'>
-                        <div class='title font-18 color-gray2'>机油推荐</div>
-                        <div class='type font-12 color-gray9'>(机油加注量:
-                            <span v-text='data.engineOil.filling+"L"'>3L</span>
-                            )</div>
-                    </header>
-                    <div class='content flex' v-if='data.engineOil'>
-                        <div class='item'>
-                            <img
-                                :src="data.engineOil.lowerImage" alt="">
-                            <p class='font-12 color-gray2' v-text='data.engineOil.lower'>超凡喜力5W-40全合成汽车润滑油</p>
+    <transition>
+        <div class="maintenance-recommend" >
+            <section v-if='loadData&& data.length!=0'>
+                <header class='header'>
+                    <div class='top flex'>
+                        <div class='title flex'>
+                            <span class='font-15' v-text="data.car.brand+'-'+data.car.models">长安福特-经典福克斯</span>
+                            <i class='iconfont icon-arrowR font-10'></i>
                         </div>
-                        <div class='item'>
-                            <img
-                                :src="data.engineOil.highImage" alt="">
-                            <p class='font-12 color-gray2'><span class='chiji font-10 flex'>最佳</span>{{data.engineOil.high}}</p>
+                        <div class='feedback' @click='feedback()'>
+                            <i class='iconfont icon-woshenpideline_ font-16'></i>
+                            <span class='font-8'>反馈</span>
                         </div>
                     </div>
-                </section>
-                <section class='other-commehernd' v-if='data.other'>
-                    <header class='flex'>
-                        <div class='title font-18 color-gray2'>其他保养项目推荐</div>
-                    </header>
-                    <div class='content'>
-                        <div class='item ' v-for="(item,index) in data.other" :class="{'noborder':item.isShowDetail}">
-                            <div class='preview flex last-no-bd'>
-                                <div class='left'>
-                                    <p class='font-14 color-gray2' v-text='item.name'>火花塞</p>
-                                    <p class='describe font-12 color-gray9' v-text='item.text'>超凡喜力5W-40全合成汽车润滑油</p>
-                                </div>
-                                <i class='iconfont icon-arrowB font-12' v-bind:class="{'show-detail':item.isShowDetail}"
-                                   @click='showDetail(index)'></i>
+                    <div class='nav'>
+                        <div class='cycle' @click='gopage(1)'>
+                            <i class='iconfont icon-rililine_ font-13'></i>
+                            <span class='font-14'>保养周期</span>
+                        </div>
+                        <div class='config' @click='gopage(2)'>
+                            <i class='iconfont icon-kepai-peizhi font-13'></i>
+                            <span class='font-14'>车辆配置</span>
+                        </div>
+                    </div>
+                    <div class='search flex' v-if='data.engineOil && data.other'>
+                        <div class='tip'>
+                            <i class='iconfont icon-kepai-gongli font-13'></i>
+                            <span class='color-gray5 font-14'>当前里程数(KM)</span>
+                        </div>
+                        <div class='int flex'>
+                            <input class='color-gray5 font-14' type="number" placeholder='请输入' v-model='currentMi'>
+                            <span class='font-13' @click='getMaintenance()' v-show='currentMi.length>0'>确认</span>
+                        </div>
+                    </div>
+                </header>
+                <div class='main'>
+                    <section class='recommend'>
+                        <header class='flex'>
+                            <div class='title font-18 color-gray2'>机油推荐</div>
+                            <div class='type font-12 color-gray9'>(机油加注量:
+                                <span v-text='data.engineOil.filling+"L"'>3L</span>
+                                )</div>
+                        </header>
+                        <div class='content flex' v-if='data.engineOil'>
+                            <div class='item'>
+                                <img
+                                    :src="data.engineOil.lowerImage" alt="">
+                                <p class='font-12 color-gray2' v-text='data.engineOil.lower'>超凡喜力5W-40全合成汽车润滑油</p>
                             </div>
+                            <div class='item'>
+                                <img
+                                    :src="data.engineOil.highImage" alt="">
+                                <p class='font-12 color-gray2'><span class='chiji font-10 flex'>最佳</span>{{data.engineOil.high}}</p>
+                            </div>
+                        </div>
+                    </section>
+                    <section class='other-commehernd' v-if='data.other'>
+                        <header class='flex'>
+                            <div class='title font-18 color-gray2'>其他保养项目推荐</div>
+                        </header>
+                        <div class='content'>
+                            <div class='item ' v-for="(item,index) in data.other" :class="{'noborder':item.isShowDetail}">
+                                <div class='preview flex last-no-bd'>
+                                    <div class='left'>
+                                        <p class='font-14 color-gray2' v-text='item.name'>火花塞</p>
+                                        <p class='describe font-12 color-gray9' v-text='item.text'>超凡喜力5W-40全合成汽车润滑油</p>
+                                    </div>
+                                    <i class='iconfont icon-arrowB font-12' v-bind:class="{'show-detail':item.isShowDetail}"
+                                       @click='showDetail(index)'></i>
+                                </div>
 
-                            <div class='detail' v-show='item.isShowDetail'>
-                                <div class='detail-item' v-for='detail in item.data'>
-                                    <div class='brand'>
-                                        <img :src="detail.brandLogo" alt="">
-                                        <span class='font-13 color-gray5' v-text='detail.brandName'>电装</span>
-                                    </div>
-                                    <div class='brand-item' v-for='child in detail.child'>
-                                        <p class='flex'>
-                                            <span class='font-14 color-gray2' v-text='child.first'>专攻以铂金</span>
-                                            <span class='font-12 color-gray9' v-text='child.second'>K20R-U</span>
-                                        </p>
+                                <div class='detail' v-show='item.isShowDetail'>
+                                    <div class='detail-item' v-for='detail in item.data'>
+                                        <div class='brand'>
+                                            <img :src="detail.brandLogo" alt="">
+                                            <span class='font-13 color-gray5' v-text='detail.brandName'>电装</span>
+                                        </div>
+                                        <div class='brand-item' v-for='child in detail.child'>
+                                            <p class='flex'>
+                                                <span class='font-14 color-gray2' v-text='child.first'>专攻以铂金</span>
+                                                <span class='font-12 color-gray9' v-text='child.second'>K20R-U</span>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </section>
-            </div>
-        </section>
-        <default-page v-show='loadData && data.length==0'></default-page>
-    </div>
+                    </section>
+                </div>
+            </section>
+            <default-page v-show='loadData && data.length==0'></default-page>
+        </div>
+    </transition>
+
 </template>
 
 <script>

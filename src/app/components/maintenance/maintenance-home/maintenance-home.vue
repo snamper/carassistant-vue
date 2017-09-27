@@ -1,147 +1,151 @@
 <template>
-    <div class="home" >
-        <section v-show='loadData && brandList.length!=0' >
-            <div class='mask' v-show='changeShow'></div>
-            <header class='header flex' v-bind:class="{'filter':searchShow,'hide222':changeShow}">
-                <div class='searchBox flex'>
-                    <i class='iconfont icon-csousuo font-13'></i>
-                    <span class='font-13 color-gray9' @click='searchCar()'>请输入17位VIN码或车辆名称</span>
-                    <i class='camera iconfont icon-xiangjiline_ font-13 color-gray9' @click='Photograph()'></i>
-                </div>
-                <div class='feedback' @click='feedback()'>
-                    <i class='iconfont icon-woshenpideline_ font-16'></i>
-                    <span class='font-9'>反馈</span>
-                </div>
-            </header>
-            <div class='main' v-bind:class="{'filter':searchShow,'hide222':changeShow}">
-                <div class='content p-t-9' >
-                    <div class='hot'>
-                        <div class='font-18 color-gray2 title'>
-                            <span>热门品牌</span>
-                        </div>
-                        <div class='brand flex'>
-                            <div class='column flex'>
-                                <div class='hot-brand' v-for="(item,index) in hotBrandList" v-if='index<5'>
-                                    <div @click='choose(1,item)'>
-                                        <div class='brand-logo'>
-                                            <img v-bind:src="item.logo" alt="">
+    <transition>
+        <div class="home" >
+
+            <section v-show='loadData && brandList.length!=0' >
+                <div class='mask' v-show='changeShow'></div>
+                <header class='header flex' v-bind:class="{'filter':searchShow,'hide222':changeShow}">
+                    <div class='searchBox flex'>
+                        <i class='iconfont icon-csousuo font-13'></i>
+                        <span class='font-13 color-gray9' @click='searchCar()'>请输入17位VIN码或车辆名称</span>
+                        <i class='camera iconfont icon-xiangjiline_ font-13 color-gray9' @click='Photograph()'></i>
+                    </div>
+                    <div class='feedback' @click='feedback()'>
+                        <i class='iconfont icon-woshenpideline_ font-16'></i>
+                        <span class='font-9'>反馈</span>
+                    </div>
+                </header>
+                <div class='main' v-bind:class="{'filter':searchShow,'hide222':changeShow}">
+                    <div class='content p-t-9' >
+                        <div class='hot'>
+                            <div class='font-18 color-gray2 title'>
+                                <span>热门品牌</span>
+                            </div>
+                            <div class='brand flex'>
+                                <div class='column flex'>
+                                    <div class='hot-brand' v-for="(item,index) in hotBrandList" v-if='index<5'>
+                                        <div @click='choose(1,item)'>
+                                            <div class='brand-logo'>
+                                                <img v-bind:src="item.logo" alt="">
+                                            </div>
+                                            <div class='brand-name font-11 color-gray5' v-text='item.name'>宝马</div>
                                         </div>
-                                        <div class='brand-name font-11 color-gray5' v-text='item.name'>宝马</div>
+                                    </div>
+                                </div>
+                                <div class='column flex'>
+                                    <div class='hot-brand' v-for="(item,index) in hotBrandList" v-if='index>4'>
+                                        <div @click='choose(1,item)'>
+                                            <div class='brand-logo'>
+                                                <img v-bind:src="item.logo" alt="">
+                                            </div>
+                                            <div class='brand-name font-10 color-gray5' v-text='item.name'>宝马</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class='column flex'>
-                                <div class='hot-brand' v-for="(item,index) in hotBrandList" v-if='index>4'>
-                                    <div @click='choose(1,item)'>
-                                        <div class='brand-logo'>
-                                            <img v-bind:src="item.logo" alt="">
-                                        </div>
-                                        <div class='brand-name font-10 color-gray5' v-text='item.name'>宝马</div>
+                        </div>
+                        <div class='brand-list'>
+                            <div class='brand-item' :id="'anchor-'+id" v-for='(item,id) in brandList'>
+                                <div class='item-title'>
+                                    <span class='font-16' v-text='item.initials'>A</span>
+                                </div>
+                                <div class='item-detail flex' v-for="(type,index) in item.data">
+                                    <div class='sign'>
+                                        <img v-bind:src="type.logo">
+                                    </div>
+                                    <div class='name font-13 color-gray2'
+                                         v-bind:class="{'last-no-bd':index==item.data.length-1}">
+                                        <span v-text='type.name' @click='choose(1,type)'></span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class='brand-list'>
-                        <div class='brand-item' :id="'anchor-'+id" v-for='(item,id) in brandList'>
-                            <div class='item-title'>
-                                <span class='font-16' v-text='item.initials'>A</span>
-                            </div>
-                            <div class='item-detail flex' v-for="(type,index) in item.data">
-                                <div class='sign'>
-                                    <img v-bind:src="type.logo">
-                                </div>
-                                <div class='name font-13 color-gray2'
-                                     v-bind:class="{'last-no-bd':index==item.data.length-1}">
-                                    <span v-text='type.name' @click='choose(1,type)'></span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class='nav-bar' v-show='!changeShow' v-bind:class="{'filter':searchShow,'hide222':changeShow}">
-                <div class='nav-item ' v-for='(item,index) in brandList'>
-                    <div class='bubble font-20' v-text='item.initials'>A</div>
-                    <div class='indexes font-9' v-text='item.initials' @click="goAnchor(index)">A</div>
-                </div>
-
-            </div>
-            <div class='changeTime' v-show='changeShow=="changBrand"'>
-                <div class='car-name font-11'>
-                    <span class='color-gray5' v-text='currentChoosed.brand'>安驰</span>
-                    <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
-                </div>
-                <div class='car-time font-14 color-gray2'>
-                    <div class='time-item' v-for='item in currentChoosedNameList' @click='choose(2,item)'>
-                        <span v-text='item'>威宝</span>
-                        <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                    </div>
-                </div>
-            </div>
-            <div class='changeTime' v-show='changeShow=="changeType"'>
-                <div class='car-name font-11'>
-                    <span class='ddid21' v-text='currentChoosed.brand' @click='back(1)'>安驰</span><i
-                    class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5'
-                                                                               v-text='currentChoosed.name'>安驰</span>
-                    <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
-                </div>
-                <div class='car-time font-14 color-gray2'>
-                    <div class='time-item' v-for='item in currentChoosedDisplacementList' @click='choose(3,item)'>
-                        <span>{{item.fuelType}}-{{item.displacement}}</span>
-                        <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                    </div>
-
-                </div>
-            </div>
-            <div class='changeTime' v-show='changeShow=="changeTime"'>
-                <div class='car-name font-11'>
-                    <span class='ddid21' v-text='currentChoosed.brand' @click='back(1)'>安驰</span><i
-                    class='iconfont icon-arrowR font-10 color-grayC'></i><span class='ddid21' @click='back(2)'
-                                                                               v-text='currentChoosed.name'>安驰</span><i
-                    class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5'
-                                                                               v-text='currentChoosed.type.fuelType+"-"+currentChoosed.type.displacement'>安驰</span>
-                    <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
-                </div>
-                <div class='car-time font-14'>
-                    <div class='time-item' @click='choose(4,item)' v-for='item in currentChoosedYearList'>
-                        <span v-text='item'>2015年产</span>
-                        <i class='iconfont icon-arrowR font-10 color-grayC'></i>
-                    </div>
-                </div>
-            </div>
-            <div class='searchPage' v-bind:class="{'opacity':searchShow&&!changeShow,'hide222':changeShow,}">
-                <div class='search-default font-13 color-gray9'>
-                    <div class='searchBox' @click="searchDefault=true">
-                        <i class='back iconfont icon-arrowL font-10' @click='searchShow=!searchShow'></i>
-                        <div class='search flex'>
-                            <div class='search-icon '>
-                                <i class='iconfont icon-csousuo font-11'></i>
-                            </div>
-                            <input id='input' v-model='searchName' class='font-13 color-gray2' type="text"
-                                   placeholder='请输入17位VIN码或车辆名称'/>
-                            <i class='iconfont icon-quxiaoglyph_ font-13' @click='searchName=""'></i>
 
                         </div>
-                        <span @click='search()'>搜索</span>
-                    </div>
-
-                    <div class='result' v-show='searchDefault'>
-                        <ul>
-                            <li class='font-14 flex color-gray2' v-for='item in searchDataList' @click='choose(1,item)'>
-                                <div class='img'>
-                                    <img v-bind:src="item.logo">
-                                </div>
-                                <span v-text='item.name'>奥迪</span>
-                            </li>
-                        </ul>
                     </div>
                 </div>
-            </div>
-        </section>
-        <default-page v-show='loadData && brandList.length==0'></default-page>
-    </div>
+                <div class='nav-bar' v-show='!changeShow' v-bind:class="{'filter':searchShow,'hide222':changeShow}">
+                    <div class='nav-item ' v-for='(item,index) in brandList'>
+                        <div class='bubble font-20' v-text='item.initials'>A</div>
+                        <div class='indexes font-9' v-text='item.initials' @click="goAnchor(index)">A</div>
+                    </div>
+
+                </div>
+                <div class='changeTime' v-show='changeShow=="changBrand"'>
+                    <div class='car-name font-11'>
+                        <span class='color-gray5' v-text='currentChoosed.brand'>安驰</span>
+                        <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
+                    </div>
+                    <div class='car-time font-14 color-gray2'>
+                        <div class='time-item' v-for='item in currentChoosedNameList' @click='choose(2,item)'>
+                            <span v-text='item'>威宝</span>
+                            <i class='iconfont icon-arrowR font-10 color-grayC'></i>
+                        </div>
+                    </div>
+                </div>
+                <div class='changeTime' v-show='changeShow=="changeType"'>
+                    <div class='car-name font-11'>
+                        <span class='ddid21' v-text='currentChoosed.brand' @click='back(1)'>安驰</span><i
+                        class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5'
+                                                                                   v-text='currentChoosed.name'>安驰</span>
+                        <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
+                    </div>
+                    <div class='car-time font-14 color-gray2'>
+                        <div class='time-item' v-for='item in currentChoosedDisplacementList' @click='choose(3,item)'>
+                            <span>{{item.fuelType}}-{{item.displacement}}</span>
+                            <i class='iconfont icon-arrowR font-10 color-grayC'></i>
+                        </div>
+
+                    </div>
+                </div>
+                <div class='changeTime' v-show='changeShow=="changeTime"'>
+                    <div class='car-name font-11'>
+                        <span class='ddid21' v-text='currentChoosed.brand' @click='back(1)'>安驰</span><i
+                        class='iconfont icon-arrowR font-10 color-grayC'></i><span class='ddid21' @click='back(2)'
+                                                                                   v-text='currentChoosed.name'>安驰</span><i
+                        class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5'
+                                                                                   v-text='currentChoosed.type.fuelType+"-"+currentChoosed.type.displacement'>安驰</span>
+                        <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
+                    </div>
+                    <div class='car-time font-14'>
+                        <div class='time-item' @click='choose(4,item)' v-for='item in currentChoosedYearList'>
+                            <span v-text='item'>2015年产</span>
+                            <i class='iconfont icon-arrowR font-10 color-grayC'></i>
+                        </div>
+                    </div>
+                </div>
+                <div class='searchPage' v-bind:class="{'opacity':searchShow&&!changeShow,'hide222':changeShow,}">
+                    <div class='search-default font-13 color-gray9'>
+                        <div class='searchBox' @click="searchDefault=true">
+                            <i class='back iconfont icon-arrowL font-10' @click='searchShow=!searchShow'></i>
+                            <div class='search flex'>
+                                <div class='search-icon '>
+                                    <i class='iconfont icon-csousuo font-11'></i>
+                                </div>
+                                <input id='input' v-model='searchName' class='font-13 color-gray2' type="text"
+                                       placeholder='请输入17位VIN码或车辆名称'/>
+                                <i class='iconfont icon-quxiaoglyph_ font-13' @click='searchName=""'></i>
+
+                            </div>
+                            <span @click='search()'>搜索</span>
+                        </div>
+
+                        <div class='result' v-show='searchDefault'>
+                            <ul>
+                                <li class='font-14 flex color-gray2' v-for='item in searchDataList' @click='choose(1,item)'>
+                                    <div class='img'>
+                                        <img v-bind:src="item.logo">
+                                    </div>
+                                    <span v-text='item.name'>奥迪</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <default-page v-show='loadData && brandList.length==0'></default-page>
+        </div>
+    </transition>
+
 </template>
 <script>
     import api from "../../../api/maintenance-api";
