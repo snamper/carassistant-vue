@@ -51,7 +51,7 @@
                         <div class='item'>
                             <img
                                 :src="data.engineOil.highImage" alt="">
-                            <p class='font-12 color-gray2'><span class='chiji font-10 flex'>最佳</span>{{data.engineOil.lower}}</p>
+                            <p class='font-12 color-gray2'><span class='chiji font-10 flex'>最佳</span>{{data.engineOil.high}}</p>
                         </div>
                     </div>
                 </section>
