@@ -1,11 +1,13 @@
 @import "../../../css/config/variables";
 @import "../../../css/config/mixins/border";
-
+.bg{
+  background: url("../../../images/maintenance/bg.jpg") no-repeat;
+}
 .maintenance-recommend {
   //页面样式
   @font-family-default: "Microsoft YaHei UI" !important;
   font-family: @font-family-default;
-  background: url("../../../images/maintenance/background.png") no-repeat;
+
   background-size: 100% 100%;
   position: absolute;
   top:0;
@@ -13,9 +15,10 @@
   width: 100%;
   overflow: scroll;
   .header{
-    background: rgba(255, 211, 1,0.8);
+    background: rgba(255, 211, 1,0.95);
     padding: 0 20/100rem;
     padding-bottom: 30/100rem;
+    line-height: 1;
     .top{
       justify-content: space-between;
       align-items: center;
@@ -27,22 +30,24 @@
         .Pseudo-border-after();
         background: #fff;
       }
+      @fd:0.64rem;
       .title{
         color: #fff;
         align-items: center;
-        max-width: 80%;
         word-break: break-all;
+        width: (calc(~"100% - @{fd}"));
+        overflow: hidden;
         span{
           margin-right: 15/100rem;
         }
       }
       .feedback{
-
         margin-top: 0.05rem;
-
         float: right;
         text-align: center;
         line-height: 1;
+        width: @fd;
+        margin-left: 30/100rem;
         span{
           color: #fff;
           line-height: 1;
@@ -117,7 +122,7 @@
         }
         ::-webkit-input-placeholder { /* WebKit browsers */
           color:    #999;
-          font-size: 14px;
+          //font-size: 14px;
         }
         :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
           color:    #999;
@@ -199,6 +204,7 @@
       margin-top: 20/100rem;
       border-radius: 8/100rem;
       overflow: hidden;
+      line-height: 1;
       header{
         padding: 30/100rem 20/100rem 25/100rem 20/100rem;
         align-items: center;
@@ -235,8 +241,17 @@
             .detail-item{
               overflow: hidden;
               margin-top: 30/100rem;
+              .logo{
+                width: 60/100rem;
+                height: 60/100rem;
+                float: left;
+                img{
+                  width: 100%;
+                }
+              }
               .brand{
                 overflow: hidden;
+                float: left;
                 img{
                   float: left;
                   width: 1.1rem;
@@ -244,6 +259,9 @@
                   background: #ccc;
                   margin-right: 15/100rem;
                 }
+              }
+              .type{
+                float: right;
               }
               .brand-item{
 

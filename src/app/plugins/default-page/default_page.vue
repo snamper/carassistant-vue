@@ -17,7 +17,6 @@
         position: absolute;
         text-align: center;
         top:2.1rem;
-        height:100vh;
         width: 100%;
         line-height: 1;
         .img{

@@ -56,7 +56,7 @@ export default {
                  'X-Requested-With': 'XMLHttpRequest',
                  'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             },
-           // withCredentials: true //解决跨域cookie问题
+            withCredentials: true //解决跨域cookie问题
         }).then(
             (response) => {
                 return checkStatus(response)
