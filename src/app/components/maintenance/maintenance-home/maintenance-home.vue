@@ -392,7 +392,7 @@
                     .then((data) => {
                         loading.show('加载中...')
                             if (data.result_code == 0) {
-                                self.levelId = data.response.levelId1
+                                self.levelId = data.response.levelId
                                 self.$router.push({path:'/maintenance/maintenance-recommend',query: {levelId:self.levelId}});
                             } else {
                                 self.$toast.show({
