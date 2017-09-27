@@ -14,14 +14,14 @@
                 </div>
             </header>
             <div class='main' v-bind:class="{'filter':searchShow,'hide222':changeShow}">
-                <div class='content p-t-9'>
+                <div class='content p-t-9' >
                     <div class='hot'>
                         <div class='font-18 color-gray2 title'>
                             <span>热门品牌</span>
                         </div>
                         <div class='brand flex'>
                             <div class='column flex'>
-                                <div class='hot-brand' v-for="(item,index) in htoBrandList" v-if='index<5'>
+                                <div class='hot-brand' v-for="(item,index) in hotBrandList" v-if='index<5'>
                                     <div @click='choose(1,item)'>
                                         <div class='brand-logo'>
                                             <img v-bind:src="item.logo" alt="">
@@ -31,7 +31,7 @@
                                 </div>
                             </div>
                             <div class='column flex'>
-                                <div class='hot-brand' v-for="(item,index) in htoBrandList" v-if='index>4'>
+                                <div class='hot-brand' v-for="(item,index) in hotBrandList" v-if='index>4'>
                                     <div @click='choose(1,item)'>
                                         <div class='brand-logo'>
                                             <img v-bind:src="item.logo" alt="">
@@ -121,7 +121,7 @@
                             </div>
                             <input id='input' v-model='searchName' class='font-13 color-gray2' type="text"
                                    placeholder='请输入17位VIN码或车辆名称'/>
-                            <i class='iconfont icon-quxiaoglyph_ font-13'></i>
+                            <i class='iconfont icon-quxiaoglyph_ font-13' ></i>
 
                         </div>
                         <span @click='search()'>搜索</span>
@@ -156,8 +156,7 @@
                 searchDefault: false,
                 brandList: [],
                 searchName: '',
-                htoBrandList1: [],
-                htoBrandList2: [],
+                hotBrandList: [],
                 currentChoosedNameList: [],
                 currentChoosedDisplacementList: [],
                 currentChoosedYearList: [],
@@ -192,6 +191,7 @@
                         self.brandList = data.response.list
                         loading.hide()
                         self.loadData = true
+                        self.scroll()
                     }
                 });
                 //热门列表
@@ -210,8 +210,8 @@
                         if(data.response.list.length==9){
                             data.response.list=data.response.list.concat([{}])
                         }
-                        self.htoBrandList = data.response.list;
-                        console.log(self.htoBrandList)
+                        self.hotBrandList = data.response.list;
+                        console.log(self.hotBrandList)
                        // self.htoBrandList1 = self.htoBrandList.slice(0, 4)
                       //  self.htoBrandList2 = self.htoBrandList.slice(5, 8)
                     }
@@ -353,9 +353,11 @@
             },
             goAnchor(index) {
                 var anchor = this.$el.querySelector('#anchor-' + index)
-                $('.main').animate({
-                    scrollTop: anchor.offsetTop - 48
-                }, 300);
+//                $('.main').animate({
+//                    scrollTop: anchor.offsetTop - 46
+//                }, 300);
+                $('.main').scrollTop(
+                     anchor.offsetTop - 46);
                 $('.bubble').hide()
                 $('.nav-item').removeClass('nav-item-active')
                 $('.nav-item').eq(index).addClass('nav-item-active')
@@ -390,6 +392,25 @@
                         })
                     )
             },
+            scroll(){
+                var self=this;
+                $('.main').scroll(function(event){
+                    var x=$('.hot').innerHeight()
+                    console.log(x+'1111')
+                    for(var i in self.brandList){
+                        if($('.brand-item').eq(i).offset().top<47){
+                            if($('.nav-item').eq(i).hasClass('nav-item-active') && i!=0){
+                                return
+                            }
+                                $('.nav-item').removeClass('nav-item-active')
+                                $('.nav-item').eq(i).addClass('nav-item-active')
+                                console.log($('.brand-item').eq(i).offset().top)
+                                console.log(i)
+                        }
+
+                    }
+                });
+            }
         },
         components: {}
     }
