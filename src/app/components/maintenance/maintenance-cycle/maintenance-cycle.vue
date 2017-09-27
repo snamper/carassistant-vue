@@ -122,9 +122,7 @@
                 self.levelId=self.$router.currentRoute.query.levelId
                 self.changeType('baoyang')
             }
-            setTimeout(function () {
-                self.stopDrop()
-            })
+
         },
         watch: {
             //监听动态路由
@@ -209,20 +207,31 @@
                 var self=this;
                 self.tipshow=!self.tipshow
                 this.scroll()
+                setTimeout(function () {
+                    self.overscroll(document.querySelector('.term-right'));//哪里需要可以局部滚动，添加一个“scroll”的class
+                    document.body.addEventListener('touchmove', function(evt) {
+                        if(!evt._isScroller){
+                            debugger
+                            evt.preventDefault();
+                        }
+                    });
+                })
             },
-            stopDrop(){
-                var lastY;//最后一次y坐标点
-                $('.term-right').on('touchstart', function(event) {
-                    lastY = event.originalEvent.changedTouches[0].clientY;//点击屏幕时记录最后一次Y度坐标。
-                });
-                $('.term-right').on('touchmove', function(event) {
-                    var y = event.originalEvent.changedTouches[0].clientY;
-                    var st = $(this).scrollTop(); //滚动条高度 
-                    if (y >= lastY && st <= 10) {//如果滚动条高度小于0，可以理解为到顶了，且是下拉情况下，阻止touchmove事件。
-                        lastY = y;
-                        event.preventDefault();
+            overscroll(el){
+                el.addEventListener('touchstart', function(){
+                    var top = el.scrollTop;
+                    var totalScroll = el.scrollHeight;
+                    var currentScroll = top + el.offsetHeight;
+                    if(top === 0) {
+                        el.scrollTop = 1;
+                    }else if(currentScroll === totalScroll){
+                        el.scrollTop = top - 1;
                     }
-                    lastY = y;
+                });
+                el.addEventListener('touchmove', function(evt){
+                    if(el.offsetHeight < el.scrollHeight){
+                        evt._isScroller = true;
+                    }
                 });
             }
 
@@ -243,6 +252,8 @@
             //this.$refs.mySwiper1.swiper.params.control=this.$refs.mySwiper3.swiper
         }
     }
+
+
 </script>
 
 <style lang="less" scoped>
