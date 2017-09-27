@@ -123,7 +123,7 @@
                 self.changeType('baoyang')
             }
             setTimeout(function () {
-                self.stopDrop()
+            //    self.stopDrop()
             })
         },
         watch: {

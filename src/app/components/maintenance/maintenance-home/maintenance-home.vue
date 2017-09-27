@@ -21,7 +21,7 @@
                         </div>
                         <div class='brand flex'>
                             <div class='column flex'>
-                                <div class='hot-brand' v-for="item in htoBrandList1">
+                                <div class='hot-brand' v-for="(item,index) in htoBrandList" v-if='index<5'>
                                     <div @click='choose(1,item)'>
                                         <div class='brand-logo'>
                                             <img v-bind:src="item.logo" alt="">
@@ -31,12 +31,12 @@
                                 </div>
                             </div>
                             <div class='column flex'>
-                                <div class='hot-brand' v-for="item in htoBrandList2">
+                                <div class='hot-brand' v-for="(item,index) in htoBrandList" v-if='index>4'>
                                     <div @click='choose(1,item)'>
                                         <div class='brand-logo'>
                                             <img v-bind:src="item.logo" alt="">
                                         </div>
-                                        <div class='brand-name font-10 color-gray5' v-text='item.item'>宝马</div>
+                                        <div class='brand-name font-10 color-gray5' v-text='item.name'>宝马</div>
                                     </div>
                                 </div>
                             </div>
@@ -197,9 +197,23 @@
                 //热门列表
                 api.hotBrand().then((data) => {
                     if (data.result_code == 0) {
+
+                        if(data.response.list.length==6){
+                            data.response.list=data.response.list.concat([{},{},{},{}])
+                        }
+                        if(data.response.list.length==7){
+                            data.response.list=data.response.list.concat([{},{},{}])
+                        }
+                        if(data.response.list.length==8){
+                            data.response.list=data.response.list.concat([{},{}])
+                        }
+                        if(data.response.list.length==9){
+                            data.response.list=data.response.list.concat([{}])
+                        }
                         self.htoBrandList = data.response.list;
-                        self.htoBrandList1 = self.htoBrandList.slice(0, 4)
-                        self.htoBrandList2 = self.htoBrandList.slice(5, 8)
+                        console.log(self.htoBrandList)
+                       // self.htoBrandList1 = self.htoBrandList.slice(0, 4)
+                      //  self.htoBrandList2 = self.htoBrandList.slice(5, 8)
                     }
                 });
             },
