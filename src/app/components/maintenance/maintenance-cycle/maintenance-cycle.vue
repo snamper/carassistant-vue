@@ -207,35 +207,7 @@
                 var self=this;
                 self.tipshow=!self.tipshow
                 this.scroll()
-                setTimeout(function () {
-                    self.overscroll(document.querySelector('.term-right'));//哪里需要可以局部滚动，添加一个“scroll”的class
-                    document.body.addEventListener('touchmove', function(evt) {
-                        if(!evt._isScroller){
-                            debugger
-                            evt.preventDefault();
-                        }
-                    });
-                })
             },
-            overscroll(el){
-                el.addEventListener('touchstart', function(){
-                    var top = el.scrollTop;
-                    var totalScroll = el.scrollHeight;
-                    var currentScroll = top + el.offsetHeight;
-                    if(top === 0) {
-                        el.scrollTop = 1;
-                    }else if(currentScroll === totalScroll){
-                        el.scrollTop = top - 1;
-                    }
-                });
-                el.addEventListener('touchmove', function(evt){
-                    if(el.offsetHeight < el.scrollHeight){
-                        evt._isScroller = true;
-                    }
-                });
-            }
-
-
     },
         components: {},
         computed: {
