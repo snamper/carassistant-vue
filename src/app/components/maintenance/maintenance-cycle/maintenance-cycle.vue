@@ -123,12 +123,11 @@
                 self.changeType('baoyang')
             }
             setTimeout(function () {
-                this.stopDrop()
+                self.stopDrop()
             })
         },
         watch: {
             //监听动态路由
-
         },
         methods: {
             //页面方法
