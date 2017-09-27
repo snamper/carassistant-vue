@@ -389,22 +389,23 @@
                     .then((localIds)=>(function () {
                             loading.show('加载中...')
                             uploadImageToWx(localIds)
+                                .then((serverId)=>(api.getVinByImg({vinImgId: serverId}))
+                                .then((data) => {
+                                    if (data.result_code == 0) {
+                                        self.levelId = data.response.levelId
+                                        self.$router.push({path:'/maintenance/maintenance-recommend',query: {levelId:self.levelId}});
+                                    } else {
+                                        self.$toast.show({
+                                            showTime: 2,
+                                            message: data.message,
+                                            style: 'error'
+                                        });
+                                    }
+                                    loading.hide()
+                                })
+                            )
                         }))
-                    .then((serverId)=>(api.getVinByImg({vinImgId: serverId}))
-                    .then((data) => {
-                            if (data.result_code == 0) {
-                                self.levelId = data.response.levelId
-                                self.$router.push({path:'/maintenance/maintenance-recommend',query: {levelId:self.levelId}});
-                            } else {
-                                self.$toast.show({
-                                    showTime: 2,
-                                    message: data.message,
-                                    style: 'error'
-                                });
-                            }
-                            loading.hide()
-                        })
-                    )
+
             },
             scroll(){
                 var self=this;
