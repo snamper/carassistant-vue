@@ -73,7 +73,7 @@
                                 </div>
                                 <div class='detail'
                                      :class="{'height0':!item.isShowDetail}" v-zzz>
-                                    <div class='detail-item flex' v-for='detail in item.data' >
+                                    <div class='detail-item flex' v-for='detail in item.data' v-show='item.isShowDetail'>
                                         <div class='brand-item '>
                                             <div class='logo flex'>
                                                 <img :src="detail.brandLogo" alt="">
