@@ -24,7 +24,7 @@ export default {
                     $('.hidebox').css('lineHeight',lineHeight)
                     $('.hidebox').css('paddingLeft','0.1rem')
                 }
-                el.onchange=function () {
+                el.onkeyup=function () {
 
                         $('.hidebox').text(el.value)
                         $(this).height($('.hidebox').height())
