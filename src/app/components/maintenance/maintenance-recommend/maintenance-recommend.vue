@@ -37,24 +37,31 @@
                     </div>
                 </header>
                 <div class='main'>
-                    <section class='recommend' v-if='data.engineOil.length!=0'>
-                        <header class='flex'>
-                            <div class='title font-18 color-gray2'>机油推荐</div>
-                            <div class='type font-12 color-gray9'>(机油加注量:
-                                <span v-text='data.engineOil.filling+"L"'>3L</span>
-                                )</div>
-                        </header>
-                        <div class='content flex' >
-                            <div class='item'>
-                                <img
-                                    :src="data.engineOil.lowerImage" alt="">
-                                <p class='font-12 color-gray2' v-text='data.engineOil.lower'>超凡喜力5W-40全合成汽车润滑油</p>
+                    <section class='recommend' >
+                        <div class='' v-if='data.engineOil.length!=0'>
+                            <header class='flex'>
+                                <div class='title font-18 color-gray2'>机油推荐</div>
+                                <div class='type font-12 color-gray9'>(机油加注量:
+                                    <span v-text='data.engineOil.filling+"L"'>3L</span>
+                                    )</div>
+                            </header>
+                            <div class='content flex' >
+                                <div class='item'>
+                                    <img
+                                        :src="data.engineOil.lowerImage" alt="">
+                                    <p class='font-12 color-gray2' v-text='data.engineOil.lower'>超凡喜力5W-40全合成汽车润滑油</p>
+                                </div>
+                                <div class='item'>
+                                    <img
+                                        :src="data.engineOil.highImage" alt="">
+                                    <p class='font-12 color-gray2'><span class='chiji font-10 flex'>最佳</span>{{data.engineOil.high}}</p>
+                                </div>
                             </div>
-                            <div class='item'>
-                                <img
-                                    :src="data.engineOil.highImage" alt="">
-                                <p class='font-12 color-gray2'><span class='chiji font-10 flex'>最佳</span>{{data.engineOil.high}}</p>
-                            </div>
+                        </div>
+                        <div class='noEngineOil' v-if='data.engineOil.length==0'>
+                            <img src="../.././../../images/default/vcy_pic_content" alt="">
+                            <p class='title color-gray5'>暂无机油推荐</p>
+                            <p class='title-en color-gray5'>Oil recommendation</p>
                         </div>
                     </section>
                     <section class='other-commehernd' v-if='data.other.length!=0'>

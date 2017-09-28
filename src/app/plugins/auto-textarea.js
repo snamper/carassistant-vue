@@ -17,7 +17,7 @@ export default {
                 }
                 $('body').append("<div class='hidebox'></div>")
                 $('.hidebox').css('wordBreak','break-all')
-                //$('.hidebox').hide()
+                $('.hidebox').hide()
                 $('.hidebox').css('background','red')
                 el.onfocus=function () {
                     var fontSize = $(this).css('font-size')
