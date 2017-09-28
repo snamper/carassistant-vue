@@ -63,16 +63,16 @@
                         </header>
                         <div class='content'>
                             <div class='item' v-for="(item,index) in data.other" :class="{'noborder':item.isShowDetail}">
-                                <div class='preview flex last-no-bd'>
+                                <div class='preview flex last-no-bd' @click='showDetail(index)' v-zzz>
                                     <div class='left'>
                                         <p class='font-14 color-gray2' v-text='item.name'>火花塞</p>
                                         <p class='describe font-12 color-gray9' v-text='item.text'>超凡喜力5W-40全合成汽车润滑油</p>
                                     </div>
                                     <i class='iconfont icon-arrowB font-12' v-bind:class="{'show-detail':item.isShowDetail}"
-                                       @click='showDetail(index)'></i>
+                                       ></i>
                                 </div>
                                 <div class='detail'
-                                     :class="{'height0':!item.isShowDetail}" v-zzz>
+                                     :class="{'height0':!item.isShowDetail}" >
                                     <div class='detail-item flex' v-for='detail in item.data' >
                                         <div class='brand-item '>
                                             <div class='logo flex'>
@@ -108,22 +108,16 @@
         //  componentUpdated: 被绑定元素所在模板完成一次更新周期时调用。
         //  unbind: 只调用一次，指令与元素解绑时调用。
         bind(el,binding){
-            setTimeout(
-                function () {
-
-                    var s=0
-                    var firstHeight=$(el).children()
-                    for(var i=0;i< firstHeight.length;i++){
-                        console.log(firstHeight.eq(i).innerHeight()+'lllll')
-                        s=firstHeight.eq(i).innerHeight()+s
-                    }
-                    $(el).height(s)
+            $(el).click(function () {
+                var next=$(el).next()
+                console.log(next)
+                var s=0
+                var firstHeight=next.children()
+                for(var i=0;i< firstHeight.length;i++){
+                    s=firstHeight.eq(i).innerHeight()+s
                 }
-            )
-
-
-        },
-        update(el,binding,vnode){
+                next.height(s)
+            })
 
         },
     })
@@ -206,7 +200,6 @@
                     this.data.other[index].isShowDetail=true
                 }
 
-                console.log(this.data.other[index].isShowDetail)
             }
         },
         components:{
