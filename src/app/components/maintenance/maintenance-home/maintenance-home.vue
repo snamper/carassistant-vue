@@ -377,7 +377,7 @@
                 if (navigator.vibrate) {
                     // 支持
                     console.log("支持设备震动！");
-                    navigator.vibrate(500);
+                    navigator.vibrate(200);
                 }
             },
             feedback() {
