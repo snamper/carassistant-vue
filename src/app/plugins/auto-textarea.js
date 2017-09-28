@@ -32,10 +32,12 @@ export default {
                     $('.hidebox').css('paddingLeft','0.07rem')
                 }
                 el.onkeyup=function () {
+                        setTimeout(function () {
+                            $('.hidebox').text(el.value)
+                            $(this).height($('.hidebox').height())
+                            console.log($(this).height())
+                        },100)
 
-                        $('.hidebox').text(el.value)
-                        $(this).height($('.hidebox').height())
-                        console.log($(this).height())
                 }
             },
             update(el,binding,vnode){
