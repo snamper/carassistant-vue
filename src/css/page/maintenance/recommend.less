@@ -18,6 +18,12 @@
     height: 0 !important;
     overflow: hidden;
   }
+  .fade-enter-active, .fade-leave-active {
+    height: 0
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+    //height: 0
+  }
   .header{
     background: rgba(255, 211, 1,0.95);
     padding: 0 20/100rem;

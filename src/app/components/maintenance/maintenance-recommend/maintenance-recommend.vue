@@ -62,32 +62,37 @@
                             <div class='title font-18 color-gray2'>其他保养项目推荐</div>
                         </header>
                         <div class='content'>
-                            <div class='item' v-for="(item,index) in data.other" :class="{'noborder':item.isShowDetail}">
-                                <div class='preview flex last-no-bd' @click='showDetail(index)'>
-                                    <div class='left'>
-                                        <p class='font-14 color-gray2' v-text='item.name'>火花塞</p>
-                                        <p class='describe font-12 color-gray9' v-text='item.text'>超凡喜力5W-40全合成汽车润滑油</p>
+
+                                <div class='item' v-for="(item,index) in data.other" :class="{'noborder':item.isShowDetail}">
+                                    <div class='preview flex last-no-bd' @click='showDetail(index)'>
+                                        <div class='left'>
+                                            <p class='font-14 color-gray2' v-text='item.name'>火花塞</p>
+                                            <p class='describe font-12 color-gray9' v-text='item.text'>超凡喜力5W-40全合成汽车润滑油</p>
+                                        </div>
+                                        <i class='iconfont icon-arrowB font-12' v-bind:class="{'show-detail':item.isShowDetail}"
+                                        ></i>
                                     </div>
-                                    <i class='iconfont icon-arrowB font-12' v-bind:class="{'show-detail':item.isShowDetail}"
-                                       ></i>
-                                </div>
-                                <div class='detail'
-                                     :class="{'height0':!item.isShowDetail}" v-zzz>
-                                    <div class='detail-item flex' v-for='detail in item.data' v-show='item.isShowDetail'>
-                                        <div class='brand-item '>
-                                            <div class='logo flex'>
-                                                <img :src="detail.brandLogo" alt="">
-                                            </div>
-                                            <div class='brand font-14 color-gray2 flex' v-text='detail.brandName'>
-                                                电装
-                                            </div>
-                                            <div class='flex type font-12 color-gray9'
-                                                 v-text='(detail.first?detail.first:"")+" "+(detail.second?detail.second:"")+" "+(detail.third?detail.third:"")'>
+                                    <transition name='fade'>
+                                        <div class='detail'
+                                             :class="{'height0':!item.isShowDetail}" v-zzz v-show='item.isShowDetail'>
+                                            <div class='detail-item flex' v-for='detail in item.data' >
+                                                <div class='brand-item '>
+                                                    <div class='logo flex'>
+                                                        <img :src="detail.brandLogo" alt="">
+                                                    </div>
+                                                    <div class='brand font-14 color-gray2 flex' v-text='detail.brandName'>
+                                                        电装
+                                                    </div>
+                                                    <div class='flex type font-12 color-gray9'
+                                                         v-text='(detail.first?detail.first:"")+" "+(detail.second?detail.second:"")+" "+(detail.third?detail.third:"")'>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </transition>
+
                                 </div>
-                            </div>
+
                         </div>
                     </section>
                 </div>
