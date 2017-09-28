@@ -36,8 +36,8 @@
                         <div class='term-right'>
                             <div class='term-right-item' v-for='item in maintenanceDatalist.data'>
                                 <div class='status flex' v-for='child in maintenanceDatalist.header'>
-                                    <div class='radio' :class="{'cantRadio':child.state==2}" v-show='child==item.value'
-                                         @click='goOtherRecommend(item)'></div>
+                                    <div class='radio' :class="{'cantRadio':item.state==2}" v-show='child==item.value'
+                                         @click='item.state==1?goOtherRecommend(item):""'></div>
                                 </div>
                             </div>
                         </div>

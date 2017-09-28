@@ -74,7 +74,7 @@
                         <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
                     </div>
                     <div class='car-time font-14 color-gray2'>
-                        <div class='time-item' v-for='item in currentChoosedNameList' @click='choose(2,item)'>
+                        <div class='time-item flex' v-for='item in currentChoosedNameList' @click='choose(2,item)'>
                             <span v-text='item'>威宝</span>
                             <i class='iconfont icon-arrowR font-10 color-grayC'></i>
                         </div>
@@ -88,7 +88,7 @@
                         <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
                     </div>
                     <div class='car-time font-14 color-gray2'>
-                        <div class='time-item' v-for='item in currentChoosedDisplacementList' @click='choose(3,item)'>
+                        <div class='time-item flex' v-for='item in currentChoosedDisplacementList' @click='choose(3,item)'>
                             <span>{{item.fuelType}}-{{item.displacement}}</span>
                             <i class='iconfont icon-arrowR font-10 color-grayC'></i>
                         </div>
@@ -105,7 +105,7 @@
                         <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
                     </div>
                     <div class='car-time font-14'>
-                        <div class='time-item' @click='choose(4,item)' v-for='item in currentChoosedYearList'>
+                        <div class='time-item flex' @click='choose(4,item)' v-for='item in currentChoosedYearList'>
                             <span v-text='item'>2015年产</span>
                             <i class='iconfont icon-arrowR font-10 color-grayC'></i>
                         </div>
