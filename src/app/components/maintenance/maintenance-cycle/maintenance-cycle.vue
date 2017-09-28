@@ -1,10 +1,10 @@
 <template>
     <div class="maintenance-cycle" >
         <section v-if=' maintenanceDatalist.length!=0'>
-            <div class='mask flex font-15' v-show='tipshow'>
+            <div class='mask flex font-15' v-show='  isfirst'>
                 <i class='iconfont icon-guanbi' @click='tipIsShow()'></i>
             </div>
-            <div v-show='!tipshow'>
+            <div v-show='!isfirst'>
                 <nav class='flex font-12 color-gray-2' v-bind:class="{ active: currentType=='yuanchang' }">
                     <div class='nav-item' v-bind:class="{ 'active-color': currentType=='baoyang' }"
                          @click='changeType("baoyang")'>保养计划周期</div>
@@ -110,7 +110,8 @@
                 tipshow:true,
                 maintenanceDatalist:'',
                 rawDatalist:'',
-                loadData:false
+                loadData:false,
+                isfirst:true
             }
         },
         created() {
@@ -124,7 +125,12 @@
                 self.changeType('baoyang')
             }
             this.getData()
-
+            console.log(sessionStorage.getItem("isfirst")+'zzz')
+            if(!sessionStorage.getItem("isfirst")){
+                sessionStorage.setItem("isfirst", true);
+            }else{
+                this.isfirst=false
+            }
         },
         watch: {
             //监听动态路由
@@ -203,6 +209,7 @@
             tipIsShow(){
                 var self=this;
                 self.tipshow=!self.tipshow
+                self.isfirst=false
                 this.scroll()
             },
     },
