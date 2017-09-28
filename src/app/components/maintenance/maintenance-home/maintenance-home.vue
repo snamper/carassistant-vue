@@ -50,9 +50,7 @@
                                     <span class='font-16' v-text='item.initials'>A</span>
                                 </div>
                                 <div class='item-detail flex' v-for="(type,index) in item.data">
-                                    <div class='sign'>
                                         <img v-bind:src="type.logo">
-                                    </div>
                                     <div class='name font-13 color-gray2'
                                          v-bind:class="{'last-no-bd':index==item.data.length-1}">
                                         <span v-text='type.name' @click='choose(1,type)'></span>

@@ -14,6 +14,10 @@
   height: 100%;
   width: 100%;
   overflow: scroll;
+  .height0{
+    height: 0 !important;
+    overflow: hidden;
+  }
   .header{
     background: rgba(255, 211, 1,0.95);
     padding: 0 20/100rem;
@@ -215,6 +219,7 @@
         .item{
           line-height: 1;
           position: relative;
+          background: #fff;
           &:after{
             .Pseudo-border-after();
           }
@@ -239,15 +244,14 @@
           }
 
           .detail{
+            transition: 0.3s;
+            height: max-content;
             .detail-item{
               height: 80/100rem;
               background: #f7f7f7;
               align-items: center;
-              position: relative;
-              &:after{
-                .Pseudo-border-after();
-               // background: #fff;
-              }
+              padding: 0 10/100rem;
+
               .logo{
                 width: 60/100rem;
                 height: 60/100rem;
@@ -282,8 +286,12 @@
               .brand-item{
                 width: 100%;
                 height: 100%;
-                padding: 0 10/100rem;
                 overflow: hidden;
+                position: relative;
+                &:after{
+                  .Pseudo-btnBorder-after(@border-width:1px 0px 0px 0px,@border-color: @hr-border-color,@border-style: dashed,@radius:0px);
+                  // background: #fff;
+                }
                 p{
                   position: relative;
                   height: 80/100rem;
@@ -297,10 +305,13 @@
 
               }
             }
-            .detail-item:nth-last-child(1){
-              &:after{
-                height: 0;
+            .detail-item:nth-child(1){
+              .brand-item{
+                &:after{
+                  border:  none !important;
+                }
               }
+
             }
           }
         }

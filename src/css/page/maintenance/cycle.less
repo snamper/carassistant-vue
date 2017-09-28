@@ -253,26 +253,24 @@
       }
       .term-right {
         float: right;
-        overflow: scroll;
         width: calc(~"100% - @{diff}");
         line-height:1;
         .term-right-item {
           width:100%;
           height: 0.9rem;
           position: relative;
-          margin-left: 15/100rem;
           &:after {
             .Pseudo-btnBorder-after(@border-width:0px 0px 1px 0px,@border-color: @hr-border-color,@border-style: dotted,@radius:0px);
           }
           .flex {
-            width: 50%;
-            height: 90/100rem;
-            float: left;
-            align-items: center;
-            justify-content: center;
-          }
+             width: 50%;
+             height: 90/100rem;
+             float: left;
+             align-items: center;
+             justify-content: center;
+           }
           .flex:nth-child(1){
-            margin-left: -15/100rem;
+            padding-right: 10/100rem;
           }
         }
         .radio{

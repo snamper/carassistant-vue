@@ -71,14 +71,14 @@
                                     <i class='iconfont icon-arrowB font-12' v-bind:class="{'show-detail':item.isShowDetail}"
                                        @click='showDetail(index)'></i>
                                 </div>
-
-                                <div class='detail' v-show='item.isShowDetail'>
-                                    <div class='detail-item flex' v-for='detail in item.data'>
+                                <div class='detail'
+                                     :class="{'height0':!item.isShowDetail}" v-zzz>
+                                    <div class='detail-item flex' v-for='detail in item.data' >
                                         <div class='brand-item '>
                                             <div class='logo flex'>
                                                 <img :src="detail.brandLogo" alt="">
                                             </div>
-                                            <div class='brand font-14 color-gray9 flex' v-text='detail.brandName'>
+                                            <div class='brand font-14 color-gray2 flex' v-text='detail.brandName'>
                                                 电装
                                             </div>
                                             <div class='flex type font-12 color-gray9'
@@ -100,6 +100,33 @@
 
 <script>
     import api from "../../../api/maintenance-api";
+    import Vue from 'vue';
+    Vue.directive("zzz",{
+        //  bind: 只调用一次，当指令第一次被绑定到元素时调用。
+        //  inserte: 被绑定元素插入父节点时调用（父节点存在即可调用，不必存在于 document 中）。
+        //  update: 被绑定元素所在的模板更新时调用，而不论绑定值是否变化。通过比较更新前后的绑定值，可以忽略不必要的模板更新。
+        //  componentUpdated: 被绑定元素所在模板完成一次更新周期时调用。
+        //  unbind: 只调用一次，指令与元素解绑时调用。
+        bind(el,binding){
+            setTimeout(
+                function () {
+
+                    var s=0
+                    var firstHeight=$(el).children()
+                    for(var i=0;i< firstHeight.length;i++){
+                        console.log(firstHeight.eq(i).innerHeight()+'lllll')
+                        s=firstHeight.eq(i).innerHeight()+s
+                    }
+                    $(el).height(s)
+                }
+            )
+
+
+        },
+        update(el,binding,vnode){
+
+        },
+    })
     export default {
         name: 'maintenance-recommend',
         data() {
@@ -166,7 +193,19 @@
             },
             //显示详细
             showDetail(index){
-                this.data.other[index].isShowDetail=!this.data.other[index].isShowDetail
+                if(this.data.other[index].isShowDetail==true){
+                    for(var i in this.data.other){
+                        this.data.other[i].isShowDetail=false
+                    }
+                    return
+                }
+                if(this.data.other[index].isShowDetail==false){
+                    for(var i in this.data.other){
+                        this.data.other[i].isShowDetail=false
+                    }
+                    this.data.other[index].isShowDetail=true
+                }
+
                 console.log(this.data.other[index].isShowDetail)
             }
         },

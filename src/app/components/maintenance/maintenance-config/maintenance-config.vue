@@ -6,21 +6,21 @@
                 <div class='brand'>
                     <div class='left color-gray2' v-text='title.brand'></div>
                     <div class='right '>
-                        <img src="" alt="">
+                        <img :src="title.logo" alt="">
                     </div>
                 </div>
                 <div class='type color-gray9 font-13' v-text='title.models'></div>
             </header>
             <section>
                 <ul>
-                    <li class='flex' v-for='item in configList'>
+                    <li class='flex' v-for='item in configList' v-if='item.field_id!="brandLogo"'>
                         <div class='left color-gray9 font-13' v-text='item.field_name'></div>
                         <div class='right color-gray5 font-13' v-text='item.field_value'> </div>
                     </li>
                 </ul>
             </section>
             <footer>
-                <div class='back'>返回</div>
+                <div class='back' @click='back()'>返回</div>
             </footer>
         </div>
         <default-page v-show='loadData && configList.length==0'></default-page>
@@ -36,6 +36,7 @@
                 title:{
                     brand:'',
                     models:'',
+                    logo:'',
                 },
                 configList:[],
                 loadData:false
@@ -72,6 +73,9 @@
                             }
                             if (currentValue.field_id == 'models') {
                                 self.title.models=currentValue.field_value
+                            }
+                            if (currentValue.field_id == 'brandLogo') {
+                                self.title.logo=currentValue.field_value
                             }
                         })
                     } else {
