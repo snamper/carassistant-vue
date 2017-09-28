@@ -97,6 +97,7 @@
             //反馈
             submit(){
                 var self=this
+
                 let toast=this.$toast
                 self.$loading.show('提交中...')
                 self.imglist.forEach((currentValue) => {
@@ -112,7 +113,7 @@
                             message: '提交成功',
                             style:'success'
                         })
-                        self.$route.go(-1)
+                        self.$router.go(-1)
                     }else {
                         toast.show({
                             showTime: 3,
