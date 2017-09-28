@@ -112,6 +112,7 @@
                             message: '提交成功',
                             style:'success'
                         })
+                        self.$route.go(-1)
                     }else {
                         toast.show({
                             showTime: 3,
