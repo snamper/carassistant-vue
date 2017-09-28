@@ -64,7 +64,9 @@
                 <div class='nav-bar' v-show='!changeShow' v-bind:class="{'filter':searchShow,'hide222':changeShow}">
                     <div class='nav-item ' v-for='(item,index) in brandList'>
                         <div class='bubble font-20' v-text='item.initials'>A</div>
-                        <div class='indexes font-9' v-text='item.initials' @click="goAnchor(index)">A</div>
+                        <div class='indexes font-9'  @click="goAnchor(index)">
+                            <span v-text='item.initials' ></span>
+                        </div>
                     </div>
 
                 </div>
