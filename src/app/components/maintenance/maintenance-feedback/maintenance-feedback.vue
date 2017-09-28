@@ -13,7 +13,8 @@
                     <span class='title-en font-10 color-gray9'>Contact The Manuscript</span>
                 </p>
                 <div class='input'>
-                    <textarea v-model='content' @focus='focus=true' @blur='focus=false' v-autoheight='' class='font-14 color-gray9'
+                    <textarea v-model='content' @focus='focus=true' ref="content" @blur='focus=false' v-autoheight=''
+                              class='font-14 color-gray9'
                               type="text"
                               placeholder='请输入'></textarea>
                 </div>

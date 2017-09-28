@@ -31,12 +31,12 @@ export default {
                     $('.hidebox').css('lineHeight',lineHeight)
                     $('.hidebox').css('paddingLeft','0.07rem')
                 }
-                el.onkeyup=function () {
-                        setTimeout(function () {
+                el.oninput=function () {
+
                             $('.hidebox').text(el.value)
                             $(this).height($('.hidebox').height())
                             console.log($(this).height())
-                        },100)
+
 
                 }
             },
