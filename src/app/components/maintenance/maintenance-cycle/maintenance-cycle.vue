@@ -116,7 +116,7 @@
         created() {
             //页面创建完成后
             //自定义标题
-            this.page.setTitle("保养推荐");
+            this.page.setTitle("保养周期");
             var self=this
             self.currentType=1
             if(self.$router.currentRoute.query.levelId){

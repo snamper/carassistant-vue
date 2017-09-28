@@ -56,7 +56,7 @@
         created() {
             //页面创建完成后
             //自定义标题
-            this.page.setTitle("maintenance-feedback");
+            this.page.setTitle("提交反馈");
         },
         watch: {
             //监听动态路由
