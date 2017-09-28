@@ -213,9 +213,7 @@
                             data.response.list=data.response.list.concat([{}])
                         }
                         self.hotBrandList = data.response.list;
-                        console.log(self.hotBrandList)
-                       // self.htoBrandList1 = self.htoBrandList.slice(0, 4)
-                      //  self.htoBrandList2 = self.htoBrandList.slice(5, 8)
+
                     }
                 });
             },
@@ -376,6 +374,11 @@
                     $('.bubble').hide()
                     //  $('.nav-item').removeClass('nav-item-active')
                 }, 500)
+                if (navigator.vibrate) {
+                    // 支持
+                    console.log("支持设备震动！");
+                    navigator.vibrate([500, 300, 400,300]);
+                }
             },
             feedback() {
                 this.$router.push({path: '/maintenance/maintenance-feedback', query: {id: "1"}});
@@ -407,7 +410,6 @@
                 var self=this;
                 $('.main').scroll(function(event){
                     var x=$('.hot').innerHeight()
-                    console.log(x+'1111')
                     for(var i in self.brandList){
                         if($('.brand-item').eq(i).offset().top<47){
                             if($('.nav-item').eq(i).hasClass('nav-item-active') && i!=0){
@@ -415,8 +417,6 @@
                             }
                                 $('.nav-item').removeClass('nav-item-active')
                                 $('.nav-item').eq(i).addClass('nav-item-active')
-                                console.log($('.brand-item').eq(i).offset().top)
-                                console.log(i)
                         }
 
                     }
