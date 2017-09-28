@@ -22,7 +22,7 @@
         color: #fff;
         background: rgba(0, 0, 0, .8);
         border-radius: 5px;
-        box-shadow: 0 0 10px #000;
+      //  box-shadow: 0 0 10px #000;
     }
 
     .v-toast-seaBlue {

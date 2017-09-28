@@ -73,15 +73,16 @@
                                 </div>
 
                                 <div class='detail' v-show='item.isShowDetail'>
-                                    <div class='detail-item' v-for='detail in item.data'>
-                                        <div class='brand-item' v-for='child in detail.child'>
-                                            <div class='logo'>
+                                    <div class='detail-item flex' v-for='detail in item.data'>
+                                        <div class='brand-item '>
+                                            <div class='logo flex'>
                                                 <img :src="detail.brandLogo" alt="">
                                             </div>
-                                            <div class='brand font-14 color-gray9' v-text='detail.brandName'>
+                                            <div class='brand font-14 color-gray9 flex' v-text='detail.brandName'>
                                                 电装
                                             </div>
-                                            <div class='flex type font-12 color-gray9' v-text='child.second'>
+                                            <div class='flex type font-12 color-gray9'
+                                                 v-text='(detail.first?detail.first:"")+" "+(detail.second?detail.second:"")+" "+(detail.third?detail.third:"")'>
                                             </div>
                                         </div>
                                     </div>

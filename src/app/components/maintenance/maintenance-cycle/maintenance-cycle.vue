@@ -47,7 +47,7 @@
 
                 </section>
                 <section class='ycpj flex' v-show='currentType=="yuanchang"'>
-                    <div class='title color-gray9 font-11'>
+                    <div class='title color-gray9 font-11 flex'>
                         <div class='left flex'>保养计划</div>
                         <div class='right'>
                             <div class='fixbox'>
@@ -65,11 +65,11 @@
                     <div class='term flex'>
                         <div class='item' v-for='item in rawDatalist'>
                             <div class='term-left flex'>
-                                <div class='term-left-item color-gray-2'>
-                                    <div class='status flex font-12'>
+
+                                    <div class='status flex font-12 color-gray-2'>
                                         <div v-text='item.type'>机油</div>
                                     </div>
-                                </div>
+
                             </div>
                             <div class='term-right'>
                                 <div class='term-right-item font-13'>

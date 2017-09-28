@@ -178,14 +178,16 @@
     }
   }
   .ycpj{
+    padding: 0 15/100rem;
+    width: 100%;
     .title{
-      position: fixed;
+      position: absolute;
       height: 0.9rem;
       top:0.8rem;
       z-index: 11;
       background: #f8f8f8;
-      width: 100%;
-
+      left: 15/100rem;
+      right: 15/100rem;
       .left{
         float: left;
         width: @diff;
@@ -196,7 +198,7 @@
       }
       .right{
         float: right;
-        width: calc(~"100% - @{diff}");
+        flex-grow: 1;
         overflow: hidden;
       }
       .fixbox{
@@ -243,7 +245,7 @@
           height: 90/100rem;
           float: left;
           align-items: center;
-          justify-content: flex-start;
+          justify-content: center;
           padding:0 20/100rem;
           width: 100%;
          // line-height: 1;
