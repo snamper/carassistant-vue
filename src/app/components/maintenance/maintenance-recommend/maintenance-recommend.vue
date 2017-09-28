@@ -71,9 +71,10 @@
                         <div class='content'>
                             <div class='item' v-for="(item,index) in data.other" :class="{'noborder':item.isShowDetail}">
                                 <div class='preview flex last-no-bd' @click='showDetail(index)'>
-                                    <div class='left'>
+                                    <div class='left '>
                                         <p class='font-14 color-gray2' v-text='item.name'>火花塞</p>
-                                        <p class='describe font-12 color-gray9' v-text='item.text'>超凡喜力5W-40全合成汽车润滑油</p>
+                                        <p class='describe font-12 color-gray9' v-text='item.text' v-if='item.text'>超凡喜力5W-40
+                                            全合成汽车润滑油</p>
                                     </div>
                                     <i class='iconfont icon-arrowB font-12' v-bind:class="{'show-detail':item.isShowDetail}"
                                        ></i>
