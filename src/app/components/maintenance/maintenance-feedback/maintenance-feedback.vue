@@ -29,14 +29,14 @@
                             <i class='iconfont icon-quxiaoglyph_ font-12' @click='delimg(index)'></i>
                         <img :src="item.atAttachment" alt="" @click='previewimg(item.atAttachment)'>
                     </div>
-                    <div class='upload' @click='upload()'>
+                    <div class='upload' @click='upload()' v-show='imglist.length<6'>
                         <i class='iconfont add_line color-gray9'></i>
                     </div>
                 </div>
             </div>
         </section>
         <footer>
-            <div class='submit' @click='submit()' v-show='imglist.length<6'>提交</div>
+            <div class='submit' @click='submit()' >提交</div>
         </footer>
     </div>
 </template>
