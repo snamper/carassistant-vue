@@ -20,24 +20,26 @@ export default {
                 $('.hidebox').hide()
                 $('.hidebox').css('background','red')
                 el.onfocus=function () {
-                    var fontSize = $(this).css('font-size')
-                    var fontStyle = $(this).css('font-family')
-                    var lineHeight = $(this).css('line-height')
-                    $(this).css('maxHeight','1.35rem')
-                    $(this).css('overflow','auto')
-                    $('.hidebox').width(el.offsetWidth)
-                    $('.hidebox').css('fontSize',fontSize)
-                    $('.hidebox').css('fontFamily',fontStyle)
-                    $('.hidebox').css('lineHeight',lineHeight)
-                    $('.hidebox').css('paddingLeft','0.07rem')
+                    if(el.value){
+                        var fontSize = $(this).css('font-size')
+                        var fontStyle = $(this).css('font-family')
+                        var lineHeight = $(this).css('line-height')
+                        $(this).css('maxHeight','1.35rem')
+                        $(this).css('overflow','auto')
+                        $('.hidebox').width(el.offsetWidth)
+                        $('.hidebox').css('fontSize',fontSize)
+                        $('.hidebox').css('fontFamily',fontStyle)
+                        $('.hidebox').css('lineHeight',lineHeight)
+                        $('.hidebox').css('paddingLeft','0.07rem')
+                    }
+
                 }
                 el.oninput=function () {
-
-                            $('.hidebox').text(el.value)
-                            $(this).height($('.hidebox').height())
-                            console.log($(this).height())
-
-
+                if(el.value){
+                    $('.hidebox').text(el.value)
+                    $(this).height($('.hidebox').height())
+                    console.log($(this).height())
+                }
                 }
             },
             update(el,binding,vnode){
