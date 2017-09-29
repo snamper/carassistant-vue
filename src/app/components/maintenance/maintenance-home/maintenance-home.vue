@@ -176,8 +176,9 @@
         created() {
             //页面创建完成后
             //自定义标题
-            this.page.setTitle("选择车型");
+
             this.getData()
+            this.page.setTitle("选择车型");
         },
         watch: {
             //监听动态路由

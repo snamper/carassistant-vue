@@ -17,8 +17,8 @@
                                ></i>
                         </div>
                         <div class='detail'
-                             :class="{'height0':!item.isShowDetail}" v-zzz>
-                            <div class='detail-item flex' v-for='detail in item.data' v-show='item.isShowDetail'>
+                             :class="{'height0':!item.isShowDetail}" >
+                            <div class='detail-item flex' v-zzz v-for='detail in item.data' v-show='item.isShowDetail'>
                                 <div class='brand-item '>
                                     <div class='logo flex'>
                                         <img :src="detail.brandLogo" alt="">
@@ -59,21 +59,14 @@
         bind(el,binding){
             setTimeout(
                 function () {
-
                     var s=0
-                    var firstHeight=$(el).children()
+                    var firstHeight=$(el).parent().children()
                     for(var i=0;i< firstHeight.length;i++){
-                        console.log(firstHeight.eq(i).innerHeight()+'lllll')
                         s=firstHeight.eq(i).innerHeight()+s
                     }
-                    $(el).height(s)
+                    $(el).parent().height(s)
                 }
             )
-
-
-        },
-        update(el,binding,vnode){
-
         },
     })
     export default {
@@ -131,7 +124,19 @@
             },
             //显示详细
             showDetail(index){
-                this.datalist[index].isShowDetail=!this.datalist[index].isShowDetail
+               // this.datalist[index].isShowDetail=!this.datalist[index].isShowDetail
+                if(this.datalist[index].isShowDetail==true){
+                    for(var i in this.datalistr){
+                        this.datalist[i].isShowDetail=false
+                    }
+                    return
+                }
+                if(this.datalist[index].isShowDetail==false){
+                    for(var i in this.datalist){
+                        this.datalist[i].isShowDetail=false
+                    }
+                    this.datalist[index].isShowDetail=true
+                }
             }
         },
         components:{

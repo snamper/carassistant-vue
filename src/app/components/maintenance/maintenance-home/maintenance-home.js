@@ -2,7 +2,7 @@ import maintenanceHome from './maintenance-home.vue';
 
 
 let maintenanceHomeModule = [
-    { path: '/maintenance/maintenance-home', component: maintenanceHome,meta:{title:'maintenance-home'} },
+    { path: '/maintenance/maintenance-home', component: maintenanceHome,meta:{title:''} },
 ]
 maintenanceHomeModule=maintenanceHomeModule.concat(
 
