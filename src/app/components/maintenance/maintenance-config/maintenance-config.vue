@@ -45,7 +45,7 @@
         created() {
             //页面创建完成后
             //自定义标题
-            this.page.setTitle("其他保养推荐");
+            this.page.setTitle("车辆配置");
             this.getDetail()
         },
         watch: {

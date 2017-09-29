@@ -87,7 +87,7 @@
         created() {
             //页面创建完成后
             //自定义标题
-            this.page.setTitle("maintenance-other-recommend");
+            this.page.setTitle("其他保养推荐");
             var self=this
             if(self.$router.currentRoute.query.id){
                 self.id=self.$router.currentRoute.query.id
