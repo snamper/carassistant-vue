@@ -35,6 +35,11 @@ export default {
         return http.post("front/car/by_vin_img",params);
 
     },
+    //根据vin码获取车型id
+    getIdByVin(params){
+        return http.post("front/car/by_vin_code",params);
+
+    },
     //根据图片获取vin码
     searchData(params){
         return http.get("front/brand/get_brands",params);

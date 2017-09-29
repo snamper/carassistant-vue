@@ -228,30 +228,52 @@
                 })
             },
             search() {
+                var re = new RegExp(/[a-z0-9A-Z]{17}/);
                 let self = this;
                 let loading = self.$loading
                 loading.show('加载中...')
-                api.searchData({
-                    name: self.searchName
-                }).then((data) => {
-                    if (data.result_code == 0) {
-                        self.searchDataList = data.response
-                        if(self.searchDataList.length==0){
+                if(re.test(self.searchName)){
+                    api.getIdByVin({
+                        vinCode: self.searchName
+                    }).then((data) => {
+                        if (data.result_code == 0) {
+                            self.levelId = data.response.levelId
+                            self.$router.push({path:'/maintenance/maintenance-recommend',query: {levelId:self.levelId}});
+                        } else {
                             self.$toast.show({
                                 showTime: 2,
-                                message: '暂无车辆信息',
+                                message: data.message,
                                 style: 'error'
                             });
                         }
-                    } else {
-                        self.$toast.show({
-                            showTime: 2,
-                            message: data.message,
-                            style: 'error'
-                        });
-                    }
-                    loading.hide()
-                });
+                        loading.hide()
+                    });
+
+                }else{
+                    api.searchData({
+                        name: self.searchName
+                    }).then((data) => {
+                        if (data.result_code == 0) {
+                            self.searchDataList = data.response
+                            if(self.searchDataList.length==0){
+                                self.$toast.show({
+                                    showTime: 2,
+                                    message: '暂无车辆信息',
+                                    style: 'error'
+                                });
+                            }
+                        } else {
+                            self.$toast.show({
+                                showTime: 2,
+                                message: data.message,
+                                style: 'error'
+                            });
+                        }
+                        loading.hide()
+                    });
+                }
+
+
 //                self.brandList.forEach((currentValue, index, array) => {
 //                    if (currentValue == self.searchData) {
 //                    }
