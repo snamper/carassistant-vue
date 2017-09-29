@@ -117,21 +117,22 @@
         //  componentUpdated: 被绑定元素所在模板完成一次更新周期时调用。
         //  unbind: 只调用一次，指令与元素解绑时调用。
         bind(el,binding){
-            var u = navigator.userAgent
-            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-            var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-            if(isiOS) {
-                setTimeout(
-                    function () {
-                        var s=0
-                        var firstHeight=$(el).parent().children()
-                        for(var i=0;i< firstHeight.length;i++){
-                            s=firstHeight.eq(i).innerHeight()+s
-                        }
-                        $(el).parent().height(s)
+//            var u = navigator.userAgent
+//            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+//            var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+//            if(isiOS) {
+//
+//            }
+            setTimeout(
+                function () {
+                    var s=0
+                    var firstHeight=$(el).parent().children()
+                    for(var i=0;i< firstHeight.length;i++){
+                        s=firstHeight.eq(i).innerHeight()+s
                     }
-                )
-            }
+                    $(el).parent().height(s)
+                }
+            )
         },
 
     })
