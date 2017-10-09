@@ -9,37 +9,35 @@ export default {
             //  componentUpdated: 被绑定元素所在模板完成一次更新周期时调用。
             //  unbind: 只调用一次，指令与元素解绑时调用。
             bind(el,binding){
-                var u = navigator.userAgent
-                var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-                var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-                if(isiOS){
-                    $(el).css('marginLeft','-0.02rem')
-                }
-                $('body').append("<div class='hidebox'></div>")
-                $('.hidebox').css('wordBreak','break-all')
-                $('.hidebox').hide()
-                $('.hidebox').css('background','red')
-                el.onfocus=function () {
-                    if(el.value){
-                        var fontSize = $(this).css('font-size')
-                        var fontStyle = $(this).css('font-family')
-                        var lineHeight = $(this).css('line-height')
-                        $(this).css('maxHeight','1.35rem')
-                        $(this).css('overflow','auto')
-                        $('.hidebox').width(el.offsetWidth)
-                        $('.hidebox').css('fontSize',fontSize)
-                        $('.hidebox').css('fontFamily',fontStyle)
-                        $('.hidebox').css('lineHeight',lineHeight)
-                        $('.hidebox').css('paddingLeft','0.07rem')
+                setTimeout(function () {
+                    var u = navigator.userAgent
+                    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+                    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+                    if(isiOS){
+                        $(el).css('marginLeft','-0.02rem')
                     }
-
-                }
+                    $('body').append("<div class='hidebox'></div>")
+                    $('.hidebox').css('wordBreak','break-all')
+                    $('.hidebox').hide()
+                    $('.hidebox').css('background','red')
+                    var fontSize = $(el).css('font-size')
+                    var fontStyle = $(el).css('font-family')
+                    var lineHeight = $(el).css('line-height')
+                    $(el).css('maxHeight','1.35rem')
+                    $(el).css('overflow','auto')
+                    console.log($(el).width())
+                    $('.hidebox').width( $(el).width())
+                    $('.hidebox').css('fontSize',fontSize)
+                    $('.hidebox').css('fontFamily',fontStyle)
+                    $('.hidebox').css('lineHeight',lineHeight)
+                   // $('.hidebox').css('paddingLeft','0.07rem')
+                })
                 el.oninput=function () {
-                if(el.value){
-                    $('.hidebox').text(el.value)
-                    $(this).height($('.hidebox').height())
-                    console.log($(this).height())
-                }
+                    if(el.value){
+                        $('.hidebox').text(el.value)
+                        $(this).height($('.hidebox').height())
+                        console.log($(this).height())
+                    }
                 }
             },
             update(el,binding,vnode){

@@ -14,7 +14,7 @@
                 </p>
                 <div class='input'>
                     <textarea v-model='content' @focus='focus=true' ref="content" @blur='focus=false' v-autoheight=''
-                              class='font-14 color-gray9'
+                              class='font-14 color-gray2'
                               type="text"
                               placeholder='请输入'></textarea>
                 </div>
@@ -98,8 +98,23 @@
             //反馈
             submit(){
                 var self=this
-
                 let toast=this.$toast
+                if(!self.content){
+                    toast.show({
+                        showTime: 3,
+                        message: '请输入提交内容',
+                        style:'error'
+                    })
+                    return false
+                }
+                if(self.imgIdlist.length==0){
+                    toast.show({
+                        showTime: 3,
+                        message: '请上传反馈图片',
+                        style:'error'
+                    })
+                    return false
+                }
                 self.$loading.show('提交中...')
                 self.imglist.forEach((currentValue) => {
                     self.imgIdlist.push(currentValue.atAttachment)

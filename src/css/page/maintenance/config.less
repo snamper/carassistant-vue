@@ -13,12 +13,21 @@
     padding: 30/100rem;
     line-height: 1;
     box-shadow: 0 0 20/100rem  #ccd5e0;
+    border-radius: 8/100rem;
     .brand{
       position: relative;
+      overflow: hidden;
+      img{
+        float: left;
+        width: 70/100rem;
+        margin-right: 15/100rem;
+        margin-top: -6/100rem;
+      }
       .left{
         font-size: 19px;
         padding-bottom: 20/100rem;
         position: relative;
+        float: left;
         &:after{
           content: '';
           position: absolute;
@@ -52,6 +61,7 @@
     margin-top: 20/100rem;
     padding: 35/100rem 0 5/100rem 0;
     box-shadow: 0 0 20/100rem  #ccd5e0;
+    border-radius: 8/100rem;
     &:after {
       .Pseudo-btnBorder-after(@border-width:1px 1px 1px 1px,@border-color: @hr-border-color,@border-style: solid,@radius:8px);
     }

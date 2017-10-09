@@ -72,7 +72,9 @@
                 </div>
                 <div class='changeTime' v-show='changeShow=="changBrand"'>
                     <div class='car-name font-11'>
-                        <span class='color-gray5' v-text='currentChoosed.brand'>安驰</span>
+
+                        <img :src="currentChoosed.logo" alt="">
+                        <span class='color-gray5 text' v-text='currentChoosed.brand'>安驰</span>
                         <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
                     </div>
                     <div class='car-time font-14 color-gray2'>
@@ -84,7 +86,8 @@
                 </div>
                 <div class='changeTime' v-show='changeShow=="changeType"'>
                     <div class='car-name font-11'>
-                        <span class='ddid21' v-text='currentChoosed.brand' @click='back(1)'>安驰</span><i
+                        <img :src="currentChoosed.logo" alt="">
+                        <span class='ddid21 text' v-text='currentChoosed.brand' @click='back(1)'>安驰</span><i
                         class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5'
                                                                                    v-text='currentChoosed.name'>安驰</span>
                         <i class='close iconfont icon-guanbi font-10 color-grayC' @click='cancelChoose()'></i>
@@ -99,7 +102,8 @@
                 </div>
                 <div class='changeTime' v-show='changeShow=="changeTime"'>
                     <div class='car-name font-11'>
-                        <span class='ddid21' v-text='currentChoosed.brand' @click='back(1)'>安驰</span><i
+                        <img :src="currentChoosed.logo" alt="">
+                        <span class='ddid21 text' v-text='currentChoosed.brand' @click='back(1)'>安驰</span><i
                         class='iconfont icon-arrowR font-10 color-grayC'></i><span class='ddid21' @click='back(2)'
                                                                                    v-text='currentChoosed.name'>安驰</span><i
                         class='iconfont icon-arrowR font-10 color-grayC'></i><span class='color-gray5'
@@ -297,6 +301,7 @@
                 if (index == 1) {
                     self.changeShow = 'changBrand'
                     self.currentChoosed.brand = current.name
+                    self.currentChoosed.logo = current.logo
                     api.choosType({
                         brandName: self.currentChoosed.brand
                     }).then((data) => {

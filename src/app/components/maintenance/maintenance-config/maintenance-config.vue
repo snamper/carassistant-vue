@@ -4,10 +4,8 @@
         <div v-if='loadData&& configList.length!=0'>
             <header>
                 <div class='brand'>
+                    <img :src="title.logo" alt="">
                     <div class='left color-gray2' v-text='title.brand'></div>
-                    <div class='right '>
-                        <img :src="title.logo" alt="">
-                    </div>
                 </div>
                 <div class='type color-gray9 font-13' v-text='title.models'></div>
             </header>
