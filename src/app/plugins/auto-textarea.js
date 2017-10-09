@@ -30,7 +30,7 @@ export default {
                     $('.hidebox').css('fontSize',fontSize)
                     $('.hidebox').css('fontFamily',fontStyle)
                     $('.hidebox').css('lineHeight',lineHeight)
-                   // $('.hidebox').css('paddingLeft','0.07rem')
+                    $('.hidebox').css('paddingLeft','0.05rem')
                 })
                 el.oninput=function () {
                     if(el.value){
